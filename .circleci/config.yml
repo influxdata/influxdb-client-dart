@@ -111,7 +111,7 @@ jobs:
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
-      - influxdb-onboarding:
+      - influxdb-onboarding
       - run:
           name: Make folder for test results
           command: mkdir -p test-results/dart-tests
