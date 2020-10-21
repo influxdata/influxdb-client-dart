@@ -1,0 +1,144 @@
+version: 2.1
+
+#####################
+# Common Definitions
+#####################
+
+# Orb declarations
+orbs:
+  win: circleci/windows@2.4.0
+
+# Simple YAML anchors
+aliases:
+  - &project_dir "~/project"
+
+commands:
+  dependencies:
+    description: "Download dependencies and setup global packages"
+    parameters:
+      shell:
+        type: string
+        default: "/bin/bash --login -eo pipefail"
+      pub-cache:
+        type: string
+        default: "~/.pub-cache"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+            - v1.4-dependencies-{{ arch }}-
+      - run:
+          name: Download deps
+          shell: << parameters.shell >>
+          command: pub get
+      - run:
+          name: Get junitreporter
+          shell: << parameters.shell >>
+          command: pub global activate junitreport
+      - save_cache:
+          key: v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+          paths:
+            - .dart_tool
+            - << parameters.pub-cache >>
+
+  native-build:
+    description: "Runs the dart2native command to build native executable for machine. Artifacts executable"
+    parameters:
+      shell:
+        type: string
+        default: "/bin/bash --login -eo pipefail"
+    steps:
+      - run:
+          name: Native compile
+          shell: << parameters.shell >>
+          command: dart2native test/influxdb_client_test.dart -o unit-tests.exe
+#      - store_artifacts:
+#          path: circleci_dart_demo.exe
+
+######################
+# Workflow Definition
+######################
+workflows:
+  version: 2.1
+  test-and-build:
+    jobs:
+      - test
+      - build-mac:
+          requires:
+            - test
+      - build-windows:
+          requires:
+            - test
+      - build-linux:
+          requires:
+            - test
+
+##################
+# Job Definitions
+##################
+jobs:
+  test:
+    docker:
+      - image: google/dart
+#        auth:
+#          username: mydockerhub-user
+#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - dependencies:
+          shell: "/bin/bash -eo pipefail"
+      - run:
+          name: Make folder for test results
+          command: mkdir -p test-results/dart-tests
+      - run:
+          name: Run tests
+          command: pub run test --reporter json | tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
+      - store_test_results:
+          path: test-results
+
+  build-mac:
+    macos:
+      xcode: "11.3.0"
+    steps:
+      - run:
+          name: Install Dart SDK
+          command: |
+            HOMEBREW_NO_AUTO_UPDATE=1 brew tap dart-lang/dart
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install dart
+      - dependencies
+      - native-build
+
+  build-windows:
+    executor: win/default
+    steps:
+      - run:
+          name: Install Dart SDK
+          command: choco install dart-sdk
+      - dependencies:
+          shell: "powershell.exe"
+          pub-cache: "~/AppData/Local/Pub/Cache"
+      - native-build:
+          shell: "powershell.exe"
+
+  build-linux:
+    machine: true
+    steps:
+      - run:
+          name: Install Dart SDK
+          shell: /bin/bash --login -eo pipefail
+          command: |
+            # Setup repo & signing key
+            sudo apt update
+            sudo apt install apt-transport-https
+            sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+            sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+
+            # Update again and install
+            sudo apt update
+            sudo apt install dart
+
+            # Set PATH in profile for downstream commands
+            echo "export PATH=$PATH:/usr/lib/dart/bin" >> $BASH_ENV
+      - dependencies
+      - native-build
+
