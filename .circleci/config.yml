@@ -114,7 +114,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update && sudo apt-get install wget
+            apt-get update && apt-get install wget
       - influxdb-onboarding
       - run:
           name: Make folder for test results
