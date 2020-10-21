@@ -61,26 +61,43 @@ commands:
 ######################
 workflows:
   version: 2.1
-  test-and-build:
     jobs:
       - test
+        name: "dart-2.10"
+        dart-image: " google/dart:2.10"
+        influxdb-image: "influxdb:2.0.0-rc"
+      - test
+        name: "dart-2.10-nightly"
+        dart-image: "google/dart:2.10"
+        influxdb-image: "influx:nightly"
       - build-mac:
           requires:
-            - test
+            - dart-2.10
       - build-windows:
           requires:
-            - test
+            - dart-2.10
       - build-linux:
           requires:
-            - test
+            - dart-2.10
 
 ##################
 # Job Definitions
 ##################
 jobs:
   test:
+    parameters:
+      dart-image:
+        type: string
+        default: &default-dart-image "google/dart:2.10"
+      influxdb-image:
+        type: string
+        default: &default-influxdb-image "influxdb:2.0.0-rc"
+
     docker:
-      - image: google/dart
+      - image: << parameters.dart-image >>
+      - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
+        environment:
+          INFLUXD_HTTP_BIND_ADDRESS: :8086
 #        auth:
 #          username: mydockerhub-user
 #          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
