@@ -60,16 +60,17 @@ commands:
 # Workflow Definition
 ######################
 workflows:
-  version: 2.1
+  version: 2
+  build:
     jobs:
-      - test
-        name: "dart-2.10"
-        dart-image: " google/dart:2.10"
-        influxdb-image: "influxdb:2.0.0-rc"
-      - test
-        name: "dart-2.10-nightly"
-        dart-image: "google/dart:2.10"
-        influxdb-image: "influx:nightly"
+      - test:
+          name: dart-2.10
+          dart-image: "google/dart:2.10"
+          influxdb-image: "influxdb:2.0.0-rc"
+      - test:
+          name: dart-2.10-nightly
+          dart-image: "google/dart:2.10"
+          influxdb-image: "influx:nightly"
       - build-mac:
           requires:
             - dart-2.10
