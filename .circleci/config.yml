@@ -111,6 +111,10 @@ jobs:
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get update && sudo apt-get install wget
       - influxdb-onboarding
       - run:
           name: Make folder for test results
