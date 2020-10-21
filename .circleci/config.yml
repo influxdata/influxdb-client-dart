@@ -13,6 +13,12 @@ aliases:
   - &project_dir "~/project"
 
 commands:
+  influxdb-onboarding:
+    steps:
+      - run:
+          name: "Post onBoarding request to InfluxDB 2"
+          command: sh ./scripts/influxdb-onboarding.sh
+
   dependencies:
     description: "Download dependencies and setup global packages"
     parameters:
@@ -105,6 +111,7 @@ jobs:
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
+      - influxdb-onboarding:
       - run:
           name: Make folder for test results
           command: mkdir -p test-results/dart-tests
