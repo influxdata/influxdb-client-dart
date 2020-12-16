@@ -77,9 +77,10 @@ workflows:
           name: dart-2.10-nightly
           dart-image: "google/dart:2.10"
           influxdb-image: "influx:nightly"
-      - build-mac:
-          requires:
-            - dart-2.10
+#  disable build for mac (circleci commertial plan is required)
+#      - build-mac:
+#          requires:
+#            - dart-2.10
       - build-windows:
           requires:
             - dart-2.10
@@ -125,17 +126,17 @@ jobs:
       - store_test_results:
           path: test-results
 
-  build-mac:
-    macos:
-      xcode: "11.3.0"
-    steps:
-      - run:
-          name: Install Dart SDK
-          command: |
-            HOMEBREW_NO_AUTO_UPDATE=1 brew tap dart-lang/dart
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install dart
-      - dependencies
-      - native-build
+#  build-mac:
+#    macos:
+#      xcode: "11.3.0"
+#    steps:
+#      - run:
+#          name: Install Dart SDK
+#          command: |
+#            HOMEBREW_NO_AUTO_UPDATE=1 brew tap dart-lang/dart
+#            HOMEBREW_NO_AUTO_UPDATE=1 brew install dart
+#      - dependencies
+#      - native-build
 
   build-windows:
     executor: win/default
