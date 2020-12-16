@@ -843,11 +843,11 @@ class ApiClient {
 
         default:
           // found type using reflection
-          var mirrors = currentMirrorSystem();
-          ClassMirror classMirror = mirrors.findLibrary(Symbol('influxdb_client_api')).declarations[Symbol(targetType)];
-          if (classMirror != null) {
-            return classMirror.invoke(Symbol('fromJson'), [value]).reflectee;
-          }
+          // var mirrors = currentMirrorSystem();
+          // ClassMirror classMirror = mirrors.findLibrary(Symbol('influxdb_client_api')).declarations[Symbol(targetType)];
+          // if (classMirror != null) {
+          //   return classMirror.invoke(Symbol('fromJson'), [value]).reflectee;
+          // }
 
           Match match;
           if (value is List && (match = _regList.firstMatch(targetType)) != null) {
