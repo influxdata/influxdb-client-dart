@@ -20,22 +20,16 @@ class HealthCheck {
     this.commit,
   });
 
-  
   String name;
 
-  
   String message;
 
-  
   List<HealthCheck> checks;
 
-  
   HealthCheckStatusEnum status;
 
-  
   String version;
 
-  
   String commit;
 
   @override

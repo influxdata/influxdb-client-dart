@@ -1,13 +1,15 @@
+import 'dart:math';
+
 import 'package:influxdb_client/api.dart';
 
 import 'package:test/test.dart';
 
-void main() {
+void main() async {
   InfluxDBClient client;
 
   setUpAll(() {
     final token =
-    String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
+        String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
     final org = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
     final url = String.fromEnvironment('INFLUXDB_URL',
         defaultValue: 'http://localhost:8086');
@@ -25,8 +27,10 @@ void main() {
   });
 
   group('buckets', () {
-    test('list', () {
-
+    test('list', () async {
+      var buckets =
+          await BucketsApi(client.getApiClient()).getBuckets(name: 'my-bucket');
+      expect(buckets.buckets.length, 1);
     });
   });
 }

@@ -170,16 +170,16 @@ class ApiClient {
         //   return AnalyzeQueryResponseErrors.fromJson(value);
         // case 'ArrayExpression':
         //   return ArrayExpression.fromJson(value);
-        // case 'Authorization':
-        //   return Authorization.fromJson(value);
-        // case 'AuthorizationAllOf':
-        //   return AuthorizationAllOf.fromJson(value);
-        // case 'AuthorizationAllOfLinks':
-        //   return AuthorizationAllOfLinks.fromJson(value);
-        // case 'AuthorizationUpdateRequest':
-        //   return AuthorizationUpdateRequest.fromJson(value);
-        // case 'Authorizations':
-        //   return Authorizations.fromJson(value);
+        case 'Authorization':
+          return Authorization.fromJson(value);
+        case 'AuthorizationAllOf':
+          return AuthorizationAllOf.fromJson(value);
+        case 'AuthorizationAllOfLinks':
+          return AuthorizationAllOfLinks.fromJson(value);
+        case 'AuthorizationUpdateRequest':
+          return AuthorizationUpdateRequest.fromJson(value);
+        case 'Authorizations':
+          return Authorizations.fromJson(value);
         // case 'Axes':
         //   return Axes.fromJson(value);
         // case 'Axis':
@@ -196,12 +196,12 @@ class ApiClient {
         //   return Block.fromJson(value);
         // case 'BooleanLiteral':
         //   return BooleanLiteral.fromJson(value);
-        // case 'Bucket':
-        //   return Bucket.fromJson(value);
-        // case 'BucketLinks':
-        //   return BucketLinks.fromJson(value);
-        // case 'Buckets':
-        //   return Buckets.fromJson(value);
+        case 'Bucket':
+          return Bucket.fromJson(value);
+        case 'BucketLinks':
+          return BucketLinks.fromJson(value);
+        case 'Buckets':
+          return Buckets.fromJson(value);
         // case 'BuilderAggregateFunctionType':
         //   return BuilderAggregateFunctionTypeTypeTransformer().decode(value);
         // case 'BuilderConfig':
@@ -340,8 +340,8 @@ class ApiClient {
         //   return HTTPNotificationRule.fromJson(value);
         // case 'HTTPNotificationRuleBase':
         //   return HTTPNotificationRuleBase.fromJson(value);
-        // case 'HealthCheck':
-        //   return HealthCheck.fromJson(value);
+        case 'HealthCheck':
+          return HealthCheck.fromJson(value);
         // case 'HeatmapViewProperties':
         //   return HeatmapViewProperties.fromJson(value);
         // case 'HistogramViewProperties':
@@ -366,18 +366,18 @@ class ApiClient {
         //   return IntegerLiteral.fromJson(value);
         // case 'IsOnboarding':
         //   return IsOnboarding.fromJson(value);
-        // case 'Label':
-        //   return Label.fromJson(value);
-        // case 'LabelCreateRequest':
-        //   return LabelCreateRequest.fromJson(value);
-        // case 'LabelMapping':
-        //   return LabelMapping.fromJson(value);
-        // case 'LabelResponse':
-        //   return LabelResponse.fromJson(value);
-        // case 'LabelUpdate':
-        //   return LabelUpdate.fromJson(value);
-        // case 'LabelsResponse':
-        //   return LabelsResponse.fromJson(value);
+        case 'Label':
+          return Label.fromJson(value);
+        case 'LabelCreateRequest':
+          return LabelCreateRequest.fromJson(value);
+        case 'LabelMapping':
+          return LabelMapping.fromJson(value);
+        case 'LabelResponse':
+          return LabelResponse.fromJson(value);
+        case 'LabelUpdate':
+          return LabelUpdate.fromJson(value);
+        case 'LabelsResponse':
+          return LabelsResponse.fromJson(value);
         // case 'LanguageRequest':
         //   return LanguageRequest.fromJson(value);
         // case 'Legend':
@@ -392,10 +392,10 @@ class ApiClient {
         //   return LineProtocolError.fromJson(value);
         // case 'LineProtocolLengthError':
         //   return LineProtocolLengthError.fromJson(value);
-        // case 'Links':
-        //   return Links.fromJson(value);
-        // case 'LogEvent':
-        //   return LogEvent.fromJson(value);
+        case 'Links':
+          return Links.fromJson(value);
+        case 'LogEvent':
+          return LogEvent.fromJson(value);
         // case 'LogicalExpression':
         //   return LogicalExpression.fromJson(value);
         // case 'Logs':
@@ -478,8 +478,8 @@ class ApiClient {
         //   return PipeExpression.fromJson(value);
         // case 'PipeLiteral':
         //   return PipeLiteral.fromJson(value);
-        // case 'PostBucketRequest':
-        //   return PostBucketRequest.fromJson(value);
+        case 'PostBucketRequest':
+          return PostBucketRequest.fromJson(value);
         // case 'PostCheck':
         //   return PostCheck.fromJson(value);
         // case 'PostNotificationEndpoint':
@@ -502,28 +502,28 @@ class ApiClient {
         //   return RangeThreshold.fromJson(value);
         // case 'RangeThresholdAllOf':
         //   return RangeThresholdAllOf.fromJson(value);
-        // case 'Ready':
-        //   return Ready.fromJson(value);
+        case 'Ready':
+          return Ready.fromJson(value);
         // case 'RegexpLiteral':
         //   return RegexpLiteral.fromJson(value);
         // case 'RenamableField':
         //   return RenamableField.fromJson(value);
-        // case 'Resource':
-        //   return Resource.fromJson(value);
-        // case 'ResourceMember':
-        //   return ResourceMember.fromJson(value);
-        // case 'ResourceMemberAllOf':
-        //   return ResourceMemberAllOf.fromJson(value);
-        // case 'ResourceMembers':
-        //   return ResourceMembers.fromJson(value);
-        // case 'ResourceOwner':
-        //   return ResourceOwner.fromJson(value);
-        // case 'ResourceOwnerAllOf':
-        //   return ResourceOwnerAllOf.fromJson(value);
-        // case 'ResourceOwners':
-        //   return ResourceOwners.fromJson(value);
-        // case 'RetentionRule':
-        //   return RetentionRule.fromJson(value);
+        case 'Resource':
+          return Resource.fromJson(value);
+        case 'ResourceMember':
+          return ResourceMember.fromJson(value);
+        case 'ResourceMemberAllOf':
+          return ResourceMemberAllOf.fromJson(value);
+        case 'ResourceMembers':
+          return ResourceMembers.fromJson(value);
+        case 'ResourceOwner':
+          return ResourceOwner.fromJson(value);
+        case 'ResourceOwnerAllOf':
+          return ResourceOwnerAllOf.fromJson(value);
+        case 'ResourceOwners':
+          return ResourceOwners.fromJson(value);
+        case 'RetentionRule':
+          return RetentionRule.fromJson(value);
         // case 'ReturnStatement':
         //   return ReturnStatement.fromJson(value);
         // case 'Routes':
@@ -536,16 +536,16 @@ class ApiClient {
         //   return RoutesSystem.fromJson(value);
         // case 'RuleStatusLevel':
         //   return RuleStatusLevelTypeTransformer().decode(value);
-        // case 'Run':
-        //   return Run.fromJson(value);
-        // case 'RunLinks':
-        //   return RunLinks.fromJson(value);
-        // case 'RunLog':
-        //   return RunLog.fromJson(value);
-        // case 'RunManually':
-        //   return RunManually.fromJson(value);
-        // case 'Runs':
-        //   return Runs.fromJson(value);
+        case 'Run':
+          return Run.fromJson(value);
+        case 'RunLinks':
+          return RunLinks.fromJson(value);
+        case 'RunLog':
+          return RunLog.fromJson(value);
+        case 'RunManually':
+          return RunManually.fromJson(value);
+        case 'Runs':
+          return Runs.fromJson(value);
         // case 'SMTPNotificationRule':
         //   return SMTPNotificationRule.fromJson(value);
         // case 'SMTPNotificationRuleBase':
@@ -562,14 +562,14 @@ class ApiClient {
         //   return ScraperTargetResponseAllOfLinks.fromJson(value);
         // case 'ScraperTargetResponses':
         //   return ScraperTargetResponses.fromJson(value);
-        // case 'SecretKeys':
-        //   return SecretKeys.fromJson(value);
-        // case 'SecretKeysResponse':
-        //   return SecretKeysResponse.fromJson(value);
-        // case 'SecretKeysResponseAllOf':
-        //   return SecretKeysResponseAllOf.fromJson(value);
-        // case 'SecretKeysResponseAllOfLinks':
-        //   return SecretKeysResponseAllOfLinks.fromJson(value);
+        case 'SecretKeys':
+          return SecretKeys.fromJson(value);
+        case 'SecretKeysResponse':
+          return SecretKeysResponse.fromJson(value);
+        case 'SecretKeysResponseAllOf':
+          return SecretKeysResponseAllOf.fromJson(value);
+        case 'SecretKeysResponseAllOfLinks':
+          return SecretKeysResponseAllOfLinks.fromJson(value);
         // case 'SingleStatViewProperties':
         //   return SingleStatViewProperties.fromJson(value);
         // case 'SlackNotificationEndpoint':
@@ -606,18 +606,18 @@ class ApiClient {
         //   return TableViewProperties.fromJson(value);
         // case 'TagRule':
         //   return TagRule.fromJson(value);
-        // case 'Task':
-        //   return Task.fromJson(value);
-        // case 'TaskCreateRequest':
-        //   return TaskCreateRequest.fromJson(value);
-        // case 'TaskLinks':
-        //   return TaskLinks.fromJson(value);
-        // case 'TaskStatusType':
-        //   return TaskStatusTypeTypeTransformer().decode(value);
-        // case 'TaskUpdateRequest':
-        //   return TaskUpdateRequest.fromJson(value);
-        // case 'Tasks':
-        //   return Tasks.fromJson(value);
+        case 'Task':
+          return Task.fromJson(value);
+        case 'TaskCreateRequest':
+          return TaskCreateRequest.fromJson(value);
+        case 'TaskLinks':
+          return TaskLinks.fromJson(value);
+        case 'TaskStatusType':
+          return TaskStatusTypeTypeTransformer().decode(value);
+        case 'TaskUpdateRequest':
+          return TaskUpdateRequest.fromJson(value);
+        case 'Tasks':
+          return Tasks.fromJson(value);
         // case 'Telegraf':
         //   return Telegraf.fromJson(value);
         // case 'TelegrafAllOf':

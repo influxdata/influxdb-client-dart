@@ -108,6 +108,15 @@ class InfluxDBClient {
     api.addDefaultHeader('User-Agent', '$CLIENT_NAME-dart/$CLIENT_VERSION');
     return api;
   }
+
+  HealthApi getHealthApi() {
+    return HealthApi(getApiClient(basePath : '/health'));
+  }
+
+  ReadyApi getReadyApi() {
+    return ReadyApi(getApiClient(basePath : '/ready'));
+  }
+
 }
 
 class LoggingClient extends BaseClient {
