@@ -1,6 +1,6 @@
 import 'package:influxdb_client/api.dart';
 
-main() async {
+void main() async {
   var client = InfluxDBClient(
       url: 'http://localhost:8086',
       token: 'my-token',
@@ -8,7 +8,7 @@ main() async {
       bucket: 'my-bucket',
       debugEnabled: true);
 
-  var orgApi = OrganizationsApi(client.getApiClient());
+  var orgApi = client.getOrganizationsApi();
 
   // list organizations
   await orgApi.getOrgs().then((organizations) {
@@ -25,7 +25,7 @@ main() async {
   await orgApi.deleteOrgsID(createdOrg.id);
   // await orgApi.deleteOrgsID("e8c1beb5b57da8d3");
 
-  var usersApi = UsersApi(client.getApiClient());
+  var usersApi = client.getUsersApi();
   await usersApi.getUsers().then((value) => value.users.forEach((user) {
         print('user: ${user.name} / ${user.id}');
       }));

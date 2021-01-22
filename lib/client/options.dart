@@ -2,30 +2,6 @@
 
 part of influxdb_client_api;
 
-
-
-/// Option for the communication with InfluxDB server.
-class ConnectionOptions {
-  /// base URL
-  String url;
-
-  /// authentication token
-  String token;
-
-  /// socket timeout
-  num timeout;
-
-  /// extra options for the transport layer
-  Map<String, dynamic> transportOptions;
-
-  ConnectionOptions(
-      {this.url, this.token, this.timeout, this.transportOptions});
-}
-
-/// default connection options */
-ConnectionOptions DEFAULT_ConnectionOptions = ConnectionOptions(
-    url: null, token: null, timeout: 10000, transportOptions: null);
-
 /// Options used by [WriteApi] .
 class WriteOptions {
   /// max number of records to send in a batch
@@ -35,7 +11,7 @@ class WriteOptions {
   int flushInterval = 1000;
 
   /// default tags, unescaped */
-  HashMap<String, String> defaultTags;
+  Map<String, String> defaultTags;
 
   /// include random milliseconds when retrying HTTP calls
   int retryJitter;
@@ -58,28 +34,49 @@ class WriteOptions {
   /// default precision
   WritePrecision precision;
 
-  WriteOptions(
-      {this.batchSize,
-      this.flushInterval,
-      this.retryJitter,
-      this.minRetryDelay,
-      this.maxRetryDelay,
-      this.exponentialBase,
-      this.maxRetries,
-      this.maxBufferLines,
-      this.defaultTags,
-      this.precision});
-}
+  /// Enable gzip compression
+  bool gzip = false;
 
-WriteOptions defaultWriteOptions = WriteOptions(
-    batchSize: 1000,
-    flushInterval: 1000,
-    retryJitter: 200,
-    maxRetryDelay: 18000,
-    minRetryDelay: 5000,
-    exponentialBase: 5,
-    maxBufferLines: 100000,
-    precision: WritePrecision.ns);
+  WriteOptions(
+      {this.batchSize = 1000,
+      this.flushInterval = 1000,
+      this.retryJitter = 200,
+      this.minRetryDelay = 18000,
+      this.maxRetryDelay = 5000,
+      this.exponentialBase = 5,
+      this.maxRetries = 3,
+      this.maxBufferLines = 100000,
+      this.defaultTags,
+      this.precision = WritePrecision.ns,
+      this.gzip = false});
+
+  /// Create a WriteOptions from current instance with merging attributes.
+  WriteOptions merge(
+      {int batchSize,
+      int flushInterval,
+      Map<String, String> defaultTags,
+      int retryJitter,
+      int minRetryDelay,
+      int maxRetryDelay,
+      int exponentialBase,
+      int maxRetries,
+      int maxBufferLines,
+      WritePrecision precision,
+      bool gzip}) {
+    return WriteOptions(
+      batchSize: batchSize ?? this.batchSize,
+      flushInterval: flushInterval ?? this.flushInterval,
+      retryJitter: retryJitter ?? this.retryJitter,
+      minRetryDelay: minRetryDelay ?? this.minRetryDelay,
+      exponentialBase: exponentialBase ?? this.exponentialBase,
+      maxRetries: maxRetries ?? this.maxRetries,
+      maxBufferLines: maxBufferLines ?? this.maxBufferLines,
+      defaultTags: defaultTags ?? Map.from(this.defaultTags ?? {}),
+      precision: precision ?? this.precision,
+      gzip: gzip ?? this.gzip,
+    );
+  }
+}
 
 /// Precission for write operations.
 /// See [https://v2.docs.influxdata.com/v2.0/api/#operation/PostWrite ]

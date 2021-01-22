@@ -19,6 +19,7 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
+import 'package:csv/csv.dart';
 
 // generated stuff
 part 'api_client.dart';
@@ -34,6 +35,7 @@ part 'auth/http_bearer_auth.dart';
 
 part 'api/health_api.dart';
 part 'api/ready_api.dart';
+part 'api/default_api.dart';
 
 // health ready
 part 'model/ready.dart';
@@ -116,14 +118,20 @@ part 'api/labels_api.dart';
 part 'model/label_update.dart';
 part 'model/label_create_request.dart';
 
+//delete api
+part 'model/delete_predicate_request.dart';
+
 
 //api stuff
 part 'client/influxdb_client.dart';
 part 'client/error.dart';
 part 'client/options.dart';
 part 'client/point.dart';
+part 'client/delete_service.dart';
 part 'client/write_service.dart';
 part 'client/query_service.dart';
+part 'client/flux_transformer.dart';
+part 'client/flux_table.dart';
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';

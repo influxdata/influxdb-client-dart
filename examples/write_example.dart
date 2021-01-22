@@ -1,6 +1,7 @@
 import 'package:influxdb_client/api.dart';
 
-main() async {
+void main() async {
+
   var client = InfluxDBClient(
       url: 'http://localhost:8086',
       token: 'my-token',

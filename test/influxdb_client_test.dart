@@ -1,32 +1,20 @@
 import 'package:influxdb_client/api.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+import 'commons_test.dart';
 
-class MockInfluxDBClient extends Mock implements InfluxDBClient {}
-
-void main() {
-  InfluxDBClient client;
+void main() async {
   WriteService writeApi;
 
   setUp(() {
-    writeApi = WriteService(client);
+    writeApi = client.getWriteService();
+  });
+
+  tearDown(() async {
+   await writeApi.close();
   });
 
   setUpAll(() {
-    final token =
-        String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-    final org = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
-    final url = String.fromEnvironment('INFLUXDB_URL',
-        defaultValue: 'http://localhost:8086');
-
-    client = InfluxDBClient(
-        token: token,
-        url: url,
-        org: org,
-        bucket: 'my-bucket',
-        debugEnabled: true);
-
-    writeApi = WriteService(client);
+    setupClient();
   });
 
   tearDownAll(() {
@@ -45,7 +33,7 @@ void main() {
   });
 
   test('writeRecord', () async {
-    await writeApi
+    var ret = await writeApi
         .writeLineProtocol('temperature,location=north value=60.0');
   });
 
@@ -96,7 +84,7 @@ void main() {
   });
 
   test('writeBatch2', () async {
-    var writeOptions = WriteOptions(batchSize: 10);
+    var writeOptions = WriteOptions().merge(batchSize: 10);
     writeApi = WriteService(client, writeOptions: writeOptions);
 
     var pointCount = 100;
@@ -112,5 +100,20 @@ void main() {
 
     await expectLater(writeApi.flush(), completion(null));
   });
+
+  test('health', () async {
+    var health = await client.getHealthApi().getHealth();
+    print (health);
+    expect(health.status.value ,'pass');
+    expect(health.name, 'influxdb');
+  });
+
+  test('ready', () async {
+    var ready = await client.getReadyApi().getReady();
+    print (ready);
+    expect(ready.status.value ,'ready');
+    expect(ready.started.toIso8601String().isNotEmpty ,true);
+  });
+
 }
 

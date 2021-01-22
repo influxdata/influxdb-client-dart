@@ -3,18 +3,18 @@
 part of influxdb_client_api;
 
 class WriteService extends DefaultService {
-  WriteOptions writeOptions = defaultWriteOptions;
+  WriteOptions writeOptions;
   WriteBatch writeBatch;
   Timer batchTimer;
   bool enableDebug = true;
 
+
   ///
   /// Creates [WriteApi] with optional custom [writeOptions]
   ///
-  WriteService(InfluxDBClient client, {WriteOptions writeOptions}) : super(client) {
-    if (writeOptions != null) {
-      this.writeOptions = writeOptions;
-    }
+  WriteService(InfluxDBClient client, {WriteOptions writeOptions})
+      : super(client) {
+    this.writeOptions = writeOptions ?? WriteOptions();
     writeBatch = WriteBatch(this.writeOptions, this);
   }
 
@@ -22,7 +22,7 @@ class WriteService extends DefaultService {
   /// Write line protocol string [record] into [bucket] and [org]
   ///
   ///
-  Future writeLineProtocol(String record,
+  Future<void> writeLineProtocol(String record,
       {String bucket,
       String org,
       WritePrecision precision = WritePrecision.ns}) async {
@@ -31,27 +31,24 @@ class WriteService extends DefaultService {
     var response = await _writePost(record, bucket ?? influxDB.bucket,
         org ?? influxDB.org, precision ?? writeOptions.precision);
 
-    if (enableDebug) {
-      _traceResponse(response);
-    }
-
     if (response.statusCode == 204) {
       // write successful
+      return;
     } else {
       // throw new InfluxDBError(response.statusCode.toString(), response.body);
       _handleError(response);
     }
   }
 
-  void _traceResponse(Response response) {
-    if (influxDB.debugEnabled) {
-      print('<< response status: ${response.statusCode}');
-      print('<< headers: ${response.headers}');
-      if (response.body.isNotEmpty) {
-        print('<< body: ${response.body}');
-      }
-    }
-  }
+  // void _traceResponse(Response response) {
+  //   if (influxDB.debugEnabled) {
+  //     print('<< response status: ${response.statusCode}');
+  //     print('<< headers: ${response.headers}');
+  //     if (response.body.isNotEmpty) {
+  //       print('<< body: ${response.body}');
+  //     }
+  //   }
+  // }
 
   void batchWrite(dynamic data,
       {String bucket, String org, WritePrecision precision}) {
@@ -72,6 +69,13 @@ class WriteService extends DefaultService {
   ///
   Future flush() async {
     await writeBatch.flush();
+  }
+
+  ///
+  /// Flushes and Closes writeService
+  ///
+  Future close() async {
+    await writeBatch.close;
   }
 
   ///
@@ -101,14 +105,18 @@ class WriteService extends DefaultService {
   Future<Response> _writePost(String data, String bucket, String organization,
       WritePrecision precision) async {
     // create uri
-    var uri = createUri(influxDB.url, '/api/v2/write',{
+    var uri = createUri('/api/v2/write', {
       'precision': precisionToString(precision),
       'bucket': bucket,
       'org': organization,
     });
+
+    print('gzip write: ${writeOptions.gzip}');
+    if (writeOptions.gzip) {
+
+    }
     return await doPost(uri, data);
   }
-
 
   dynamic _payload(dynamic data, WritePrecision precision, String bucket,
       String org, bool batching) {
@@ -135,7 +143,6 @@ class WriteService extends DefaultService {
 
     if (data is Iterable) {
       var buffer = StringBuffer();
-
       var iterator = data.iterator;
       iterator.moveNext();
       var lp = _payload(iterator.current, precision, bucket, org, batching);

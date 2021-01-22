@@ -1,50 +1,170 @@
-import 'package:influxdb_client/api.dart';
+import 'package:csv/csv.dart';
+import 'package:http/http.dart';
+import 'package:http/testing.dart';
 import 'package:test/test.dart';
+import 'commons_test.dart';
 
+var EOL = defaultEol; //'\r\n'
 void main() {
-  InfluxDBClient client;
+  var oneTable = '#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string$EOL'
+      '#group,false,false,true,true,false,false,true,true,true$EOL'
+      '#default,_result,,,,,,,,$EOL' +
+      ',result,table,_start,_stop,_time,_value,_field,_measurement,host$EOL' +
+      ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:05Z,11125907456,used,mem,mac.local$EOL' +
+      ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:06Z,11127103488,used,mem,mac.local$EOL' +
+      ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:07Z,11127291904,used,mem,mac.local$EOL' +
+      ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:08Z,11126190080,used,mem,mac.local$EOL' +
+      ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:09Z,11127832576,used,mem,mac.local$EOL';
+
+  var multipleQueries  = '#datatype,string,long,string,string,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string$EOL' +
+  '#group,false,false,true,true,true,true,false,false,true$EOL' +
+  '#default,t1,,,,,,,,$EOL' +
+  ',result,table,_field,_measurement,_start,_stop,_time,_value,tag$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:20:00Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:21:40Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:23:20Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:25:00Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:26:40Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:28:20Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:30:00Z,2,test1$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:20:00Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:21:40Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:23:20Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:25:00Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:26:40Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:28:20Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:30:00Z,2,test2$EOL' +
+  '$EOL' +
+  '#datatype,string,long,string,string,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string$EOL' +
+  '#group,false,false,true,true,true,true,false,false,true$EOL' +
+  '#default,t2,,,,,,,,$EOL' +
+  ',result,table,_field,_measurement,_start,_stop,_time,_value,tag$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:20:00Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:21:40Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:23:20Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:25:00Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:26:40Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:28:20Z,2,test1$EOL' +
+  ',,0,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:30:00Z,2,test1$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:20:00Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:21:40Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:23:20Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:25:00Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:26:40Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:28:20Z,2,test2$EOL' +
+  ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:30:00Z,2,test2';
 
   setUpAll(() {
-    final token =
-        String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-    final org = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
-    final url = String.fromEnvironment('INFLUXDB_URL',
-        defaultValue: 'http://localhost:8086');
-
-    client = InfluxDBClient(
-        token: token,
-        url: url,
-        org: org,
-        bucket: 'my-bucket',
-        debugEnabled: true);
+    setupClient();
   });
 
   tearDownAll(() {
     client.close();
   });
 
-  test('writeNonExistentBucket', () async {
-    try {
-      await WriteService(client).writeLineProtocol(
-          'temperature,location=north value=60.0',
-          bucket: 'not-existent');
-      fail('Exception should be thrown');
-    } on InfluxDBException catch (e) {
-      expect(e.code, 'not found');
-      expect(e.statusCode, 404);
-      expect(e.message, 'bucket "not-existent" not found');
-    }
+  test('queryOneTable', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: 'my-bucket') 
+        |> range(start: -5s, stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var resp = await client.getQueryService().queryRaw(query);
+    expect(resp, oneTable);
   });
 
-  test('queryRaw', () async {
-    var queryService = QueryService(client);
+  test('queryOneTableStream', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
 
-    var rawCSV = await queryService.queryRaw('''
-    from(bucket: "my-bucket")
-  |> range(start: 0)
-  |> filter(fn: (r) => r["_measurement"] == "temperature")
-  
-  ''');
-    assert (rawCSV.length > 0);
+    client.client = mockClient;
+
+    var query = '''from(bucket: 'my-bucket') 
+        |> range(start: -5s, stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var resp = await client.getQueryService().queryLines(query);
+
+    // resp.listen((event) { print('->> $event');});
+
+    var list = await resp.toList();
+
+    list.forEach((element) {print('-> $element');});
+    expect(list.length, 9);
+  });
+
+  test('queryOneTableFluxRecord', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: 'my-bucket') 
+        |> range(start: -5s, stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var resp = await client.getQueryService().queryRecords(query);
+
+    var res = await resp.toList();
+    for (var r in res) {
+      print(r);
+      expect(r['table'], 0);
+      expect(r['_measurement'], 'mem');
+      expect(r['host'], 'mac.local');
+    }
+
+    expect(res[0]['_value'],11125907456);
+    expect(res[0]['_time'],'2019-11-12T08:09:05Z');
+    expect(res[1]['_value'],11127103488);
+    expect(res[1]['_time'],'2019-11-12T08:09:06Z');
+    expect(res[2]['_value'],11127291904);
+    expect(res[2]['_time'],'2019-11-12T08:09:07Z');
+    expect(res[3]['_value'],11126190080);
+    expect(res[3]['_time'],'2019-11-12T08:09:08Z');
+    expect(res[4]['_value'],11127832576);
+    expect(res[4]['_time'],'2019-11-12T08:09:09Z');
+
+  });
+
+  test('queryMultipleTableFluxRecord', () async {
+    var mockClient = MockClient((request) async {
+      return Response(multipleQueries, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: 'my-bucket') 
+        |> range(start: -5s, stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var resp = await client.getQueryService().queryRecords(query);
+
+    var res = await resp.toList();
+    var i=0;
+    for (var r in res) {
+      print('${i} : ${r.tableIndex} -> $r');
+      if (i >= 0 && i < 14) {
+        expect(r['result'],'t1');
+      } else if (i >= 14 && i < 28) {
+        expect(r['result'],'t2');
+      };
+      expect(r['_measurement'], 'dart_client_test');
+      expect(r['_value'],2);
+      i++;
+    }
+    expect(res[27]['_time'], '2020-02-27T16:30:00Z');
+    expect(res[27]['tag'], 'test2');
+    expect(res.length, 28);
+
   });
 }

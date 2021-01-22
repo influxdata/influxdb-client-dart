@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:influxdb_client/api.dart';
 
 import 'package:test/test.dart';

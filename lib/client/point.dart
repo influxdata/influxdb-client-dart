@@ -56,7 +56,7 @@ class Point {
     var sb = StringBuffer();
 
     _escapeKey(sb, name, false);
-    _appendTags(sb, defaultTags);
+    _appendTags(sb, defaultTags: defaultTags);
     var appendedFields = _appendFields(sb);
     if (!appendedFields) {
       return '';
@@ -94,21 +94,22 @@ class Point {
     }
   }
 
-  void _appendTags(StringBuffer sb, Map defaultTags) {
-    //TODO add defaultTags
-
-    void addTag(String key, String value, StringBuffer sb) {
-      if (key.isEmpty || value.isEmpty) {
-        return;
-      }
-      sb.write(',');
-      _escapeKey(sb, key, true);
-      sb.write('=');
-      _escapeKey(sb, value, true);
+  void _addTag(String key, String value, StringBuffer sb) {
+    if (key.isEmpty || value.isEmpty) {
+      return;
     }
-    tags.forEach((k,v) => addTag(k,v,sb));
-    sb.write(' ');
+    sb.write(',');
+    _escapeKey(sb, key, true);
+    sb.write('=');
+    _escapeKey(sb, value, true);
+  }
 
+  void _appendTags(StringBuffer sb, {Map defaultTags}) {
+    if (defaultTags != null) {
+      defaultTags.forEach((k, v) => _addTag(k, v, sb));
+    }
+    tags.forEach((k,v) => _addTag(k,v,sb));
+    sb.write(' ');
   }
 
   bool _appendFields(StringBuffer sb) {

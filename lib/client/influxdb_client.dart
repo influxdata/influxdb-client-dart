@@ -22,17 +22,27 @@ abstract class DefaultService {
 
   get version => influxDB.version;
 
-  Future<Response> doPost(Uri uri, payload) {
-    var headers = <String, String>{'Authorization': 'Token ' + influxDB.token};
-    return influxDB.client.post(uri, body: payload, headers: headers);
+  Map<String, String> authHeader() {
+    return {'Authorization': 'Token ' + influxDB.token};
   }
+  void addAuthHeader(Request r) {
+    r.headers.addAll(authHeader());
+  }
+
+  Future<Response> doPost(Uri uri, payload) async {
+    return influxDB.client.post(uri, body: payload, headers: authHeader());
+  }
+
 
   Future<Response> doGet(Uri uri, payload) async {
-    var headers = <String, String>{'Authorization': 'Token ' + influxDB.token};
-    return await influxDB.client.get(uri, headers: headers);
+    return await influxDB.client.get(uri, headers: authHeader());
   }
 
-  Uri createUri(
+  Uri createUri(String path, Map<String, String> queryParams) {
+    return _buildUri(influxDB.url, path, queryParams);
+  }
+
+  Uri _buildUri(
       String influxUrl, String path, Map<String, String> queryParams) {
     Uri uri;
 
@@ -53,18 +63,6 @@ abstract class DefaultService {
 
   ApiClient getApiClient(String basePath) {
     return influxDB.getApiClient(basePath: basePath);
-  }
-}
-
-class HttpTokenAuth implements Authentication {
-  HttpTokenAuth(token);
-
-  String token;
-
-  @override
-  void applyToParams(
-      List<QueryParam> queryParams, Map<String, String> headerParams) {
-    headerParams['Authorization'] = 'Token $token';
   }
 }
 
@@ -101,20 +99,56 @@ class InfluxDBClient {
     client.close();
   }
 
-  ApiClient getApiClient({String basePath = "/api/v2"}) {
+  ApiClient getApiClient({String basePath = '/api/v2'}) {
     var api = ApiClient(basePath: url + basePath);
-    // api._authentications[r'TokenAuth'] = HttpTokenAuth(token);
+    api._client = client;
     api.addDefaultHeader('Authorization', 'Token $token');
     api.addDefaultHeader('User-Agent', '$CLIENT_NAME-dart/$CLIENT_VERSION');
     return api;
+  }
+
+  AuthorizationsApi getAuthorizationsApi() {
+    return AuthorizationsApi(getApiClient());
+  }
+
+  BucketsApi getBucketsApi() {
+    return BucketsApi(getApiClient());
   }
 
   HealthApi getHealthApi() {
     return HealthApi(getApiClient(basePath : '/health'));
   }
 
+  LabelsApi getLabelsApi() {
+    return LabelsApi(getApiClient());
+  }
+
+  OrganizationsApi getOrganizationsApi() {
+    return OrganizationsApi(getApiClient());
+  }
+
   ReadyApi getReadyApi() {
     return ReadyApi(getApiClient(basePath : '/ready'));
+  }
+
+  TasksApi getTasksApi() {
+    return TasksApi(getApiClient());
+  }
+
+  UsersApi getUsersApi() {
+    return UsersApi(getApiClient());
+  }
+
+  WriteService getWriteService([WriteOptions writeOptions]) {
+    return WriteService(this, writeOptions: writeOptions);
+  }
+
+  QueryService getQueryService({QueryOptions queryOptions}) {
+    return QueryService(this, queryOptions: queryOptions);
+  }
+
+  DeleteService getDeleteService() {
+    return DeleteService(this);
   }
 
 }
@@ -130,7 +164,12 @@ class LoggingClient extends BaseClient {
     if (debugEnabled) {
       _traceRequest(request);
     }
-    return delegate.send(request);
+    var send = delegate.send(request);
+    send.then((resp) {
+      print('<< status: ${resp.statusCode} - contentLength: ${resp.contentLength}');
+      print('<< headers: ${resp.headers}');
+    });
+    return send;
   }
 
   @override

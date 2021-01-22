@@ -9,28 +9,33 @@ class InfluxDBException implements Exception {
 
   InfluxDBException(this.statusCode, this.code, this.message);
 
-  @override
-  String toString() {
-    return 'InfluxDBError{statusCode: $statusCode, code: $code, message: $message}';
+  static InfluxDBException fromResponse(Response response) {
+    return fromJson(response.body, response.statusCode);
   }
 
-  static InfluxDBException fromResponse(Response response) {
-    String responseCode;
+  static InfluxDBException fromJson(String errorBody, int statusCode) {
+    String code;
     String message;
     dynamic body;
     try {
-      body = json.decode(response.body);
+      body = json.decode(errorBody);
     } catch (e) {
-      // ignore
+      message = errorBody;
     }
     if (body != null) {
       if (body['message'] != null) {
         message = body['message'].toString();
       }
       if (body['code'] != null) {
-        responseCode = body['code'].toString();
+        code = body['code'].toString();
       }
     }
-    return InfluxDBException(response.statusCode, responseCode, message);
+    return InfluxDBException(statusCode, code, message);
   }
+
+  @override
+  String toString() {
+    return 'InfluxDBException: statusCode = $statusCode, code = $code, message = $message';
+  }
+
 }
