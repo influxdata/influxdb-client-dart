@@ -5,34 +5,34 @@ part of influxdb_client_api;
 /// Options used by [WriteApi] .
 class WriteOptions {
   /// max number of records to send in a batch
-  int batchSize = 1000;
+  final int batchSize;
 
   /// delay between data flushes in milliseconds, at most `batch size` records are sent during flush  */
-  int flushInterval = 1000;
+  final int flushInterval;
 
   /// default tags, unescaped */
-  Map<String, String> defaultTags;
+  final Map<String, String> defaultTags;
 
   /// include random milliseconds when retrying HTTP calls
-  int retryJitter;
+  final int retryJitter;
 
-  /// minimum delay when retrying write (milliseconds)
-  int minRetryDelay;
+  /// Delay when retrying first write (milliseconds)
+  final int retryInterval;
 
   /// maximum delay when retrying write (milliseconds)
-  int maxRetryDelay;
+  final int maxRetryDelay;
 
   /// base for the exponential retry delay, the next delay is computed as `minRetryDelay * exponentialBase^(attempts-1) + random(retryJitter)` */
-  int exponentialBase;
+  final int exponentialBase;
 
   /// max number of retries when write fails
-  int maxRetries;
+  final int maxRetries;
 
   /// the maximum size of retry-buffer (in lines)
-  int maxBufferLines;
+  final int maxBufferLines;
 
   /// default precision
-  WritePrecision precision;
+  final WritePrecision precision;
 
   /// Enable gzip compression
   bool gzip = false;
@@ -41,8 +41,8 @@ class WriteOptions {
       {this.batchSize = 1000,
       this.flushInterval = 1000,
       this.retryJitter = 200,
-      this.minRetryDelay = 18000,
-      this.maxRetryDelay = 5000,
+      this.retryInterval = 1000,
+      this.maxRetryDelay = 180000,
       this.exponentialBase = 5,
       this.maxRetries = 3,
       this.maxBufferLines = 100000,
@@ -67,7 +67,7 @@ class WriteOptions {
       batchSize: batchSize ?? this.batchSize,
       flushInterval: flushInterval ?? this.flushInterval,
       retryJitter: retryJitter ?? this.retryJitter,
-      minRetryDelay: minRetryDelay ?? this.minRetryDelay,
+      retryInterval: minRetryDelay ?? this.retryInterval,
       exponentialBase: exponentialBase ?? this.exponentialBase,
       maxRetries: maxRetries ?? this.maxRetries,
       maxBufferLines: maxBufferLines ?? this.maxBufferLines,
@@ -76,10 +76,20 @@ class WriteOptions {
       gzip: gzip ?? this.gzip,
     );
   }
+
+  RetryOptions toRetryStrategy() {
+    return RetryOptions(
+        exponentialBase: exponentialBase,
+        retryInterval: Duration(milliseconds: retryInterval),
+        maxDelay: Duration(milliseconds: maxRetryDelay),
+        maxRetries: maxRetries,
+        retryJitter: Duration(milliseconds: retryJitter));
+  }
 }
 
 /// Precission for write operations.
 /// See [https://v2.docs.influxdata.com/v2.0/api/#operation/PostWrite ]
+/*
 enum WritePrecision {
   /// nanosecond
   ns,
@@ -93,7 +103,9 @@ enum WritePrecision {
   /// second
   s
 }
+*/
 
+/*
 String precisionToString(WritePrecision wp) {
   switch (wp) {
     case WritePrecision.ns:
@@ -108,3 +120,4 @@ String precisionToString(WritePrecision wp) {
       return 'ns';
   }
 }
+ */

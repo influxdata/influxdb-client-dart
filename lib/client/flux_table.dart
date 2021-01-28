@@ -2,6 +2,7 @@
 
 part of influxdb_client_api;
 
+/// Holds metadata about the column the in the table
 class FluxColumn {
   String label;
   String dataType;
@@ -10,10 +11,15 @@ class FluxColumn {
   num index;
 
   FluxColumn(
-  {this.label, this.dataType, this.group, this.defaultValue, this.index});
+      {this.label, this.dataType, this.group, this.defaultValue, this.index});
 
   FluxColumn.name(
       this.label, this.dataType, this.group, this.defaultValue, this.index);
+
+  @override
+  String toString() {
+    return 'FluxColumn: $label, $dataType, $group, $defaultValue, $index';
+  }
 }
 
 /// Represents metadata of a {@link http://bit.ly/flux-spec#table | flux table}.
@@ -24,18 +30,19 @@ class FluxTableMetaData {
 
   FluxTableMetaData(this.tableIndex);
 
-//
-// Creates an object out of the supplied values with the help of columns .
-//  @param values - a row with data for each column
-//
+// Creates an FluxRecord out of the supplied values with the help of columns .
   FluxRecord toObject(List<dynamic> values) {
-
     var record = FluxRecord(tableIndex);
     // record.table = tableIndex;
 
     for (var column in columns) {
       var columnName = column.label;
-      var csvValue = values[column.index+1];
+      var index = column.index + 1;
+      ////
+      if (index >= values.length) {
+        throw FluxCsvParserException('Invalid data $values - columns: $columns');
+      }
+      var csvValue = values[index];
       record[columnName] = _toValue(csvValue, column);
     }
 
@@ -51,15 +58,15 @@ class FluxTableMetaData {
       return _toValue(defaultValue, column);
     }
 
-    var value = serializers[column.dataType] (val);
-    return value; 
+    var value = serializers[column.dataType](val);
+    return value;
   }
-
 }
-///
 
-class FluxRecord extends MapMixin<String, dynamic>  {
-  int tableIndex;
+/// FluxRecord represents row in the Flux query response.
+class FluxRecord extends MapMixin<String, dynamic> {
+  /// index of table
+  final int tableIndex;
   final Map<String, dynamic> _values = {};
 
   FluxRecord(this.tableIndex);
@@ -85,8 +92,10 @@ class FluxRecord extends MapMixin<String, dynamic>  {
   }
 }
 
+/// Identity function
 T identity<T>(T x) => x;
 
+/// Map of serializers for each datatype in flux query response
 Map<String, dynamic> serializers = {
   'boolean': (dynamic x) => x == 'true',
   'unsignedLong': (dynamic x) => x as int,
@@ -97,7 +106,7 @@ Map<String, dynamic> serializers = {
     if (x is String) {
       return (x == '' ? null : int.parse(x));
     }
-  } ,
+  },
   'double': (dynamic x) {
     if (x is num) {
       return x.toDouble();
@@ -111,8 +120,6 @@ Map<String, dynamic> serializers = {
 };
 
 void serializeDateTimeAsDate() {
-  serializers['dateTime:RFC3339'] = (String x) => (x == '' ? null : DateTime.parse(x));
+  serializers['dateTime:RFC3339'] =
+      (String x) => (x == '' ? null : DateTime.parse(x));
 }
-
-
-

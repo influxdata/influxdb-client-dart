@@ -112,7 +112,7 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var resp = await client.getQueryService().queryRecords(query);
+    var resp = await client.getQueryService().query(query);
 
     var res = await resp.toList();
     for (var r in res) {
@@ -147,7 +147,7 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var resp = await client.getQueryService().queryRecords(query);
+    var resp = await client.getQueryService().query(query);
 
     var res = await resp.toList();
     var i=0;

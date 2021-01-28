@@ -20,6 +20,9 @@ final Dialect DEFAULT_dialect = Dialect(
     commentPrefix: '#',
     dateTimeFormat: DialectDateTimeFormatEnum.rFC3339);
 
+/// Query InfluxDB 2.0. Provides methods for stream Flux query.
+/// See {@link https://v2.docs.influxdata.com/v2.0/api/#operation/PostQuery }
+
 class QueryService extends DefaultService {
   QueryApi queryApi;
   bool gzip = false;
@@ -31,7 +34,10 @@ class QueryService extends DefaultService {
     queryApi = QueryApi(client.getApiClient());
   }
 
-  /// Gets the result of query as a raw string, use this with care
+  /// Gets the result of [fluxQuery] as a raw string.
+  ///
+  /// Use this with care, all response is stored in memory.
+  /// Result CSV format can be changed using [dialect].
   Future<String> queryRaw(String fluxQuery, {Dialect dialect}) async {
     var query = Query(dialect: dialect, query: fluxQuery);
     return await queryApi.postQuery(
@@ -40,7 +46,9 @@ class QueryService extends DefaultService {
         org: influxDB.org);
   }
 
-  /// Streams the result of query, each line is CSV parsed list of objects.
+  /// Streams the result of [fluxQuery] using [Dialect].
+  ///
+  /// Each line is CSV parsed list of objects.
   Future<Stream<List<dynamic>>> queryLines(String fluxQuery,
       {Dialect dialect}) async {
     var q = Query(query: fluxQuery, dialect: dialect);
@@ -48,21 +56,8 @@ class QueryService extends DefaultService {
     return utf8.decoder.bind(response.stream).transform(CsvToListConverter());
   }
 
-  /// Streams the result og the query as
-  Future<StreamSubscription<FluxRecord>> queryAsync(
-      String fluxQuery, void Function(FluxRecord event) onData,
-      {Function onError, void Function() onDone}) async {
-    var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
-
-    var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
-    return utf8.decoder
-        .bind(response.stream)
-        .transform(CsvToListConverter())
-        .transform(FluxTransformer())
-        .listen(onData, onError: onError, onDone: onDone);
-  }
-
-  Future<Stream<FluxRecord>> queryRecords(String fluxQuery) async {
+  /// Streams the result of query into [Stream<FluxRecord>]
+  Future<Stream<FluxRecord>> query(String fluxQuery) async {
     var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
     var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
     return utf8.decoder
@@ -71,16 +66,16 @@ class QueryService extends DefaultService {
         .transform(FluxTransformer());
   }
 
-  Future<StreamedResponse> _send(path, queryParams, body) async {
-    var uri = createUri(path, queryParams);
+  Future<StreamedResponse> _send(String path, Map<String,String> queryParams, body) async {
+    var uri = _buildUri(influxDB.url, path, queryParams);
     var r = Request('POST', uri);
-    addAuthHeader(r);
+    r.headers.addAll(influxDB.defaultHeaders);
     r.headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
     r.body = jsonEncode(body.toJson());
     var response = await influxDB.client.send(r);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw InfluxDBException.fromJson(
-          await response.stream.bytesToString(), response.statusCode);
+          await response.stream.bytesToString(), response.statusCode, response.headers);
     }
     return response;
   }

@@ -16,36 +16,11 @@ String CLIENT_NAME = loadYaml(File('pubspec.yaml').readAsStringSync())['name'];
 abstract class DefaultService {
   final InfluxDBClient influxDB;
 
-  final log = Logger('WriteService');
-
   DefaultService(this.influxDB);
-
-  get version => influxDB.version;
-
-  Map<String, String> authHeader() {
-    return {'Authorization': 'Token ' + influxDB.token};
-  }
-  void addAuthHeader(Request r) {
-    r.headers.addAll(authHeader());
-  }
-
-  Future<Response> doPost(Uri uri, payload) async {
-    return influxDB.client.post(uri, body: payload, headers: authHeader());
-  }
-
-
-  Future<Response> doGet(Uri uri, payload) async {
-    return await influxDB.client.get(uri, headers: authHeader());
-  }
-
-  Uri createUri(String path, Map<String, String> queryParams) {
-    return _buildUri(influxDB.url, path, queryParams);
-  }
 
   Uri _buildUri(
       String influxUrl, String path, Map<String, String> queryParams) {
     Uri uri;
-
     if (influxUrl.startsWith('https://')) {
       uri =
           Uri.https(influxUrl.substring('https://'.length), path, queryParams);
@@ -66,44 +41,77 @@ abstract class DefaultService {
   }
 }
 
+/// Log printer; defaults print log to console.
+void Function(Object object) logPrint = print;
+
 ///
 /// Main InfluxDB client class
 ///
 class InfluxDBClient {
-  InfluxDBClient(
-      {String url,
-      String token,
-      String bucket,
-      String org,
-      http.Client client,
-      bool debugEnabled = false}) {
+  ///
+  /// Create a new client for a InfluxDB.
+  ///
+  /// Example:
+  /// ```
+  ///  var client = InfluxDBClient(
+  ///     url: 'http://localhost:8086',
+  ///     token: 'my-token',
+  ///     org: 'my-org',
+  ///     bucket: 'my-bucket'
+  ///   );
+  /// ```
+  /// * [debug] - enable/disable verbose http call traing
+  /// * [username] and [password] is only for InfluxDB 1.8 comatibility
+  ///
+  InfluxDBClient({
+
+    String url,
+    String token,
+    String bucket,
+    String org,
+    http.Client client,
+    /// InfluxDB 1.x compatibility only
+    String username,
+    /// InfluxDB 1.x compatibility only
+    String password,
+    /// verbose logging of http calls
+    bool debug = false,
+  }) {
     this.url = url ?? String.fromEnvironment('INFLUXDB_URL');
     this.token = token ?? String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? String.fromEnvironment('INFLUXDB_ORG');
-    this.client = client ?? LoggingClient(debugEnabled, http.Client());
-    this.debugEnabled = debugEnabled;
+    this.client = client ?? LoggingClient(debug, http.Client());
+    this.debug = debug;
+
+    // 1.8 compatibility token
+    if (username != null && password != null && token == null) {
+      token = '$username:$password';
+    }
+    defaultHeaders['Authorization'] = 'Token $token';
+    defaultHeaders['User-Agent'] = '${CLIENT_NAME}_dart/$CLIENT_VERSION';
   }
 
   String token;
   String url;
   String bucket;
   String org;
-  bool debugEnabled;
+  bool debug;
 
   http.Client client;
 
-  get version => '0.0.1';
-
+  /// Closes the client and cleans up any resources associated with it.
+  ///
   void close() {
     client.close();
   }
 
+  Map<String, String> defaultHeaders = {};
+
   ApiClient getApiClient({String basePath = '/api/v2'}) {
     var api = ApiClient(basePath: url + basePath);
     api._client = client;
-    api.addDefaultHeader('Authorization', 'Token $token');
-    api.addDefaultHeader('User-Agent', '$CLIENT_NAME-dart/$CLIENT_VERSION');
+    api._defaultHeaderMap.addAll(defaultHeaders);
     return api;
   }
 
@@ -116,7 +124,7 @@ class InfluxDBClient {
   }
 
   HealthApi getHealthApi() {
-    return HealthApi(getApiClient(basePath : '/health'));
+    return HealthApi(getApiClient(basePath: '/health'));
   }
 
   LabelsApi getLabelsApi() {
@@ -128,7 +136,7 @@ class InfluxDBClient {
   }
 
   ReadyApi getReadyApi() {
-    return ReadyApi(getApiClient(basePath : '/ready'));
+    return ReadyApi(getApiClient(basePath: '/ready'));
   }
 
   TasksApi getTasksApi() {
@@ -150,9 +158,9 @@ class InfluxDBClient {
   DeleteService getDeleteService() {
     return DeleteService(this);
   }
-
 }
 
+/// Logging wrapper for http client.
 class LoggingClient extends BaseClient {
   bool debugEnabled = true;
   final Client delegate;
@@ -165,10 +173,13 @@ class LoggingClient extends BaseClient {
       _traceRequest(request);
     }
     var send = delegate.send(request);
-    send.then((resp) {
-      print('<< status: ${resp.statusCode} - contentLength: ${resp.contentLength}');
-      print('<< headers: ${resp.headers}');
-    });
+    if (debugEnabled) {
+      send.then((r) {
+        logPrint(
+            '<< status: ${r.statusCode} - contentLength: ${r.contentLength}');
+        logPrint('<< headers: ${r.headers}');
+      });
+    }
     return send;
   }
 
@@ -176,8 +187,8 @@ class LoggingClient extends BaseClient {
   void close() => delegate.close();
 
   void _traceRequest(BaseRequest request) {
-    print('>> ${request.method} ${request.url} =====');
-    print('>> headers: ${request.headers}');
-    print('>> contentLength: ${request.contentLength}');
+    logPrint('>> ${request.method} ${request.url} =====');
+    logPrint('>> headers: ${request.headers}');
+    logPrint('>> contentLength: ${request.contentLength}');
   }
 }

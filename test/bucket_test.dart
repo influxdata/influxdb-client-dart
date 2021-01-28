@@ -17,7 +17,7 @@ void main() async {
         url: url,
         org: org,
         bucket: 'my-bucket',
-        debugEnabled: true);
+        debug: true);
   });
 
   tearDownAll(() {

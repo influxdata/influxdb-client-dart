@@ -4,10 +4,9 @@ part of influxdb_client_api;
 
 /// Point defines values of a single measurement.
 class Point {
-
   String name;
-  SplayTreeMap <String, String> tags = SplayTreeMap();
-  SplayTreeMap <String, dynamic> fields = SplayTreeMap();
+  SplayTreeMap<String, String> tags = SplayTreeMap();
+  SplayTreeMap<String, dynamic> fields = SplayTreeMap();
 
   //timestamp in epoch nanoseconds
   dynamic timestamp;
@@ -23,22 +22,21 @@ class Point {
 
   /// Adds a tag.
   Point addTag(String name, String value) {
-    tags [ name ] = value;
+    tags[name] = value;
     return this;
   }
 
   /// Adds a tag.
   Point addField(String name, dynamic value) {
-    fields [ name ] = value;
+    fields[name] = value;
     return this;
   }
 
-  /// Sets point time. A string or number value can be used
-  /// to carry an int64 value of a precision that depends
-  /// on WriteApi, nanoseconds by default. An undefined value
-  /// generates a local timestamp using the client's clock.
-  /// An empty string can be used to let the server assign
-  /// the timestamp.
+  /// Sets point time.
+  ///
+  /// A [int] or [DateTime] value can be used
+  /// to carry an int value of a precision that depends
+  /// on WriteApi, nanoseconds by default.
   Point time(dynamic time) {
     if (time is DateTime) {
       timestamp = time;
@@ -108,7 +106,7 @@ class Point {
     if (defaultTags != null) {
       defaultTags.forEach((k, v) => _addTag(k, v, sb));
     }
-    tags.forEach((k,v) => _addTag(k,v,sb));
+    tags.forEach((k, v) => _addTag(k, v, sb));
     sb.write(' ');
   }
 
@@ -146,7 +144,6 @@ class Point {
   }
 
   void _escapeValue(StringBuffer sb, String value) {
-
     for (var i = 0; i < value.length; i++) {
       switch (value[i]) {
         case '\\':
@@ -170,17 +167,17 @@ class Point {
       int convertedTime;
 
       var nanos = (timestamp as DateTime).microsecondsSinceEpoch * 1000;
-      switch (precision) {
-        case WritePrecision.ns:
+      switch (precision.value) {
+        case 'ns':
           convertedTime = nanos;
           break;
-        case WritePrecision.us:
+        case 'us':
           convertedTime = (nanos / 1000).round();
           break;
-        case WritePrecision.ms:
+        case 'ms':
           convertedTime = (nanos / 1000000).round();
           break;
-        case WritePrecision.s:
+        case 's':
           convertedTime = (nanos / 1000000000).round();
           break;
         default:

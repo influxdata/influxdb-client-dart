@@ -23,7 +23,7 @@ void main() async {
 
   test('urlTest', () async {
     var uri = Uri.http('localhost:8086', '/api/v2/write', {
-      'precision': precisionToString(WritePrecision.ns),
+      'precision': WritePrecision.ns.value,
       'bucket': 'my-bucket',
       'org': 'my-org'
     });

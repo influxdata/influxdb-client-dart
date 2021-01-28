@@ -99,37 +99,18 @@ void main() {
       |> filter(fn: (r) => r["_measurement"] == "temperature")
     ''';
 
-    var queryLines = await queryService.queryRecords(fluxQuery);
+    var queryLines = await queryService.query(fluxQuery);
 
     queryLines.listen((fluxRecord) {
       print(fluxRecord);
     });
   });
 
-  test('queryAsync', () async {
-    var queryService = QueryService(client);
-    var fluxQuery = '''
-      from(bucket: "my-bucket")
-      |> range(start: 0)
-      |> filter(fn: (r) => r["_measurement"] == "temperature")
-    ''';
-
-    var out = [];
-    var sub = await queryService.queryAsync(fluxQuery, (fluxRecord) {
-      out.add(fluxRecord);
-    },
-        onDone: () => print('Done. $out'),
-        onError: (error, stacktrace) => print('$error $stacktrace'));
-
-    print('Subscription: ${sub.toString()}');
-    print(out);
-  });
-
   test('queryError', () async {
     var queryService = QueryService(client);
     var fluxQuery = 'from(Xbucket: "my-bucket") |> range(start: 0)';
     expect(
-        queryService.queryAsync(fluxQuery, (_) => fail('bad onDone invoked')),
+        queryService.query(fluxQuery),
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 400 &&
             e.message.contains('found unexpected argument Xbucket')))));
@@ -140,7 +121,7 @@ void main() {
     var queryService = unauthorizedClient.getQueryService();
     var fluxQuery = 'from(bucket: "my-bucket") |> range(start: 0)';
     expect(
-        queryService.queryRecords(fluxQuery),
+        queryService.query(fluxQuery),
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 401 &&
             e.code == 'unauthorized' &&
@@ -153,7 +134,7 @@ void main() {
     var queryService = unauthorizedClient.getQueryService();
     var fluxQuery = 'from(bucket: "my-bucket") |> range(start: 0)';
     expect(
-        queryService.queryAsync(fluxQuery, (_) => fail('fail.')),
+        queryService.query(fluxQuery),
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 401 &&
             e.code == 'unauthorized' &&
@@ -179,7 +160,7 @@ void main() {
       |> range(start: 0)
       |> filter(fn: (r) => r["_measurement"] == "temperature")
     ''';
-    var x  = await queryService.queryRecords(fluxQuery);
+    var x  = await queryService.query(fluxQuery);
     print(await x.toList());
   });
 

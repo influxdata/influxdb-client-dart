@@ -24,6 +24,7 @@ Please submit issues and pull requests, help out, or just give encouragement.
     - [Creating a client](#creating-a-client)
     - [Writing data](#writes)
     - [Querying data](#queries)
+    - [Delete data](#delete)  
     - [Management API](#management-api)
 - [Advanced Usage](#advanced-usage)
     - [Default Tags](#default-tags)
@@ -66,36 +67,34 @@ import 'package:influxdb_client/api.dart';
 Specify **url** and **token** via parameters:
 
 ```dart
-
-
-var client = InfluxDBClient(url: 'http://localhost:8086', token: 'my-token', org: 'my-org', bucket: 'my-bucket');
-
-client.close();
+var client = InfluxDBClient(
+    url: 'http://localhost:8086',
+    token: 'my-token',
+    org: 'my-org',
+    bucket: 'my-bucket',
+    debug: true);
 ```
 
 #### Client Options
 
 | Option | Description | Type | Default |
 |---|---|---|---|
+| url | InfluxDB url | String | none |
 | bucket | Default destination bucket for writes | String | none |
 | org | Default organization bucket for writes | String | none |
 | precision | Default precision for the unix timestamps within the body line-protocol | WritePrecision | ns |
-| enableGzip | Enable Gzip compression for HTTP requests. | Bool | false |
+| debug | Enable verbose logging of underlying  http client | bool | false |
 
 #### InfluxDB 1.8 API compatibility
 
-TODO 
 ```dart
-client = InfluxDBClient(
-        url: "http://localhost:8086", 
-        username: "user", 
-        password: "pass",
-        database: "my-db", 
-        retentionPolicy: "autogen")
-
-...
-
-client.close()
+  var client = InfluxDBClient(
+    url: 'http://localhost:8086',
+    username: '...',
+    password: '...',
+    org: 'my-org',
+    bucket: 'my-bucket',
+    debug: true);
 ```
 
 ### Writes
@@ -106,10 +105,9 @@ The data could be written as:
 
 1. `String` that is formatted as a InfluxDB's Line Protocol
 1. [Data Point](/lib/client/point.dart) structure
-1. TODO Tuple style mapping with keys: `measurement`, `tags`, `fields` and `time`
 1. Array of above items
 
-The following example demonstrates how to write data with different type of records. For further information see docs and [examples](/Examples).
+The following example demonstrates how to write data with different type of records. For further information see docs and [examples](examples).
 
 ```dart
 import 'package:influxdb_client/api.dart';
@@ -140,22 +138,47 @@ main() async {
 }
 
 ```
-- sources - [write_example](/example/write_example.dart)
+- sources - [write_example](examples/write_example.dart)
 
 ### Queries
 
-TODO
-The result retrieved by [QueryService](/lib/src/client/QueryService.dart) could be formatted as a:
-
-1. Lazy sequence of [FluxRecord](/Sources/InfluxDBSwift/QueryAPI.swift#L258)
-1. Raw query response as a `String`.
+The result retrieved by [QueryService](lib/client/query_service.dart) could be formatted as a:
 
 #### Query to FluxRecord
 
 ```dart
 
+import 'package:influxdb_client/api.dart';
+
+void main() async {
+  var client = InfluxDBClient(
+    url: 'http://localhost:8086',
+    token: 'my-token',
+    org: 'my-org',
+    bucket: 'my-bucket',
+  );
+
+  var queryService = client.getQueryService();
+
+  var recordStream = await queryService.query('''
+  from(bucket: "my-bucket")
+  |> range(start: 0)
+  |> filter(fn: (r) => r["_measurement"] == "cpu")
+  |> filter(fn: (r) => r["cpu"] == "cpu-total")
+  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  ''');
+
+  var count = 0;
+  await recordStream.forEach((record) {
+    print(
+        'record: ${count++} ${record['_time']}: ${record['host']} ${record['cpu']} ${record['_value']}');
+  });
+
+  client.close();
+}
+
 ```
-- sources - [QueryCpu/main.swift](/Examples/QueryCpu/Sources/QueryCpu/main.swift)
 
 #### Query to String
 
@@ -164,14 +187,10 @@ The result retrieved by [QueryService](/lib/src/client/QueryService.dart) could 
 import 'package:influxdb_client/api.dart';
 
 main() async {
-  var client = InfluxDBClient(
-      url: 'http://localhost:8086',
-      token: 'my-token',
-      org: 'my-org',
-      bucket: 'my-bucket',
-      debugEnabled: true);
+  var client = InfluxDBClient(url: 'http://localhost:8086',
+      token: 'my-token', org: 'my-org', bucket: 'my-bucket');
 
-  var queryService = QueryService(client);
+  var queryService = client.getQueryService(client);
 
   var rawCSV = await queryService.queryRaw('''
       from(bucket: "my-bucket")
@@ -186,6 +205,50 @@ main() async {
 
 
 ```
+### Delete points
+
+The [DeleteService](lib/client/delete_service.dart) supports deletes
+[points](https://v2.docs.influxdata.com/v2.0/reference/glossary/#point) from an InfluxDB bucket.
+
+InfluxDB uses an InfluxQL-like [predicate](https://docs.influxdata.com/influxdb/cloud/reference/syntax/delete-predicate/)
+syntax to determine what data points to delete.
+
+```dart
+import 'package:influxdb_client/api.dart';
+
+void main() async {
+  var client = InfluxDBClient(
+      url: 'http://localhost:8086',
+      token: 'my-token',
+      org: 'my-org',
+      bucket: 'my-bucket',
+      debugEnabled: true);
+
+  await client
+      .getDeleteService()
+      .delete(
+      predicate: '_measurement="temperature"',
+      start: '1970-01-01T00:00:00.000000001Z',
+      stop: DateTime.now().toUtc().toIso8601String(),
+      bucket: 'my-bucket',
+      org: 'my-org')
+      .catchError((e) => print(e));
+
+  var queryService = client.getQueryService();
+
+  var fluxQuery = '''
+  from(bucket: "my-bucket")
+  |> range(start: -1d)
+  |> filter(fn: (r) => r["_measurement"] == "temperature")
+  ''';
+
+  // should be empty
+  var records = await queryService.query(fluxQuery);
+  assert(await records.isEmpty);
+
+  client.close();
+}
+```
 
 ### Management API
 
@@ -194,10 +257,22 @@ The client supports following management API:
 |  | API docs |
 | --- | --- |
 
-TODO
+The client supports following management API:
+
+|  | API docs |
+| --- | --- |
+| [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Authorizations |
+| [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Buckets |
+| [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/DBRPs |
+| [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Health |
+| [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Labels |
+| [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Organizations |
+| [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ready |
+| [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Tasks |
+| [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Users |
 
 
-The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](/Examples).
+The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](examples/management_api_example.dart).
 
 ```dart
 import 'package:influxdb_client/api.dart';
@@ -206,7 +281,6 @@ void main() async {
 // Initialize Client and API
   var client = InfluxDBClient(
       url: 'http://localhost:8086', token: 'my-token', org: 'my-org');
-  var api = client.getApiClient();
 
   var healthCheck = await client.getHealthApi().getHealth();
   print('Health check: ${healthCheck.name}/${healthCheck.version} - ${healthCheck.message}');
@@ -263,32 +337,6 @@ void main() async {
   client.close();
 }
 
-```
-
-## Advanced Usage
-
-### Default Tags
-
-TODO
-
-Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`.
-The client is able to use static value or env variable as a tag value.
-
-The expressions:
-- `California Miner` - static value
-- `${env.HOST_NAME}` - environment property
-
-#### Example
-
-```dart
-TODO
-```
-
-##### Example Output
-
-```bash
-mining,customer=California\ Miner,sensor_id=123-456-789,sensor_state=normal depth=2i
-mining,customer=California\ Miner,sensor_id=123-456-789,sensor_state=normal pressure=3i
 ```
 
 ## Contributing

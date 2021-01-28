@@ -1,6 +1,3 @@
-//
-// AUTO-GENERATED FILE, DO NOT MODIFY!
-//
 // @dart=2.0
 
 // ignore_for_file: unused_element, unused_import
@@ -13,6 +10,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:collection';
+import 'dart:math' as math;
+import 'package:archive/archive.dart';
 import 'package:yaml/yaml.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
@@ -41,8 +40,12 @@ part 'api/default_api.dart';
 part 'model/ready.dart';
 part 'model/health_check.dart';
 
-// query apu
+// query api
 part 'api/query_api.dart';
+
+// write api
+part 'api/write_api.dart';
+part 'model/write_precision.dart';
 
 part 'model/dialect.dart';
 part 'model/query.dart';
@@ -132,6 +135,7 @@ part 'client/write_service.dart';
 part 'client/query_service.dart';
 part 'client/flux_transformer.dart';
 part 'client/flux_table.dart';
+part 'client/retry.dart';
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';

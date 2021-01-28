@@ -7,6 +7,7 @@ const ANNOTATION_GROUP = '#group';
 const ANNOTATION_DATATYPE = '#datatype';
 const ANNOTATIONS = [ANNOTATION_DEFAULT, ANNOTATION_GROUP, ANNOTATION_DATATYPE];
 
+/// [FluxQueryException] is thrown when Flux response contains error from server
 class FluxQueryException implements Exception {
   String message;
   String reference;
@@ -19,12 +20,15 @@ class FluxQueryException implements Exception {
   }
 }
 
+/// [FluxCsvParserException] is thrown when flux csv parser failed
 class FluxCsvParserException implements Exception {
   String cause;
 
   FluxCsvParserException(this.cause);
 }
 
+/// Parses Flux query result and transforms the CSV stream of List<dynamic>
+/// in to Stream<FluxRecord>
 class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   StreamController _controller;
 
@@ -38,20 +42,25 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   var parsingStateError = false;
   var groups;
 
-
   // Original Stream
   Stream<List> _stream;
 
-  FluxTransformer({bool sync = false, this.cancelOnError}) {
-    _controller = StreamController<FluxRecord>(onListen: _onListen, onCancel: _onCancel, onPause: () {
-      _subscription.pause();
-    }, onResume: () {
-      _subscription.resume();
-    }, sync: sync);
+  FluxTransformer({bool sync = false, this.cancelOnError = true}) {
+    _controller = StreamController<FluxRecord>(
+        onListen: _onListen,
+        onCancel: _onCancel,
+        onPause: () {
+          _subscription.pause();
+        },
+        onResume: () {
+          _subscription.resume();
+        },
+        sync: sync);
   }
 
   FluxTransformer.broadcast({bool sync = false, this.cancelOnError}) {
-    _controller = StreamController<FluxRecord>.broadcast(onListen: _onListen, onCancel: _onCancel, sync: sync);
+    _controller = StreamController<FluxRecord>.broadcast(
+        onListen: _onListen, onCancel: _onCancel, sync: sync);
   }
 
   void _onListen() {
@@ -67,24 +76,25 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   }
 
   void onData(List csv) {
-    // Empty line
-    if (csv.isEmpty || (csv.length == 1 && csv[0] == '' )) {
+    // skip empty line
+    if (csv.isEmpty || (csv.length == 1 && csv[0] == '')) {
       return;
     }
 
+    // check error found in csv
     if (csv.length > 1 && 'error' == csv[1] && 'reference' == csv[2]) {
       parsingStateError = true;
       return;
     }
-
+    // throw error on next row
     if (parsingStateError) {
       var error = csv[1];
       var reference = csv[2];
       throw FluxQueryException(error, reference);
     }
 
+    // check csv annotations
     var token = csv[0];
-
     if (ANNOTATIONS.contains(token) && !startNewTable) {
       startNewTable = true;
       table = FluxTableMetaData(tableIndex);
@@ -94,7 +104,6 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
       throw FluxCsvParserException(
           'Unable to parse CSV response. FluxTable definition was not found.');
     }
-
     if (ANNOTATION_DATATYPE == token) {
       _addDataTypes(table, csv);
     } else if (ANNOTATION_GROUP == token) {
@@ -128,8 +137,9 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
         tableIndex = tableIndex + 1;
         tableId = currentId;
       }
-
-      var fluxRecord = table.toObject(csv); // parseRecord(tableIndex - 1, table, csv);
+      // create flux recod from csv line
+      var fluxRecord =
+          table.toObject(csv); // parseRecord(tableIndex - 1, table, csv);
       _controller.add(fluxRecord);
     }
   }
@@ -178,4 +188,3 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
     return StreamTransformer.castFrom(this);
   }
 }
-

@@ -7,9 +7,9 @@ void main() async {
       token: 'my-token',
       org: 'my-org',
       bucket: 'my-bucket',
-      debugEnabled: true);
+      debug: true);
 
-  var writeApi = WriteService(client);
+  var writeApi = client.getWriteService();
 
   var point = Point('h2o')
       .addTag('location', 'Prague')

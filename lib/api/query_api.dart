@@ -35,8 +35,6 @@ class QueryApi {
   /// * [String] orgID:
   ///   Specifies the ID of the organization executing the query. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
-  /// * [UNKNOWN_BASE_TYPE] UNKNOWN_BASE_TYPE:
-  ///   Flux query or specification to execute
   Future<Response> postQueryWithHttpInfo({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
     // Verify required params are set.
 
@@ -111,8 +109,6 @@ class QueryApi {
   /// * [String] orgID:
   ///   Specifies the ID of the organization executing the query. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
-  /// * [UNKNOWN_BASE_TYPE] UNKNOWN_BASE_TYPE:
-  ///   Flux query or specification to execute
   Future<String> postQuery({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
     final response = await postQueryWithHttpInfo( zapTraceSpan: zapTraceSpan, acceptEncoding: acceptEncoding, contentType: contentType, org: org, orgID: orgID, query: query );
     if (response.statusCode >= HttpStatus.badRequest) {
