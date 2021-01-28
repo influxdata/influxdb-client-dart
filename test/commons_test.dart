@@ -14,6 +14,7 @@ String generateBucketName() {
 }
 
 Future<Bucket> createTestBucket() async {
+  var org = organization ?? await findMyOrg();
   var bucketName = generateBucketName();
   var request = PostBucketRequest(
       orgID: organization.id, name: bucketName, retentionRules: null);
@@ -24,7 +25,7 @@ Future<void> deleteTestBucket(Bucket bucket) {
   return client.getBucketsApi().deleteBucketsID(bucket.id);
 }
 
-void setupClient() {
+void setupClient() async {
   final token =
       String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
   orgName = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
@@ -36,7 +37,9 @@ void setupClient() {
       url: url,
       org: orgName,
       bucket: 'my-bucket',
-      debugEnabled: debugEnabled);
+      debug: debugEnabled);
+
+  organization = await findMyOrg();
 }
 
 Future<Organization> findMyOrg() async {

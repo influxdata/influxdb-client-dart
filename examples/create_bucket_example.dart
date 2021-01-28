@@ -4,7 +4,6 @@ void main() async {
 // Initialize Client and API
   var client = InfluxDBClient(
       url: 'http://localhost:8086', token: 'my-token', org: 'my-org');
-  var api = client.getApiClient();
 
   var healthCheck = await client.getHealthApi().getHealth();
   print('Health check: ${healthCheck.name}/${healthCheck.version} - ${healthCheck.message}');
@@ -12,10 +11,10 @@ void main() async {
   var ready = await client.getReadyApi().getReady();
   print('Ready check: ${ready.status}');
 
-  var orgs = await OrganizationsApi(api).getOrgs();
+  var orgs = await client.getOrganizationsApi().getOrgs();
   var myOrgId = orgs.orgs.first.id;
 
-  var bucketsApi = BucketsApi(api);
+  var bucketsApi = client.getBucketsApi();
   var bucketName = 'bucket-my-org';
 
   // find and delete bucket 'bucket-my-org'
@@ -50,7 +49,7 @@ void main() async {
       ]);
 
 // Create Authorization
-  var authorizationsApi = AuthorizationsApi(api);
+  var authorizationsApi = client.getAuthorizationsApi();
   var authorization = await authorizationsApi.postAuthorizations(auth);
 
 // Print token

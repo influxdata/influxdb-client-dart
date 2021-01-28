@@ -44,7 +44,7 @@ void main() {
         url: client.url,
         token: authToken,
         org: client.org,
-        debugEnabled: client.debugEnabled);
+        debug: client.debug);
   });
 
   tearDown(() {
@@ -130,7 +130,7 @@ void main() {
 
       var fluxQuery =
           'from(bucket:"${bucket.name}") |> range(start: 1970-01-01T00:00:00.000000001Z)';
-      var records = await client.getQueryService().queryRecords(fluxQuery);
+      var records = await client.getQueryService().query(fluxQuery);
       List rec = await records.where((record) => record.tableIndex == 0).toList();
       expect(rec.length, 12);
 
@@ -143,7 +143,7 @@ void main() {
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);
-      records = await client.getQueryService().queryRecords(fluxQuery);
+      records = await client.getQueryService().query(fluxQuery);
       rec = await records.toList();
       expect(rec.length, 0);
     });
@@ -153,7 +153,7 @@ void main() {
 
       var fluxQuery =
           'from(bucket:"${bucket.name}") |> range(start: 1970-01-01T00:00:00.000000001Z)';
-      var records = await client.getQueryService().queryRecords(fluxQuery);
+      var records = await client.getQueryService().query(fluxQuery);
       List rec = await records.where((record) => record.tableIndex == 0).toList();
       expect(rec.length, 12);
 
@@ -166,7 +166,7 @@ void main() {
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);
-      records = await client.getQueryService().queryRecords(fluxQuery);
+      records = await client.getQueryService().query(fluxQuery);
       rec = await records.toList();
       expect(rec.length, 0);
     });
