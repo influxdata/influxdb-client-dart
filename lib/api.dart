@@ -17,7 +17,6 @@ import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-import 'package:logging/logging.dart';
 import 'package:csv/csv.dart';
 
 // generated stuff

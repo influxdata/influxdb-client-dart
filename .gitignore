@@ -1,5 +1,6 @@
 # See https://www.dartlang.org/guides/libraries/private-files
 
+.idea/
 # Files and directories created by pub
 .dart_tool/
 .packages
@@ -22,3 +23,4 @@ test-results
 *.js_
 *.js.deps
 *.js.map
+scripts/generated

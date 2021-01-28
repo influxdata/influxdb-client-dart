@@ -107,7 +107,7 @@ The data could be written as:
 1. [Data Point](/lib/client/point.dart) structure
 1. Array of above items
 
-The following example demonstrates how to write data with different type of records. For further information see docs and [examples](examples).
+The following example demonstrates how to write data with different type of records. For further information see docs and [examples](example).
 
 ```dart
 import 'package:influxdb_client/api.dart';
@@ -138,7 +138,7 @@ main() async {
 }
 
 ```
-- sources - [write_example](examples/write_example.dart)
+- sources - [write_example](example/write_example.dart)
 
 ### Queries
 
@@ -272,7 +272,7 @@ The client supports following management API:
 | [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Users |
 
 
-The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](examples/management_api_example.dart).
+The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).
 
 ```dart
 import 'package:influxdb_client/api.dart';
