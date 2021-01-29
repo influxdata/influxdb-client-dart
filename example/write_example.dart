@@ -1,7 +1,6 @@
 import 'package:influxdb_client/api.dart';
 
 void main() async {
-
   var client = InfluxDBClient(
       url: 'http://localhost:8086',
       token: 'my-token',
@@ -9,7 +8,11 @@ void main() async {
       bucket: 'my-bucket',
       debug: true);
 
-  var writeApi = client.getWriteService();
+  var writeApi = client.getWriteService(WriteOptions().merge(
+      precision: WritePrecision.s,
+      batchSize: 100,
+      flushInterval: 5000,
+      gzip: true));
 
   var point = Point('h2o')
       .addTag('location', 'Prague')
@@ -23,5 +26,4 @@ void main() async {
     print('Handle write error here!');
     print(exception);
   });
-
 }

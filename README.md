@@ -1,11 +1,9 @@
 # influxdb-client-dart
 
 [![CircleCI](https://circleci.com/gh/bonitoo-io/influxdb-client-dart.svg?style=svg)](https://circleci.com/gh/bonitoo-io/influxdb-client-dart)
-[![codecov](https://codecov.io/gh/bonitoo-io/influxdb-client-dart/branch/master/graph/badge.svg)](https://codecov.io/gh/bonitoo-io/influxdb-client-dart)
 [![Platforms](https://img.shields.io/badge/platform-dart|flutter-blue.svg)](https://github.com/bonitoo-io/influxdb-client-dart/)
-[![Pub](https://img.shields.io/pub/v/github.svg)](https://pub.dartlang.org/packages/influxdb_client)
+![Pub Version](https://img.shields.io/pub/v/influxdb_client)
 [![License](https://img.shields.io/github/license/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/blob/master/LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-latest-blue)](https://bonitoo-io.github.io/influxdb-dart-swift/)
 [![GitHub issues](https://img.shields.io/github/issues-raw/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
@@ -36,6 +34,7 @@ Please submit issues and pull requests, help out, or just give encouragement.
 InfluxDB 2.0 client supports:
 
 - Querying data using the Flux language
+    - Streaming result to `Stream<FluxRecord>` 
 - Writing data
     - batched in chunks on background
     - automatic retries on write failures
@@ -52,6 +51,7 @@ InfluxDB 2.0 client supports:
 Library works in web, server, and Flutter.
 
 ## Installation
+
 
 ### Import
 
@@ -82,7 +82,6 @@ var client = InfluxDBClient(
 | url | InfluxDB url | String | none |
 | bucket | Default destination bucket for writes | String | none |
 | org | Default organization bucket for writes | String | none |
-| precision | Default precision for the unix timestamps within the body line-protocol | WritePrecision | ns |
 | debug | Enable verbose logging of underlying  http client | bool | false |
 
 #### InfluxDB 1.8 API compatibility
@@ -138,11 +137,35 @@ main() async {
 }
 
 ```
+
+#### WriteOptions
+
+Settings for `WriteService` like batching, default tags, retry strategy, precision, 
+can customized in `WriteOptions'.
+
+Example how to modify default `WriteOptions`:
+
+```dart
+  var client = InfluxDBClient(
+      url: 'http://localhost:8086',
+      token: 'my-token',
+      org: 'my-org',
+      bucket: 'my-bucket',
+      debug: true);
+
+  var writeApi = client.getWriteService(WriteOptions().merge(
+      precision: WritePrecision.s,
+      batchSize: 100,
+      flushInterval: 5000,
+      gzip: true));
+
+```
 - sources - [write_example](example/write_example.dart)
 
 ### Queries
 
 The result retrieved by [QueryService](lib/client/query_service.dart) could be formatted as a:
+
 
 #### Query to FluxRecord
 
@@ -359,13 +382,6 @@ Check code coverage:
 ```bash
 ./scripts/influxdb-restart.sh
 dart test --enable-code-coverage
-```
-
-You could also use a `docker-cli` without installing the Swift SDK:
-
-```bash
-make docker-cli
-swift build
 ```
 
 ## License

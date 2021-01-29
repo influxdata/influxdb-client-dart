@@ -16,7 +16,7 @@ packages:
     source: hosted
     version: "0.40.6"
   archive:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: archive
       url: "https://pub.dartlang.org"
@@ -156,7 +156,7 @@ packages:
     source: hosted
     version: "3.6.0"
   collection:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: collection
       url: "https://pub.dartlang.org"
@@ -569,7 +569,7 @@ packages:
     source: hosted
     version: "0.7.4"
   yaml:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: yaml
       url: "https://pub.dartlang.org"
