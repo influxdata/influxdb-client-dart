@@ -6,9 +6,8 @@
 
 part of influxdb_client_api;
 
-String CLIENT_VERSION =
-    loadYaml(File('pubspec.yaml').readAsStringSync())['version'];
-String CLIENT_NAME = loadYaml(File('pubspec.yaml').readAsStringSync())['name'];
+String CLIENT_VERSION = '0.1.1';
+String CLIENT_NAME = 'influxdb-client-dart';
 
 ///
 /// Superclass for all services.
@@ -89,7 +88,7 @@ class InfluxDBClient {
       token = '$username:$password';
     }
     defaultHeaders['Authorization'] = 'Token $token';
-    defaultHeaders['User-Agent'] = '${CLIENT_NAME}_dart/$CLIENT_VERSION';
+    defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
   }
 
   String token;
