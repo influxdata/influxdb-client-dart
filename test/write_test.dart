@@ -31,12 +31,12 @@ void main() {
     var mockClient = MockClient((request) async {
       var body = request.body.toString();
       expect(body.contains('default_tag1=default_tag1_value'), true);
-      return Response("", 204);
+      return Response('', 204);
     });
 
-    client.client = mockClient;
-
-    var writeService = client.getWriteService(WriteOptions()
+    var clientMock = createClient();
+    clientMock.client = mockClient;
+    var writeService = clientMock.getWriteService(WriteOptions()
         .merge(defaultTags: {'default_tag1': 'default_tag1_value'}));
     var p = Point('temperature');
     p.addField('value', 60.0);
