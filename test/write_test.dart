@@ -1,5 +1,8 @@
+import 'package:http/http.dart';
+import 'package:http/testing.dart';
 import 'package:influxdb_client/api.dart';
 import 'package:test/test.dart';
+
 import 'commons_test.dart';
 
 void main() {
@@ -22,6 +25,28 @@ void main() {
       expect(e.statusCode, 404);
       expect(e.message, 'bucket "not-existent" not found');
     }
+  });
+
+  test('writeDefaultTag', () async {
+    var mockClient = MockClient((request) async {
+      var body = request.body.toString();
+      expect(body.contains('default_tag1=default_tag1_value'), true);
+      return Response('', 204);
+    });
+
+    var clientMock = createClient();
+    clientMock.client = mockClient;
+    var writeService = clientMock.getWriteService(WriteOptions()
+        .merge(defaultTags: {'default_tag1': 'default_tag1_value'}));
+    var p = Point('temperature');
+    p.addField('value', 60.0);
+    p.addTag('location', 'north');
+
+    await writeService.write(p);
+
+    writeService.batchWrite(p);
+    await writeService.flush();
+
   });
 
   test('writeGzip', () async {
@@ -59,8 +84,7 @@ void main() {
       'temperature,location=south value=111.0 2'
     ], bucket: bucket.name);
 
-    var rawCSV = await queryService.queryRaw(
-    '''
+    var rawCSV = await queryService.queryRaw('''
     from(bucket: "${bucket.name}") 
     |> range(start: 0) 
     |> filter(fn: (r) => r["_measurement"] == "temperature") 

@@ -1,7 +1,7 @@
 import 'package:influxdb_client/api.dart';
 
 /// enable HTTP tracing
-bool debugEnabled=true;
+bool debugEnabled = true;
 
 /// global test properties
 InfluxDBClient client;
@@ -16,8 +16,8 @@ String generateBucketName() {
 Future<Bucket> createTestBucket() async {
   var org = organization ?? await findMyOrg();
   var bucketName = generateBucketName();
-  var request = PostBucketRequest(
-      orgID: organization.id, name: bucketName, retentionRules: null);
+  var request =
+      PostBucketRequest(orgID: org.id, name: bucketName, retentionRules: null);
   return await client.getBucketsApi().postBuckets(request);
 }
 
@@ -26,29 +26,28 @@ Future<void> deleteTestBucket(Bucket bucket) {
 }
 
 void setupClient() async {
+  client = createClient();
+  organization = await findMyOrg();
+}
+
+InfluxDBClient createClient() {
   final token =
       String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
   orgName = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
   final url = String.fromEnvironment('INFLUXDB_URL',
       defaultValue: 'http://localhost:8086');
 
-  client = InfluxDBClient(
+  return InfluxDBClient(
       token: token,
       url: url,
       org: orgName,
       bucket: 'my-bucket',
       debug: debugEnabled);
-
-  organization = await findMyOrg();
 }
 
 Future<Organization> findMyOrg() async {
   var orgList = await client.getOrganizationsApi().getOrgs();
-  return orgList.orgs.firstWhere((org) {
-    print(org.name + ' ? '+ orgName);
-    return org.name == orgName;});
+  return orgList.orgs.firstWhere((org) => org.name == orgName);
 }
 
-void main () {
-
-}
+void main() {}

@@ -27,8 +27,6 @@ class WriteService extends DefaultService {
     assert(record != null);
 
     if (writeOptions.maxRetries > 0) {
-
-      var retry2 = writeOptions.toRetryStrategy();
       var retry = RetryOptions(
         exponentialBase: writeOptions.exponentialBase,
         retryInterval: Duration(milliseconds: writeOptions.retryInterval),
@@ -120,6 +118,7 @@ class WriteService extends DefaultService {
     _checkNotNull('org', org);
 
     var payload = _payload(data, precision, bucket, org, false);
+
     if (payload == null) {
       throw ArgumentError('Unable to write, no data');
     }
@@ -156,8 +155,9 @@ class WriteService extends DefaultService {
       return null;
     }
     if (data is Point) {
-      return _payload(
-          data.toLineProtocol(precision), precision, bucket, org, batching);
+      var lineProtocol =
+          data.toLineProtocol(precision, defaultTags: writeOptions.defaultTags);
+      return _payload(lineProtocol, precision, bucket, org, batching);
     }
     if (data is String) {
       if (data.isEmpty) {
