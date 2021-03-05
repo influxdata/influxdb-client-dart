@@ -7,19 +7,9 @@ void main() {
 
   setUp(() async {
     setupClient();
-
     organization = await findMyOrg();
-    var bucketsApi = client.getBucketsApi();
-    var buckets = await bucketsApi.getBuckets();
-
-    for (var bucket in buckets.buckets) {
-      if (bucket.name.endsWith('_IT')) {
-        print('Delete Bucket: ${bucket.name}');
-        await bucketsApi.deleteBucketsID(bucket.id);
-      }
-    }
     bucket = await createTestBucket();
-
+    print('Created bucket id:${bucket.id} name: ${bucket.name}');
     // Create Authorization with permission to read/write created bucket
     var bucketResource = Resource(
         type: ResourceTypeEnum.buckets, id: bucket.id, orgID: organization.id);
@@ -47,7 +37,11 @@ void main() {
         debug: client.debug);
   });
 
-  tearDown(() {
+  tearDown(() async {
+    if (bucket != null) {
+      print('Delete bucket id: ${bucket.id}');
+      await client.getBucketsApi().deleteBucketsID(bucket.id);
+    }
     client.close();
   });
 
@@ -131,7 +125,8 @@ void main() {
       var fluxQuery =
           'from(bucket:"${bucket.name}") |> range(start: 1970-01-01T00:00:00.000000001Z)';
       var records = await client.getQueryService().query(fluxQuery);
-      List rec = await records.where((record) => record.tableIndex == 0).toList();
+      List rec =
+          await records.where((record) => record.tableIndex == 0).toList();
       expect(rec.length, 12);
 
       var start = '1970-01-01T00:00:00.000000001Z';
@@ -154,7 +149,8 @@ void main() {
       var fluxQuery =
           'from(bucket:"${bucket.name}") |> range(start: 1970-01-01T00:00:00.000000001Z)';
       var records = await client.getQueryService().query(fluxQuery);
-      List rec = await records.where((record) => record.tableIndex == 0).toList();
+      List rec =
+          await records.where((record) => record.tableIndex == 0).toList();
       expect(rec.length, 12);
 
       var start = '1970-01-01T00:00:00.000000001Z';
