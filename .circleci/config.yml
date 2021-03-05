@@ -125,6 +125,8 @@ jobs:
           command: pub run test --reporter json | tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
       - store_test_results:
           path: test-results
+      - store_test_results:
+          path: test-results/dart-tests/influxdb_client_test-report.xml   
 
 #  build-mac:
 #    macos:
