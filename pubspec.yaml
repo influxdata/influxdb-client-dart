@@ -1,5 +1,5 @@
 name: influxdb_client
-version: 0.1.0-dev.2
+version: 0.1.0-dev.3
 description: A InfluxDB 2.0 API Client Library
 homepage: https://github.com/bonitoo-io/influxdb-client-dart
 
