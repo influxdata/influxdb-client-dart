@@ -75,7 +75,7 @@ workflows:
       - test:
           name: dart-latest
           dart-image: "google/dart:latest"
-          influxdb-image: "influxdb:v2.0.4"
+          influxdb-image: "influxdb:latest"
       - test:
           name: dart-2.10-nightly
           dart-image: "google/dart:2.10"
