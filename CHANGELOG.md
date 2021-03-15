@@ -1,5 +1,8 @@
 ## 1.0.0 [unreleased]
 
+### CI
+1. [#4](https://github.com/bonitoo-io/influxdb-client-dart/pull/4): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`
+
 ## 0.1.0-dev.3 [2021-03-05]
 
 ### Bug Fixes
