@@ -7279,7 +7279,11 @@ components:
           type: integer
           description: Duration in seconds for how long data will be kept in the database.
           example: 86400
-          minimum: 1
+          minimum: 0
+        shardGroupDurationSeconds:
+          type: integer
+          format: int64
+          description: Shard duration measured in seconds.
       required: [type, everySeconds]
     Link:
       type: string

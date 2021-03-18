@@ -14,26 +14,32 @@ class RetentionRule {
   RetentionRule({
     this.type = const RetentionRuleTypeEnum._('expire'),
     @required this.everySeconds,
+    this.shardGroupDurationSeconds,
   });
 
   RetentionRuleTypeEnum type;
 
-  /// Duration in seconds for how long data will be kept in the database.
-  // minimum: 1
+  /// Duration in seconds for how long data will be kept in the database. 0 means infinite.
+  // minimum: 0
   int everySeconds;
+
+  /// Shard duration measured in seconds.
+  int shardGroupDurationSeconds;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is RetentionRule &&
      other.type == type &&
-     other.everySeconds == everySeconds;
+     other.everySeconds == everySeconds &&
+     other.shardGroupDurationSeconds == shardGroupDurationSeconds;
 
   @override
   int get hashCode =>
     (type == null ? 0 : type.hashCode) +
-    (everySeconds == null ? 0 : everySeconds.hashCode);
+    (everySeconds == null ? 0 : everySeconds.hashCode) +
+    (shardGroupDurationSeconds == null ? 0 : shardGroupDurationSeconds.hashCode);
 
   @override
-  String toString() => 'RetentionRule[type=$type, everySeconds=$everySeconds]';
+  String toString() => 'RetentionRule[type=$type, everySeconds=$everySeconds, shardGroupDurationSeconds=$shardGroupDurationSeconds]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -42,6 +48,9 @@ class RetentionRule {
     }
     if (everySeconds != null) {
       json[r'everySeconds'] = everySeconds;
+    }
+    if (shardGroupDurationSeconds != null) {
+      json[r'shardGroupDurationSeconds'] = shardGroupDurationSeconds;
     }
     return json;
   }
@@ -53,6 +62,7 @@ class RetentionRule {
     : RetentionRule(
         type: RetentionRuleTypeEnum.fromJson(json[r'type']),
         everySeconds: json[r'everySeconds'],
+        shardGroupDurationSeconds: json[r'shardGroupDurationSeconds'],
     );
 
   static List<RetentionRule> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
