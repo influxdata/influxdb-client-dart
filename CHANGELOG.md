@@ -1,5 +1,8 @@
 ## 1.0.0 [unreleased]
 
+### API
+1. [#5](https://github.com/bonitoo-io/influxdb-client-dart/pull/5): Updated swagger to the latest version
+ 
 ### CI
 1. [#4](https://github.com/bonitoo-io/influxdb-client-dart/pull/4): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`
 
