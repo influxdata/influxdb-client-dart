@@ -1,6 +1,6 @@
 ## 1.0.0 [unreleased]
 
-## 0.1.0-dev.3 [2021-04-02]
+## 0.1.0-dev.4 [2021-04-02]
 
 ### API
 1. [#5](https://github.com/bonitoo-io/influxdb-client-dart/pull/5): Updated swagger to the latest version
