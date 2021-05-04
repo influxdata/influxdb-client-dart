@@ -60,7 +60,8 @@ class WriteOptions {
       int flushInterval,
       Map<String, String> defaultTags,
       int retryJitter,
-      int minRetryDelay,
+      int retryInterval,
+      int maxRetryDelay,
       int maxRetryTime,
       int exponentialBase,
       int maxRetries,
@@ -71,10 +72,10 @@ class WriteOptions {
       batchSize: batchSize ?? this.batchSize,
       flushInterval: flushInterval ?? this.flushInterval,
       retryJitter: retryJitter ?? this.retryJitter,
-      retryInterval: minRetryDelay ?? this.retryInterval,
-      exponentialBase: exponentialBase ?? this.exponentialBase,
+      retryInterval: retryInterval ?? this.retryInterval,
       maxRetryDelay: maxRetryDelay ?? this.maxRetryDelay,
       maxRetryTime: maxRetryTime ?? this.maxRetryTime,
+      exponentialBase: exponentialBase ?? this.exponentialBase,
       maxRetries: maxRetries ?? this.maxRetries,
       maxBufferLines: maxBufferLines ?? this.maxBufferLines,
       defaultTags: defaultTags ?? Map.from(this.defaultTags ?? {}),
@@ -94,7 +95,7 @@ class WriteOptions {
   }
 }
 
-/// Precission for write operations.
+/// Precision for write operations.
 /// See [https://v2.docs.influxdata.com/v2.0/api/#operation/PostWrite ]
 /*
 enum WritePrecision {
