@@ -29,7 +29,7 @@ void main() {
           if (line.startsWith('>>') || line.startsWith('<<')) {
             return;
           }
-            expect(line, contains('Next retry in:  4 s.'));
+            expect(line, contains('Next retry in: 4s.'));
         }
       };
       var mockClient = MockClient((request) async {
@@ -50,7 +50,47 @@ void main() {
 
     });
 
-    test('testSocketExceptionRetry', () async {
+    test('testSocketExceptionRetryMaxTime', () async {
+      var client = HttpClient();
+      var onRetryCounter = 0;
+      var invokeCounter = 0;
+
+      var options = RetryOptions(
+          maxTime: Duration(seconds: 30));
+      try {
+        await options.retry(
+            // Make a GET request
+            () async {
+              print('Call # ${++invokeCounter}');
+              final request = await client
+                  .getUrl(Uri.parse('https://XXX.YYY.ZZZ'))
+                  .timeout(Duration(seconds: 5));
+              final response =
+                  await request.close().timeout(Duration(seconds: 5));
+              await response.drain();
+              return response.statusCode;
+            },
+            // Retry on SocketException or TimeoutException
+            retryIf: (e) => e is SocketException || e is TimeoutException,
+            onRetry: (e) {
+              print('onRetry: ${e}');
+              onRetryCounter++;
+              return true;
+            });
+      } catch (e) {
+        print('EXCEPTION: ${e}');
+        expect(e is RetryException, isTrue);
+        expect(e.toString(), contains('Maximum retry time (30000ms) exceeded'));
+        expect((e as RetryException).getCause(), isNotNull);
+        expect((e as RetryException).getCause() is SocketException, isTrue);
+        expect((e as RetryException).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        // First call is not counted as a retry
+        expect(invokeCounter, 4);
+        expect(onRetryCounter, 3);
+      }
+    }, timeout: Timeout(Duration(seconds: 60)));
+
+    test('testSocketExceptionRetryMaxAttempts', () async {
       var client = HttpClient();
       var onRetryCounter = 0;
       var invokeCounter = 0;
@@ -81,11 +121,35 @@ void main() {
               return true;
             });
       } catch (e) {
-        expect(e.toString(), startsWith('SocketException: Failed host lookup'));
-        //first call is not counted as a retry
+        expect(e is RetryException, isTrue);
+        expect(e.toString(), contains('Maximum retry attempts reached'));
+        expect((e as RetryException).getCause(), isNotNull);
+        expect((e as RetryException).getCause() is SocketException, isTrue);
+        expect((e as RetryException).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        // First call is not counted as a retry
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);
       }
+    });
+
+    test('testDelaySequenceDefault', () async {
+      var options = RetryOptions();
+      var d = options.delay(1, null, null);
+      expect(d >= Duration(seconds: 5) && d <= Duration(seconds: 10), isTrue);
+      d = options.delay(2, null, null);
+      expect(d >= Duration(seconds: 10) && d <= Duration(seconds: 20), isTrue);
+      d = options.delay(3, null, null);
+      expect(d >= Duration(seconds: 20) && d <= Duration(seconds: 40), isTrue);
+      d = options.delay(4, null, null);
+      expect(d >= Duration(seconds: 40) && d <= Duration(seconds: 80), isTrue);
+      d = options.delay(5, null, null);
+      expect(d >= Duration(seconds: 80) && d <= Duration(seconds: 125), isTrue);
+    });
+
+    test('testDelayRetryAfter', () async {
+      var options = RetryOptions();
+      var d = options.delay(1, 333, null);
+      expect(d == Duration(seconds: 333), isTrue);
     });
   });
 }
