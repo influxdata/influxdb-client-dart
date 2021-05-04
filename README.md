@@ -56,7 +56,7 @@ Dart developer can add it as a dependency in their pubspec.yaml:
 
 ```yaml
 dependencies:
-  influxdb_client: 0.1.0-dev.2
+  influxdb_client: 0.1.0-dev.5
 ```
 
 
