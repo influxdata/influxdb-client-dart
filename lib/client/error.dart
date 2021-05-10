@@ -49,3 +49,19 @@ class InfluxDBException implements Exception {
     return 'InfluxDBException: statusCode = $statusCode, code = $code, message = $message';
   }
 }
+
+class RetryException implements Exception {
+  Exception cause;
+  String message;
+
+  RetryException(this.message, [this.cause]);
+
+  Exception getCause() {
+    return cause;
+  }
+
+  @override
+  String toString() {
+    return 'RetryException: $message. Cause: $cause';
+  }
+}

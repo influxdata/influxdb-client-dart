@@ -13,19 +13,22 @@ class WriteOptions {
   /// default tags, unescaped */
   final Map<String, String> defaultTags;
 
-  /// include random milliseconds when retrying HTTP calls
+  /// include random milliseconds when retrying HTTP calls (default is 200)
   final int retryJitter;
 
-  /// Delay when retrying first write (milliseconds)
+  /// delay when retrying first write (milliseconds, default is 5000)
   final int retryInterval;
 
-  /// maximum delay when retrying write (milliseconds)
+  /// maximum delay when retrying write (milliseconds, default is 125000)
   final int maxRetryDelay;
 
-  /// base for the exponential retry delay, the next delay is computed as `minRetryDelay * exponentialBase^(attempts-1) + random(retryJitter)` */
+  /// maximum time for retrying write (milliseconds, default is 180000)
+  final int maxRetryTime;
+
+  /// base for the exponential retry delay (default is 2)
   final int exponentialBase;
 
-  /// max number of retries when write fails
+  /// max number of retries when write fails (default is 5)
   final int maxRetries;
 
   /// the maximum size of retry-buffer (in lines)
@@ -41,10 +44,11 @@ class WriteOptions {
       {this.batchSize = 1000,
       this.flushInterval = 1000,
       this.retryJitter = 200,
-      this.retryInterval = 1000,
-      this.maxRetryDelay = 180000,
-      this.exponentialBase = 5,
-      this.maxRetries = 3,
+      this.retryInterval = 5000,
+      this.maxRetryDelay = 125000,
+      this.maxRetryTime = 180000,
+      this.exponentialBase = 2,
+      this.maxRetries = 5,
       this.maxBufferLines = 100000,
       this.defaultTags,
       this.precision = WritePrecision.ns,
@@ -56,8 +60,9 @@ class WriteOptions {
       int flushInterval,
       Map<String, String> defaultTags,
       int retryJitter,
-      int minRetryDelay,
+      int retryInterval,
       int maxRetryDelay,
+      int maxRetryTime,
       int exponentialBase,
       int maxRetries,
       int maxBufferLines,
@@ -67,7 +72,9 @@ class WriteOptions {
       batchSize: batchSize ?? this.batchSize,
       flushInterval: flushInterval ?? this.flushInterval,
       retryJitter: retryJitter ?? this.retryJitter,
-      retryInterval: minRetryDelay ?? this.retryInterval,
+      retryInterval: retryInterval ?? this.retryInterval,
+      maxRetryDelay: maxRetryDelay ?? this.maxRetryDelay,
+      maxRetryTime: maxRetryTime ?? this.maxRetryTime,
       exponentialBase: exponentialBase ?? this.exponentialBase,
       maxRetries: maxRetries ?? this.maxRetries,
       maxBufferLines: maxBufferLines ?? this.maxBufferLines,
@@ -82,12 +89,13 @@ class WriteOptions {
         exponentialBase: exponentialBase,
         retryInterval: Duration(milliseconds: retryInterval),
         maxDelay: Duration(milliseconds: maxRetryDelay),
+        maxTime: Duration(milliseconds: maxRetryTime),
         maxRetries: maxRetries,
         retryJitter: Duration(milliseconds: retryJitter));
   }
 }
 
-/// Precission for write operations.
+/// Precision for write operations.
 /// See [https://v2.docs.influxdata.com/v2.0/api/#operation/PostWrite ]
 /*
 enum WritePrecision {

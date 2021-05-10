@@ -31,6 +31,7 @@ class WriteService extends DefaultService {
         exponentialBase: writeOptions.exponentialBase,
         retryInterval: Duration(milliseconds: writeOptions.retryInterval),
         maxDelay: Duration(milliseconds: writeOptions.maxRetryDelay),
+        maxTime: Duration(milliseconds: writeOptions.maxRetryTime),
         maxRetries: writeOptions.maxRetries,
         retryJitter: Duration(milliseconds: writeOptions.retryJitter),
       );

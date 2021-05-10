@@ -134,7 +134,7 @@ void main() {
 
       await client
           .getDeleteService()
-          .delete(start: start, stop: stop, bucketID: bucket.id, org: 'my-org');
+          .delete(start: start, stop: stop, bucketID: bucket.id, orgID: organization.id);
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);
@@ -158,7 +158,7 @@ void main() {
 
       await client
           .getDeleteService()
-          .delete(start: start, stop: stop, bucket: bucket.name, org: 'my-org');
+          .delete(start: start, stop: stop, bucket: bucket.name, orgID: organization.id);
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);

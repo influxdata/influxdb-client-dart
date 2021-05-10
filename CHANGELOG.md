@@ -1,5 +1,8 @@
 ## 1.0.0 [unreleased]
 
+## 0.1.0-dev.5 [2021-05-07]
+1. [#6](https://github.com/bonitoo-io/influxdb-client-dart/pull/6): Exponential random backoff retry strategy
+
 ## 0.1.0-dev.4 [2021-04-02]
 
 ### API
