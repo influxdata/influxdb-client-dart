@@ -167,4 +167,38 @@ void main() {
     expect(res.length, 28);
 
   });
+
+  test('infinityValues', () async {
+    var mockClient = MockClient((request) async {
+      var body = '#group,false,false,true,true,true,true,true,true,true,true,false,false$EOL' +
+          '#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,string,string,double,double$EOL' +
+          '#default,_result,,,,,,,,,,,$EOL' +
+          ',result,table,_start,_stop,_field,_measurement,language,license,name,owner,le,_value$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,0,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,10,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,20,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,30,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,40,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,50,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,60,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,70,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,80,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,90,0$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,+Inf,15$EOL' +
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,-Inf,15$EOL'
+      ;
+      return Response(body, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: 'my-bucket')''';
+    var resp = await client.getQueryService().query(query);
+
+    var res = await resp.toList();
+    expect(res.length, 12);
+
+    expect(res[10]['le'], double.infinity);
+    expect(res[11]['le'], -double.infinity);
+  });
 }
