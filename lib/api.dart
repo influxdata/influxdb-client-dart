@@ -31,8 +31,11 @@ part 'auth/http_bearer_auth.dart';
 
 
 part 'api/health_api.dart';
+part 'api/delete_api.dart';
 part 'api/ready_api.dart';
 part 'api/default_api.dart';
+part 'api/secrets_api.dart';
+
 
 // health ready
 part 'model/ready.dart';
@@ -52,6 +55,8 @@ part 'model/query.dart';
 part 'api/organizations_api.dart';
 
 part 'model/organization.dart';
+part 'model/patch_organization_request.dart';
+part 'model/post_organization_request.dart';
 part 'model/organization_links.dart';
 part 'model/organizations.dart';
 part 'model/links.dart';
@@ -72,6 +77,9 @@ part 'model/add_resource_member_request_body.dart';
 // users api
 part 'api/users_api.dart';
 part 'model/user.dart';
+part 'model/user_response.dart';
+part 'model/user_response_links.dart';
+part 'model/resource_members_links.dart';
 part 'model/users.dart';
 part 'model/password_reset_body.dart';
 
@@ -81,7 +89,10 @@ part 'model/buckets.dart';
 part 'model/bucket.dart';
 part 'model/bucket_links.dart';
 part 'model/label.dart';
+part 'model/schema_type.dart';
 part 'model/retention_rule.dart';
+part 'model/patch_retention_rule.dart';
+part 'model/patch_bucket_request.dart';
 part 'model/label_response.dart';
 part 'model/label_mapping.dart';
 part 'model/labels_response.dart';
@@ -90,6 +101,7 @@ part 'model/post_bucket_request.dart';
 //authorizations api
 part 'api/authorizations_api.dart';
 part 'model/authorization.dart';
+part 'model/authorization_post_request.dart';
 part 'model/authorizations.dart';
 part 'model/permission.dart';
 part 'model/authorization_all_of.dart';
@@ -122,6 +134,28 @@ part 'model/label_create_request.dart';
 //delete api
 part 'model/delete_predicate_request.dart';
 
+//variables api
+part 'api/variables_api.dart';
+part 'model/variable.dart';
+part 'model/variables.dart';
+part 'model/variable_links.dart';
+part 'model/variable_properties.dart';
+
+//dbrp
+part 'api/dbrps_api.dart';
+part 'model/dbrp.dart';
+part 'model/dbrp_create.dart';
+part 'model/dbrp_get.dart';
+part 'model/dbrp_update.dart';
+part 'model/dbrps.dart';
+
+//setup
+part 'api/setup_api.dart';
+part 'model/is_onboarding.dart';
+part 'model/onboarding_request.dart';
+part 'model/onboarding_response.dart';
+
+
 
 //api stuff
 part 'client/influxdb_client.dart';
@@ -139,6 +173,7 @@ const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';
 final _dateFormatter = DateFormat('yyyy-MM-dd');
 final _regList = RegExp(r'^List<(.*)>$');
+final _regSet = RegExp(r'^Set<(.*)>$');
 final _regMap = RegExp(r'^Map<String,(.*)>$');
 
 ApiClient defaultApiClient = ApiClient();

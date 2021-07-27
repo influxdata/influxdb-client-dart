@@ -3,10 +3,10 @@
 part of influxdb_client_api;
 
 class DeleteService extends DefaultService {
-  DefaultApi _service;
+  DeleteApi _service;
 
   DeleteService(InfluxDBClient client) : super(client) {
-    _service = DefaultApi(client.getApiClient());
+    _service = DeleteApi(client.getApiClient());
   }
 
   /// Delete time series data from InfluxDB

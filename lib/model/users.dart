@@ -16,9 +16,9 @@ class Users {
     this.users = const [],
   });
 
-  UsersLinks links;
+  ResourceMembersLinks links;
 
-  List<User> users;
+  List<UserResponse> users;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Users &&
@@ -49,8 +49,8 @@ class Users {
   static Users fromJson(Map<String, dynamic> json) => json == null
     ? null
     : Users(
-        links: UsersLinks.fromJson(json[r'links']),
-        users: User.listFromJson(json[r'users']),
+        links: ResourceMembersLinks.fromJson(json[r'links']),
+        users: UserResponse.listFromJson(json[r'users']),
     );
 
   static List<Users> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

@@ -19,6 +19,7 @@ class Bucket {
     this.description,
     this.orgID,
     this.rp,
+    this.schemaType,
     this.createdAt,
     this.updatedAt,
     this.retentionRules = const [],
@@ -39,6 +40,8 @@ class Bucket {
 
   String rp;
 
+  SchemaType schemaType;
+
   DateTime createdAt;
 
   DateTime updatedAt;
@@ -57,6 +60,7 @@ class Bucket {
      other.description == description &&
      other.orgID == orgID &&
      other.rp == rp &&
+     other.schemaType == schemaType &&
      other.createdAt == createdAt &&
      other.updatedAt == updatedAt &&
      other.retentionRules == retentionRules &&
@@ -71,13 +75,14 @@ class Bucket {
     (description == null ? 0 : description.hashCode) +
     (orgID == null ? 0 : orgID.hashCode) +
     (rp == null ? 0 : rp.hashCode) +
+    (schemaType == null ? 0 : schemaType.hashCode) +
     (createdAt == null ? 0 : createdAt.hashCode) +
     (updatedAt == null ? 0 : updatedAt.hashCode) +
     (retentionRules == null ? 0 : retentionRules.hashCode) +
     (labels == null ? 0 : labels.hashCode);
 
   @override
-  String toString() => 'Bucket[links=$links, id=$id, type=$type, name=$name, description=$description, orgID=$orgID, rp=$rp, createdAt=$createdAt, updatedAt=$updatedAt, retentionRules=$retentionRules, labels=$labels]';
+  String toString() => 'Bucket[links=$links, id=$id, type=$type, name=$name, description=$description, orgID=$orgID, rp=$rp, schemaType=$schemaType, createdAt=$createdAt, updatedAt=$updatedAt, retentionRules=$retentionRules, labels=$labels]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -90,9 +95,7 @@ class Bucket {
     if (type != null) {
       json[r'type'] = type;
     }
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (description != null) {
       json[r'description'] = description;
     }
@@ -102,15 +105,16 @@ class Bucket {
     if (rp != null) {
       json[r'rp'] = rp;
     }
+    if (schemaType != null) {
+      json[r'schemaType'] = schemaType;
+    }
     if (createdAt != null) {
       json[r'createdAt'] = createdAt.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
       json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
     }
-    if (retentionRules != null) {
       json[r'retentionRules'] = retentionRules;
-    }
     if (labels != null) {
       json[r'labels'] = labels;
     }
@@ -129,6 +133,7 @@ class Bucket {
         description: json[r'description'],
         orgID: json[r'orgID'],
         rp: json[r'rp'],
+        schemaType: SchemaType.fromJson(json[r'schemaType']),
         createdAt: json[r'createdAt'] == null
           ? null
           : DateTime.parse(json[r'createdAt']),
@@ -171,13 +176,6 @@ class BucketTypeEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is BucketTypeEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

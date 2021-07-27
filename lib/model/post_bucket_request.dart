@@ -17,6 +17,7 @@ class PostBucketRequest {
     this.description,
     this.rp,
     this.retentionRules = const [],
+    this.schemaType,
   });
 
   String orgID;
@@ -30,13 +31,16 @@ class PostBucketRequest {
   /// Rules to expire or retain data.  No rules means data never expires.
   List<RetentionRule> retentionRules;
 
+  SchemaType schemaType;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is PostBucketRequest &&
      other.orgID == orgID &&
      other.name == name &&
      other.description == description &&
      other.rp == rp &&
-     other.retentionRules == retentionRules;
+     other.retentionRules == retentionRules &&
+     other.schemaType == schemaType;
 
   @override
   int get hashCode =>
@@ -44,27 +48,25 @@ class PostBucketRequest {
     (name == null ? 0 : name.hashCode) +
     (description == null ? 0 : description.hashCode) +
     (rp == null ? 0 : rp.hashCode) +
-    (retentionRules == null ? 0 : retentionRules.hashCode);
+    (retentionRules == null ? 0 : retentionRules.hashCode) +
+    (schemaType == null ? 0 : schemaType.hashCode);
 
   @override
-  String toString() => 'PostBucketRequest[orgID=$orgID, name=$name, description=$description, rp=$rp, retentionRules=$retentionRules]';
+  String toString() => 'PostBucketRequest[orgID=$orgID, name=$name, description=$description, rp=$rp, retentionRules=$retentionRules, schemaType=$schemaType]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (orgID != null) {
       json[r'orgID'] = orgID;
-    }
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (description != null) {
       json[r'description'] = description;
     }
     if (rp != null) {
       json[r'rp'] = rp;
     }
-    if (retentionRules != null) {
       json[r'retentionRules'] = retentionRules;
+    if (schemaType != null) {
+      json[r'schemaType'] = schemaType;
     }
     return json;
   }
@@ -79,6 +81,7 @@ class PostBucketRequest {
         description: json[r'description'],
         rp: json[r'rp'],
         retentionRules: RetentionRule.listFromJson(json[r'retentionRules']),
+        schemaType: SchemaType.fromJson(json[r'schemaType']),
     );
 
   static List<PostBucketRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

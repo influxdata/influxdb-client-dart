@@ -32,7 +32,7 @@ class LabelsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
     }
 
-    final path = '/labels/{labelID}'.replaceAll('{format}', 'json')
+    final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
     Object postBody;
@@ -89,7 +89,7 @@ class LabelsApi {
     }
   }
 
-  /// Get all labels
+  /// List all labels
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -103,7 +103,7 @@ class LabelsApi {
   Future<Response> getLabelsWithHttpInfo({ String zapTraceSpan, String orgID }) async {
     // Verify required params are set.
 
-    final path = '/labels'.replaceAll('{format}', 'json');
+    final path = r'/labels';
 
     Object postBody;
 
@@ -147,7 +147,7 @@ class LabelsApi {
     );
   }
 
-  /// Get all labels
+  /// List all labels
   ///
   /// Parameters:
   ///
@@ -166,11 +166,11 @@ class LabelsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelsResponse') as LabelsResponse;
-    }
-    return null;
+        }
+    return Future<LabelsResponse>.value(null);
   }
 
-  /// Get a label
+  /// Retrieve a label
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -187,7 +187,7 @@ class LabelsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
     }
 
-    final path = '/labels/{labelID}'.replaceAll('{format}', 'json')
+    final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
     Object postBody;
@@ -228,7 +228,7 @@ class LabelsApi {
     );
   }
 
-  /// Get a label
+  /// Retrieve a label
   ///
   /// Parameters:
   ///
@@ -247,8 +247,8 @@ class LabelsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
-    }
-    return null;
+        }
+    return Future<LabelResponse>.value(null);
   }
 
   /// Update a label
@@ -274,7 +274,7 @@ class LabelsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelUpdate');
     }
 
-    final path = '/labels/{labelID}'.replaceAll('{format}', 'json')
+    final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
     Object postBody = labelUpdate;
@@ -337,8 +337,8 @@ class LabelsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
-    }
-    return null;
+        }
+    return Future<LabelResponse>.value(null);
   }
 
   /// Create a label
@@ -355,7 +355,7 @@ class LabelsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelCreateRequest');
     }
 
-    final path = '/labels'.replaceAll('{format}', 'json');
+    final path = r'/labels';
 
     Object postBody = labelCreateRequest;
 
@@ -407,7 +407,7 @@ class LabelsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
-    }
-    return null;
+        }
+    return Future<LabelResponse>.value(null);
   }
 }

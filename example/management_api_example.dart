@@ -12,7 +12,7 @@ void main() async {
   });
 
   // create new organization
-  var newOrg = Organization(name: 'new org3' + DateTime.now().toString());
+  var newOrg = PostOrganizationRequest(name: 'new org3' + DateTime.now().toString());
   var createdOrg = await orgApi.postOrgs(newOrg);
   print('Created org ${createdOrg.name} ${createdOrg.id}');
 

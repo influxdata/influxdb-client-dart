@@ -32,7 +32,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody;
@@ -112,7 +112,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
     }
 
-    final path = '/buckets/{bucketID}/labels/{labelID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/labels/{labelID}'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString())
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
@@ -196,7 +196,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}/members/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/members/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
@@ -280,7 +280,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}/owners/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/owners/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
@@ -358,17 +358,20 @@ class BucketsApi {
   ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
   ///
   /// * [String] org:
-  ///   The organization name.
+  ///   The name of the organization.
   ///
   /// * [String] orgID:
   ///   The organization ID.
   ///
   /// * [String] name:
   ///   Only returns buckets with a specific name.
-  Future<Response> getBucketsWithHttpInfo({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name }) async {
+  ///
+  /// * [String] id:
+  ///   Only returns buckets with a specific ID.
+  Future<Response> getBucketsWithHttpInfo({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name, String id }) async {
     // Verify required params are set.
 
-    final path = '/buckets'.replaceAll('{format}', 'json');
+    final path = r'/buckets';
 
     Object postBody;
 
@@ -393,6 +396,9 @@ class BucketsApi {
     }
     if (name != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'name', name));
+    }
+    if (id != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'id', id));
     }
 
     if (zapTraceSpan != null) {
@@ -442,15 +448,18 @@ class BucketsApi {
   ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
   ///
   /// * [String] org:
-  ///   The organization name.
+  ///   The name of the organization.
   ///
   /// * [String] orgID:
   ///   The organization ID.
   ///
   /// * [String] name:
   ///   Only returns buckets with a specific name.
-  Future<Buckets> getBuckets({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name }) async {
-    final response = await getBucketsWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, org: org, orgID: orgID, name: name );
+  ///
+  /// * [String] id:
+  ///   Only returns buckets with a specific ID.
+  Future<Buckets> getBuckets({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name, String id }) async {
+    final response = await getBucketsWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, org: org, orgID: orgID, name: name, id: id );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -459,8 +468,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Buckets') as Buckets;
-    }
-    return null;
+        }
+    return Future<Buckets>.value(null);
   }
 
   /// Retrieve a bucket
@@ -480,7 +489,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody;
@@ -540,8 +549,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Bucket') as Bucket;
-    }
-    return null;
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// List all labels for a bucket
@@ -561,7 +570,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}/labels'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/labels'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody;
@@ -621,8 +630,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelsResponse') as LabelsResponse;
-    }
-    return null;
+        }
+    return Future<LabelsResponse>.value(null);
   }
 
   /// List all users with member privileges for a bucket
@@ -642,7 +651,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}/members'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/members'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody;
@@ -702,8 +711,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMembers') as ResourceMembers;
-    }
-    return null;
+        }
+    return Future<ResourceMembers>.value(null);
   }
 
   /// List all owners of a bucket
@@ -723,7 +732,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
 
-    final path = '/buckets/{bucketID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/owners'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody;
@@ -783,8 +792,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwners') as ResourceOwners;
-    }
-    return null;
+        }
+    return Future<ResourceOwners>.value(null);
   }
 
   /// Get buckets in a source
@@ -800,14 +809,14 @@ class BucketsApi {
   ///   OpenTracing span context
   ///
   /// * [String] org:
-  ///   The organization name.
+  ///   The name of the organization.
   Future<Response> getSourcesIDBucketsWithHttpInfo(String sourceID, { String zapTraceSpan, String org }) async {
     // Verify required params are set.
     if (sourceID == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: sourceID');
     }
 
-    final path = '/sources/{sourceID}/buckets'.replaceAll('{format}', 'json')
+    final path = r'/sources/{sourceID}/buckets'
       .replaceAll('{' + 'sourceID' + '}', sourceID.toString());
 
     Object postBody;
@@ -863,7 +872,7 @@ class BucketsApi {
   ///   OpenTracing span context
   ///
   /// * [String] org:
-  ///   The organization name.
+  ///   The name of the organization.
   Future<Buckets> getSourcesIDBuckets(String sourceID, { String zapTraceSpan, String org }) async {
     final response = await getSourcesIDBucketsWithHttpInfo(sourceID,  zapTraceSpan: zapTraceSpan, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
@@ -874,8 +883,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Buckets') as Buckets;
-    }
-    return null;
+        }
+    return Future<Buckets>.value(null);
   }
 
   /// Update a bucket
@@ -887,24 +896,24 @@ class BucketsApi {
   /// * [String] bucketID (required):
   ///   The bucket ID.
   ///
-  /// * [Bucket] bucket (required):
+  /// * [PatchBucketRequest] patchBucketRequest (required):
   ///   Bucket update to apply
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchBucketsIDWithHttpInfo(String bucketID, Bucket bucket, { String zapTraceSpan }) async {
+  Future<Response> patchBucketsIDWithHttpInfo(String bucketID, PatchBucketRequest patchBucketRequest, { String zapTraceSpan }) async {
     // Verify required params are set.
     if (bucketID == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
     }
-    if (bucket == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucket');
+    if (patchBucketRequest == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: patchBucketRequest');
     }
 
-    final path = '/buckets/{bucketID}'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
-    Object postBody = bucket;
+    Object postBody = patchBucketRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -949,13 +958,13 @@ class BucketsApi {
   /// * [String] bucketID (required):
   ///   The bucket ID.
   ///
-  /// * [Bucket] bucket (required):
+  /// * [PatchBucketRequest] patchBucketRequest (required):
   ///   Bucket update to apply
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Bucket> patchBucketsID(String bucketID, Bucket bucket, { String zapTraceSpan }) async {
-    final response = await patchBucketsIDWithHttpInfo(bucketID, bucket,  zapTraceSpan: zapTraceSpan );
+  Future<Bucket> patchBucketsID(String bucketID, PatchBucketRequest patchBucketRequest, { String zapTraceSpan }) async {
+    final response = await patchBucketsIDWithHttpInfo(bucketID, patchBucketRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -964,8 +973,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Bucket') as Bucket;
-    }
-    return null;
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// Create a bucket
@@ -985,7 +994,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: postBucketRequest');
     }
 
-    final path = '/buckets'.replaceAll('{format}', 'json');
+    final path = r'/buckets';
 
     Object postBody = postBucketRequest;
 
@@ -1044,8 +1053,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Bucket') as Bucket;
-    }
-    return null;
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// Add a label to a bucket
@@ -1071,7 +1080,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelMapping');
     }
 
-    final path = '/buckets/{bucketID}/labels'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/labels'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody = labelMapping;
@@ -1134,8 +1143,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
-    }
-    return null;
+        }
+    return Future<LabelResponse>.value(null);
   }
 
   /// Add a member to a bucket
@@ -1161,7 +1170,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/buckets/{bucketID}/members'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/members'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1224,8 +1233,8 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMember') as ResourceMember;
-    }
-    return null;
+        }
+    return Future<ResourceMember>.value(null);
   }
 
   /// Add an owner to a bucket
@@ -1251,7 +1260,7 @@ class BucketsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/buckets/{bucketID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/buckets/{bucketID}/owners'
       .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1314,7 +1323,7 @@ class BucketsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwner') as ResourceOwner;
-    }
-    return null;
+        }
+    return Future<ResourceOwner>.value(null);
   }
 }

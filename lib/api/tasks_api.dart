@@ -34,7 +34,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -116,7 +116,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
     }
 
-    final path = '/tasks/{taskID}/labels/{labelID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/labels/{labelID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
@@ -200,7 +200,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/members/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/members/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -284,7 +284,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/owners/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/owners/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -368,7 +368,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
     }
 
-    final path = '/tasks/{taskID}/runs/{runID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs/{runID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
@@ -461,7 +461,7 @@ class TasksApi {
   Future<Response> getTasksWithHttpInfo({ String zapTraceSpan, String name, String after, String user, String org, String orgID, String status, int limit }) async {
     // Verify required params are set.
 
-    final path = '/tasks'.replaceAll('{format}', 'json');
+    final path = r'/tasks';
 
     Object postBody;
 
@@ -560,8 +560,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Tasks') as Tasks;
-    }
-    return null;
+        }
+    return Future<Tasks>.value(null);
   }
 
   /// Retrieve a task
@@ -581,7 +581,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -641,8 +641,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Task') as Task;
-    }
-    return null;
+        }
+    return Future<Task>.value(null);
   }
 
   /// List all labels for a task
@@ -662,7 +662,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/labels'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/labels'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -722,8 +722,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelsResponse') as LabelsResponse;
-    }
-    return null;
+        }
+    return Future<LabelsResponse>.value(null);
   }
 
   /// Retrieve all logs for a task
@@ -743,7 +743,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/logs'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/logs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -803,8 +803,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Logs') as Logs;
-    }
-    return null;
+        }
+    return Future<Logs>.value(null);
   }
 
   /// List all task members
@@ -824,7 +824,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/members'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/members'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -884,8 +884,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMembers') as ResourceMembers;
-    }
-    return null;
+        }
+    return Future<ResourceMembers>.value(null);
   }
 
   /// List all owners of a task
@@ -905,7 +905,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/owners'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -965,8 +965,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwners') as ResourceOwners;
-    }
-    return null;
+        }
+    return Future<ResourceOwners>.value(null);
   }
 
   /// List runs for a task
@@ -998,7 +998,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/runs'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody;
@@ -1083,8 +1083,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Runs') as Runs;
-    }
-    return null;
+        }
+    return Future<Runs>.value(null);
   }
 
   /// Retrieve a single run for a task
@@ -1110,7 +1110,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
     }
 
-    final path = '/tasks/{taskID}/runs/{runID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs/{runID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
@@ -1174,8 +1174,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Run') as Run;
-    }
-    return null;
+        }
+    return Future<Run>.value(null);
   }
 
   /// Retrieve all logs for a run
@@ -1201,7 +1201,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
     }
 
-    final path = '/tasks/{taskID}/runs/{runID}/logs'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs/{runID}/logs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
@@ -1265,8 +1265,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Logs') as Logs;
-    }
-    return null;
+        }
+    return Future<Logs>.value(null);
   }
 
   /// Update a task
@@ -1294,7 +1294,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskUpdateRequest');
     }
 
-    final path = '/tasks/{taskID}'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody = taskUpdateRequest;
@@ -1359,8 +1359,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Task') as Task;
-    }
-    return null;
+        }
+    return Future<Task>.value(null);
   }
 
   /// Create a new task
@@ -1380,7 +1380,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskCreateRequest');
     }
 
-    final path = '/tasks'.replaceAll('{format}', 'json');
+    final path = r'/tasks';
 
     Object postBody = taskCreateRequest;
 
@@ -1439,8 +1439,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Task') as Task;
-    }
-    return null;
+        }
+    return Future<Task>.value(null);
   }
 
   /// Add a label to a task
@@ -1466,7 +1466,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: labelMapping');
     }
 
-    final path = '/tasks/{taskID}/labels'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/labels'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody = labelMapping;
@@ -1529,8 +1529,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
-    }
-    return null;
+        }
+    return Future<LabelResponse>.value(null);
   }
 
   /// Add a member to a task
@@ -1556,7 +1556,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/tasks/{taskID}/members'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/members'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1619,8 +1619,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMember') as ResourceMember;
-    }
-    return null;
+        }
+    return Future<ResourceMember>.value(null);
   }
 
   /// Add an owner to a task
@@ -1646,7 +1646,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/tasks/{taskID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/owners'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1709,8 +1709,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwner') as ResourceOwner;
-    }
-    return null;
+        }
+    return Future<ResourceOwner>.value(null);
   }
 
   /// Manually start a task run, overriding the current schedule
@@ -1731,7 +1731,7 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
     }
 
-    final path = '/tasks/{taskID}/runs'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
     Object postBody = runManually;
@@ -1792,8 +1792,8 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Run') as Run;
-    }
-    return null;
+        }
+    return Future<Run>.value(null);
   }
 
   /// Retry a task run
@@ -1810,7 +1810,9 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String zapTraceSpan }) async {
+  ///
+  /// * [Object] body:
+  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String zapTraceSpan, Object body }) async {
     // Verify required params are set.
     if (taskID == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
@@ -1819,11 +1821,11 @@ class TasksApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
     }
 
-    final path = '/tasks/{taskID}/runs/{runID}/retry'.replaceAll('{format}', 'json')
+    final path = r'/tasks/{taskID}/runs/{runID}/retry'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
-    Object postBody;
+    Object postBody = body;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1833,7 +1835,7 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
+    final contentTypes = <String>['application/json; charset=utf-8'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
@@ -1873,8 +1875,10 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Run> postTasksIDRunsIDRetry(String taskID, String runID, { String zapTraceSpan }) async {
-    final response = await postTasksIDRunsIDRetryWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan );
+  ///
+  /// * [Object] body:
+  Future<Run> postTasksIDRunsIDRetry(String taskID, String runID, { String zapTraceSpan, Object body }) async {
+    final response = await postTasksIDRunsIDRetryWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan, body: body );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -1883,7 +1887,7 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Run') as Run;
-    }
-    return null;
+        }
+    return Future<Run>.value(null);
   }
 }
