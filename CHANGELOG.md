@@ -1,15 +1,15 @@
 ## 1.0.0 [unreleased]
 
 ## 0.1.0-dev.5 [2021-05-07]
-1. [#6](https://github.com/bonitoo-io/influxdb-client-dart/pull/6): Exponential random backoff retry strategy
+1. [#6](https://github.com/influxdata/influxdb-client-dart/pull/6): Exponential random backoff retry strategy
 
 ## 0.1.0-dev.4 [2021-04-02]
 
 ### API
-1. [#5](https://github.com/bonitoo-io/influxdb-client-dart/pull/5): Updated swagger to the latest version
+1. [#5](https://github.com/influxdata/influxdb-client-dart/pull/5): Updated swagger to the latest version
  
 ### CI
-1. [#4](https://github.com/bonitoo-io/influxdb-client-dart/pull/4): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`
+1. [#4](https://github.com/influxdata/influxdb-client-dart/pull/4): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`
 
 ## 0.1.0-dev.3 [2021-03-05]
 
