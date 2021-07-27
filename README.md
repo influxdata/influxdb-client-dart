@@ -1,11 +1,11 @@
 # influxdb-client-dart
 
-[![CircleCI](https://circleci.com/gh/bonitoo-io/influxdb-client-dart.svg?style=svg)](https://circleci.com/gh/bonitoo-io/influxdb-client-dart)
-[![Platforms](https://img.shields.io/badge/platform-dart|flutter-blue.svg)](https://github.com/bonitoo-io/influxdb-client-dart/)
+[![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-dart.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-dart)
+[![Platforms](https://img.shields.io/badge/platform-dart|flutter-blue.svg)](https://github.com/influxdata/influxdb-client-dart/)
 ![Pub Version](https://img.shields.io/pub/v/influxdb_client)
-[![License](https://img.shields.io/github/license/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues-raw/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/bonitoo-io/influxdb-client-dart.svg)](https://github.com/bonitoo-io/influxdb-client-dart/pulls)
+[![License](https://img.shields.io/github/license/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
 #### !!! Disclaimer: This library is a work in progress and should not be considered production ready yet. !!!
