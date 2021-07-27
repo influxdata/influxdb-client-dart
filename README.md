@@ -29,6 +29,15 @@ Please submit issues and pull requests, help out, or just give encouragement.
 - [Contributing](#contributing)
 - [License](#license)
 
+## Documentation
+
+This section contains links to the client library documentation.
+
+* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#installation)
+* [Examples](example)
+* [API Reference](https://pub.dev/documentation/influxdb_client/latest/influxdb_client_api/InfluxDBClient-class.html)
+* [Changelog](CHANGELOG.md)
+
 ## Features
 
 InfluxDB 2.0 client supports:
