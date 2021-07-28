@@ -112,6 +112,10 @@ Map<String, dynamic> serializers = {
       return x.toDouble();
     } else if (x is double) {
       return x;
+    } else if ('+Inf' == x) {
+      return double.infinity;
+    } else if ('-Inf' == x) {
+      return -double.infinity;
     }
   },
   'string': identity,
