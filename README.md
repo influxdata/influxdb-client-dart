@@ -303,12 +303,16 @@ The client supports following management API:
 | [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Authorizations |
 | [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Buckets |
 | [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/DBRPs |
+| [**DeleteAPI**](lib/api/delete_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Delete |
 | [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Health |
 | [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Labels |
 | [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Organizations |
 | [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ready |
+| [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Secrets |
+| [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Setup |
 | [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Tasks |
 | [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Users |
+| [**VariablesAPI**](lib/api/variables_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Variables |
 
 
 The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).

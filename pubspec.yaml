@@ -8,10 +8,10 @@ environment:
 
 dependencies:
   archive: ^2.0.13
-  http: ^0.12.0
-  json_annotation: '>=2.0.0 <4.0.0'
-  intl: ^0.16.1
-  meta: ^1.1.8
+  http: '>=0.12.0 <0.13.0'
+  json_annotation: '>=2.0.0 <4.2.0'
+  intl: '^0.16.1'
+  meta: '>1.1.8 <1.5.0'
   csv: ^4.1.0
 
 dev_dependencies:
