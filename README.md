@@ -331,10 +331,10 @@ void main() async {
   var ready = await client.getReadyApi().getReady();
   print('Ready check: ${ready.status}');
 
-  var orgs = await OrganizationsApi(api).getOrgs();
+  var orgs = await client.getOrganizationsApi().getOrgs();
   var myOrgId = orgs.orgs.first.id;
 
-  var bucketsApi = BucketsApi(api);
+  var bucketsApi = client.getBucketsApi();
   var bucketName = 'bucket-my-org';
 
   // find and delete bucket 'bucket-my-org'
@@ -360,7 +360,7 @@ void main() async {
   Resource(type: ResourceTypeEnum.buckets, id: bucket.id, orgID: myOrgId);
 
 // Authorization configuration
-  var auth = Authorization(
+  var auth = AuthorizationPostRequest(
       description: 'Authorization to read/write bucket:${bucket.name}',
       orgID: myOrgId,
       permissions: [
@@ -369,7 +369,7 @@ void main() async {
       ]);
 
 // Create Authorization
-  var authorizationsApi = AuthorizationsApi(api);
+  var authorizationsApi = client.getAuthorizationsApi();
   var authorization = await authorizationsApi.postAuthorizations(auth);
 
 // Print token
@@ -379,6 +379,7 @@ void main() async {
 
   client.close();
 }
+
 
 ```
 

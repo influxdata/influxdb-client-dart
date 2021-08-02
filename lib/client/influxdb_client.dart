@@ -146,6 +146,22 @@ class InfluxDBClient {
     return UsersApi(getApiClient());
   }
 
+  VariablesApi getVariablesApi() {
+    return VariablesApi(getApiClient());
+  }
+
+  SetupApi getSetupApi() {
+    return SetupApi(getApiClient());
+  }
+
+  SecretsApi getSecretsApi() {
+    return SecretsApi(getApiClient());
+  }
+
+  DBRPsApi getDBRPsApi() {
+    return DBRPsApi(getApiClient());
+  }
+
   WriteService getWriteService([WriteOptions writeOptions]) {
     return WriteService(this, writeOptions: writeOptions);
   }
