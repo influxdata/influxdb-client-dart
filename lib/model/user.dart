@@ -16,7 +16,6 @@ class User {
     this.oauthID,
     @required this.name,
     this.status = const UserStatusEnum._('active'),
-    this.links,
   });
 
   String id;
@@ -28,26 +27,22 @@ class User {
   /// If inactive the user is inactive.
   UserStatusEnum status;
 
-  UserLinks links;
-
   @override
   bool operator ==(Object other) => identical(this, other) || other is User &&
      other.id == id &&
      other.oauthID == oauthID &&
      other.name == name &&
-     other.status == status &&
-     other.links == links;
+     other.status == status;
 
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
     (oauthID == null ? 0 : oauthID.hashCode) +
     (name == null ? 0 : name.hashCode) +
-    (status == null ? 0 : status.hashCode) +
-    (links == null ? 0 : links.hashCode);
+    (status == null ? 0 : status.hashCode);
 
   @override
-  String toString() => 'User[id=$id, oauthID=$oauthID, name=$name, status=$status, links=$links]';
+  String toString() => 'User[id=$id, oauthID=$oauthID, name=$name, status=$status]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -57,14 +52,9 @@ class User {
     if (oauthID != null) {
       json[r'oauthID'] = oauthID;
     }
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (status != null) {
       json[r'status'] = status;
-    }
-    if (links != null) {
-      json[r'links'] = links;
     }
     return json;
   }
@@ -78,7 +68,6 @@ class User {
         oauthID: json[r'oauthID'],
         name: json[r'name'],
         status: UserStatusEnum.fromJson(json[r'status']),
-        links: UserLinks.fromJson(json[r'links']),
     );
 
   static List<User> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
@@ -113,13 +102,6 @@ class UserStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is UserStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

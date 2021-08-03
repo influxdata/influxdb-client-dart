@@ -105,12 +105,8 @@ class Authorization {
     if (updatedAt != null) {
       json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
     }
-    if (orgID != null) {
       json[r'orgID'] = orgID;
-    }
-    if (permissions != null) {
       json[r'permissions'] = permissions;
-    }
     if (id != null) {
       json[r'id'] = id;
     }
@@ -187,13 +183,6 @@ class AuthorizationStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is AuthorizationStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

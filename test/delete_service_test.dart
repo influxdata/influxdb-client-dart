@@ -15,7 +15,7 @@ void main() {
         type: ResourceTypeEnum.buckets, id: bucket.id, orgID: organization.id);
 
     // Authorization configuration
-    var auth = Authorization(
+    var auth = AuthorizationPostRequest(
         description: 'Authorization to read/write bucket:${bucket.name}',
         orgID: organization.id,
         permissions: [

@@ -15,61 +15,19 @@ class DefaultApi {
 
   final ApiClient apiClient;
 
-  /// Delete time series data from InfluxDB
+  /// Checks the status of InfluxDB instance and version of InfluxDB.
   ///
   /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [DeletePredicateRequest] deletePredicateRequest (required):
-  ///   Predicate delete request
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  ///
-  /// * [String] org:
-  ///   Specifies the organization to delete data from.
-  ///
-  /// * [String] bucket:
-  ///   Specifies the bucket to delete data from.
-  ///
-  /// * [String] orgID:
-  ///   Specifies the organization ID of the resource.
-  ///
-  /// * [String] bucketID:
-  ///   Specifies the bucket ID to delete data from.
-  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String zapTraceSpan, String org, String bucket, String orgID, String bucketID }) async {
-    // Verify required params are set.
-    if (deletePredicateRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: deletePredicateRequest');
-    }
+  Future<Response> getPingWithHttpInfo() async {
+    final path = r'/ping';
 
-    final path = '/delete'.replaceAll('{format}', 'json');
-
-    Object postBody = deletePredicateRequest;
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    if (org != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
-    }
-    if (bucket != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucket', bucket));
-    }
-    if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
-    }
-    if (bucketID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucketID', bucketID));
-    }
-
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>['application/json'];
+    final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
@@ -87,7 +45,7 @@ class DefaultApi {
 
     return await apiClient.invokeAPI(
       path,
-      'POST',
+      'GET',
       queryParams,
       postBody,
       headerParams,
@@ -97,29 +55,57 @@ class DefaultApi {
     );
   }
 
-  /// Delete time series data from InfluxDB
+  /// Checks the status of InfluxDB instance and version of InfluxDB.
+  Future<void> getPing() async {
+    final response = await getPingWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+    }
+  }
+
+  /// Checks the status of InfluxDB instance and version of InfluxDB.
   ///
-  /// Parameters:
-  ///
-  /// * [DeletePredicateRequest] deletePredicateRequest (required):
-  ///   Predicate delete request
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  ///
-  /// * [String] org:
-  ///   Specifies the organization to delete data from.
-  ///
-  /// * [String] bucket:
-  ///   Specifies the bucket to delete data from.
-  ///
-  /// * [String] orgID:
-  ///   Specifies the organization ID of the resource.
-  ///
-  /// * [String] bucketID:
-  ///   Specifies the bucket ID to delete data from.
-  Future<void> postDelete(DeletePredicateRequest deletePredicateRequest, { String zapTraceSpan, String org, String bucket, String orgID, String bucketID }) async {
-    final response = await postDeleteWithHttpInfo(deletePredicateRequest,  zapTraceSpan: zapTraceSpan, org: org, bucket: bucket, orgID: orgID, bucketID: bucketID );
+  /// Note: This method returns the HTTP [Response].
+  Future<Response> headPingWithHttpInfo() async {
+    final path = r'/ping';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>[];
+
+    if (
+      nullableContentType != null &&
+      nullableContentType.toLowerCase().startsWith('multipart/form-data')
+    ) {
+      bool hasFields = false;
+      final mp = MultipartRequest(null, null);
+      if (hasFields) {
+        postBody = mp;
+      }
+    } else {
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'HEAD',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Checks the status of InfluxDB instance and version of InfluxDB.
+  Future<void> headPing() async {
+    final response = await headPingWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -136,7 +122,7 @@ class DefaultApi {
   Future<Response> postSigninWithHttpInfo({ String zapTraceSpan }) async {
     // Verify required params are set.
 
-    final path = '/signin'.replaceAll('{format}', 'json');
+    final path = r'/signin';
 
     Object postBody;
 
@@ -200,7 +186,7 @@ class DefaultApi {
   Future<Response> postSignoutWithHttpInfo({ String zapTraceSpan }) async {
     // Verify required params are set.
 
-    final path = '/signout'.replaceAll('{format}', 'json');
+    final path = r'/signout';
 
     Object postBody;
 

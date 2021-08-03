@@ -10,30 +10,30 @@
 part of influxdb_client_api;
 
 
-class UsersApi {
-  UsersApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+class VariablesApi {
+  VariablesApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
-  /// Delete a user
+  /// Delete a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The ID of the user to delete.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteUsersIDWithHttpInfo(String userID, { String zapTraceSpan }) async {
+  Future<Response> deleteVariablesIDWithHttpInfo(String variableID, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
     }
 
-    final path = r'/users/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString());
+    final path = r'/variables/{variableID}'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
 
     Object postBody;
 
@@ -73,23 +73,107 @@ class UsersApi {
     );
   }
 
-  /// Delete a user
+  /// Delete a variable
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The ID of the user to delete.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteUsersID(String userID, { String zapTraceSpan }) async {
-    final response = await deleteUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteVariablesID(String variableID, { String zapTraceSpan }) async {
+    final response = await deleteVariablesIDWithHttpInfo(variableID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
   }
 
-  /// Return the feature flags for the currently authenticated user
+  /// Delete a label from a variable
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [String] labelID (required):
+  ///   The label ID to delete.
+  ///
+  /// * [String] zapTraceSpan:
+  ///   OpenTracing span context
+  Future<Response> deleteVariablesIDLabelsIDWithHttpInfo(String variableID, String labelID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
+    }
+    if (labelID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
+    }
+
+    final path = r'/variables/{variableID}/labels/{labelID}'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString())
+      .replaceAll('{' + 'labelID' + '}', labelID.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (zapTraceSpan != null) {
+      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>[];
+
+    if (
+      nullableContentType != null &&
+      nullableContentType.toLowerCase().startsWith('multipart/form-data')
+    ) {
+      bool hasFields = false;
+      final mp = MultipartRequest(null, null);
+      if (hasFields) {
+        postBody = mp;
+      }
+    } else {
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'DELETE',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Delete a label from a variable
+  ///
+  /// Parameters:
+  ///
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [String] labelID (required):
+  ///   The label ID to delete.
+  ///
+  /// * [String] zapTraceSpan:
+  ///   OpenTracing span context
+  Future<void> deleteVariablesIDLabelsID(String variableID, String labelID, { String zapTraceSpan }) async {
+    final response = await deleteVariablesIDLabelsIDWithHttpInfo(variableID, labelID,  zapTraceSpan: zapTraceSpan );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+    }
+  }
+
+  /// List all variables
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -97,16 +181,29 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getFlagsWithHttpInfo({ String zapTraceSpan }) async {
+  ///
+  /// * [String] org:
+  ///   The name of the organization.
+  ///
+  /// * [String] orgID:
+  ///   The organization ID.
+  Future<Response> getVariablesWithHttpInfo({ String zapTraceSpan, String org, String orgID }) async {
     // Verify required params are set.
 
-    final path = r'/flags';
+    final path = r'/variables';
 
     Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
+
+    if (org != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
+    }
+    if (orgID != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+    }
 
     if (zapTraceSpan != null) {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
@@ -140,14 +237,20 @@ class UsersApi {
     );
   }
 
-  /// Return the feature flags for the currently authenticated user
+  /// List all variables
   ///
   /// Parameters:
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Map<String, Object>> getFlags({ String zapTraceSpan }) async {
-    final response = await getFlagsWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  ///
+  /// * [String] org:
+  ///   The name of the organization.
+  ///
+  /// * [String] orgID:
+  ///   The organization ID.
+  Future<Variables> getVariables({ String zapTraceSpan, String org, String orgID }) async {
+    final response = await getVariablesWithHttpInfo( zapTraceSpan: zapTraceSpan, org: org, orgID: orgID );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -155,210 +258,30 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return Map<String, Object>.from(apiClient.deserialize(_decodeBodyBytes(response), 'Map<String, Object>'));
-    }
-    return Future<Map<String, Object>>.value(null);
-  }
-
-  /// Retrieve the currently authenticated user
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<Response> getMeWithHttpInfo({ String zapTraceSpan }) async {
-    // Verify required params are set.
-
-    final path = r'/me';
-
-    Object postBody;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
-
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
-
-    return await apiClient.invokeAPI(
-      path,
-      'GET',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      nullableContentType,
-      authNames,
-    );
-  }
-
-  /// Retrieve the currently authenticated user
-  ///
-  /// Parameters:
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<UserResponse> getMe({ String zapTraceSpan }) async {
-    final response = await getMeWithHttpInfo( zapTraceSpan: zapTraceSpan );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    }
-    // When a remote server returns no body with a status of 204, we shall not decode it.
-    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
-    // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'UserResponse') as UserResponse;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'Variables') as Variables;
         }
-    return Future<UserResponse>.value(null);
+    return Future<Variables>.value(null);
   }
 
-  /// List all users
+  /// Retrieve a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  ///
-  /// * [int] offset:
-  ///
-  /// * [int] limit:
-  ///
-  /// * [String] after:
-  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
-  ///
-  /// * [String] name:
-  ///
-  /// * [String] id:
-  Future<Response> getUsersWithHttpInfo({ String zapTraceSpan, int offset, int limit, String after, String name, String id }) async {
+  Future<Response> getVariablesIDWithHttpInfo(String variableID, { String zapTraceSpan }) async {
     // Verify required params are set.
-
-    final path = r'/users';
-
-    Object postBody;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (offset != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'offset', offset));
-    }
-    if (limit != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'limit', limit));
-    }
-    if (after != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'after', after));
-    }
-    if (name != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'name', name));
-    }
-    if (id != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'id', id));
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
     }
 
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
-
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
-
-    return await apiClient.invokeAPI(
-      path,
-      'GET',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      nullableContentType,
-      authNames,
-    );
-  }
-
-  /// List all users
-  ///
-  /// Parameters:
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  ///
-  /// * [int] offset:
-  ///
-  /// * [int] limit:
-  ///
-  /// * [String] after:
-  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
-  ///
-  /// * [String] name:
-  ///
-  /// * [String] id:
-  Future<Users> getUsers({ String zapTraceSpan, int offset, int limit, String after, String name, String id }) async {
-    final response = await getUsersWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, name: name, id: id );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    }
-    // When a remote server returns no body with a status of 204, we shall not decode it.
-    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
-    // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Users') as Users;
-        }
-    return Future<Users>.value(null);
-  }
-
-  /// Retrieve a user
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] userID (required):
-  ///   The user ID.
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<Response> getUsersIDWithHttpInfo(String userID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-
-    final path = r'/users/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString());
+    final path = r'/variables/{variableID}'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
 
     Object postBody;
 
@@ -398,17 +321,17 @@ class UsersApi {
     );
   }
 
-  /// Retrieve a user
+  /// Retrieve a variable
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The user ID.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> getUsersID(String userID, { String zapTraceSpan }) async {
-    final response = await getUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
+  Future<Variable> getVariablesID(String variableID, { String zapTraceSpan }) async {
+    final response = await getVariablesIDWithHttpInfo(variableID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -416,38 +339,119 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'UserResponse') as UserResponse;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'Variable') as Variable;
         }
-    return Future<UserResponse>.value(null);
+    return Future<Variable>.value(null);
   }
 
-  /// Update a user
+  /// List all labels for a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The ID of the user to update.
-  ///
-  /// * [User] user (required):
-  ///   User update to apply
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchUsersIDWithHttpInfo(String userID, User user, { String zapTraceSpan }) async {
+  Future<Response> getVariablesIDLabelsWithHttpInfo(String variableID, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (user == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: user');
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
     }
 
-    final path = r'/users/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString());
+    final path = r'/variables/{variableID}/labels'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
 
-    Object postBody = user;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (zapTraceSpan != null) {
+      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>[];
+
+    if (
+      nullableContentType != null &&
+      nullableContentType.toLowerCase().startsWith('multipart/form-data')
+    ) {
+      bool hasFields = false;
+      final mp = MultipartRequest(null, null);
+      if (hasFields) {
+        postBody = mp;
+      }
+    } else {
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// List all labels for a variable
+  ///
+  /// Parameters:
+  ///
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [String] zapTraceSpan:
+  ///   OpenTracing span context
+  Future<LabelsResponse> getVariablesIDLabels(String variableID, { String zapTraceSpan }) async {
+    final response = await getVariablesIDLabelsWithHttpInfo(variableID,  zapTraceSpan: zapTraceSpan );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return apiClient.deserialize(_decodeBodyBytes(response), 'LabelsResponse') as LabelsResponse;
+        }
+    return Future<LabelsResponse>.value(null);
+  }
+
+  /// Update a variable
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [Variable] variable (required):
+  ///   Variable update to apply
+  ///
+  /// * [String] zapTraceSpan:
+  ///   OpenTracing span context
+  Future<Response> patchVariablesIDWithHttpInfo(String variableID, Variable variable, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
+    }
+    if (variable == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variable');
+    }
+
+    final path = r'/variables/{variableID}'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+
+    Object postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -485,20 +489,20 @@ class UsersApi {
     );
   }
 
-  /// Update a user
+  /// Update a variable
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The ID of the user to update.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
-  /// * [User] user (required):
-  ///   User update to apply
+  /// * [Variable] variable (required):
+  ///   Variable update to apply
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> patchUsersID(String userID, User user, { String zapTraceSpan }) async {
-    final response = await patchUsersIDWithHttpInfo(userID, user,  zapTraceSpan: zapTraceSpan );
+  Future<Variable> patchVariablesID(String variableID, Variable variable, { String zapTraceSpan }) async {
+    final response = await patchVariablesIDWithHttpInfo(variableID, variable,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -506,31 +510,31 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'UserResponse') as UserResponse;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'Variable') as Variable;
         }
-    return Future<UserResponse>.value(null);
+    return Future<Variable>.value(null);
   }
 
-  /// Create a user
+  /// Create a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [User] user (required):
-  ///   User to create
+  /// * [Variable] variable (required):
+  ///   Variable to create
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersWithHttpInfo(User user, { String zapTraceSpan }) async {
+  Future<Response> postVariablesWithHttpInfo(Variable variable, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (user == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: user');
+    if (variable == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variable');
     }
 
-    final path = r'/users';
+    final path = r'/variables';
 
-    Object postBody = user;
+    Object postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -568,17 +572,17 @@ class UsersApi {
     );
   }
 
-  /// Create a user
+  /// Create a variable
   ///
   /// Parameters:
   ///
-  /// * [User] user (required):
-  ///   User to create
+  /// * [Variable] variable (required):
+  ///   Variable to create
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> postUsers(User user, { String zapTraceSpan }) async {
-    final response = await postUsersWithHttpInfo(user,  zapTraceSpan: zapTraceSpan );
+  Future<Variable> postVariables(Variable variable, { String zapTraceSpan }) async {
+    final response = await postVariablesWithHttpInfo(variable,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -586,38 +590,38 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'UserResponse') as UserResponse;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'Variable') as Variable;
         }
-    return Future<UserResponse>.value(null);
+    return Future<Variable>.value(null);
   }
 
-  /// Update a password
+  /// Add a label to a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The user ID.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
-  /// * [PasswordResetBody] passwordResetBody (required):
-  ///   New password
+  /// * [LabelMapping] labelMapping (required):
+  ///   Label to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersIDPasswordWithHttpInfo(String userID, PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
+  Future<Response> postVariablesIDLabelsWithHttpInfo(String variableID, LabelMapping labelMapping, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
     }
-    if (passwordResetBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: passwordResetBody');
+    if (labelMapping == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelMapping');
     }
 
-    final path = r'/users/{userID}/password'
-      .replaceAll('{' + 'userID' + '}', userID.toString());
+    final path = r'/variables/{variableID}/labels'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
 
-    Object postBody = passwordResetBody;
+    Object postBody = labelMapping;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -629,7 +633,7 @@ class UsersApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuth'];
+    final authNames = <String>[];
 
     if (
       nullableContentType != null &&
@@ -655,45 +659,59 @@ class UsersApi {
     );
   }
 
-  /// Update a password
+  /// Add a label to a variable
   ///
   /// Parameters:
   ///
-  /// * [String] userID (required):
-  ///   The user ID.
+  /// * [String] variableID (required):
+  ///   The variable ID.
   ///
-  /// * [PasswordResetBody] passwordResetBody (required):
-  ///   New password
+  /// * [LabelMapping] labelMapping (required):
+  ///   Label to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> postUsersIDPassword(String userID, PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
-    final response = await postUsersIDPasswordWithHttpInfo(userID, passwordResetBody,  zapTraceSpan: zapTraceSpan );
+  Future<LabelResponse> postVariablesIDLabels(String variableID, LabelMapping labelMapping, { String zapTraceSpan }) async {
+    final response = await postVariablesIDLabelsWithHttpInfo(variableID, labelMapping,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return apiClient.deserialize(_decodeBodyBytes(response), 'LabelResponse') as LabelResponse;
+        }
+    return Future<LabelResponse>.value(null);
   }
 
-  /// Update a password
+  /// Replace a variable
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [PasswordResetBody] passwordResetBody (required):
-  ///   New password
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [Variable] variable (required):
+  ///   Variable to replace
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> putMePasswordWithHttpInfo(PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
+  Future<Response> putVariablesIDWithHttpInfo(String variableID, Variable variable, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (passwordResetBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: passwordResetBody');
+    if (variableID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variableID');
+    }
+    if (variable == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: variable');
     }
 
-    final path = r'/me/password';
+    final path = r'/variables/{variableID}'
+      .replaceAll('{' + 'variableID' + '}', variableID.toString());
 
-    Object postBody = passwordResetBody;
+    Object postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -705,7 +723,7 @@ class UsersApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuth'];
+    final authNames = <String>[];
 
     if (
       nullableContentType != null &&
@@ -731,19 +749,29 @@ class UsersApi {
     );
   }
 
-  /// Update a password
+  /// Replace a variable
   ///
   /// Parameters:
   ///
-  /// * [PasswordResetBody] passwordResetBody (required):
-  ///   New password
+  /// * [String] variableID (required):
+  ///   The variable ID.
+  ///
+  /// * [Variable] variable (required):
+  ///   Variable to replace
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> putMePassword(PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
-    final response = await putMePasswordWithHttpInfo(passwordResetBody,  zapTraceSpan: zapTraceSpan );
+  Future<Variable> putVariablesID(String variableID, Variable variable, { String zapTraceSpan }) async {
+    final response = await putVariablesIDWithHttpInfo(variableID, variable,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return apiClient.deserialize(_decodeBodyBytes(response), 'Variable') as Variable;
+        }
+    return Future<Variable>.value(null);
   }
 }

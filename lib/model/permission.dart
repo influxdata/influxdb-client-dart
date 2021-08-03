@@ -35,12 +35,8 @@ class Permission {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (action != null) {
       json[r'action'] = action;
-    }
-    if (resource != null) {
       json[r'resource'] = resource;
-    }
     return json;
   }
 
@@ -85,13 +81,6 @@ class PermissionActionEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is PermissionActionEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

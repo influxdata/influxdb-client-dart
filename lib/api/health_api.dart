@@ -26,7 +26,7 @@ class HealthApi {
   Future<Response> getHealthWithHttpInfo({ String zapTraceSpan }) async {
     // Verify required params are set.
 
-    final path = '/health'.replaceAll('{format}', 'json');
+    final path = r'/health';
 
     Object postBody;
 
@@ -82,7 +82,7 @@ class HealthApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'HealthCheck') as HealthCheck;
-    }
-    return null;
+        }
+    return Future<HealthCheck>.value(null);
   }
 }

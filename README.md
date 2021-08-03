@@ -303,12 +303,16 @@ The client supports following management API:
 | [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Authorizations |
 | [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Buckets |
 | [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/DBRPs |
+| [**DeleteAPI**](lib/api/delete_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Delete |
 | [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Health |
 | [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Labels |
 | [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Organizations |
 | [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ready |
+| [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Secrets |
+| [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Setup |
 | [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Tasks |
 | [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Users |
+| [**VariablesAPI**](lib/api/variables_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Variables |
 
 
 The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).
@@ -327,10 +331,10 @@ void main() async {
   var ready = await client.getReadyApi().getReady();
   print('Ready check: ${ready.status}');
 
-  var orgs = await OrganizationsApi(api).getOrgs();
+  var orgs = await client.getOrganizationsApi().getOrgs();
   var myOrgId = orgs.orgs.first.id;
 
-  var bucketsApi = BucketsApi(api);
+  var bucketsApi = client.getBucketsApi();
   var bucketName = 'bucket-my-org';
 
   // find and delete bucket 'bucket-my-org'
@@ -356,7 +360,7 @@ void main() async {
   Resource(type: ResourceTypeEnum.buckets, id: bucket.id, orgID: myOrgId);
 
 // Authorization configuration
-  var auth = Authorization(
+  var auth = AuthorizationPostRequest(
       description: 'Authorization to read/write bucket:${bucket.name}',
       orgID: myOrgId,
       permissions: [
@@ -365,7 +369,7 @@ void main() async {
       ]);
 
 // Create Authorization
-  var authorizationsApi = AuthorizationsApi(api);
+  var authorizationsApi = client.getAuthorizationsApi();
   var authorization = await authorizationsApi.postAuthorizations(auth);
 
 // Print token
@@ -375,6 +379,7 @@ void main() async {
 
   client.close();
 }
+
 
 ```
 

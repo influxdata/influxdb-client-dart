@@ -32,7 +32,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody;
@@ -112,7 +112,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}/members/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/members/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
@@ -196,7 +196,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}/owners/{userID}'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/owners/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
@@ -283,7 +283,7 @@ class OrganizationsApi {
   Future<Response> getOrgsWithHttpInfo({ String zapTraceSpan, int offset, int limit, bool descending, String org, String orgID, String userID }) async {
     // Verify required params are set.
 
-    final path = '/orgs'.replaceAll('{format}', 'json');
+    final path = r'/orgs';
 
     Object postBody;
 
@@ -373,8 +373,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Organizations') as Organizations;
-    }
-    return null;
+        }
+    return Future<Organizations>.value(null);
   }
 
   /// Retrieve an organization
@@ -394,7 +394,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody;
@@ -454,8 +454,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Organization') as Organization;
-    }
-    return null;
+        }
+    return Future<Organization>.value(null);
   }
 
   /// List all members of an organization
@@ -475,7 +475,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}/members'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/members'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody;
@@ -535,8 +535,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMembers') as ResourceMembers;
-    }
-    return null;
+        }
+    return Future<ResourceMembers>.value(null);
   }
 
   /// List all owners of an organization
@@ -556,7 +556,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
 
-    final path = '/orgs/{orgID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/owners'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody;
@@ -616,89 +616,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwners') as ResourceOwners;
-    }
-    return null;
-  }
-
-  /// List all secret keys for an organization
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<Response> getOrgsIDSecretsWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
-    final path = '/orgs/{orgID}/secrets'.replaceAll('{format}', 'json')
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
-
-    Object postBody;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
-
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
-
-    return await apiClient.invokeAPI(
-      path,
-      'GET',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      nullableContentType,
-      authNames,
-    );
-  }
-
-  /// List all secret keys for an organization
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<SecretKeysResponse> getOrgsIDSecrets(String orgID, { String zapTraceSpan }) async {
-    final response = await getOrgsIDSecretsWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    }
-    // When a remote server returns no body with a status of 204, we shall not decode it.
-    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
-    // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'SecretKeysResponse') as SecretKeysResponse;
-    }
-    return null;
+        }
+    return Future<ResourceOwners>.value(null);
   }
 
   /// Update an organization
@@ -710,24 +629,24 @@ class OrganizationsApi {
   /// * [String] orgID (required):
   ///   The ID of the organization to get.
   ///
-  /// * [Organization] organization (required):
+  /// * [PatchOrganizationRequest] patchOrganizationRequest (required):
   ///   Organization update to apply
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchOrgsIDWithHttpInfo(String orgID, Organization organization, { String zapTraceSpan }) async {
+  Future<Response> patchOrgsIDWithHttpInfo(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String zapTraceSpan }) async {
     // Verify required params are set.
     if (orgID == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
     }
-    if (organization == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: organization');
+    if (patchOrganizationRequest == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: patchOrganizationRequest');
     }
 
-    final path = '/orgs/{orgID}'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
-    Object postBody = organization;
+    Object postBody = patchOrganizationRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -772,13 +691,13 @@ class OrganizationsApi {
   /// * [String] orgID (required):
   ///   The ID of the organization to get.
   ///
-  /// * [Organization] organization (required):
+  /// * [PatchOrganizationRequest] patchOrganizationRequest (required):
   ///   Organization update to apply
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> patchOrgsID(String orgID, Organization organization, { String zapTraceSpan }) async {
-    final response = await patchOrgsIDWithHttpInfo(orgID, organization,  zapTraceSpan: zapTraceSpan );
+  Future<Organization> patchOrgsID(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String zapTraceSpan }) async {
+    final response = await patchOrgsIDWithHttpInfo(orgID, patchOrganizationRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -787,91 +706,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Organization') as Organization;
-    }
-    return null;
-  }
-
-  /// Update secrets in an organization
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [Map<String, String>] requestBody (required):
-  ///   Secret key value pairs to update/add
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<Response> patchOrgsIDSecretsWithHttpInfo(String orgID, Map<String, String> requestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (requestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: requestBody');
-    }
-
-    final path = '/orgs/{orgID}/secrets'.replaceAll('{format}', 'json')
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
-
-    Object postBody = requestBody;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
-
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
-
-    return await apiClient.invokeAPI(
-      path,
-      'PATCH',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      nullableContentType,
-      authNames,
-    );
-  }
-
-  /// Update secrets in an organization
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [Map<String, String>] requestBody (required):
-  ///   Secret key value pairs to update/add
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<void> patchOrgsIDSecrets(String orgID, Map<String, String> requestBody, { String zapTraceSpan }) async {
-    final response = await patchOrgsIDSecretsWithHttpInfo(orgID, requestBody,  zapTraceSpan: zapTraceSpan );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    }
+        }
+    return Future<Organization>.value(null);
   }
 
   /// Create an organization
@@ -880,20 +716,20 @@ class OrganizationsApi {
   ///
   /// Parameters:
   ///
-  /// * [Organization] organization (required):
+  /// * [PostOrganizationRequest] postOrganizationRequest (required):
   ///   Organization to create
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsWithHttpInfo(Organization organization, { String zapTraceSpan }) async {
+  Future<Response> postOrgsWithHttpInfo(PostOrganizationRequest postOrganizationRequest, { String zapTraceSpan }) async {
     // Verify required params are set.
-    if (organization == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: organization');
+    if (postOrganizationRequest == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: postOrganizationRequest');
     }
 
-    final path = '/orgs'.replaceAll('{format}', 'json');
+    final path = r'/orgs';
 
-    Object postBody = organization;
+    Object postBody = postOrganizationRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -935,13 +771,13 @@ class OrganizationsApi {
   ///
   /// Parameters:
   ///
-  /// * [Organization] organization (required):
+  /// * [PostOrganizationRequest] postOrganizationRequest (required):
   ///   Organization to create
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> postOrgs(Organization organization, { String zapTraceSpan }) async {
-    final response = await postOrgsWithHttpInfo(organization,  zapTraceSpan: zapTraceSpan );
+  Future<Organization> postOrgs(PostOrganizationRequest postOrganizationRequest, { String zapTraceSpan }) async {
+    final response = await postOrgsWithHttpInfo(postOrganizationRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     }
@@ -950,8 +786,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Organization') as Organization;
-    }
-    return null;
+        }
+    return Future<Organization>.value(null);
   }
 
   /// Add a member to an organization
@@ -977,7 +813,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/orgs/{orgID}/members'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/members'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1040,8 +876,8 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceMember') as ResourceMember;
-    }
-    return null;
+        }
+    return Future<ResourceMember>.value(null);
   }
 
   /// Add an owner to an organization
@@ -1067,7 +903,7 @@ class OrganizationsApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
     }
 
-    final path = '/orgs/{orgID}/owners'.replaceAll('{format}', 'json')
+    final path = r'/orgs/{orgID}/owners'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
     Object postBody = addResourceMemberRequestBody;
@@ -1130,90 +966,7 @@ class OrganizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'ResourceOwner') as ResourceOwner;
-    }
-    return null;
-  }
-
-  /// Delete secrets from an organization
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [SecretKeys] secretKeys (required):
-  ///   Secret key to delete
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<Response> postOrgsIDSecretsWithHttpInfo(String orgID, SecretKeys secretKeys, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (secretKeys == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: secretKeys');
-    }
-
-    final path = '/orgs/{orgID}/secrets/delete'.replaceAll('{format}', 'json')
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
-
-    Object postBody = secretKeys;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (zapTraceSpan != null) {
-      headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
-    }
-
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
-
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
-
-    return await apiClient.invokeAPI(
-      path,
-      'POST',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      nullableContentType,
-      authNames,
-    );
-  }
-
-  /// Delete secrets from an organization
-  ///
-  /// Parameters:
-  ///
-  /// * [String] orgID (required):
-  ///   The organization ID.
-  ///
-  /// * [SecretKeys] secretKeys (required):
-  ///   Secret key to delete
-  ///
-  /// * [String] zapTraceSpan:
-  ///   OpenTracing span context
-  Future<void> postOrgsIDSecrets(String orgID, SecretKeys secretKeys, { String zapTraceSpan }) async {
-    final response = await postOrgsIDSecretsWithHttpInfo(orgID, secretKeys,  zapTraceSpan: zapTraceSpan );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    }
+        }
+    return Future<ResourceOwner>.value(null);
   }
 }

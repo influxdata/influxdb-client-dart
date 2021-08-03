@@ -41,16 +41,12 @@ class ApiClient {
      _defaultHeaderMap[key] = value;
   }
 
-  dynamic deserialize(String json, String targetType, {bool growable}) {
-    // Remove all spaces.  Necessary for reg expressions as well.
-    targetType = targetType.replaceAll(' ', '');
+  Map<String,String> get defaultHeaderMap => _defaultHeaderMap;
 
-    return targetType == 'String'
-      ? json
-      : _deserialize(jsonDecode(json), targetType, growable: true == growable);
-  }
-
-  String serialize(Object obj) => obj == null ? '' : json.encode(obj);
+  /// returns an unmodifiable view of the authentications, since none should be added
+  /// nor deleted
+  Map<String, Authentication> get authentications =>
+      Map.unmodifiable(_authentications);
 
   T getAuthentication<T extends Authentication>(String name) {
     final authentication = _authentications[name];
@@ -176,6 +172,10 @@ class ApiClient {
           return AuthorizationAllOf.fromJson(value);
         case 'AuthorizationAllOfLinks':
           return AuthorizationAllOfLinks.fromJson(value);
+        case 'AuthorizationPostRequest':
+          return AuthorizationPostRequest.fromJson(value);
+        // case 'AuthorizationPostRequestAllOf':
+        //   return AuthorizationPostRequestAllOf.fromJson(value);
         case 'AuthorizationUpdateRequest':
           return AuthorizationUpdateRequest.fromJson(value);
         case 'Authorizations':
@@ -200,10 +200,15 @@ class ApiClient {
           return Bucket.fromJson(value);
         case 'BucketLinks':
           return BucketLinks.fromJson(value);
+        // case 'BucketMetadataManifest':
+        //   return BucketMetadataManifest.fromJson(value);
+        // case 'BucketShardMapping':
+        //   return BucketShardMapping.fromJson(value);
         case 'Buckets':
           return Buckets.fromJson(value);
         // case 'BuilderAggregateFunctionType':
         //   return BuilderAggregateFunctionTypeTypeTransformer().decode(value);
+        //
         // case 'BuilderConfig':
         //   return BuilderConfig.fromJson(value);
         // case 'BuilderConfigAggregateWindow':
@@ -238,6 +243,7 @@ class ApiClient {
         //   return CheckPatch.fromJson(value);
         // case 'CheckStatusLevel':
         //   return CheckStatusLevelTypeTransformer().decode(value);
+        //
         // case 'CheckViewProperties':
         //   return CheckViewProperties.fromJson(value);
         // case 'Checks':
@@ -254,12 +260,16 @@ class ApiClient {
         //   return CustomCheck.fromJson(value);
         // case 'CustomCheckAllOf':
         //   return CustomCheckAllOf.fromJson(value);
-        // case 'DBRP':
-        //   return DBRP.fromJson(value);
-        // case 'DBRPUpdate':
-        //   return DBRPUpdate.fromJson(value);
-        // case 'DBRPs':
-        //   return DBRPs.fromJson(value);
+        case 'DBRP':
+          return DBRP.fromJson(value);
+        case 'DBRPCreate':
+          return DBRPCreate.fromJson(value);
+        case 'DBRPGet':
+          return DBRPGet.fromJson(value);
+        case 'DBRPUpdate':
+          return DBRPUpdate.fromJson(value);
+        case 'DBRPs':
+          return DBRPs.fromJson(value);
         // case 'Dashboard':
         //   return Dashboard.fromJson(value);
         // case 'DashboardAllOf':
@@ -290,6 +300,10 @@ class ApiClient {
         //   return DeletePredicateRequest.fromJson(value);
         // case 'Dialect':
         //   return Dialect.fromJson(value);
+        // case 'DictExpression':
+        //   return DictExpression.fromJson(value);
+        // case 'DictItem':
+        //   return DictItem.fromJson(value);
         // case 'Document':
         //   return Document.fromJson(value);
         // case 'DocumentCreate':
@@ -328,6 +342,28 @@ class ApiClient {
         //   return FunctionExpression.fromJson(value);
         // case 'GaugeViewProperties':
         //   return GaugeViewProperties.fromJson(value);
+        // case 'GeoCircleViewLayer':
+        //   return GeoCircleViewLayer.fromJson(value);
+        // case 'GeoCircleViewLayerAllOf':
+        //   return GeoCircleViewLayerAllOf.fromJson(value);
+        // case 'GeoHeatMapViewLayer':
+        //   return GeoHeatMapViewLayer.fromJson(value);
+        // case 'GeoHeatMapViewLayerAllOf':
+        //   return GeoHeatMapViewLayerAllOf.fromJson(value);
+        // case 'GeoPointMapViewLayer':
+        //   return GeoPointMapViewLayer.fromJson(value);
+        // case 'GeoPointMapViewLayerAllOf':
+        //   return GeoPointMapViewLayerAllOf.fromJson(value);
+        // case 'GeoTrackMapViewLayer':
+        //   return GeoTrackMapViewLayer.fromJson(value);
+        // case 'GeoViewLayer':
+        //   return GeoViewLayer.fromJson(value);
+        // case 'GeoViewLayerProperties':
+        //   return GeoViewLayerProperties.fromJson(value);
+        // case 'GeoViewProperties':
+        //   return GeoViewProperties.fromJson(value);
+        // case 'GeoViewPropertiesCenter':
+        //   return GeoViewPropertiesCenter.fromJson(value);
         // case 'GreaterThreshold':
         //   return GreaterThreshold.fromJson(value);
         // case 'GreaterThresholdAllOf':
@@ -354,18 +390,12 @@ class ApiClient {
         //   return IndexExpression.fromJson(value);
         // case 'InfluxQLQuery':
         //   return InfluxQLQuery.fromJson(value);
-        // case 'InlineObject':
-        //   return InlineObject.fromJson(value);
-        // case 'InlineObject1':
-        //   return InlineObject1.fromJson(value);
-        // case 'InlineObject2':
-        //   return InlineObject2.fromJson(value);
         // case 'InlineResponse200':
         //   return InlineResponse200.fromJson(value);
         // case 'IntegerLiteral':
         //   return IntegerLiteral.fromJson(value);
-        // case 'IsOnboarding':
-        //   return IsOnboarding.fromJson(value);
+        case 'IsOnboarding':
+          return IsOnboarding.fromJson(value);
         case 'Label':
           return Label.fromJson(value);
         case 'LabelCreateRequest':
@@ -380,8 +410,14 @@ class ApiClient {
           return LabelsResponse.fromJson(value);
         // case 'LanguageRequest':
         //   return LanguageRequest.fromJson(value);
-        // case 'Legend':
-        //   return Legend.fromJson(value);
+        // case 'LatLonColumn':
+        //   return LatLonColumn.fromJson(value);
+        // case 'LatLonColumns':
+        //   return LatLonColumns.fromJson(value);
+        // case 'LegacyAuthorizationPostRequest':
+        //   return LegacyAuthorizationPostRequest.fromJson(value);
+        // case 'LegacyAuthorizationPostRequestAllOf':
+        //   return LegacyAuthorizationPostRequestAllOf.fromJson(value);
         // case 'LesserThreshold':
         //   return LesserThreshold.fromJson(value);
         // case 'LesserThresholdAllOf':
@@ -398,8 +434,8 @@ class ApiClient {
           return LogEvent.fromJson(value);
         // case 'LogicalExpression':
         //   return LogicalExpression.fromJson(value);
-        // case 'Logs':
-        //   return Logs.fromJson(value);
+        case 'Logs':
+          return Logs.fromJson(value);
         // case 'MapVariableProperties':
         //   return MapVariableProperties.fromJson(value);
         // case 'MarkdownViewProperties':
@@ -408,6 +444,8 @@ class ApiClient {
         //   return MemberAssignment.fromJson(value);
         // case 'MemberExpression':
         //   return MemberExpression.fromJson(value);
+        // case 'MetadataBackup':
+        //   return MetadataBackup.fromJson(value);
         // case 'ModelFile':
         //   return ModelFile.fromJson(value);
         // case 'ModelSource':
@@ -422,10 +460,11 @@ class ApiClient {
         //   return NotificationEndpointBase.fromJson(value);
         // case 'NotificationEndpointBaseLinks':
         //   return NotificationEndpointBaseLinks.fromJson(value);
-        // case 'NotificationEndpointDiscrimator':
-        //   return NotificationEndpointDiscrimator.fromJson(value);
+        // case 'NotificationEndpointDiscriminator':
+        //   return NotificationEndpointDiscriminator.fromJson(value);
         // case 'NotificationEndpointType':
         //   return NotificationEndpointTypeTypeTransformer().decode(value);
+        //
         // case 'NotificationEndpointUpdate':
         //   return NotificationEndpointUpdate.fromJson(value);
         // case 'NotificationEndpoints':
@@ -444,10 +483,10 @@ class ApiClient {
         //   return NotificationRules.fromJson(value);
         // case 'ObjectExpression':
         //   return ObjectExpression.fromJson(value);
-        // case 'OnboardingRequest':
-        //   return OnboardingRequest.fromJson(value);
-        // case 'OnboardingResponse':
-        //   return OnboardingResponse.fromJson(value);
+        case 'OnboardingRequest':
+          return OnboardingRequest.fromJson(value);
+        case 'OnboardingResponse':
+          return OnboardingResponse.fromJson(value);
         // case 'OptionStatement':
         //   return OptionStatement.fromJson(value);
         case 'Organization':
@@ -470,10 +509,20 @@ class ApiClient {
         //   return PagerDutyNotificationRuleBase.fromJson(value);
         // case 'ParenExpression':
         //   return ParenExpression.fromJson(value);
-        // case 'PasswordResetBody':
-        //   return PasswordResetBody.fromJson(value);
-        // case 'Permission':
-        //   return Permission.fromJson(value);
+        case 'PasswordResetBody':
+          return PasswordResetBody.fromJson(value);
+        case 'PatchBucketRequest':
+          return PatchBucketRequest.fromJson(value);
+        // case 'PatchDashboardRequest':
+        //   return PatchDashboardRequest.fromJson(value);
+        case 'PatchOrganizationRequest':
+          return PatchOrganizationRequest.fromJson(value);
+        case 'PatchRetentionRule':
+          return PatchRetentionRule.fromJson(value);
+        // case 'PatchStackRequest':
+        //   return PatchStackRequest.fromJson(value);
+        case 'Permission':
+          return Permission.fromJson(value);
         // case 'PipeExpression':
         //   return PipeExpression.fromJson(value);
         // case 'PipeLiteral':
@@ -486,6 +535,10 @@ class ApiClient {
         //   return PostNotificationEndpoint.fromJson(value);
         // case 'PostNotificationRule':
         //   return PostNotificationRule.fromJson(value);
+        case 'PostOrganizationRequest':
+          return PostOrganizationRequest.fromJson(value);
+        // case 'PostStackRequest':
+        //   return PostStackRequest.fromJson(value);
         // case 'Property':
         //   return Property.fromJson(value);
         // case 'PropertyKey':
@@ -516,16 +569,22 @@ class ApiClient {
           return ResourceMemberAllOf.fromJson(value);
         case 'ResourceMembers':
           return ResourceMembers.fromJson(value);
+        case 'ResourceMembersLinks':
+          return ResourceMembersLinks.fromJson(value);
         case 'ResourceOwner':
           return ResourceOwner.fromJson(value);
         case 'ResourceOwnerAllOf':
           return ResourceOwnerAllOf.fromJson(value);
         case 'ResourceOwners':
           return ResourceOwners.fromJson(value);
+        // case 'RestoredBucketMappings':
+        //   return RestoredBucketMappings.fromJson(value);
+        // case 'RetentionPolicyManifest':
+        //   return RetentionPolicyManifest.fromJson(value);
         case 'RetentionRule':
           return RetentionRule.fromJson(value);
-        // case 'ReturnStatement':
-        //   return ReturnStatement.fromJson(value);
+        case 'ReturnStatement':
+          // return ReturnStatement.fromJson(value);
         // case 'Routes':
         //   return Routes.fromJson(value);
         // case 'RoutesExternal':
@@ -536,12 +595,11 @@ class ApiClient {
         //   return RoutesSystem.fromJson(value);
         // case 'RuleStatusLevel':
         //   return RuleStatusLevelTypeTransformer().decode(value);
+          
         case 'Run':
           return Run.fromJson(value);
         case 'RunLinks':
           return RunLinks.fromJson(value);
-        case 'RunLog':
-          return RunLog.fromJson(value);
         case 'RunManually':
           return RunManually.fromJson(value);
         case 'Runs':
@@ -552,6 +610,9 @@ class ApiClient {
         //   return SMTPNotificationRuleBase.fromJson(value);
         // case 'ScatterViewProperties':
         //   return ScatterViewProperties.fromJson(value);
+        case 'SchemaType':
+          return SchemaTypeTypeTransformer().decode(value);
+          
         // case 'ScraperTargetRequest':
         //   return ScraperTargetRequest.fromJson(value);
         // case 'ScraperTargetResponse':
@@ -570,6 +631,12 @@ class ApiClient {
           return SecretKeysResponseAllOf.fromJson(value);
         case 'SecretKeysResponseAllOfLinks':
           return SecretKeysResponseAllOfLinks.fromJson(value);
+        // case 'ShardGroupManifest':
+        //   return ShardGroupManifest.fromJson(value);
+        // case 'ShardManifest':
+        //   return ShardManifest.fromJson(value);
+        // case 'ShardOwner':
+        //   return ShardOwner.fromJson(value);
         // case 'SingleStatViewProperties':
         //   return SingleStatViewProperties.fromJson(value);
         // case 'SlackNotificationEndpoint':
@@ -598,12 +665,18 @@ class ApiClient {
         //   return StacksStackIdAdditionalResources.fromJson(value);
         // case 'Statement':
         //   return Statement.fromJson(value);
+        // case 'StaticLegend':
+        //   return StaticLegend.fromJson(value);
         // case 'StatusRule':
         //   return StatusRule.fromJson(value);
         // case 'StringLiteral':
         //   return StringLiteral.fromJson(value);
+        // case 'SubscriptionManifest':
+        //   return SubscriptionManifest.fromJson(value);
         // case 'TableViewProperties':
         //   return TableViewProperties.fromJson(value);
+        // case 'TableViewPropertiesTableOptions':
+        //   return TableViewPropertiesTableOptions.fromJson(value);
         // case 'TagRule':
         //   return TagRule.fromJson(value);
         case 'Task':
@@ -626,80 +699,12 @@ class ApiClient {
         //   return TelegrafAllOfLinks.fromJson(value);
         // case 'TelegrafPlugin':
         //   return TelegrafPlugin.fromJson(value);
-        // case 'TelegrafPluginInputCpu':
-        //   return TelegrafPluginInputCpu.fromJson(value);
-        // case 'TelegrafPluginInputDisk':
-        //   return TelegrafPluginInputDisk.fromJson(value);
-        // case 'TelegrafPluginInputDiskio':
-        //   return TelegrafPluginInputDiskio.fromJson(value);
-        // case 'TelegrafPluginInputDocker':
-        //   return TelegrafPluginInputDocker.fromJson(value);
-        // case 'TelegrafPluginInputDockerConfig':
-        //   return TelegrafPluginInputDockerConfig.fromJson(value);
-        // case 'TelegrafPluginInputFile':
-        //   return TelegrafPluginInputFile.fromJson(value);
-        // case 'TelegrafPluginInputFileConfig':
-        //   return TelegrafPluginInputFileConfig.fromJson(value);
-        // case 'TelegrafPluginInputKernel':
-        //   return TelegrafPluginInputKernel.fromJson(value);
-        // case 'TelegrafPluginInputKubernetes':
-        //   return TelegrafPluginInputKubernetes.fromJson(value);
-        // case 'TelegrafPluginInputKubernetesConfig':
-        //   return TelegrafPluginInputKubernetesConfig.fromJson(value);
-        // case 'TelegrafPluginInputLogParser':
-        //   return TelegrafPluginInputLogParser.fromJson(value);
-        // case 'TelegrafPluginInputLogParserConfig':
-        //   return TelegrafPluginInputLogParserConfig.fromJson(value);
-        // case 'TelegrafPluginInputMem':
-        //   return TelegrafPluginInputMem.fromJson(value);
-        // case 'TelegrafPluginInputNet':
-        //   return TelegrafPluginInputNet.fromJson(value);
-        // case 'TelegrafPluginInputNetResponse':
-        //   return TelegrafPluginInputNetResponse.fromJson(value);
-        // case 'TelegrafPluginInputNginx':
-        //   return TelegrafPluginInputNginx.fromJson(value);
-        // case 'TelegrafPluginInputProcesses':
-        //   return TelegrafPluginInputProcesses.fromJson(value);
-        // case 'TelegrafPluginInputProcstat':
-        //   return TelegrafPluginInputProcstat.fromJson(value);
-        // case 'TelegrafPluginInputProcstatConfig':
-        //   return TelegrafPluginInputProcstatConfig.fromJson(value);
-        // case 'TelegrafPluginInputPrometheus':
-        //   return TelegrafPluginInputPrometheus.fromJson(value);
-        // case 'TelegrafPluginInputPrometheusConfig':
-        //   return TelegrafPluginInputPrometheusConfig.fromJson(value);
-        // case 'TelegrafPluginInputRedis':
-        //   return TelegrafPluginInputRedis.fromJson(value);
-        // case 'TelegrafPluginInputRedisConfig':
-        //   return TelegrafPluginInputRedisConfig.fromJson(value);
-        // case 'TelegrafPluginInputSwap':
-        //   return TelegrafPluginInputSwap.fromJson(value);
-        // case 'TelegrafPluginInputSyslog':
-        //   return TelegrafPluginInputSyslog.fromJson(value);
-        // case 'TelegrafPluginInputSyslogConfig':
-        //   return TelegrafPluginInputSyslogConfig.fromJson(value);
-        // case 'TelegrafPluginInputSystem':
-        //   return TelegrafPluginInputSystem.fromJson(value);
-        // case 'TelegrafPluginInputTail':
-        //   return TelegrafPluginInputTail.fromJson(value);
-        // case 'TelegrafPluginOutputFile':
-        //   return TelegrafPluginOutputFile.fromJson(value);
-        // case 'TelegrafPluginOutputFileConfig':
-        //   return TelegrafPluginOutputFileConfig.fromJson(value);
-        // case 'TelegrafPluginOutputFileConfigFiles':
-        //   return TelegrafPluginOutputFileConfigFiles.fromJson(value);
-        // case 'TelegrafPluginOutputInfluxDBV2':
-        //   return TelegrafPluginOutputInfluxDBV2.fromJson(value);
-        // case 'TelegrafPluginOutputInfluxDBV2Config':
-        //   return TelegrafPluginOutputInfluxDBV2Config.fromJson(value);
         // case 'TelegrafPlugins':
         //   return TelegrafPlugins.fromJson(value);
         // case 'TelegrafRequest':
         //   return TelegrafRequest.fromJson(value);
         // case 'TelegrafRequestMetadata':
         //   return TelegrafRequestMetadata.fromJson(value);
-        // case 'TelegrafRequestPlugin':
-        //   return TelegrafRequestPlugin.fromJson(value);
         // case 'Telegrafs':
         //   return Telegrafs.fromJson(value);
         // case 'TelegramNotificationEndpoint':
@@ -810,22 +815,22 @@ class ApiClient {
         //   return UnsignedIntegerLiteral.fromJson(value);
         case 'User':
           return User.fromJson(value);
-        case 'UserLinks':
-          return UserLinks.fromJson(value);
+        case 'UserResponse':
+          return UserResponse.fromJson(value);
+        case 'UserResponseLinks':
+          return UserResponseLinks.fromJson(value);
         case 'Users':
           return Users.fromJson(value);
-        case 'UsersLinks':
-          return UsersLinks.fromJson(value);
-        // case 'Variable':
-        //   return Variable.fromJson(value);
+        case 'Variable':
+          return Variable.fromJson(value);
         // case 'VariableAssignment':
         //   return VariableAssignment.fromJson(value);
-        // case 'VariableLinks':
-        //   return VariableLinks.fromJson(value);
-        // case 'VariableProperties':
-        //   return VariableProperties.fromJson(value);
-        // case 'Variables':
-        //   return Variables.fromJson(value);
+        case 'VariableLinks':
+          return VariableLinks.fromJson(value);
+        case 'VariableProperties':
+          return VariableProperties.fromJson(value);
+        case 'Variables':
+          return Variables.fromJson(value);
         // case 'View':
         //   return View.fromJson(value);
         // case 'ViewLinks':
@@ -834,27 +839,27 @@ class ApiClient {
         //   return ViewProperties.fromJson(value);
         // case 'Views':
         //   return Views.fromJson(value);
-        // case 'WritePrecision':
-        //   return WritePrecisionTypeTransformer().decode(value);
+        case 'WritePrecision':
+          return WritePrecisionTypeTransformer().decode(value);
+          
         // case 'XYGeom':
         //   return XYGeomTypeTransformer().decode(value);
+        //
         // case 'XYViewProperties':
         //   return XYViewProperties.fromJson(value);
-
         default:
-          // found type using reflection
-          // var mirrors = currentMirrorSystem();
-          // ClassMirror classMirror = mirrors.findLibrary(Symbol('influxdb_client_api')).declarations[Symbol(targetType)];
-          // if (classMirror != null) {
-          //   return classMirror.invoke(Symbol('fromJson'), [value]).reflectee;
-          // }
-
           Match match;
           if (value is List && (match = _regList.firstMatch(targetType)) != null) {
             final newTargetType = match[1];
             return value
               .map((v) => _deserialize(v, newTargetType, growable: growable))
               .toList(growable: true == growable);
+          }
+          if (value is Set && (match = _regSet.firstMatch(targetType)) != null) {
+            final newTargetType = match[1];
+            return value
+              .map((v) => _deserialize(v, newTargetType, growable: growable))
+              .toSet();
           }
           if (value is Map && (match = _regMap.firstMatch(targetType)) != null) {
             final newTargetType = match[1];
@@ -868,8 +873,19 @@ class ApiClient {
     } on Exception catch (e, stack) {
       throw ApiException.withInner(HttpStatus.internalServerError, 'Exception during deserialization.', e, stack,);
     }
-    throw ApiException(HttpStatus.internalServerError, 'Could not find a suitable class for deserialization for $targetType',);
+    throw ApiException(HttpStatus.internalServerError, 'Could not find a suitable class for deserialization',);
   }
+
+  dynamic deserialize(String json, String targetType, {bool growable}) {
+    // Remove all spaces.  Necessary for reg expressions as well.
+    targetType = targetType.replaceAll(' ', '');
+
+  return targetType == 'String'
+    ? json
+    : _deserialize(jsonDecode(json), targetType, growable: true == growable);
+  }
+
+  String serialize(Object obj) => obj == null ? '' : json.encode(obj);
 
   /// Update query and header parameters based on authentication settings.
   /// @param authNames The authentications to apply

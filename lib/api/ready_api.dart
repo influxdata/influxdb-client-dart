@@ -26,7 +26,7 @@ class ReadyApi {
   Future<Response> getReadyWithHttpInfo({ String zapTraceSpan }) async {
     // Verify required params are set.
 
-    final path = '/ready'.replaceAll('{format}', 'json');
+    final path = r'/ready';
 
     Object postBody;
 
@@ -82,7 +82,7 @@ class ReadyApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return apiClient.deserialize(_decodeBodyBytes(response), 'Ready') as Ready;
-    }
-    return null;
+        }
+    return Future<Ready>.value(null);
   }
 }

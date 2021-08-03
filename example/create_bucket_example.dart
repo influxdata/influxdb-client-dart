@@ -40,7 +40,7 @@ void main() async {
       Resource(type: ResourceTypeEnum.buckets, id: bucket.id, orgID: myOrgId);
 
 // Authorization configuration
-  var auth = Authorization(
+  var auth = AuthorizationPostRequest(
       description: 'Authorization to read/write bucket:${bucket.name}',
       orgID: myOrgId,
       permissions: [
