@@ -8,8 +8,6 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
-#### !!! Disclaimer: This library is a work in progress and should not be considered production ready yet. !!!
-
 This repository contains the reference Dart client for the InfluxDB 2.0.
 It works on all platforms including web, server, and Flutter. 
 Please submit issues and pull requests, help out, or just give encouragement.
