@@ -1,4 +1,4 @@
-## 1.0.0 [unreleased]
+## 1.0.0 [2021-08-20]
 
 ### Bug Fixes
 1. [#7](https://github.com/bonitoo-io/influxdb-client-dart/pull/7): Parsing infinite numbers
