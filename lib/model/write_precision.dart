@@ -18,13 +18,6 @@ class WritePrecision {
   final String value;
 
   @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is WritePrecision && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
-
-  @override
   String toString() => value;
 
   String toJson() => value;

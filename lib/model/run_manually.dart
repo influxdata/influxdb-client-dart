@@ -50,12 +50,12 @@ class RunManually {
   static List<RunManually> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <RunManually>[]
-      : json.map((v) => RunManually.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => RunManually.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, RunManually> mapFromJson(Map<String, dynamic> json) {
     final map = <String, RunManually>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = RunManually.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = RunManually.fromJson(value));
     }
     return map;
   }
@@ -63,9 +63,9 @@ class RunManually {
   // maps a json object with a list of RunManually-objects as value to a dart map
   static Map<String, List<RunManually>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<RunManually>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = RunManually.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = RunManually.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

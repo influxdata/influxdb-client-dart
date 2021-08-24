@@ -47,12 +47,12 @@ class ResourceMemberAllOf {
   static List<ResourceMemberAllOf> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMemberAllOf>[]
-      : json.map((v) => ResourceMemberAllOf.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => ResourceMemberAllOf.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, ResourceMemberAllOf> mapFromJson(Map<String, dynamic> json) {
     final map = <String, ResourceMemberAllOf>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = ResourceMemberAllOf.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = ResourceMemberAllOf.fromJson(value));
     }
     return map;
   }
@@ -60,9 +60,9 @@ class ResourceMemberAllOf {
   // maps a json object with a list of ResourceMemberAllOf-objects as value to a dart map
   static Map<String, List<ResourceMemberAllOf>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ResourceMemberAllOf>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = ResourceMemberAllOf.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = ResourceMemberAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -76,13 +76,6 @@ class ResourceMemberAllOfRoleEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is ResourceMemberAllOfRoleEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

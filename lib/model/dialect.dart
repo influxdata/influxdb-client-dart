@@ -16,7 +16,7 @@ class Dialect {
     this.delimiter = ',',
     this.annotations = const [],
     this.commentPrefix = '#',
-    this.dateTimeFormat = DialectDateTimeFormatEnum.rFC3339,
+    this.dateTimeFormat = const DialectDateTimeFormatEnum._('RFC3339'),
   });
 
   /// If true, the results will contain a header row
@@ -88,12 +88,12 @@ class Dialect {
   static List<Dialect> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Dialect>[]
-      : json.map((v) => Dialect.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Dialect.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Dialect> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Dialect>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Dialect.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Dialect.fromJson(value));
     }
     return map;
   }
@@ -101,16 +101,16 @@ class Dialect {
   // maps a json object with a list of Dialect-objects as value to a dart map
   static Map<String, List<Dialect>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Dialect>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Dialect.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Dialect.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
   }
 }
 
-/// https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
+
 class DialectAnnotationsEnum {
   /// Instantiate a new enum with the provided [value].
   const DialectAnnotationsEnum._(this.value);
@@ -119,14 +119,7 @@ class DialectAnnotationsEnum {
   final String value;
 
   @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is DialectAnnotationsEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
-
-  @override
-  String toString() => value.toString();
+  String toString() => value;
 
   String toJson() => value;
 
@@ -152,7 +145,7 @@ class DialectAnnotationsEnum {
           .toList(growable: true == growable);
 }
 
-/// Transformation class that can [encode] an instance of [DialectAnnotationsEnum] to ModelSet<String>,
+/// Transformation class that can [encode] an instance of [DialectAnnotationsEnum] to String,
 /// and [decode] dynamic data back to [DialectAnnotationsEnum].
 class DialectAnnotationsEnumTypeTransformer {
   const DialectAnnotationsEnumTypeTransformer._();
@@ -193,13 +186,6 @@ class DialectDateTimeFormatEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is DialectDateTimeFormatEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

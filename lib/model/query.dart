@@ -12,14 +12,15 @@ part of influxdb_client_api;
 class Query {
   /// Returns a new [Query] instance.
   Query({
+    this.extern,
     @required this.query,
     this.type,
+    this.params = const {},
     this.dialect,
     this.now,
   });
 
-  
-
+  File extern;
 
   /// Query script to execute.
   String query;
@@ -27,7 +28,9 @@ class Query {
   /// The type of query. Must be \"flux\".
   QueryTypeEnum type;
 
-  
+  /// Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both) 
+  Map<String, Object> params;
+
   Dialect dialect;
 
   /// Specifies the time that should be reported as \"now\" in the query. Default is the server's now time.
@@ -35,28 +38,36 @@ class Query {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Query &&
+     other.extern == extern &&
      other.query == query &&
      other.type == type &&
+     other.params == params &&
      other.dialect == dialect &&
      other.now == now;
 
   @override
   int get hashCode =>
+    (extern == null ? 0 : extern.hashCode) +
     (query == null ? 0 : query.hashCode) +
     (type == null ? 0 : type.hashCode) +
+    (params == null ? 0 : params.hashCode) +
     (dialect == null ? 0 : dialect.hashCode) +
     (now == null ? 0 : now.hashCode);
 
   @override
-  String toString() => 'Query[query=$query, type=$type, dialect=$dialect, now=$now]';
+  String toString() => 'Query[extern=$extern, query=$query, type=$type, params=$params, dialect=$dialect, now=$now]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (query != null) {
-      json[r'query'] = query;
+    if (extern != null) {
+      json[r'extern'] = extern;
     }
+      json[r'query'] = query;
     if (type != null) {
       json[r'type'] = type;
+    }
+    if (params != null) {
+      json[r'params'] = params;
     }
     if (dialect != null) {
       json[r'dialect'] = dialect;
@@ -74,6 +85,7 @@ class Query {
     : Query(
         query: json[r'query'],
         type: QueryTypeEnum.fromJson(json[r'type']),
+        params: json[r'params'],
         dialect: Dialect.fromJson(json[r'dialect']),
         now: json[r'now'] == null
           ? null
@@ -83,12 +95,12 @@ class Query {
   static List<Query> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Query>[]
-      : json.map((v) => Query.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Query.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Query> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Query>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Query.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Query.fromJson(value));
     }
     return map;
   }
@@ -96,9 +108,9 @@ class Query {
   // maps a json object with a list of Query-objects as value to a dart map
   static Map<String, List<Query>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Query>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Query.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Query.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -112,13 +124,6 @@ class QueryTypeEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is QueryTypeEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

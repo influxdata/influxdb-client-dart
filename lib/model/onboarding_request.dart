@@ -97,12 +97,12 @@ class OnboardingRequest {
   static List<OnboardingRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <OnboardingRequest>[]
-      : json.map((v) => OnboardingRequest.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => OnboardingRequest.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, OnboardingRequest> mapFromJson(Map<String, dynamic> json) {
     final map = <String, OnboardingRequest>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = OnboardingRequest.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = OnboardingRequest.fromJson(value));
     }
     return map;
   }
@@ -110,9 +110,9 @@ class OnboardingRequest {
   // maps a json object with a list of OnboardingRequest-objects as value to a dart map
   static Map<String, List<OnboardingRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<OnboardingRequest>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = OnboardingRequest.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = OnboardingRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

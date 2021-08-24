@@ -138,12 +138,12 @@ class AuthorizationAllOf {
   static List<AuthorizationAllOf> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <AuthorizationAllOf>[]
-      : json.map((v) => AuthorizationAllOf.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => AuthorizationAllOf.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, AuthorizationAllOf> mapFromJson(Map<String, dynamic> json) {
     final map = <String, AuthorizationAllOf>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = AuthorizationAllOf.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = AuthorizationAllOf.fromJson(value));
     }
     return map;
   }
@@ -151,9 +151,9 @@ class AuthorizationAllOf {
   // maps a json object with a list of AuthorizationAllOf-objects as value to a dart map
   static Map<String, List<AuthorizationAllOf>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<AuthorizationAllOf>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = AuthorizationAllOf.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = AuthorizationAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

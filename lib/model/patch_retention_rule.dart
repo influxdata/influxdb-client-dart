@@ -66,12 +66,12 @@ class PatchRetentionRule {
   static List<PatchRetentionRule> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PatchRetentionRule>[]
-      : json.map((v) => PatchRetentionRule.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PatchRetentionRule.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PatchRetentionRule> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PatchRetentionRule>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PatchRetentionRule.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PatchRetentionRule.fromJson(value));
     }
     return map;
   }
@@ -79,9 +79,9 @@ class PatchRetentionRule {
   // maps a json object with a list of PatchRetentionRule-objects as value to a dart map
   static Map<String, List<PatchRetentionRule>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PatchRetentionRule>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PatchRetentionRule.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PatchRetentionRule.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

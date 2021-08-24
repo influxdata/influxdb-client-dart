@@ -66,8 +66,7 @@ void main() {
           print('---');
           if (element.length == 1) {
             print('STOP!!!');
-
-            throw Exception("parse error stop streaming");
+            throw Exception('parse error stop streaming');
           }
         })
         .whenComplete(() => print('whenComplete'))

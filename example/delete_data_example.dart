@@ -8,13 +8,12 @@ void main() async {
       bucket: 'my-bucket',
       debug: true);
 
-  var stop2 = DateTime.now().toUtc().toIso8601String();
   await client
       .getDeleteService()
       .delete(
           predicate: '_measurement="temperature"',
-          start: '1970-01-01T00:00:00.000000001Z',
-          stop: stop2,
+          start: DateTime.parse('1970-01-01T00:00:00Z'),
+          stop: DateTime.now().toUtc(),
           bucket: 'my-bucket',
           org: 'my-org')
       .catchError((e) => print(e));

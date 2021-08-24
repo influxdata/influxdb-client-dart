@@ -18,10 +18,10 @@ class DeletePredicateRequest {
   });
 
   /// RFC3339Nano
-  String start;
+  DateTime start;
 
   /// RFC3339Nano
-  String stop;
+  DateTime stop;
 
   /// InfluxQL-like delete statement
   String predicate;
@@ -43,12 +43,8 @@ class DeletePredicateRequest {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (start != null) {
-      json[r'start'] = start;
-    }
-    if (stop != null) {
-      json[r'stop'] = stop;
-    }
+      json[r'start'] = start.toUtc().toIso8601String();
+      json[r'stop'] = stop.toUtc().toIso8601String();
     if (predicate != null) {
       json[r'predicate'] = predicate;
     }
@@ -60,20 +56,24 @@ class DeletePredicateRequest {
   static DeletePredicateRequest fromJson(Map<String, dynamic> json) => json == null
     ? null
     : DeletePredicateRequest(
-        start: json[r'start'],
-        stop: json[r'stop'],
+        start: json[r'start'] == null
+          ? null
+          : DateTime.parse(json[r'start']),
+        stop: json[r'stop'] == null
+          ? null
+          : DateTime.parse(json[r'stop']),
         predicate: json[r'predicate'],
     );
 
   static List<DeletePredicateRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <DeletePredicateRequest>[]
-      : json.map((v) => DeletePredicateRequest.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => DeletePredicateRequest.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, DeletePredicateRequest> mapFromJson(Map<String, dynamic> json) {
     final map = <String, DeletePredicateRequest>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = DeletePredicateRequest.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = DeletePredicateRequest.fromJson(value));
     }
     return map;
   }
@@ -81,9 +81,9 @@ class DeletePredicateRequest {
   // maps a json object with a list of DeletePredicateRequest-objects as value to a dart map
   static Map<String, List<DeletePredicateRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<DeletePredicateRequest>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = DeletePredicateRequest.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = DeletePredicateRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

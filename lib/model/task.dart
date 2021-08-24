@@ -17,6 +17,7 @@ class Task {
     @required this.orgID,
     this.org,
     @required this.name,
+    this.ownerID,
     this.description,
     this.status,
     this.labels = const [],
@@ -46,6 +47,9 @@ class Task {
 
   /// The name of the task.
   String name;
+
+  /// The ID of the user who owns this Task.
+  String ownerID;
 
   /// An optional description of the task.
   String description;
@@ -89,6 +93,7 @@ class Task {
      other.orgID == orgID &&
      other.org == org &&
      other.name == name &&
+     other.ownerID == ownerID &&
      other.description == description &&
      other.status == status &&
      other.labels == labels &&
@@ -111,6 +116,7 @@ class Task {
     (orgID == null ? 0 : orgID.hashCode) +
     (org == null ? 0 : org.hashCode) +
     (name == null ? 0 : name.hashCode) +
+    (ownerID == null ? 0 : ownerID.hashCode) +
     (description == null ? 0 : description.hashCode) +
     (status == null ? 0 : status.hashCode) +
     (labels == null ? 0 : labels.hashCode) +
@@ -127,24 +133,21 @@ class Task {
     (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'Task[id=$id, type=$type, orgID=$orgID, org=$org, name=$name, description=$description, status=$status, labels=$labels, authorizationID=$authorizationID, flux=$flux, every=$every, cron=$cron, offset=$offset, latestCompleted=$latestCompleted, lastRunStatus=$lastRunStatus, lastRunError=$lastRunError, createdAt=$createdAt, updatedAt=$updatedAt, links=$links]';
+  String toString() => 'Task[id=$id, type=$type, orgID=$orgID, org=$org, name=$name, ownerID=$ownerID, description=$description, status=$status, labels=$labels, authorizationID=$authorizationID, flux=$flux, every=$every, cron=$cron, offset=$offset, latestCompleted=$latestCompleted, lastRunStatus=$lastRunStatus, lastRunError=$lastRunError, createdAt=$createdAt, updatedAt=$updatedAt, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (id != null) {
       json[r'id'] = id;
-    }
     if (type != null) {
       json[r'type'] = type;
     }
-    if (orgID != null) {
       json[r'orgID'] = orgID;
-    }
     if (org != null) {
       json[r'org'] = org;
     }
-    if (name != null) {
       json[r'name'] = name;
+    if (ownerID != null) {
+      json[r'ownerID'] = ownerID;
     }
     if (description != null) {
       json[r'description'] = description;
@@ -158,9 +161,7 @@ class Task {
     if (authorizationID != null) {
       json[r'authorizationID'] = authorizationID;
     }
-    if (flux != null) {
       json[r'flux'] = flux;
-    }
     if (every != null) {
       json[r'every'] = every;
     }
@@ -201,6 +202,7 @@ class Task {
         orgID: json[r'orgID'],
         org: json[r'org'],
         name: json[r'name'],
+        ownerID: json[r'ownerID'],
         description: json[r'description'],
         status: TaskStatusType.fromJson(json[r'status']),
         labels: Label.listFromJson(json[r'labels']),
@@ -226,12 +228,12 @@ class Task {
   static List<Task> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Task>[]
-      : json.map((v) => Task.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Task.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Task> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Task>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Task.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Task.fromJson(value));
     }
     return map;
   }
@@ -239,9 +241,9 @@ class Task {
   // maps a json object with a list of Task-objects as value to a dart map
   static Map<String, List<Task>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Task>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Task.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Task.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -255,13 +257,6 @@ class TaskLastRunStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is TaskLastRunStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

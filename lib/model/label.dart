@@ -77,12 +77,12 @@ class Label {
   static List<Label> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Label>[]
-      : json.map((v) => Label.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Label.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Label> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Label>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Label.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Label.fromJson(value));
     }
     return map;
   }
@@ -90,9 +90,9 @@ class Label {
   // maps a json object with a list of Label-objects as value to a dart map
   static Map<String, List<Label>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Label>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Label.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Label.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

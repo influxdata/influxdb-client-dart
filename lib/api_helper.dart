@@ -28,7 +28,7 @@ Iterable<QueryParam> _convertParametersForCollectionFormat(
   final params = <QueryParam>[];
 
   // preconditions
-  if (name != null && !name.isEmpty && value != null) {
+  if (name != null && name.isNotEmpty && value != null) {
     if (value is List) {
       // get the collection format, default: csv
       collectionFormat = (collectionFormat == null || collectionFormat.isEmpty)
@@ -58,12 +58,46 @@ String parameterToString(dynamic value) {
   if (value is DateTime) {
     return value.toUtc().toIso8601String();
   }
+  // if (value is AxisScale) {
+  //   return AxisScaleTypeTransformer().encode(value).toString();
+  // }
+  // if (value is BuilderAggregateFunctionType) {
+  //   return BuilderAggregateFunctionTypeTypeTransformer().encode(value).toString();
+  // }
+  // if (value is CheckStatusLevel) {
+  //   return CheckStatusLevelTypeTransformer().encode(value).toString();
+  // }
+  // if (value is NotificationEndpointType) {
+  //   return NotificationEndpointTypeTypeTransformer().encode(value).toString();
+  // }
+  // if (value is QueryEditMode) {
+  //   return QueryEditModeTypeTransformer().encode(value).toString();
+  // }
+  // if (value is RuleStatusLevel) {
+  //   return RuleStatusLevelTypeTransformer().encode(value).toString();
+  // }
+  // if (value is SchemaType) {
+  //   return SchemaTypeTypeTransformer().encode(value).toString();
+  // }
+  // if (value is TaskStatusType) {
+  //   return TaskStatusTypeTypeTransformer().encode(value).toString();
+  // }
+  // if (value is TemplateKind) {
+  //   return TemplateKindTypeTransformer().encode(value).toString();
+  // }
+
+  if (value is WritePrecision) {
+    return WritePrecisionTypeTransformer().encode(value).toString();
+  }
+  // if (value is XYGeom) {
+  //   return XYGeomTypeTransformer().encode(value).toString();
+  // }
   return value.toString();
 }
 
 /// Returns the decoded body as UTF-8 if the given headers indicate an 'application/json'
 /// content type. Otherwise, returns the decoded body as decoded by dart:http package.
-String _decodeBodyBytes(Response response) {
+Future<String> _decodeBodyBytes(Response response) async {
   final contentType = response.headers['content-type'];
   return contentType != null && contentType.toLowerCase().startsWith('application/json')
     ? response.bodyBytes == null ? null : utf8.decode(response.bodyBytes)

@@ -32,11 +32,6 @@ void main() async {
         'http://localhost:8086/api/v2/write?precision=ns&bucket=my-bucket&org=my-org');
   });
 
-  test('writeRecord', () async {
-    var ret = await writeApi
-        .writeLineProtocol('temperature,location=north value=60.0');
-  });
-
   test('writeNonExistentBucket', () async {
     try {
       await writeApi.writeLineProtocol(

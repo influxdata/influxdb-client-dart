@@ -33,7 +33,7 @@ class Run {
   DateTime scheduledFor;
 
   /// An array of logs associated with the run.
-  List<RunLog> log;
+  List<LogEvent> log;
 
   /// Time run started executing, RFC3339Nano.
   DateTime startedAt;
@@ -116,7 +116,7 @@ class Run {
         scheduledFor: json[r'scheduledFor'] == null
           ? null
           : DateTime.parse(json[r'scheduledFor']),
-        log: RunLog.listFromJson(json[r'log']),
+        log: LogEvent.listFromJson(json[r'log']),
         startedAt: json[r'startedAt'] == null
           ? null
           : DateTime.parse(json[r'startedAt']),
@@ -132,12 +132,12 @@ class Run {
   static List<Run> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Run>[]
-      : json.map((v) => Run.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Run.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Run> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Run>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Run.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Run.fromJson(value));
     }
     return map;
   }
@@ -145,9 +145,9 @@ class Run {
   // maps a json object with a list of Run-objects as value to a dart map
   static Map<String, List<Run>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Run>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Run.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Run.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -161,13 +161,6 @@ class RunStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is RunStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

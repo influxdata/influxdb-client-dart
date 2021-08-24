@@ -67,9 +67,7 @@ class Organization {
     if (id != null) {
       json[r'id'] = id;
     }
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (description != null) {
       json[r'description'] = description;
     }
@@ -106,12 +104,12 @@ class Organization {
   static List<Organization> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Organization>[]
-      : json.map((v) => Organization.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Organization.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Organization> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Organization>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Organization.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Organization.fromJson(value));
     }
     return map;
   }
@@ -119,9 +117,9 @@ class Organization {
   // maps a json object with a list of Organization-objects as value to a dart map
   static Map<String, List<Organization>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Organization>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Organization.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Organization.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -135,13 +133,6 @@ class OrganizationStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is OrganizationStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

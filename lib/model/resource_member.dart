@@ -29,7 +29,7 @@ class ResourceMember {
   /// If inactive the user is inactive.
   ResourceMemberStatusEnum status;
 
-  UserLinks links;
+  UserResponseLinks links;
 
   ResourceMemberRoleEnum role;
 
@@ -62,9 +62,7 @@ class ResourceMember {
     if (oauthID != null) {
       json[r'oauthID'] = oauthID;
     }
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (status != null) {
       json[r'status'] = status;
     }
@@ -86,19 +84,19 @@ class ResourceMember {
         oauthID: json[r'oauthID'],
         name: json[r'name'],
         status: ResourceMemberStatusEnum.fromJson(json[r'status']),
-        links: UserLinks.fromJson(json[r'links']),
+        links: UserResponseLinks.fromJson(json[r'links']),
         role: ResourceMemberRoleEnum.fromJson(json[r'role']),
     );
 
   static List<ResourceMember> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMember>[]
-      : json.map((v) => ResourceMember.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => ResourceMember.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, ResourceMember> mapFromJson(Map<String, dynamic> json) {
     final map = <String, ResourceMember>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = ResourceMember.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = ResourceMember.fromJson(value));
     }
     return map;
   }
@@ -106,9 +104,9 @@ class ResourceMember {
   // maps a json object with a list of ResourceMember-objects as value to a dart map
   static Map<String, List<ResourceMember>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ResourceMember>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = ResourceMember.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = ResourceMember.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -122,13 +120,6 @@ class ResourceMemberStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is ResourceMemberStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;
@@ -195,13 +186,6 @@ class ResourceMemberRoleEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is ResourceMemberRoleEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

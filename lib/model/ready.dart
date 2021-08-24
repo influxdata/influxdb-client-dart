@@ -17,13 +17,10 @@ class Ready {
     this.up,
   });
 
-  
   ReadyStatusEnum status;
 
-  
   DateTime started;
 
-  
   String up;
 
   @override
@@ -70,12 +67,12 @@ class Ready {
   static List<Ready> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Ready>[]
-      : json.map((v) => Ready.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Ready.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Ready> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Ready>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Ready.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Ready.fromJson(value));
     }
     return map;
   }
@@ -83,9 +80,9 @@ class Ready {
   // maps a json object with a list of Ready-objects as value to a dart map
   static Map<String, List<Ready>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Ready>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Ready.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Ready.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -99,13 +96,6 @@ class ReadyStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is ReadyStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

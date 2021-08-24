@@ -1,3 +1,8 @@
+## 1.0.1 [unreleased]
+
+### API
+1. [#10](https://github.com/bonitoo-io/influxdb-client-dart/pull/10): Updated openapi generator 
+
 ## 1.0.0 [2021-08-20]
 
 ### Bug Fixes

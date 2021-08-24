@@ -35,9 +35,7 @@ class AddResourceMemberRequestBody {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (id != null) {
       json[r'id'] = id;
-    }
     if (name != null) {
       json[r'name'] = name;
     }
@@ -56,12 +54,12 @@ class AddResourceMemberRequestBody {
   static List<AddResourceMemberRequestBody> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <AddResourceMemberRequestBody>[]
-      : json.map((v) => AddResourceMemberRequestBody.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => AddResourceMemberRequestBody.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, AddResourceMemberRequestBody> mapFromJson(Map<String, dynamic> json) {
     final map = <String, AddResourceMemberRequestBody>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = AddResourceMemberRequestBody.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = AddResourceMemberRequestBody.fromJson(value));
     }
     return map;
   }
@@ -69,9 +67,9 @@ class AddResourceMemberRequestBody {
   // maps a json object with a list of AddResourceMemberRequestBody-objects as value to a dart map
   static Map<String, List<AddResourceMemberRequestBody>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<AddResourceMemberRequestBody>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = AddResourceMemberRequestBody.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = AddResourceMemberRequestBody.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
