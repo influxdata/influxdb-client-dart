@@ -55,18 +55,14 @@ class HealthCheck {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (name != null) {
       json[r'name'] = name;
-    }
     if (message != null) {
       json[r'message'] = message;
     }
     if (checks != null) {
       json[r'checks'] = checks;
     }
-    if (status != null) {
       json[r'status'] = status;
-    }
     if (version != null) {
       json[r'version'] = version;
     }
@@ -92,12 +88,12 @@ class HealthCheck {
   static List<HealthCheck> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <HealthCheck>[]
-      : json.map((v) => HealthCheck.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => HealthCheck.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, HealthCheck> mapFromJson(Map<String, dynamic> json) {
     final map = <String, HealthCheck>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = HealthCheck.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = HealthCheck.fromJson(value));
     }
     return map;
   }
@@ -105,9 +101,9 @@ class HealthCheck {
   // maps a json object with a list of HealthCheck-objects as value to a dart map
   static Map<String, List<HealthCheck>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<HealthCheck>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = HealthCheck.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = HealthCheck.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -121,13 +117,6 @@ class HealthCheckStatusEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is HealthCheckStatusEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

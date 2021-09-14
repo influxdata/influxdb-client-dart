@@ -1,8 +1,13 @@
+## 1.0.1 [unreleased]
+
+### API
+1. [#10](https://github.com/influxdata/influxdb-client-dart/pull/10): Updated dependencies and openapi generated code 
+
 ## 1.0.0 [2021-08-20]
 
 ### Bug Fixes
-1. [#7](https://github.com/bonitoo-io/influxdb-client-dart/pull/7): Parsing infinite numbers
-1. [#9](https://github.com/bonitoo-io/influxdb-client-dart/pull/8): Updated to latest swagger version
+1. [#7](https://github.com/influxdata/influxdb-client-dart/pull/7): Parsing infinite numbers
+1. [#9](https://github.com/influxdata/influxdb-client-dart/pull/8): Updated to latest swagger version
 
 ## 0.1.0-dev.5 [2021-05-07]
 1. [#6](https://github.com/influxdata/influxdb-client-dart/pull/6): Exponential random backoff retry strategy

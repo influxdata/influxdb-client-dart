@@ -62,17 +62,6 @@ class DBRPsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -104,7 +93,7 @@ class DBRPsApi {
   Future<void> deleteDBRPID(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
     final response = await deleteDBRPIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
 
@@ -178,17 +167,6 @@ class DBRPsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -232,13 +210,13 @@ class DBRPsApi {
   Future<DBRPs> getDBRPs({ String zapTraceSpan, String orgID, String org, String id, String bucketID, bool default_, String db, String rp }) async {
     final response = await getDBRPsWithHttpInfo( zapTraceSpan: zapTraceSpan, orgID: orgID, org: org, id: id, bucketID: bucketID, default_: default_, db: db, rp: rp );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'DBRPs') as DBRPs;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPs',) as DBRPs;
         }
     return Future<DBRPs>.value(null);
   }
@@ -290,17 +268,6 @@ class DBRPsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -332,13 +299,13 @@ class DBRPsApi {
   Future<DBRPGet> getDBRPsID(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
     final response = await getDBRPsIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'DBRPGet') as DBRPGet;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
         }
     return Future<DBRPGet>.value(null);
   }
@@ -396,17 +363,6 @@ class DBRPsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -441,13 +397,13 @@ class DBRPsApi {
   Future<DBRPGet> patchDBRPID(String dbrpID, DBRPUpdate dBRPUpdate, { String zapTraceSpan, String orgID, String org }) async {
     final response = await patchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'DBRPGet') as DBRPGet;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
         }
     return Future<DBRPGet>.value(null);
   }
@@ -459,7 +415,7 @@ class DBRPsApi {
   /// Parameters:
   ///
   /// * [DBRPCreate] dBRPCreate (required):
-  ///   The database retention policy mapping to add
+  ///   The Database Retention Policy Mapping to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
@@ -485,17 +441,6 @@ class DBRPsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -514,20 +459,20 @@ class DBRPsApi {
   /// Parameters:
   ///
   /// * [DBRPCreate] dBRPCreate (required):
-  ///   The database retention policy mapping to add
+  ///   The Database Retention Policy Mapping to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
   Future<DBRP> postDBRP(DBRPCreate dBRPCreate, { String zapTraceSpan }) async {
     final response = await postDBRPWithHttpInfo(dBRPCreate,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'DBRP') as DBRP;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRP',) as DBRP;
         }
     return Future<DBRP>.value(null);
   }

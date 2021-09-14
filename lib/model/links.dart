@@ -46,9 +46,7 @@ class Links {
     if (next != null) {
       json[r'next'] = next;
     }
-    if (self != null) {
       json[r'self'] = self;
-    }
     if (prev != null) {
       json[r'prev'] = prev;
     }
@@ -68,12 +66,12 @@ class Links {
   static List<Links> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Links>[]
-      : json.map((v) => Links.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Links.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Links> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Links>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Links.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Links.fromJson(value));
     }
     return map;
   }
@@ -81,9 +79,9 @@ class Links {
   // maps a json object with a list of Links-objects as value to a dart map
   static Map<String, List<Links>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Links>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Links.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Links.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

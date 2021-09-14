@@ -43,12 +43,8 @@ class RetentionRule {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (type != null) {
       json[r'type'] = type;
-    }
-    if (everySeconds != null) {
       json[r'everySeconds'] = everySeconds;
-    }
     if (shardGroupDurationSeconds != null) {
       json[r'shardGroupDurationSeconds'] = shardGroupDurationSeconds;
     }
@@ -68,12 +64,12 @@ class RetentionRule {
   static List<RetentionRule> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <RetentionRule>[]
-      : json.map((v) => RetentionRule.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => RetentionRule.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, RetentionRule> mapFromJson(Map<String, dynamic> json) {
     final map = <String, RetentionRule>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = RetentionRule.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = RetentionRule.fromJson(value));
     }
     return map;
   }
@@ -81,9 +77,9 @@ class RetentionRule {
   // maps a json object with a list of RetentionRule-objects as value to a dart map
   static Map<String, List<RetentionRule>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<RetentionRule>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = RetentionRule.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = RetentionRule.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
@@ -97,13 +93,6 @@ class RetentionRuleTypeEnum {
 
   /// The underlying value of this enum member.
   final String value;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) ||
-      other is RetentionRuleTypeEnum && other.value == value;
-
-  @override
-  int get hashCode => toString().hashCode;
 
   @override
   String toString() => value;

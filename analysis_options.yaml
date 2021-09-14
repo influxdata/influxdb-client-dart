@@ -1,11 +1,13 @@
 include: package:pedantic/analysis_options.1.9.0.yaml
 
 analyzer:
-  exclude: [build/**]
+  exclude: [build/**, scripts/**]
 
   strong-mode:
     implicit-casts: true
 
 linter:
   rules:
-    - camel_case_types
+    camel_case_types: true
+    prefer_adjacent_string_concatenation: false
+    omit_local_variable_types: false

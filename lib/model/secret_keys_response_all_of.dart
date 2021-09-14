@@ -47,12 +47,12 @@ class SecretKeysResponseAllOf {
   static List<SecretKeysResponseAllOf> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <SecretKeysResponseAllOf>[]
-      : json.map((v) => SecretKeysResponseAllOf.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => SecretKeysResponseAllOf.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, SecretKeysResponseAllOf> mapFromJson(Map<String, dynamic> json) {
     final map = <String, SecretKeysResponseAllOf>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = SecretKeysResponseAllOf.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = SecretKeysResponseAllOf.fromJson(value));
     }
     return map;
   }
@@ -60,9 +60,9 @@ class SecretKeysResponseAllOf {
   // maps a json object with a list of SecretKeysResponseAllOf-objects as value to a dart map
   static Map<String, List<SecretKeysResponseAllOf>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<SecretKeysResponseAllOf>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = SecretKeysResponseAllOf.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = SecretKeysResponseAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

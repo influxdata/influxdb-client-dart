@@ -49,17 +49,6 @@ class AuthorizationsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -85,7 +74,7 @@ class AuthorizationsApi {
   Future<void> deleteAuthorizationsID(String authID, { String zapTraceSpan }) async {
     final response = await deleteAuthorizationsIDWithHttpInfo(authID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
 
@@ -141,17 +130,6 @@ class AuthorizationsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -186,13 +164,13 @@ class AuthorizationsApi {
   Future<Authorizations> getAuthorizations({ String zapTraceSpan, String userID, String user, String orgID, String org }) async {
     final response = await getAuthorizationsWithHttpInfo( zapTraceSpan: zapTraceSpan, userID: userID, user: user, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Authorizations') as Authorizations;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorizations',) as Authorizations;
         }
     return Future<Authorizations>.value(null);
   }
@@ -231,17 +209,6 @@ class AuthorizationsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -267,13 +234,13 @@ class AuthorizationsApi {
   Future<Authorization> getAuthorizationsID(String authID, { String zapTraceSpan }) async {
     final response = await getAuthorizationsIDWithHttpInfo(authID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Authorization') as Authorization;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
         }
     return Future<Authorization>.value(null);
   }
@@ -318,17 +285,6 @@ class AuthorizationsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -357,13 +313,13 @@ class AuthorizationsApi {
   Future<Authorization> patchAuthorizationsID(String authID, AuthorizationUpdateRequest authorizationUpdateRequest, { String zapTraceSpan }) async {
     final response = await patchAuthorizationsIDWithHttpInfo(authID, authorizationUpdateRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Authorization') as Authorization;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
         }
     return Future<Authorization>.value(null);
   }
@@ -401,17 +357,6 @@ class AuthorizationsApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -437,13 +382,13 @@ class AuthorizationsApi {
   Future<Authorization> postAuthorizations(AuthorizationPostRequest authorizationPostRequest, { String zapTraceSpan }) async {
     final response = await postAuthorizationsWithHttpInfo(authorizationPostRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Authorization') as Authorization;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
         }
     return Future<Authorization>.value(null);
   }

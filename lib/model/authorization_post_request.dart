@@ -84,12 +84,12 @@ class AuthorizationPostRequest {
   static List<AuthorizationPostRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <AuthorizationPostRequest>[]
-      : json.map((v) => AuthorizationPostRequest.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => AuthorizationPostRequest.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, AuthorizationPostRequest> mapFromJson(Map<String, dynamic> json) {
     final map = <String, AuthorizationPostRequest>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = AuthorizationPostRequest.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = AuthorizationPostRequest.fromJson(value));
     }
     return map;
   }
@@ -97,9 +97,9 @@ class AuthorizationPostRequest {
   // maps a json object with a list of AuthorizationPostRequest-objects as value to a dart map
   static Map<String, List<AuthorizationPostRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<AuthorizationPostRequest>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = AuthorizationPostRequest.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = AuthorizationPostRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

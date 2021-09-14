@@ -13,10 +13,11 @@ http://maven.apache.org/POM/4.0.0 ">
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>5.1.0</version>
+                <version>5.2.1</version>
                 <configuration>
                     <inputSpec>
-                        https://raw.githubusercontent.com/influxdata/openapi/master/contracts/oss.yml
+                        https://raw.githubusercontent.com/influxdata/openapi/554e516a1d2d462cb29143ec76e577715da88bbf/contracts/oss.yml
+<!--                        https://raw.githubusercontent.com/influxdata/openapi/master/contracts/oss.yml-->
                     </inputSpec>
                     <generatorName>dart</generatorName>
                     <configOptions>

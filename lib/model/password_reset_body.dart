@@ -30,9 +30,7 @@ class PasswordResetBody {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (password != null) {
       json[r'password'] = password;
-    }
     return json;
   }
 
@@ -47,12 +45,12 @@ class PasswordResetBody {
   static List<PasswordResetBody> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PasswordResetBody>[]
-      : json.map((v) => PasswordResetBody.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PasswordResetBody.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PasswordResetBody> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PasswordResetBody>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PasswordResetBody.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PasswordResetBody.fromJson(value));
     }
     return map;
   }
@@ -60,9 +58,9 @@ class PasswordResetBody {
   // maps a json object with a list of PasswordResetBody-objects as value to a dart map
   static Map<String, List<PasswordResetBody>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PasswordResetBody>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PasswordResetBody.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PasswordResetBody.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

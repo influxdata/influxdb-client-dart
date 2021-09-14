@@ -13,10 +13,10 @@ class DeleteService extends DefaultService {
   ///
   /// Parameters:
   ///
-  /// * [String] start;
+  /// * [DateTime] start;
   ///   RFC3339Nano
   ///
-  /// * [String] stop;
+  /// * [DateTime] stop;
   ///   RFC3339Nano
   ///
   /// * [String] predicate;
@@ -37,8 +37,8 @@ class DeleteService extends DefaultService {
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
   Future<void> delete(
-      {@required String start,
-        @required String stop,
+      {@required DateTime start,
+        @required DateTime stop,
       String predicate,
       String zapTraceSpan,
       String org,

@@ -16,7 +16,7 @@ class ResourceMembers {
     this.users = const [],
   });
 
-  UsersLinks links;
+  ResourceMembersLinks links;
 
   List<ResourceMember> users;
 
@@ -49,19 +49,19 @@ class ResourceMembers {
   static ResourceMembers fromJson(Map<String, dynamic> json) => json == null
     ? null
     : ResourceMembers(
-        links: UsersLinks.fromJson(json[r'links']),
+        links: ResourceMembersLinks.fromJson(json[r'links']),
         users: ResourceMember.listFromJson(json[r'users']),
     );
 
   static List<ResourceMembers> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMembers>[]
-      : json.map((v) => ResourceMembers.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => ResourceMembers.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, ResourceMembers> mapFromJson(Map<String, dynamic> json) {
     final map = <String, ResourceMembers>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = ResourceMembers.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = ResourceMembers.fromJson(value));
     }
     return map;
   }
@@ -69,9 +69,9 @@ class ResourceMembers {
   // maps a json object with a list of ResourceMembers-objects as value to a dart map
   static Map<String, List<ResourceMembers>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ResourceMembers>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = ResourceMembers.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = ResourceMembers.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

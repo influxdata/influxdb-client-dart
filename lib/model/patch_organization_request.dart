@@ -58,12 +58,12 @@ class PatchOrganizationRequest {
   static List<PatchOrganizationRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PatchOrganizationRequest>[]
-      : json.map((v) => PatchOrganizationRequest.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PatchOrganizationRequest.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PatchOrganizationRequest> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PatchOrganizationRequest>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PatchOrganizationRequest.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PatchOrganizationRequest.fromJson(value));
     }
     return map;
   }
@@ -71,9 +71,9 @@ class PatchOrganizationRequest {
   // maps a json object with a list of PatchOrganizationRequest-objects as value to a dart map
   static Map<String, List<PatchOrganizationRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PatchOrganizationRequest>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PatchOrganizationRequest.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PatchOrganizationRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

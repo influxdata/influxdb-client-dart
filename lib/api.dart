@@ -63,8 +63,6 @@ part 'model/resource_owner.dart';
 part 'model/resource_owners.dart';
 part 'model/resource_owner_all_of.dart';
 
-part 'model/user_links.dart';
-part 'model/users_links.dart';
 part 'model/secret_keys.dart';
 part 'model/secret_keys_response.dart';
 part 'model/secret_keys_response_all_of.dart';
@@ -117,7 +115,6 @@ part 'model/task_update_request.dart';
 part 'model/tasks.dart';
 part 'model/run.dart';
 part 'model/run_links.dart';
-part 'model/run_log.dart';
 part 'model/run_manually.dart';
 part 'model/log_event.dart';
 part 'model/logs.dart';

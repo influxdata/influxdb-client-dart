@@ -62,7 +62,7 @@ class WriteApi {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: body');
     }
 
-    final path = '/write'.replaceAll('{format}', 'json');
+    final path = r'/write';
 
     Object postBody = body;
 
@@ -99,17 +99,6 @@ class WriteApi {
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
     final authNames = <String>[];
 
-    if (
-      nullableContentType != null &&
-      nullableContentType.toLowerCase().startsWith('multipart/form-data')
-    ) {
-      bool hasFields = false;
-      final mp = MultipartRequest(null, null);
-      if (hasFields) {
-        postBody = mp;
-      }
-    } else {
-    }
 
     return await apiClient.invokeAPI(
       path,
@@ -159,7 +148,7 @@ class WriteApi {
   Future<void> postWrite(String org, String bucket, String body, { String zapTraceSpan, String contentEncoding, String contentType, int contentLength, String accept, String orgID, WritePrecision precision }) async {
     final response = await postWriteWithHttpInfo(org, bucket, body,  zapTraceSpan: zapTraceSpan, contentEncoding: contentEncoding, contentType: contentType, contentLength: contentLength, accept: accept, orgID: orgID, precision: precision );
     if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
 }
