@@ -380,6 +380,41 @@ void main() async {
 
 
 ```
+### Proxy configuration
+
+By default the HttpClient uses the proxy configuration available from the environment, 
+see [findProxyFromEnvironment](https://api.dart.dev/stable/dart-io/HttpClient/findProxyFromEnvironment.html).
+
+```
+export http_proxy="PROXY http://localhost:8080"
+```
+
+Initialize a proxy from code:
+
+```dart
+HttpClient httpClient = HttpClient();
+httpClient.findProxy = (url) => "PROXY localhost:8080";
+var client = IOClient(httpClient);
+
+var influxdb = InfluxDBClient(
+    url: 'http://localhost:8086',
+    token: 'my-token',
+    org: 'my-org',
+    bucket: 'my-bucket',
+    client: client,
+    followRedirects: true,
+    maxRedirects: 5,
+    debug: true);
+```
+
+To turn off the use of proxies set the `findProxy` property to null.
+
+Client [automatically follows](https://api.dart.dev/stable/dart-io/HttpClientRequest/followRedirects.html) HTTP redirects 
+for all GET and HEAD requests with status codes 301, 302, 303, 307, 308. 
+The default redirect policy is to follow up to 5 consecutive requests.
+
+`write` and `query` APIs also support an automatic redirect of POST requests. You can disable `followRedirects`
+and change default `maxRedirects` on `InfluxDBClient` instance.  
 
 ## Contributing
 

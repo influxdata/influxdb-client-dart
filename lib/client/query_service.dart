@@ -40,10 +40,13 @@ class QueryService extends DefaultService {
   /// Result CSV format can be changed using [dialect].
   Future<String> queryRaw(String fluxQuery, {Dialect dialect}) async {
     var query = Query(dialect: dialect, query: fluxQuery);
-    return await queryApi.postQuery(
-        query: query,
-        acceptEncoding: queryOptions.gzip ? 'gzip' : 'identity',
-        org: influxDB.org);
+    var uri = _buildUri(influxDB.url, '/api/v2/query', {'org': influxDB.org});
+    var body = jsonEncode(query);
+    Map<String, String> headers = {};
+    headers.addAll(influxDB.defaultHeaders);
+    var response = await _invoke(uri, 'POST',
+        headers: headers, body: body, maxRedirects: influxDB.maxRedirects);
+    return (response as Response).body;
   }
 
   /// Streams the result of [fluxQuery] using [Dialect].
@@ -66,17 +69,16 @@ class QueryService extends DefaultService {
         .transform(FluxTransformer());
   }
 
-  Future<StreamedResponse> _send(String path, Map<String,String> queryParams, body) async {
+  Future<StreamedResponse> _send(
+      String path, Map<String, String> queryParams, body) async {
     var uri = _buildUri(influxDB.url, path, queryParams);
-    var r = Request('POST', uri);
-    r.headers.addAll(influxDB.defaultHeaders);
-    r.headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
-    r.body = jsonEncode(body.toJson());
-    var response = await influxDB.client.send(r);
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw InfluxDBException.fromJson(
-          await response.stream.bytesToString(), response.statusCode, response.headers);
-    }
-    return response;
+    Map<String, String> headers = {};
+    headers.addAll(influxDB.defaultHeaders);
+    headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
+    return await _invoke(uri, 'POST',
+        headers: headers,
+        body: jsonEncode(body.toJson()),
+        maxRedirects: influxDB.maxRedirects,
+        stream: true);
   }
 }
