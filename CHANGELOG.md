@@ -1,4 +1,4 @@
-## 1.1.0 [unreleased]
+## 1.1.0 [2021-09-17]
 
 ### API
 1. [#10](https://github.com/influxdata/influxdb-client-dart/pull/10): Updated dependencies and openapi generated code 
