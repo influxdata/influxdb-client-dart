@@ -1,5 +1,8 @@
 ## 1.2.0 [unreleased]
 
+### Bug Fixes
+1. [#14](https://github.com/influxdata/influxdb-client-dart/pull/14): Add missing 'Content-Type' header for streaming queries 
+
 ## 1.1.0 [2021-09-17]
 
 ### API
