@@ -75,6 +75,7 @@ class QueryService extends DefaultService {
     Map<String, String> headers = {};
     headers.addAll(influxDB.defaultHeaders);
     headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
+    headers[r'Content-Type'] = 'application/json';
     return await _invoke(uri, 'POST',
         headers: headers,
         body: jsonEncode(body.toJson()),

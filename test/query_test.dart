@@ -202,4 +202,18 @@ void main() {
     expect(res[10]['le'], double.infinity);
     expect(res[11]['le'], -double.infinity);
   });
+
+  test('contentType', () async {
+    var mockClient = MockClient((request) async {
+      expect(request.headers['Content-Type'], 'application/json; charset=utf-8');
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = "from(bucket: 'my-bucket') |> range(start: -5s, stop: now())";
+    var resp = await client.getQueryService().query(query);
+
+    var _ = await resp.toList();
+  });
 }
