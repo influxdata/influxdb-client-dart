@@ -38,6 +38,106 @@ abstract class DefaultService {
   ApiClient getApiClient(String basePath) {
     return influxDB.getApiClient(basePath: basePath);
   }
+
+  Future<BaseResponse> _invoke(Uri uri, String method,
+      {Map<String, String> headers, body, maxRedirects, stream = false}) {
+
+    if (stream) {
+      var request = Request(method, uri);
+      request.headers.addAll(headers);
+      request.followRedirects = influxDB.followRedirects;
+      request.maxRedirects = influxDB.maxRedirects;
+      request.body = body;
+      return influxDB.client.send(request).then((response) =>
+          _handleResponse(method, maxRedirects, response, headers, body, true));
+    }
+
+    switch (method) {
+      case 'POST':
+        {
+          return influxDB.client.post(uri, headers: headers, body: body).then(
+              (response) => _handleResponse(
+                  method, maxRedirects, response, headers, body, false));
+        }
+      case 'HEAD':
+        {
+          return influxDB.client.head(uri, headers: headers).then((response) =>
+              _handleResponse(
+                  method, maxRedirects, response, headers, null, false));
+        }
+      case 'GET':
+        {
+          return influxDB.client.get(uri, headers: headers).then((response) =>
+              _handleResponse(
+                  method, maxRedirects, response, headers, null, false));
+        }
+      case 'PUT':
+        {
+          return influxDB.client.put(uri, headers: headers, body: body).then(
+              (response) => _handleResponse(
+                  method, maxRedirects, response, headers, body, false));
+        }
+      case 'PATCH':
+        {
+          return influxDB.client.patch(uri, headers: headers, body: body).then(
+              (response) => _handleResponse(
+                  method, maxRedirects, response, headers, body, false));
+        }
+      case 'DELETE':
+        {
+          return influxDB.client.delete(uri, headers: headers, body: body).then(
+              (response) => _handleResponse(
+                  method, maxRedirects, response, headers, body, false));
+        }
+    }
+    throw InfluxDBException(0, null, 'Invalid http method');
+  }
+
+  Future<BaseResponse> _handleResponse(method, maxRedirects,
+      BaseResponse response, headers, body, bool stream) async {
+
+    //handle errors
+    if (response.statusCode >= HttpStatus.badRequest) {
+      if (response is StreamedResponse) {
+        throw InfluxDBException.fromJson(
+            await (response).stream.bytesToString(),
+            response.statusCode,
+            response.headers);
+      } else {
+        throw InfluxDBException.fromJson(
+            (response as Response).body, response.statusCode, response.headers);
+      }
+    }
+
+    //handle redirects
+    if (maxRedirects < 0) {
+      throw InfluxDBException(response.statusCode, null,
+          'Too many HTTP redirects. Exceeded limit: ${influxDB.maxRedirects}');
+    }
+
+    if (influxDB.followRedirects &&
+        [
+          HttpStatus.temporaryRedirect,
+          HttpStatus.permanentRedirect,
+          HttpStatus.movedPermanently,
+          HttpStatus.seeOther,
+          HttpStatus.movedTemporarily,
+        ].contains(response.statusCode)) {
+      var location = response.headers['location'];
+      if (location == null) {
+        return Future.value(response);
+      }
+
+      var uriRedirect = Uri.parse(location);
+      return _invoke(uriRedirect, method,
+          headers: headers,
+          body: body,
+          maxRedirects: --maxRedirects,
+          stream: stream);
+    } else {
+      return Future.value(response);
+    }
+  }
 }
 
 /// Log printer; defaults print log to console.
@@ -62,26 +162,31 @@ class InfluxDBClient {
   /// * [debug] - enable/disable verbose http call traing
   /// * [username] and [password] is only for InfluxDB 1.8 comatibility
   ///
-  InfluxDBClient({
+  InfluxDBClient(
+      {String url,
+      String token,
+      String bucket,
+      String org,
+      http.Client client,
 
-    String url,
-    String token,
-    String bucket,
-    String org,
-    http.Client client,
-    /// InfluxDB 1.x compatibility only
-    String username,
-    /// InfluxDB 1.x compatibility only
-    String password,
-    /// verbose logging of http calls
-    bool debug = false,
-  }) {
+      /// InfluxDB 1.x compatibility only
+      String username,
+
+      /// InfluxDB 1.x compatibility only
+      String password,
+
+      /// verbose logging of http calls
+      bool debug = false,
+      maxRedirects = 5,
+      followRedirects = true}) {
     this.url = url ?? String.fromEnvironment('INFLUXDB_URL');
     this.token = token ?? String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? String.fromEnvironment('INFLUXDB_ORG');
     this.client = client ?? LoggingClient(debug, http.Client());
     this.debug = debug;
+    this.maxRedirects = maxRedirects;
+    this.followRedirects = followRedirects;
 
     // 1.8 compatibility token
     if (username != null && password != null && token == null) {
@@ -96,6 +201,8 @@ class InfluxDBClient {
   String bucket;
   String org;
   bool debug;
+  int maxRedirects;
+  bool followRedirects;
 
   http.Client client;
 

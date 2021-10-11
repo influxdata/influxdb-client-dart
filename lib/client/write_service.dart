@@ -36,12 +36,10 @@ class WriteService extends DefaultService {
         retryJitter: Duration(milliseconds: writeOptions.retryJitter),
       );
       return retry.retry(
-          () => _write(record,
-              bucket: bucket, org: org, precision: precision),
+          () => _write(record, bucket: bucket, org: org, precision: precision),
           retryIf: (e) => retry.isRetryable(e));
     } else {
-      await _write(record,
-          bucket: bucket, org: org, precision: precision);
+      await _write(record, bucket: bucket, org: org, precision: precision);
     }
   }
 
@@ -137,17 +135,18 @@ class WriteService extends DefaultService {
       'org': organization,
     });
     var headers = influxDB.defaultHeaders;
-    headers['Content-Type']='text/plain; charset=utf-8';
+    headers['Content-Type'] = 'text/plain; charset=utf-8';
     var payload;
     if (writeOptions.gzip) {
       var stringBytes = utf8.encode(data);
       payload = GZipEncoder().encode(stringBytes);
-      headers['Content-Encoding']='gzip';
+      headers['Content-Encoding'] = 'gzip';
     } else {
-      headers['Content-Encoding']='identity';
+      headers['Content-Encoding'] = 'identity';
       payload = data;
     }
-    return await influxDB.client.post(uri, body: payload, headers: headers);
+    return await _invoke(uri, 'POST',
+        body: payload, headers: headers, maxRedirects: influxDB.maxRedirects);
   }
 
   dynamic _payload(dynamic data, WritePrecision precision, String bucket,
