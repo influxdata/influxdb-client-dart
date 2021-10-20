@@ -134,8 +134,10 @@ class WriteService extends DefaultService {
       'bucket': bucket,
       'org': organization,
     });
-    var headers = influxDB.defaultHeaders;
-    headers['Content-Type'] = 'text/plain; charset=utf-8';
+    var headers = {
+      'Content-Type': 'text/plain; charset=utf-8'
+    };
+    _updateParamsForAuth(headers);
     var payload;
     if (writeOptions.gzip) {
       var stringBytes = utf8.encode(data);

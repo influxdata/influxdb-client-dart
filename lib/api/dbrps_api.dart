@@ -60,7 +60,7 @@ class DBRPsApi {
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -97,7 +97,7 @@ class DBRPsApi {
     }
   }
 
-  /// List all database retention policy mappings
+  /// List database retention policy mappings
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -165,7 +165,7 @@ class DBRPsApi {
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -180,7 +180,7 @@ class DBRPsApi {
     );
   }
 
-  /// List all database retention policy mappings
+  /// List database retention policy mappings
   ///
   /// Parameters:
   ///
@@ -266,7 +266,7 @@ class DBRPsApi {
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -361,7 +361,7 @@ class DBRPsApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -415,7 +415,7 @@ class DBRPsApi {
   /// Parameters:
   ///
   /// * [DBRPCreate] dBRPCreate (required):
-  ///   The Database Retention Policy Mapping to add
+  ///   The database retention policy mapping to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
@@ -439,7 +439,7 @@ class DBRPsApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -459,7 +459,7 @@ class DBRPsApi {
   /// Parameters:
   ///
   /// * [DBRPCreate] dBRPCreate (required):
-  ///   The Database Retention Policy Mapping to add
+  ///   The database retention policy mapping to add
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context

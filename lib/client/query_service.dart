@@ -43,7 +43,7 @@ class QueryService extends DefaultService {
     var uri = _buildUri(influxDB.url, '/api/v2/query', {'org': influxDB.org});
     var body = jsonEncode(query);
     Map<String, String> headers = {};
-    headers.addAll(influxDB.defaultHeaders);
+    _updateParamsForAuth(headers);
     var response = await _invoke(uri, 'POST',
         headers: headers, body: body, maxRedirects: influxDB.maxRedirects);
     return (response as Response).body;
@@ -73,9 +73,9 @@ class QueryService extends DefaultService {
       String path, Map<String, String> queryParams, body) async {
     var uri = _buildUri(influxDB.url, path, queryParams);
     Map<String, String> headers = {};
-    headers.addAll(influxDB.defaultHeaders);
     headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
     headers[r'Content-Type'] = 'application/json';
+    _updateParamsForAuth(headers);
     return await _invoke(uri, 'POST',
         headers: headers,
         body: jsonEncode(body.toJson()),

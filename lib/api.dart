@@ -28,11 +28,12 @@ part 'auth/api_key_auth.dart';
 part 'auth/oauth.dart';
 part 'auth/http_basic_auth.dart';
 part 'auth/http_bearer_auth.dart';
+
 part 'api/health_api.dart';
 part 'api/delete_api.dart';
 part 'api/ready_api.dart';
-part 'api/default_api.dart';
 part 'api/secrets_api.dart';
+part 'api/ping_api.dart';
 
 // health ready
 part 'model/ready.dart';

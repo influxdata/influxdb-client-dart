@@ -12,7 +12,9 @@ part of influxdb_client_api;
 class ApiClient {
   ApiClient({this.basePath = 'https://raw.githubusercontent.com/api/v2'}) {
     // Setup authentications (key: authentication name, value: authentication).
-    _authentications[r'BasicAuth'] = HttpBasicAuth();
+    _authentications[r'BasicAuthentication'] = HttpBasicAuth();
+    _authentications[r'QuerystringAuthentication'] = ApiKeyAuth('query', 'u=&p=');
+    _authentications[r'TokenAuthentication'] = ApiKeyAuth('header', 'Authorization');
   }
 
   final String basePath;

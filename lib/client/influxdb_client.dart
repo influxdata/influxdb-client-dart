@@ -14,8 +14,11 @@ String CLIENT_NAME = 'influxdb-client-dart';
 ///
 abstract class DefaultService {
   final InfluxDBClient influxDB;
+  ApiClient apiClient;
 
-  DefaultService(this.influxDB);
+  DefaultService(this.influxDB) {
+    apiClient = influxDB.getApiClient();
+  }
 
   Uri _buildUri(
       String influxUrl, String path, Map<String, String> queryParams) {
@@ -31,16 +34,23 @@ abstract class DefaultService {
     return uri;
   }
 
+  void _updateParamsForAuth(Map<String, String> headers) {
+    apiClient.authentications.forEach((_, auth) {
+      auth.applyToParams([], headers);
+    });
+  }
+
   Client getClient() {
     return influxDB.client;
   }
 
   ApiClient getApiClient(String basePath) {
-    return influxDB.getApiClient(basePath: basePath);
+    return apiClient;
   }
 
   Future<BaseResponse> _invoke(Uri uri, String method,
       {Map<String, String> headers, body, maxRedirects, stream = false}) {
+    headers.addAll(apiClient.defaultHeaderMap);
 
     if (stream) {
       var request = Request(method, uri);
@@ -95,7 +105,6 @@ abstract class DefaultService {
 
   Future<BaseResponse> _handleResponse(method, maxRedirects,
       BaseResponse response, headers, body, bool stream) async {
-
     //handle errors
     if (response.statusCode >= HttpStatus.badRequest) {
       if (response is StreamedResponse) {
@@ -192,7 +201,6 @@ class InfluxDBClient {
     if (username != null && password != null && token == null) {
       token = '$username:$password';
     }
-    defaultHeaders['Authorization'] = 'Token $token';
     defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
   }
 
@@ -216,6 +224,12 @@ class InfluxDBClient {
 
   ApiClient getApiClient({String basePath = '/api/v2'}) {
     var api = ApiClient(basePath: url + basePath);
+    if (token != null) {
+      var authentication =
+          api.getAuthentication('TokenAuthentication') as ApiKeyAuth;
+      authentication.apiKeyPrefix = 'Token';
+      authentication.apiKey = token;
+    }
     api._client = client;
     api._defaultHeaderMap.addAll(defaultHeaders);
     return api;
@@ -230,7 +244,7 @@ class InfluxDBClient {
   }
 
   HealthApi getHealthApi() {
-    return HealthApi(getApiClient(basePath: '/health'));
+    return HealthApi(getApiClient(basePath: ''));
   }
 
   LabelsApi getLabelsApi() {
@@ -242,7 +256,7 @@ class InfluxDBClient {
   }
 
   ReadyApi getReadyApi() {
-    return ReadyApi(getApiClient(basePath: '/ready'));
+    return ReadyApi(getApiClient(basePath: ''));
   }
 
   TasksApi getTasksApi() {
@@ -279,6 +293,10 @@ class InfluxDBClient {
 
   DeleteService getDeleteService() {
     return DeleteService(this);
+  }
+
+  PingApi getPingApi() {
+    return PingApi(getApiClient(basePath: ''));
   }
 }
 

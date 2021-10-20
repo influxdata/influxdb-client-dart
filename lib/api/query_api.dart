@@ -40,7 +40,7 @@ class QueryApi {
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -55,7 +55,9 @@ class QueryApi {
     );
   }
 
-  /// Query InfluxDB
+  /// Query data
+  ///
+  /// Retrieves data from InfluxDB buckets.  To query data, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/flux) or [InfluxQL](https://docs.influxdata.com/influxdb/v2.0/query-data/influxql/) query.  For more information and examples, see [Query with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/query-data/execute-queries/influx-api/).
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -70,12 +72,12 @@ class QueryApi {
   /// * [String] contentType:
   ///
   /// * [String] org:
-  ///   Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   Specifies the name of the organization executing the query. Takes either the ID or Name. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
   /// * [String] orgID:
   ///   Specifies the ID of the organization executing the query. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
-  /// * [UNKNOWN_BASE_TYPE] UNKNOWN_BASE_TYPE:
+  /// * [Query] query:
   ///   Flux query or specification to execute
   Future<Response> postQueryWithHttpInfo({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
     // Verify required params are set.
@@ -107,7 +109,7 @@ class QueryApi {
 
     final contentTypes = <String>['application/json', 'application/vnd.flux'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -122,7 +124,9 @@ class QueryApi {
     );
   }
 
-  /// Query InfluxDB
+  /// Query data
+  ///
+  /// Retrieves data from InfluxDB buckets.  To query data, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/flux) or [InfluxQL](https://docs.influxdata.com/influxdb/v2.0/query-data/influxql/) query.  For more information and examples, see [Query with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/query-data/execute-queries/influx-api/).
   ///
   /// Parameters:
   ///
@@ -135,12 +139,12 @@ class QueryApi {
   /// * [String] contentType:
   ///
   /// * [String] org:
-  ///   Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   Specifies the name of the organization executing the query. Takes either the ID or Name. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
   /// * [String] orgID:
   ///   Specifies the ID of the organization executing the query. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
-  /// * [UNKNOWN_BASE_TYPE] UNKNOWN_BASE_TYPE:
+  /// * [Query] query:
   ///   Flux query or specification to execute
   Future<String> postQuery({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
     final response = await postQueryWithHttpInfo( zapTraceSpan: zapTraceSpan, acceptEncoding: acceptEncoding, contentType: contentType, org: org, orgID: orgID, query: query );
@@ -152,7 +156,7 @@ class QueryApi {
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-    }
+        }
     return Future<String>.value(null);
   }
 

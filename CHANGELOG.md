@@ -3,6 +3,9 @@
 ### Bug Fixes
 1. [#14](https://github.com/influxdata/influxdb-client-dart/pull/14): Add missing 'Content-Type' header for streaming queries 
 
+### API
+1. [#17](https://github.com/influxdata/influxdb-client-dart/pull/17): Add `PingApi` to check status of OSS and Cloud instance
+
 ## 1.1.0 [2021-09-17]
 
 ### API

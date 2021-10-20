@@ -2,7 +2,7 @@
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
 
-#rm -rf "${SCRIPT_PATH}"/generated
+rm -rf "${SCRIPT_PATH}"/generated
 
 # Generate client
 cd "${SCRIPT_PATH}"/ || exit
@@ -30,7 +30,6 @@ cp -r ${SRC}/api_exception.dart $OUT
 cp -r ${SRC}/api/authorizations_api.dart $OUT/api
 cp -r ${SRC}/api/buckets_api.dart $OUT/api
 cp -r ${SRC}/api/delete_api.dart $OUT/api
-cp -r ${SRC}/api/default_api.dart $OUT/api
 cp -r ${SRC}/api/health_api.dart $OUT/api
 cp -r ${SRC}/api/labels_api.dart $OUT/api
 cp -r ${SRC}/api/organizations_api.dart $OUT/api
@@ -42,9 +41,12 @@ cp -r ${SRC}/api/variables_api.dart $OUT/api
 cp -r ${SRC}/api/dbrps_api.dart $OUT/api
 cp -r ${SRC}/api/setup_api.dart $OUT/api
 cp -r ${SRC}/api/write_api.dart $OUT/api
+cp -r ${SRC}/api/ping_api.dart $OUT/api
+
+### needs manual modification
+#cp -r ${SRC}/api/query_api.dart $OUT/api
 
 ## copy models
-#cp -r "${SCRIPT_PATH}"/generated/lib/model/*.dart "${SCRIPT_PATH}"/../lib/model
 cp -r ${SRC}/model/bucket.dart $OUT/model
 cp -r ${SRC}/model/schema_type.dart $OUT/model
 cp -r ${SRC}/model/patch_bucket_request.dart $OUT/model
@@ -102,10 +104,4 @@ cp -r ${SRC}/model/organizations.dart $OUT/model
 cp -r ${SRC}/model/password_reset_body.dart $OUT/model
 
 cp -r ${SRC}/auth/*.dart $OUT/auth
-
-# copy supporting files
-# cp -r "${SCRIPT_PATH}"/generated/lib/*.dart "${SCRIPT_PATH}"/../lib
-
-
-# rm -rf "${SCRIPT_PATH}"/generated
 
