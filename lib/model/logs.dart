@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -15,7 +15,7 @@ class Logs {
     this.events = const [],
   });
 
-  List<LogEvent> events;
+  List<LogEvent?>? events;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Logs &&
@@ -38,29 +38,29 @@ class Logs {
 
   /// Returns a new [Logs] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Logs fromJson(Map<String, dynamic> json) => json == null
+  static Logs? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Logs(
         events: LogEvent.listFromJson(json[r'events']),
     );
 
-  static List<Logs> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Logs?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Logs>[]
       : json.map((dynamic value) => Logs.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Logs> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Logs>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Logs?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Logs?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Logs.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Logs-objects as value to a dart map
-  static Map<String, List<Logs>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Logs>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Logs?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Logs?>?> map = <String, List<Logs>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Logs.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

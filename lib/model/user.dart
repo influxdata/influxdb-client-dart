@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,18 +14,18 @@ class User {
   User({
     this.id,
     this.oauthID,
-    @required this.name,
+    required this.name,
     this.status = const UserStatusEnum._('active'),
   });
 
-  String id;
+  String? id;
 
-  String oauthID;
+  String? oauthID;
 
-  String name;
+  String? name;
 
   /// If inactive the user is inactive.
-  UserStatusEnum status;
+  UserStatusEnum? status;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is User &&
@@ -61,7 +61,7 @@ class User {
 
   /// Returns a new [User] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static User fromJson(Map<String, dynamic> json) => json == null
+  static User? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : User(
         id: json[r'id'],
@@ -70,23 +70,23 @@ class User {
         status: UserStatusEnum.fromJson(json[r'status']),
     );
 
-  static List<User> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<User?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <User>[]
       : json.map((dynamic value) => User.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, User> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, User>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, User?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, User?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = User.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of User-objects as value to a dart map
-  static Map<String, List<User>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<User>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<User?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<User?>?> map = <String, List<User>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = User.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -117,11 +117,11 @@ class UserStatusEnum {
     inactive,
   ];
 
-  static UserStatusEnum fromJson(dynamic value) =>
+  static UserStatusEnum? fromJson(dynamic value) =>
     UserStatusEnumTypeTransformer().decode(value);
 
-  static List<UserStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<UserStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <UserStatusEnum>[]
       : json
           .map((value) => UserStatusEnum.fromJson(value))
@@ -145,7 +145,7 @@ class UserStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  UserStatusEnum decode(dynamic data, {bool allowNull}) {
+  UserStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'active': return UserStatusEnum.active;
       case r'inactive': return UserStatusEnum.inactive;
@@ -158,6 +158,6 @@ class UserStatusEnumTypeTransformer {
   }
 
   /// Singleton [UserStatusEnumTypeTransformer] instance.
-  static UserStatusEnumTypeTransformer _instance;
+  static UserStatusEnumTypeTransformer? _instance;
 }
 

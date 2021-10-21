@@ -1,9 +1,8 @@
-// @dart=2.0
 
 part of influxdb_client_api;
 
 class DeleteService extends DefaultService {
-  DeleteApi _service;
+  late DeleteApi _service;
 
   DeleteService(InfluxDBClient client) : super(client) {
     _service = DeleteApi(client.getApiClient());
@@ -37,14 +36,14 @@ class DeleteService extends DefaultService {
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
   Future<void> delete(
-      {@required DateTime start,
-        @required DateTime stop,
-      String predicate,
-      String zapTraceSpan,
-      String org,
-      String bucket,
-      String orgID,
-      String bucketID}) async {
+      {required DateTime start,
+        required DateTime stop,
+      String? predicate,
+      String? zapTraceSpan,
+      String? org,
+      String? bucket,
+      String? orgID,
+      String? bucketID}) async {
 
     var deletePredicateRequest = DeletePredicateRequest(start: start, stop: stop, predicate: predicate);
 

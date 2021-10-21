@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,24 +14,24 @@ class ResourceMember {
   ResourceMember({
     this.id,
     this.oauthID,
-    @required this.name,
+    required this.name,
     this.status = const ResourceMemberStatusEnum._('active'),
     this.links,
     this.role = const ResourceMemberRoleEnum._('member'),
   });
 
-  String id;
+  String? id;
 
-  String oauthID;
+  String? oauthID;
 
-  String name;
+  String? name;
 
   /// If inactive the user is inactive.
-  ResourceMemberStatusEnum status;
+  ResourceMemberStatusEnum? status;
 
-  UserResponseLinks links;
+  UserResponseLinks? links;
 
-  ResourceMemberRoleEnum role;
+  ResourceMemberRoleEnum? role;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ResourceMember &&
@@ -77,7 +77,7 @@ class ResourceMember {
 
   /// Returns a new [ResourceMember] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static ResourceMember fromJson(Map<String, dynamic> json) => json == null
+  static ResourceMember? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : ResourceMember(
         id: json[r'id'],
@@ -88,23 +88,23 @@ class ResourceMember {
         role: ResourceMemberRoleEnum.fromJson(json[r'role']),
     );
 
-  static List<ResourceMember> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceMember?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMember>[]
       : json.map((dynamic value) => ResourceMember.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, ResourceMember> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, ResourceMember>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, ResourceMember?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, ResourceMember?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = ResourceMember.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ResourceMember-objects as value to a dart map
-  static Map<String, List<ResourceMember>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<ResourceMember>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<ResourceMember?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<ResourceMember?>?> map = <String, List<ResourceMember>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = ResourceMember.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -135,11 +135,11 @@ class ResourceMemberStatusEnum {
     inactive,
   ];
 
-  static ResourceMemberStatusEnum fromJson(dynamic value) =>
+  static ResourceMemberStatusEnum? fromJson(dynamic value) =>
     ResourceMemberStatusEnumTypeTransformer().decode(value);
 
-  static List<ResourceMemberStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceMemberStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMemberStatusEnum>[]
       : json
           .map((value) => ResourceMemberStatusEnum.fromJson(value))
@@ -163,7 +163,7 @@ class ResourceMemberStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ResourceMemberStatusEnum decode(dynamic data, {bool allowNull}) {
+  ResourceMemberStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'active': return ResourceMemberStatusEnum.active;
       case r'inactive': return ResourceMemberStatusEnum.inactive;
@@ -176,7 +176,7 @@ class ResourceMemberStatusEnumTypeTransformer {
   }
 
   /// Singleton [ResourceMemberStatusEnumTypeTransformer] instance.
-  static ResourceMemberStatusEnumTypeTransformer _instance;
+  static ResourceMemberStatusEnumTypeTransformer? _instance;
 }
 
 
@@ -199,11 +199,11 @@ class ResourceMemberRoleEnum {
     member,
   ];
 
-  static ResourceMemberRoleEnum fromJson(dynamic value) =>
+  static ResourceMemberRoleEnum? fromJson(dynamic value) =>
     ResourceMemberRoleEnumTypeTransformer().decode(value);
 
-  static List<ResourceMemberRoleEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceMemberRoleEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceMemberRoleEnum>[]
       : json
           .map((value) => ResourceMemberRoleEnum.fromJson(value))
@@ -227,7 +227,7 @@ class ResourceMemberRoleEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ResourceMemberRoleEnum decode(dynamic data, {bool allowNull}) {
+  ResourceMemberRoleEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'member': return ResourceMemberRoleEnum.member;
       default:
@@ -239,6 +239,6 @@ class ResourceMemberRoleEnumTypeTransformer {
   }
 
   /// Singleton [ResourceMemberRoleEnumTypeTransformer] instance.
-  static ResourceMemberRoleEnumTypeTransformer _instance;
+  static ResourceMemberRoleEnumTypeTransformer? _instance;
 }
 

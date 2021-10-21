@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class WriteApi {
-  WriteApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  WriteApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -52,18 +52,7 @@ class WriteApi {
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.
-  Future<Response> postWriteWithHttpInfo(String org, String bucket, String body, { String zapTraceSpan, String contentEncoding, String contentType, int contentLength, String accept, String orgID, WritePrecision precision }) async {
-    // Verify required params are set.
-    if (org == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: org');
-    }
-    if (bucket == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucket');
-    }
-    if (body == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: body');
-    }
-
+  Future<Response> postWriteWithHttpInfo(String org, String bucket, String body, { String? zapTraceSpan, String? contentEncoding, String? contentType, int? contentLength, String? accept, String? orgID, WritePrecision? precision }) async {
     final path = r'/write';
 
     Object postBody = body;
@@ -149,7 +138,7 @@ class WriteApi {
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.
-  Future<void> postWrite(String org, String bucket, String body, { String zapTraceSpan, String contentEncoding, String contentType, int contentLength, String accept, String orgID, WritePrecision precision }) async {
+  Future<void> postWrite(String org, String bucket, String body, { String? zapTraceSpan, String? contentEncoding, String? contentType, int? contentLength, String? accept, String? orgID, WritePrecision? precision }) async {
     final response = await postWriteWithHttpInfo(org, bucket, body,  zapTraceSpan: zapTraceSpan, contentEncoding: contentEncoding, contentType: contentType, contentLength: contentLength, accept: accept, orgID: orgID, precision: precision );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));

@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -20,19 +20,19 @@ class Dialect {
   });
 
   /// If true, the results will contain a header row
-  bool header;
+  bool? header;
 
   /// Separator between cells; the default is ,
-  String delimiter;
+  String? delimiter;
 
   /// https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
-  List<DialectAnnotationsEnum> annotations;
+  List<DialectAnnotationsEnum?>? annotations;
 
   /// Character prefixed to comment strings
-  String commentPrefix;
+  String? commentPrefix;
 
   /// Format of timestamps
-  DialectDateTimeFormatEnum dateTimeFormat;
+  DialectDateTimeFormatEnum? dateTimeFormat;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Dialect &&
@@ -75,7 +75,7 @@ class Dialect {
 
   /// Returns a new [Dialect] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Dialect fromJson(Map<String, dynamic> json) => json == null
+  static Dialect? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Dialect(
         header: json[r'header'],
@@ -85,23 +85,23 @@ class Dialect {
         dateTimeFormat: DialectDateTimeFormatEnum.fromJson(json[r'dateTimeFormat']),
     );
 
-  static List<Dialect> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Dialect?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Dialect>[]
       : json.map((dynamic value) => Dialect.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Dialect> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Dialect>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Dialect?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Dialect?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Dialect.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Dialect-objects as value to a dart map
-  static Map<String, List<Dialect>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Dialect>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Dialect?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Dialect?>?> map = <String, List<Dialect>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Dialect.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -134,11 +134,11 @@ class DialectAnnotationsEnum {
     default_,
   ];
 
-  static DialectAnnotationsEnum fromJson(dynamic value) =>
+  static DialectAnnotationsEnum? fromJson(dynamic value) =>
     DialectAnnotationsEnumTypeTransformer().decode(value);
 
-  static List<DialectAnnotationsEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<DialectAnnotationsEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <DialectAnnotationsEnum>[]
       : json
           .map((value) => DialectAnnotationsEnum.fromJson(value))
@@ -162,7 +162,7 @@ class DialectAnnotationsEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  DialectAnnotationsEnum decode(dynamic data, {bool allowNull}) {
+  DialectAnnotationsEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'group': return DialectAnnotationsEnum.group;
       case r'datatype': return DialectAnnotationsEnum.datatype;
@@ -176,7 +176,7 @@ class DialectAnnotationsEnumTypeTransformer {
   }
 
   /// Singleton [DialectAnnotationsEnumTypeTransformer] instance.
-  static DialectAnnotationsEnumTypeTransformer _instance;
+  static DialectAnnotationsEnumTypeTransformer? _instance;
 }
 
 /// Format of timestamps
@@ -201,11 +201,11 @@ class DialectDateTimeFormatEnum {
     rFC3339Nano,
   ];
 
-  static DialectDateTimeFormatEnum fromJson(dynamic value) =>
+  static DialectDateTimeFormatEnum? fromJson(dynamic value) =>
     DialectDateTimeFormatEnumTypeTransformer().decode(value);
 
-  static List<DialectDateTimeFormatEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<DialectDateTimeFormatEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <DialectDateTimeFormatEnum>[]
       : json
           .map((value) => DialectDateTimeFormatEnum.fromJson(value))
@@ -229,7 +229,7 @@ class DialectDateTimeFormatEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  DialectDateTimeFormatEnum decode(dynamic data, {bool allowNull}) {
+  DialectDateTimeFormatEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'RFC3339': return DialectDateTimeFormatEnum.rFC3339;
       case r'RFC3339Nano': return DialectDateTimeFormatEnum.rFC3339Nano;
@@ -242,6 +242,6 @@ class DialectDateTimeFormatEnumTypeTransformer {
   }
 
   /// Singleton [DialectDateTimeFormatEnumTypeTransformer] instance.
-  static DialectDateTimeFormatEnumTypeTransformer _instance;
+  static DialectDateTimeFormatEnumTypeTransformer? _instance;
 }
 

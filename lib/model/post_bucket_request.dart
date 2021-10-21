@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,26 +12,26 @@ part of influxdb_client_api;
 class PostBucketRequest {
   /// Returns a new [PostBucketRequest] instance.
   PostBucketRequest({
-    @required this.orgID,
-    @required this.name,
+    required this.orgID,
+    required this.name,
     this.description,
     this.rp,
     this.retentionRules = const [],
     this.schemaType,
   });
 
-  String orgID;
+  String? orgID;
 
-  String name;
+  String? name;
 
-  String description;
+  String? description;
 
-  String rp;
+  String? rp;
 
   /// Rules to expire or retain data.  No rules means data never expires.
-  List<RetentionRule> retentionRules;
+  List<RetentionRule?>? retentionRules;
 
-  SchemaType schemaType;
+  SchemaType? schemaType;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PostBucketRequest &&
@@ -73,7 +73,7 @@ class PostBucketRequest {
 
   /// Returns a new [PostBucketRequest] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static PostBucketRequest fromJson(Map<String, dynamic> json) => json == null
+  static PostBucketRequest? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : PostBucketRequest(
         orgID: json[r'orgID'],
@@ -84,23 +84,23 @@ class PostBucketRequest {
         schemaType: SchemaType.fromJson(json[r'schemaType']),
     );
 
-  static List<PostBucketRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PostBucketRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PostBucketRequest>[]
       : json.map((dynamic value) => PostBucketRequest.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, PostBucketRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, PostBucketRequest>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, PostBucketRequest?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, PostBucketRequest?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = PostBucketRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PostBucketRequest-objects as value to a dart map
-  static Map<String, List<PostBucketRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<PostBucketRequest>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<PostBucketRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<PostBucketRequest?>?> map = <String, List<PostBucketRequest>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = PostBucketRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

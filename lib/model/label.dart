@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -18,14 +18,14 @@ class Label {
     this.properties = const {},
   });
 
-  String id;
+  String? id;
 
-  String orgID;
+  String? orgID;
 
-  String name;
+  String? name;
 
   /// Key/Value pairs associated with this label. Keys can be removed by sending an update with an empty value.
-  Map<String, String> properties;
+  Map<String, String>? properties;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Label &&
@@ -63,7 +63,7 @@ class Label {
 
   /// Returns a new [Label] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Label fromJson(Map<String, dynamic> json) => json == null
+  static Label? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Label(
         id: json[r'id'],
@@ -74,23 +74,23 @@ class Label {
           (json[r'properties'] as Map).cast<String, String>(),
     );
 
-  static List<Label> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Label?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Label>[]
       : json.map((dynamic value) => Label.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Label> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Label>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Label?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Label?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Label.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Label-objects as value to a dart map
-  static Map<String, List<Label>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Label>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Label?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Label?>?> map = <String, List<Label>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Label.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

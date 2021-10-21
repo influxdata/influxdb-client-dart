@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class ReadyApi {
-  ReadyApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  ReadyApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -23,12 +23,10 @@ class ReadyApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getReadyWithHttpInfo({ String zapTraceSpan }) async {
-    // Verify required params are set.
-
+  Future<Response> getReadyWithHttpInfo({ String? zapTraceSpan }) async {
     final path = r'/ready';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -61,7 +59,7 @@ class ReadyApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Ready> getReady({ String zapTraceSpan }) async {
+  Future<Ready> getReady({ String? zapTraceSpan }) async {
     final response = await getReadyWithHttpInfo( zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -69,7 +67,7 @@ class ReadyApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Ready',) as Ready;
         }
     return Future<Ready>.value(null);

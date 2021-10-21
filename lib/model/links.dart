@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -13,18 +13,18 @@ class Links {
   /// Returns a new [Links] instance.
   Links({
     this.next,
-    @required this.self,
+    required this.self,
     this.prev,
   });
 
   /// URI of resource.
-  String next;
+  String? next;
 
   /// URI of resource.
-  String self;
+  String? self;
 
   /// URI of resource.
-  String prev;
+  String? prev;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Links &&
@@ -55,7 +55,7 @@ class Links {
 
   /// Returns a new [Links] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Links fromJson(Map<String, dynamic> json) => json == null
+  static Links? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Links(
         next: json[r'next'],
@@ -63,23 +63,23 @@ class Links {
         prev: json[r'prev'],
     );
 
-  static List<Links> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Links?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Links>[]
       : json.map((dynamic value) => Links.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Links> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Links>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Links?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Links?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Links.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Links-objects as value to a dart map
-  static Map<String, List<Links>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Links>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Links?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Links?>?> map = <String, List<Links>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Links.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

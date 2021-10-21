@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -17,14 +17,14 @@ class PatchRetentionRule {
     this.shardGroupDurationSeconds,
   });
 
-  PatchRetentionRuleTypeEnum type;
+  PatchRetentionRuleTypeEnum? type;
 
   /// Duration in seconds for how long data will be kept in the database. 0 means infinite.
   // minimum: 0
-  int everySeconds;
+  int? everySeconds;
 
   /// Shard duration measured in seconds.
-  int shardGroupDurationSeconds;
+  int? shardGroupDurationSeconds;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PatchRetentionRule &&
@@ -55,7 +55,7 @@ class PatchRetentionRule {
 
   /// Returns a new [PatchRetentionRule] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static PatchRetentionRule fromJson(Map<String, dynamic> json) => json == null
+  static PatchRetentionRule? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : PatchRetentionRule(
         type: PatchRetentionRuleTypeEnum.fromJson(json[r'type']),
@@ -63,23 +63,23 @@ class PatchRetentionRule {
         shardGroupDurationSeconds: json[r'shardGroupDurationSeconds'],
     );
 
-  static List<PatchRetentionRule> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PatchRetentionRule?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PatchRetentionRule>[]
       : json.map((dynamic value) => PatchRetentionRule.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, PatchRetentionRule> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, PatchRetentionRule>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, PatchRetentionRule?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, PatchRetentionRule?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = PatchRetentionRule.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PatchRetentionRule-objects as value to a dart map
-  static Map<String, List<PatchRetentionRule>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<PatchRetentionRule>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<PatchRetentionRule?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<PatchRetentionRule?>?> map = <String, List<PatchRetentionRule>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = PatchRetentionRule.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -108,11 +108,11 @@ class PatchRetentionRuleTypeEnum {
     expire,
   ];
 
-  static PatchRetentionRuleTypeEnum fromJson(dynamic value) =>
+  static PatchRetentionRuleTypeEnum? fromJson(dynamic value) =>
     PatchRetentionRuleTypeEnumTypeTransformer().decode(value);
 
-  static List<PatchRetentionRuleTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PatchRetentionRuleTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PatchRetentionRuleTypeEnum>[]
       : json
           .map((value) => PatchRetentionRuleTypeEnum.fromJson(value))
@@ -136,7 +136,7 @@ class PatchRetentionRuleTypeEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  PatchRetentionRuleTypeEnum decode(dynamic data, {bool allowNull}) {
+  PatchRetentionRuleTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'expire': return PatchRetentionRuleTypeEnum.expire;
       default:
@@ -148,6 +148,6 @@ class PatchRetentionRuleTypeEnumTypeTransformer {
   }
 
   /// Singleton [PatchRetentionRuleTypeEnumTypeTransformer] instance.
-  static PatchRetentionRuleTypeEnumTypeTransformer _instance;
+  static PatchRetentionRuleTypeEnumTypeTransformer? _instance;
 }
 

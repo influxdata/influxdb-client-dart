@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,26 +12,26 @@ part of influxdb_client_api;
 class Resource {
   /// Returns a new [Resource] instance.
   Resource({
-    @required this.type,
+    required this.type,
     this.id,
     this.name,
     this.orgID,
     this.org,
   });
 
-  ResourceTypeEnum type;
+  ResourceTypeEnum? type;
 
   /// If ID is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.
-  String id;
+  String? id;
 
   /// Optional name of the resource if the resource has a name field.
-  String name;
+  String? name;
 
   /// If orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type.
-  String orgID;
+  String? orgID;
 
   /// Optional name of the organization of the organization with orgID.
-  String org;
+  String? org;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Resource &&
@@ -72,7 +72,7 @@ class Resource {
 
   /// Returns a new [Resource] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Resource fromJson(Map<String, dynamic> json) => json == null
+  static Resource? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Resource(
         type: ResourceTypeEnum.fromJson(json[r'type']),
@@ -82,23 +82,23 @@ class Resource {
         org: json[r'org'],
     );
 
-  static List<Resource> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Resource?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Resource>[]
       : json.map((dynamic value) => Resource.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Resource> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Resource>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Resource?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Resource?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Resource.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Resource-objects as value to a dart map
-  static Map<String, List<Resource>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Resource>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Resource?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Resource?>?> map = <String, List<Resource>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Resource.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -163,11 +163,11 @@ class ResourceTypeEnum {
     notebooks,
   ];
 
-  static ResourceTypeEnum fromJson(dynamic value) =>
+  static ResourceTypeEnum? fromJson(dynamic value) =>
     ResourceTypeEnumTypeTransformer().decode(value);
 
-  static List<ResourceTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceTypeEnum>[]
       : json
           .map((value) => ResourceTypeEnum.fromJson(value))
@@ -191,7 +191,7 @@ class ResourceTypeEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ResourceTypeEnum decode(dynamic data, {bool allowNull}) {
+  ResourceTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'authorizations': return ResourceTypeEnum.authorizations;
       case r'buckets': return ResourceTypeEnum.buckets;
@@ -221,6 +221,6 @@ class ResourceTypeEnumTypeTransformer {
   }
 
   /// Singleton [ResourceTypeEnumTypeTransformer] instance.
-  static ResourceTypeEnumTypeTransformer _instance;
+  static ResourceTypeEnumTypeTransformer? _instance;
 }
 

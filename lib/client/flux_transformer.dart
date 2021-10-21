@@ -1,4 +1,4 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
@@ -30,12 +30,12 @@ class FluxCsvParserException implements Exception {
 /// Parses Flux query result and transforms the CSV stream of List<dynamic>
 /// in to Stream<FluxRecord>
 class FluxTransformer implements StreamTransformer<List, FluxRecord> {
-  StreamController _controller;
+  late StreamController _controller;
 
-  StreamSubscription _subscription;
+  StreamSubscription? _subscription;
 
-  FluxTableMetaData table;
-  bool cancelOnError;
+  late FluxTableMetaData table;
+  bool? cancelOnError;
   var tableIndex = 0;
   var tableId = -1;
   var startNewTable = false;
@@ -43,17 +43,17 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   var groups;
 
   // Original Stream
-  Stream<List> _stream;
+  late Stream<List> _stream;
 
   FluxTransformer({bool sync = false, this.cancelOnError = true}) {
     _controller = StreamController<FluxRecord>(
         onListen: _onListen,
         onCancel: _onCancel,
         onPause: () {
-          _subscription.pause();
+          _subscription!.pause();
         },
         onResume: () {
-          _subscription.resume();
+          _subscription!.resume();
         },
         sync: sync);
   }
@@ -71,7 +71,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   }
 
   void _onCancel() {
-    _subscription.cancel();
+    _subscription!.cancel();
     _subscription = null;
   }
 
@@ -146,9 +146,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
   void _addDataTypes(FluxTableMetaData table, List csv) {
     for (var i = 1; i < csv.length; i++) {
-      var column = FluxColumn();
-      column.index = i - 1;
-      column.dataType = csv[i];
+      var column = FluxColumn(csv[i], i -1);
       table.columns.add(column);
     }
   }
@@ -169,10 +167,10 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
     }
   }
 
-  void _addGroups(FluxTableMetaData table, List csv) {
+  void _addGroups(FluxTableMetaData table, List? csv) {
     var i = 1;
     for (var column in table.columns) {
-      column.group = csv[i] == 'true';
+      column.group = csv![i] == 'true';
       i++;
     }
   }
@@ -180,7 +178,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   @override
   Stream<FluxRecord> bind(Stream<List> stream) {
     _stream = stream;
-    return _controller.stream;
+    return _controller.stream as Stream<FluxRecord>;
   }
 
   @override

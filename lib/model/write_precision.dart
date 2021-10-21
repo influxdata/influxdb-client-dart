@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -35,11 +35,11 @@ class WritePrecision {
     ns,
   ];
 
-  static WritePrecision fromJson(dynamic value) =>
+  static WritePrecision? fromJson(dynamic value) =>
     WritePrecisionTypeTransformer().decode(value);
 
-  static List<WritePrecision> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<WritePrecision?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <WritePrecision>[]
       : json
           .map((value) => WritePrecision.fromJson(value))
@@ -63,7 +63,7 @@ class WritePrecisionTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  WritePrecision decode(dynamic data, {bool allowNull}) {
+  WritePrecision? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'ms': return WritePrecision.ms;
       case r's': return WritePrecision.s;
@@ -78,5 +78,5 @@ class WritePrecisionTypeTransformer {
   }
 
   /// Singleton [WritePrecisionTypeTransformer] instance.
-  static WritePrecisionTypeTransformer _instance;
+  static WritePrecisionTypeTransformer? _instance;
 }

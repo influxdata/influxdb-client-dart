@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,25 +12,25 @@ part of influxdb_client_api;
 class HealthCheck {
   /// Returns a new [HealthCheck] instance.
   HealthCheck({
-    @required this.name,
+    required this.name,
     this.message,
     this.checks = const [],
-    @required this.status,
+    required this.status,
     this.version,
     this.commit,
   });
 
-  String name;
+  String? name;
 
-  String message;
+  String? message;
 
-  List<HealthCheck> checks;
+  List<HealthCheck?>? checks;
 
-  HealthCheckStatusEnum status;
+  HealthCheckStatusEnum? status;
 
-  String version;
+  String? version;
 
-  String commit;
+  String? commit;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is HealthCheck &&
@@ -74,7 +74,7 @@ class HealthCheck {
 
   /// Returns a new [HealthCheck] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static HealthCheck fromJson(Map<String, dynamic> json) => json == null
+  static HealthCheck? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : HealthCheck(
         name: json[r'name'],
@@ -85,23 +85,23 @@ class HealthCheck {
         commit: json[r'commit'],
     );
 
-  static List<HealthCheck> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<HealthCheck?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <HealthCheck>[]
       : json.map((dynamic value) => HealthCheck.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, HealthCheck> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, HealthCheck>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, HealthCheck?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, HealthCheck?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = HealthCheck.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of HealthCheck-objects as value to a dart map
-  static Map<String, List<HealthCheck>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<HealthCheck>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<HealthCheck?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<HealthCheck?>?> map = <String, List<HealthCheck>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = HealthCheck.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -132,11 +132,11 @@ class HealthCheckStatusEnum {
     fail,
   ];
 
-  static HealthCheckStatusEnum fromJson(dynamic value) =>
+  static HealthCheckStatusEnum? fromJson(dynamic value) =>
     HealthCheckStatusEnumTypeTransformer().decode(value);
 
-  static List<HealthCheckStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<HealthCheckStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <HealthCheckStatusEnum>[]
       : json
           .map((value) => HealthCheckStatusEnum.fromJson(value))
@@ -160,7 +160,7 @@ class HealthCheckStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  HealthCheckStatusEnum decode(dynamic data, {bool allowNull}) {
+  HealthCheckStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'pass': return HealthCheckStatusEnum.pass;
       case r'fail': return HealthCheckStatusEnum.fail;
@@ -173,6 +173,6 @@ class HealthCheckStatusEnumTypeTransformer {
   }
 
   /// Singleton [HealthCheckStatusEnumTypeTransformer] instance.
-  static HealthCheckStatusEnumTypeTransformer _instance;
+  static HealthCheckStatusEnumTypeTransformer? _instance;
 }
 

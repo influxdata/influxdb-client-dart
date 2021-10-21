@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -18,13 +18,13 @@ class LogEvent {
   });
 
   /// Time event occurred, RFC3339Nano.
-  DateTime time;
+  DateTime? time;
 
   /// A description of the event that occurred.
-  String message;
+  String? message;
 
   /// the ID of the task that logged
-  String runID;
+  String? runID;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is LogEvent &&
@@ -44,7 +44,7 @@ class LogEvent {
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
     if (time != null) {
-      json[r'time'] = time.toUtc().toIso8601String();
+      json[r'time'] = time!.toUtc().toIso8601String();
     }
     if (message != null) {
       json[r'message'] = message;
@@ -57,7 +57,7 @@ class LogEvent {
 
   /// Returns a new [LogEvent] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static LogEvent fromJson(Map<String, dynamic> json) => json == null
+  static LogEvent? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : LogEvent(
         time: json[r'time'] == null
@@ -67,23 +67,23 @@ class LogEvent {
         runID: json[r'runID'],
     );
 
-  static List<LogEvent> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<LogEvent?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <LogEvent>[]
       : json.map((dynamic value) => LogEvent.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, LogEvent> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, LogEvent>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, LogEvent?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, LogEvent?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = LogEvent.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of LogEvent-objects as value to a dart map
-  static Map<String, List<LogEvent>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<LogEvent>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<LogEvent?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<LogEvent?>?> map = <String, List<LogEvent>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = LogEvent.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

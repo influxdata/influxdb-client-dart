@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -16,7 +16,7 @@ class Authorization {
     this.description,
     this.createdAt,
     this.updatedAt,
-    @required this.orgID,
+    required this.orgID,
     this.permissions = const [],
     this.id,
     this.token,
@@ -27,36 +27,36 @@ class Authorization {
   });
 
   /// If inactive the token is inactive and requests using the token will be rejected.
-  AuthorizationStatusEnum status;
+  AuthorizationStatusEnum? status;
 
   /// A description of the token.
-  String description;
+  String? description;
 
-  DateTime createdAt;
+  DateTime? createdAt;
 
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
   /// ID of org that authorization is scoped to.
-  String orgID;
+  String? orgID;
 
   /// List of permissions for an auth.  An auth must have at least one Permission.
-  List<Permission> permissions;
+  List<Permission?>? permissions;
 
-  String id;
+  String? id;
 
   /// Passed via the Authorization Header and Token Authentication type.
-  String token;
+  String? token;
 
   /// ID of user that created and owns the token.
-  String userID;
+  String? userID;
 
   /// Name of user that created and owns the token.
-  String user;
+  String? user;
 
   /// Name of the org token is scoped to.
-  String org;
+  String? org;
 
-  AuthorizationAllOfLinks links;
+  AuthorizationAllOfLinks? links;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Authorization &&
@@ -100,10 +100,10 @@ class Authorization {
       json[r'description'] = description;
     }
     if (createdAt != null) {
-      json[r'createdAt'] = createdAt.toUtc().toIso8601String();
+      json[r'createdAt'] = createdAt!.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
-      json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
+      json[r'updatedAt'] = updatedAt!.toUtc().toIso8601String();
     }
       json[r'orgID'] = orgID;
       json[r'permissions'] = permissions;
@@ -130,7 +130,7 @@ class Authorization {
 
   /// Returns a new [Authorization] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Authorization fromJson(Map<String, dynamic> json) => json == null
+  static Authorization? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Authorization(
         status: AuthorizationStatusEnum.fromJson(json[r'status']),
@@ -151,23 +151,23 @@ class Authorization {
         links: AuthorizationAllOfLinks.fromJson(json[r'links']),
     );
 
-  static List<Authorization> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Authorization?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Authorization>[]
       : json.map((dynamic value) => Authorization.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Authorization> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Authorization>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Authorization?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Authorization?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Authorization.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Authorization-objects as value to a dart map
-  static Map<String, List<Authorization>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Authorization>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Authorization?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Authorization?>?> map = <String, List<Authorization>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Authorization.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -198,11 +198,11 @@ class AuthorizationStatusEnum {
     inactive,
   ];
 
-  static AuthorizationStatusEnum fromJson(dynamic value) =>
+  static AuthorizationStatusEnum? fromJson(dynamic value) =>
     AuthorizationStatusEnumTypeTransformer().decode(value);
 
-  static List<AuthorizationStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<AuthorizationStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <AuthorizationStatusEnum>[]
       : json
           .map((value) => AuthorizationStatusEnum.fromJson(value))
@@ -226,7 +226,7 @@ class AuthorizationStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  AuthorizationStatusEnum decode(dynamic data, {bool allowNull}) {
+  AuthorizationStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'active': return AuthorizationStatusEnum.active;
       case r'inactive': return AuthorizationStatusEnum.inactive;
@@ -239,6 +239,6 @@ class AuthorizationStatusEnumTypeTransformer {
   }
 
   /// Singleton [AuthorizationStatusEnumTypeTransformer] instance.
-  static AuthorizationStatusEnumTypeTransformer _instance;
+  static AuthorizationStatusEnumTypeTransformer? _instance;
 }
 

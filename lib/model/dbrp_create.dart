@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,29 +14,29 @@ class DBRPCreate {
   DBRPCreate({
     this.orgID,
     this.org,
-    @required this.bucketID,
-    @required this.database,
-    @required this.retentionPolicy,
+    required this.bucketID,
+    required this.database,
+    required this.retentionPolicy,
     this.default_,
   });
 
   /// the organization ID that owns this mapping.
-  String orgID;
+  String? orgID;
 
   /// the organization that owns this mapping.
-  String org;
+  String? org;
 
   /// the bucket ID used as target for the translation.
-  String bucketID;
+  String? bucketID;
 
   /// InfluxDB v1 database
-  String database;
+  String? database;
 
   /// InfluxDB v1 retention policy
-  String retentionPolicy;
+  String? retentionPolicy;
 
   /// Specify if this mapping represents the default retention policy for the database specificed.
-  bool default_;
+  bool? default_;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is DBRPCreate &&
@@ -78,7 +78,7 @@ class DBRPCreate {
 
   /// Returns a new [DBRPCreate] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static DBRPCreate fromJson(Map<String, dynamic> json) => json == null
+  static DBRPCreate? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : DBRPCreate(
         orgID: json[r'orgID'],
@@ -89,23 +89,23 @@ class DBRPCreate {
         default_: json[r'default'],
     );
 
-  static List<DBRPCreate> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<DBRPCreate?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <DBRPCreate>[]
       : json.map((dynamic value) => DBRPCreate.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, DBRPCreate> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, DBRPCreate>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, DBRPCreate?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, DBRPCreate?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = DBRPCreate.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of DBRPCreate-objects as value to a dart map
-  static Map<String, List<DBRPCreate>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<DBRPCreate>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<DBRPCreate?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<DBRPCreate?>?> map = <String, List<DBRPCreate>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = DBRPCreate.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

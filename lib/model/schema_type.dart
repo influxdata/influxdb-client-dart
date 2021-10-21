@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -31,11 +31,11 @@ class SchemaType {
     explicit,
   ];
 
-  static SchemaType fromJson(dynamic value) =>
+  static SchemaType? fromJson(dynamic value) =>
     SchemaTypeTypeTransformer().decode(value);
 
-  static List<SchemaType> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<SchemaType?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <SchemaType>[]
       : json
           .map((value) => SchemaType.fromJson(value))
@@ -59,7 +59,7 @@ class SchemaTypeTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  SchemaType decode(dynamic data, {bool allowNull}) {
+  SchemaType? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'implicit': return SchemaType.implicit;
       case r'explicit': return SchemaType.explicit;
@@ -72,5 +72,5 @@ class SchemaTypeTypeTransformer {
   }
 
   /// Singleton [SchemaTypeTypeTransformer] instance.
-  static SchemaTypeTypeTransformer _instance;
+  static SchemaTypeTypeTransformer? _instance;
 }

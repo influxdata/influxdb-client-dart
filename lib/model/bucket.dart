@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -15,7 +15,7 @@ class Bucket {
     this.links,
     this.id,
     this.type = const BucketTypeEnum._('user'),
-    @required this.name,
+    required this.name,
     this.description,
     this.orgID,
     this.rp,
@@ -26,30 +26,30 @@ class Bucket {
     this.labels = const [],
   });
 
-  BucketLinks links;
+  BucketLinks? links;
 
-  String id;
+  String? id;
 
-  BucketTypeEnum type;
+  BucketTypeEnum? type;
 
-  String name;
+  String? name;
 
-  String description;
+  String? description;
 
-  String orgID;
+  String? orgID;
 
-  String rp;
+  String? rp;
 
-  SchemaType schemaType;
+  SchemaType? schemaType;
 
-  DateTime createdAt;
+  DateTime? createdAt;
 
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
   /// Rules to expire or retain data.  No rules means data never expires.
-  List<RetentionRule> retentionRules;
+  List<RetentionRule?>? retentionRules;
 
-  List<Label> labels;
+  List<Label?>? labels;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Bucket &&
@@ -109,10 +109,10 @@ class Bucket {
       json[r'schemaType'] = schemaType;
     }
     if (createdAt != null) {
-      json[r'createdAt'] = createdAt.toUtc().toIso8601String();
+      json[r'createdAt'] = createdAt!.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
-      json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
+      json[r'updatedAt'] = updatedAt!.toUtc().toIso8601String();
     }
       json[r'retentionRules'] = retentionRules;
     if (labels != null) {
@@ -123,7 +123,7 @@ class Bucket {
 
   /// Returns a new [Bucket] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Bucket fromJson(Map<String, dynamic> json) => json == null
+  static Bucket? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Bucket(
         links: BucketLinks.fromJson(json[r'links']),
@@ -144,23 +144,23 @@ class Bucket {
         labels: Label.listFromJson(json[r'labels']),
     );
 
-  static List<Bucket> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Bucket?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Bucket>[]
       : json.map((dynamic value) => Bucket.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Bucket> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Bucket>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Bucket?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Bucket?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Bucket.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Bucket-objects as value to a dart map
-  static Map<String, List<Bucket>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Bucket>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Bucket?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Bucket?>?> map = <String, List<Bucket>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Bucket.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -191,11 +191,11 @@ class BucketTypeEnum {
     system,
   ];
 
-  static BucketTypeEnum fromJson(dynamic value) =>
+  static BucketTypeEnum? fromJson(dynamic value) =>
     BucketTypeEnumTypeTransformer().decode(value);
 
-  static List<BucketTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<BucketTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <BucketTypeEnum>[]
       : json
           .map((value) => BucketTypeEnum.fromJson(value))
@@ -219,7 +219,7 @@ class BucketTypeEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  BucketTypeEnum decode(dynamic data, {bool allowNull}) {
+  BucketTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'user': return BucketTypeEnum.user;
       case r'system': return BucketTypeEnum.system;
@@ -232,6 +232,6 @@ class BucketTypeEnumTypeTransformer {
   }
 
   /// Singleton [BucketTypeEnumTypeTransformer] instance.
-  static BucketTypeEnumTypeTransformer _instance;
+  static BucketTypeEnumTypeTransformer? _instance;
 }
 

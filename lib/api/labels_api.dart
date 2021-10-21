@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class LabelsApi {
-  LabelsApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  LabelsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -26,16 +26,11 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteLabelsIDWithHttpInfo(String labelID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (labelID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
-    }
-
-    final path = r'/labels/{labelID}'
+  Future<Response> deleteLabelsIDWithHttpInfo(String labelID, { String? zapTraceSpan }) async {
+      final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -71,7 +66,7 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteLabelsID(String labelID, { String zapTraceSpan }) async {
+  Future<void> deleteLabelsID(String labelID, { String? zapTraceSpan }) async {
     final response = await deleteLabelsIDWithHttpInfo(labelID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -89,12 +84,10 @@ class LabelsApi {
   ///
   /// * [String] orgID:
   ///   The organization ID.
-  Future<Response> getLabelsWithHttpInfo({ String zapTraceSpan, String orgID }) async {
-    // Verify required params are set.
-
+  Future<Response> getLabelsWithHttpInfo({ String? zapTraceSpan, String? orgID }) async {
     final path = r'/labels';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -134,7 +127,7 @@ class LabelsApi {
   ///
   /// * [String] orgID:
   ///   The organization ID.
-  Future<LabelsResponse> getLabels({ String zapTraceSpan, String orgID }) async {
+  Future<LabelsResponse> getLabels({ String? zapTraceSpan, String? orgID }) async {
     final response = await getLabelsWithHttpInfo( zapTraceSpan: zapTraceSpan, orgID: orgID );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -142,7 +135,7 @@ class LabelsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
         }
     return Future<LabelsResponse>.value(null);
@@ -159,16 +152,11 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getLabelsIDWithHttpInfo(String labelID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (labelID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
-    }
-
+  Future<Response> getLabelsIDWithHttpInfo(String labelID, { String? zapTraceSpan }) async {
     final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -204,7 +192,7 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> getLabelsID(String labelID, { String zapTraceSpan }) async {
+  Future<LabelResponse> getLabelsID(String labelID, { String? zapTraceSpan }) async {
     final response = await getLabelsIDWithHttpInfo(labelID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -212,7 +200,7 @@ class LabelsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
         }
     return Future<LabelResponse>.value(null);
@@ -232,15 +220,7 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchLabelsIDWithHttpInfo(String labelID, LabelUpdate labelUpdate, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (labelID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
-    }
-    if (labelUpdate == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelUpdate');
-    }
-
+  Future<Response> patchLabelsIDWithHttpInfo(String labelID, LabelUpdate labelUpdate, { String? zapTraceSpan }) async {
     final path = r'/labels/{labelID}'
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
@@ -283,7 +263,7 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> patchLabelsID(String labelID, LabelUpdate labelUpdate, { String zapTraceSpan }) async {
+  Future<LabelResponse> patchLabelsID(String labelID, LabelUpdate labelUpdate, { String? zapTraceSpan }) async {
     final response = await patchLabelsIDWithHttpInfo(labelID, labelUpdate,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -291,8 +271,8 @@ class LabelsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',);
         }
     return Future<LabelResponse>.value(null);
   }
@@ -306,11 +286,6 @@ class LabelsApi {
   /// * [LabelCreateRequest] labelCreateRequest (required):
   ///   Label to create
   Future<Response> postLabelsWithHttpInfo(LabelCreateRequest labelCreateRequest) async {
-    // Verify required params are set.
-    if (labelCreateRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelCreateRequest');
-    }
-
     final path = r'/labels';
 
     Object postBody = labelCreateRequest;
@@ -350,8 +325,8 @@ class LabelsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',);
         }
     return Future<LabelResponse>.value(null);
   }

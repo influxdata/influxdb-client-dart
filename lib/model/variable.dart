@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,35 +14,35 @@ class Variable {
   Variable({
     this.links,
     this.id,
-    @required this.orgID,
-    @required this.name,
+    required this.orgID,
+    required this.name,
     this.description,
     this.selected = const [],
     this.labels = const [],
-    @required this.arguments,
+    required this.arguments,
     this.createdAt,
     this.updatedAt,
   });
 
-  VariableLinks links;
+  VariableLinks? links;
 
-  String id;
+  String? id;
 
-  String orgID;
+  String? orgID;
 
-  String name;
+  String? name;
 
-  String description;
+  String? description;
 
-  List<String> selected;
+  List<String>? selected;
 
-  List<Label> labels;
+  List<Label?>? labels;
 
-  VariableProperties arguments;
+  VariableProperties? arguments;
 
-  DateTime createdAt;
+  DateTime? createdAt;
 
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Variable &&
@@ -94,17 +94,17 @@ class Variable {
     }
       json[r'arguments'] = arguments;
     if (createdAt != null) {
-      json[r'createdAt'] = createdAt.toUtc().toIso8601String();
+      json[r'createdAt'] = createdAt!.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
-      json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
+      json[r'updatedAt'] = updatedAt!.toUtc().toIso8601String();
     }
     return json;
   }
 
   /// Returns a new [Variable] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Variable fromJson(Map<String, dynamic> json) => json == null
+  static Variable? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Variable(
         links: VariableLinks.fromJson(json[r'links']),
@@ -125,23 +125,23 @@ class Variable {
           : DateTime.parse(json[r'updatedAt']),
     );
 
-  static List<Variable> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Variable?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Variable>[]
       : json.map((dynamic value) => Variable.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Variable> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Variable>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Variable?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Variable?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Variable.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Variable-objects as value to a dart map
-  static Map<String, List<Variable>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Variable>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Variable?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Variable?>?> map = <String, List<Variable>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Variable.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

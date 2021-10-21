@@ -82,8 +82,8 @@ void main() {
         expect(e is RetryException, isTrue);
         expect(e.toString(), contains('Maximum retry time (30000ms) exceeded'));
         expect((e as RetryException).getCause(), isNotNull);
-        expect((e as RetryException).getCause() is SocketException, isTrue);
-        expect((e as RetryException).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        expect((e).getCause() is SocketException, isTrue);
+        expect((e).getCause().toString(), startsWith('SocketException: Failed host lookup'));
         // First call is not counted as a retry
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);
@@ -124,8 +124,8 @@ void main() {
         expect(e is RetryException, isTrue);
         expect(e.toString(), contains('Maximum retry attempts reached'));
         expect((e as RetryException).getCause(), isNotNull);
-        expect((e as RetryException).getCause() is SocketException, isTrue);
-        expect((e as RetryException).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        expect((e).getCause() is SocketException, isTrue);
+        expect((e).getCause().toString(), startsWith('SocketException: Failed host lookup'));
         // First call is not counted as a retry
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);

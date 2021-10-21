@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -23,28 +23,28 @@ class Run {
     this.links,
   });
 
-  String id;
+  String? id;
 
-  String taskID;
+  String? taskID;
 
-  RunStatusEnum status;
+  RunStatusEnum? status;
 
   /// Time used for run's \"now\" option, RFC3339.
-  DateTime scheduledFor;
+  DateTime? scheduledFor;
 
   /// An array of logs associated with the run.
-  List<LogEvent> log;
+  List<LogEvent?>? log;
 
   /// Time run started executing, RFC3339Nano.
-  DateTime startedAt;
+  DateTime? startedAt;
 
   /// Time run finished executing, RFC3339Nano.
-  DateTime finishedAt;
+  DateTime? finishedAt;
 
   /// Time run was manually requested, RFC3339Nano.
-  DateTime requestedAt;
+  DateTime? requestedAt;
 
-  RunLinks links;
+  RunLinks? links;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Run &&
@@ -85,19 +85,19 @@ class Run {
       json[r'status'] = status;
     }
     if (scheduledFor != null) {
-      json[r'scheduledFor'] = scheduledFor.toUtc().toIso8601String();
+      json[r'scheduledFor'] = scheduledFor!.toUtc().toIso8601String();
     }
     if (log != null) {
       json[r'log'] = log;
     }
     if (startedAt != null) {
-      json[r'startedAt'] = startedAt.toUtc().toIso8601String();
+      json[r'startedAt'] = startedAt!.toUtc().toIso8601String();
     }
     if (finishedAt != null) {
-      json[r'finishedAt'] = finishedAt.toUtc().toIso8601String();
+      json[r'finishedAt'] = finishedAt!.toUtc().toIso8601String();
     }
     if (requestedAt != null) {
-      json[r'requestedAt'] = requestedAt.toUtc().toIso8601String();
+      json[r'requestedAt'] = requestedAt!.toUtc().toIso8601String();
     }
     if (links != null) {
       json[r'links'] = links;
@@ -107,7 +107,7 @@ class Run {
 
   /// Returns a new [Run] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Run fromJson(Map<String, dynamic> json) => json == null
+  static Run? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Run(
         id: json[r'id'],
@@ -129,23 +129,23 @@ class Run {
         links: RunLinks.fromJson(json[r'links']),
     );
 
-  static List<Run> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Run?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Run>[]
       : json.map((dynamic value) => Run.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Run> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Run>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Run?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Run?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Run.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Run-objects as value to a dart map
-  static Map<String, List<Run>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Run>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Run?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Run?>?> map = <String, List<Run>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Run.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -182,11 +182,11 @@ class RunStatusEnum {
     canceled,
   ];
 
-  static RunStatusEnum fromJson(dynamic value) =>
+  static RunStatusEnum? fromJson(dynamic value) =>
     RunStatusEnumTypeTransformer().decode(value);
 
-  static List<RunStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<RunStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <RunStatusEnum>[]
       : json
           .map((value) => RunStatusEnum.fromJson(value))
@@ -210,7 +210,7 @@ class RunStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  RunStatusEnum decode(dynamic data, {bool allowNull}) {
+  RunStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'scheduled': return RunStatusEnum.scheduled;
       case r'started': return RunStatusEnum.started;
@@ -226,6 +226,6 @@ class RunStatusEnumTypeTransformer {
   }
 
   /// Singleton [RunStatusEnumTypeTransformer] instance.
-  static RunStatusEnumTypeTransformer _instance;
+  static RunStatusEnumTypeTransformer? _instance;
 }
 

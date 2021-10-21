@@ -1,4 +1,4 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
@@ -11,7 +11,7 @@ class WriteOptions {
   final int flushInterval;
 
   /// default tags, unescaped */
-  final Map<String, String> defaultTags;
+  final Map<String, String>? defaultTags;
 
   /// include random milliseconds when retrying HTTP calls (default is 200)
   final int retryJitter;
@@ -56,18 +56,18 @@ class WriteOptions {
 
   /// Create a WriteOptions from current instance with merging attributes.
   WriteOptions merge(
-      {int batchSize,
-      int flushInterval,
-      Map<String, String> defaultTags,
-      int retryJitter,
-      int retryInterval,
-      int maxRetryDelay,
-      int maxRetryTime,
-      int exponentialBase,
-      int maxRetries,
-      int maxBufferLines,
-      WritePrecision precision,
-      bool gzip}) {
+      {int? batchSize,
+      int? flushInterval,
+      Map<String, String>? defaultTags,
+      int? retryJitter,
+      int? retryInterval,
+      int? maxRetryDelay,
+      int? maxRetryTime,
+      int? exponentialBase,
+      int? maxRetries,
+      int? maxBufferLines,
+      WritePrecision? precision,
+      bool? gzip}) {
     return WriteOptions(
       batchSize: batchSize ?? this.batchSize,
       flushInterval: flushInterval ?? this.flushInterval,

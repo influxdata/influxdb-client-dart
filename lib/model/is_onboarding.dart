@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -16,7 +16,7 @@ class IsOnboarding {
   });
 
   /// True means that the influxdb instance has NOT had initial setup; false means that the database has been setup.
-  bool allowed;
+  bool? allowed;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is IsOnboarding &&
@@ -39,29 +39,29 @@ class IsOnboarding {
 
   /// Returns a new [IsOnboarding] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static IsOnboarding fromJson(Map<String, dynamic> json) => json == null
+  static IsOnboarding? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : IsOnboarding(
         allowed: json[r'allowed'],
     );
 
-  static List<IsOnboarding> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<IsOnboarding?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <IsOnboarding>[]
       : json.map((dynamic value) => IsOnboarding.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, IsOnboarding> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, IsOnboarding>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, IsOnboarding?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, IsOnboarding?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = IsOnboarding.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of IsOnboarding-objects as value to a dart map
-  static Map<String, List<IsOnboarding>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<IsOnboarding>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<IsOnboarding?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<IsOnboarding?>?> map = <String, List<IsOnboarding>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = IsOnboarding.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

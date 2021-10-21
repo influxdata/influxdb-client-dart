@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,30 +12,30 @@ part of influxdb_client_api;
 class OnboardingRequest {
   /// Returns a new [OnboardingRequest] instance.
   OnboardingRequest({
-    @required this.username,
+    required this.username,
     this.password,
-    @required this.org,
-    @required this.bucket,
+    required this.org,
+    required this.bucket,
     this.retentionPeriodSeconds,
     this.retentionPeriodHrs,
     this.token,
   });
 
-  String username;
+  String? username;
 
-  String password;
+  String? password;
 
-  String org;
+  String? org;
 
-  String bucket;
+  String? bucket;
 
-  int retentionPeriodSeconds;
+  int? retentionPeriodSeconds;
 
   /// Retention period *in nanoseconds* for the new bucket. This key's name has been misleading since OSS 2.0 GA, please transition to use `retentionPeriodSeconds` 
-  int retentionPeriodHrs;
+  int? retentionPeriodHrs;
 
   /// Authentication token to set on the initial user. If not specified, the server will generate a token. 
-  String token;
+  String? token;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OnboardingRequest &&
@@ -82,7 +82,7 @@ class OnboardingRequest {
 
   /// Returns a new [OnboardingRequest] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static OnboardingRequest fromJson(Map<String, dynamic> json) => json == null
+  static OnboardingRequest? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : OnboardingRequest(
         username: json[r'username'],
@@ -94,23 +94,23 @@ class OnboardingRequest {
         token: json[r'token'],
     );
 
-  static List<OnboardingRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<OnboardingRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <OnboardingRequest>[]
       : json.map((dynamic value) => OnboardingRequest.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, OnboardingRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, OnboardingRequest>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, OnboardingRequest?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, OnboardingRequest?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = OnboardingRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of OnboardingRequest-objects as value to a dart map
-  static Map<String, List<OnboardingRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<OnboardingRequest>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<OnboardingRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<OnboardingRequest?>?> map = <String, List<OnboardingRequest>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = OnboardingRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

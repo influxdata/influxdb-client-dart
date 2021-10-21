@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -21,25 +21,25 @@ class TaskUpdateRequest {
     this.description,
   });
 
-  TaskStatusType status;
+  TaskStatusType? status;
 
   /// The Flux script to run for this task.
-  String flux;
+  String? flux;
 
   /// Override the 'name' option in the flux script.
-  String name;
+  String? name;
 
   /// Override the 'every' option in the flux script.
-  String every;
+  String? every;
 
   /// Override the 'cron' option in the flux script.
-  String cron;
+  String? cron;
 
   /// Override the 'offset' option in the flux script.
-  String offset;
+  String? offset;
 
   /// An optional description of the task.
-  String description;
+  String? description;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is TaskUpdateRequest &&
@@ -92,7 +92,7 @@ class TaskUpdateRequest {
 
   /// Returns a new [TaskUpdateRequest] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static TaskUpdateRequest fromJson(Map<String, dynamic> json) => json == null
+  static TaskUpdateRequest? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : TaskUpdateRequest(
         status: TaskStatusType.fromJson(json[r'status']),
@@ -104,23 +104,23 @@ class TaskUpdateRequest {
         description: json[r'description'],
     );
 
-  static List<TaskUpdateRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<TaskUpdateRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <TaskUpdateRequest>[]
       : json.map((dynamic value) => TaskUpdateRequest.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, TaskUpdateRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, TaskUpdateRequest>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, TaskUpdateRequest?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, TaskUpdateRequest?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = TaskUpdateRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of TaskUpdateRequest-objects as value to a dart map
-  static Map<String, List<TaskUpdateRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<TaskUpdateRequest>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<TaskUpdateRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<TaskUpdateRequest?>?> map = <String, List<TaskUpdateRequest>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = TaskUpdateRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -17,11 +17,11 @@ class Ready {
     this.up,
   });
 
-  ReadyStatusEnum status;
+  ReadyStatusEnum? status;
 
-  DateTime started;
+  DateTime? started;
 
-  String up;
+  String? up;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Ready &&
@@ -44,7 +44,7 @@ class Ready {
       json[r'status'] = status;
     }
     if (started != null) {
-      json[r'started'] = started.toUtc().toIso8601String();
+      json[r'started'] = started!.toUtc().toIso8601String();
     }
     if (up != null) {
       json[r'up'] = up;
@@ -54,7 +54,7 @@ class Ready {
 
   /// Returns a new [Ready] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Ready fromJson(Map<String, dynamic> json) => json == null
+  static Ready? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Ready(
         status: ReadyStatusEnum.fromJson(json[r'status']),
@@ -64,23 +64,23 @@ class Ready {
         up: json[r'up'],
     );
 
-  static List<Ready> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Ready?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Ready>[]
       : json.map((dynamic value) => Ready.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Ready> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Ready>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Ready?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Ready?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Ready.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Ready-objects as value to a dart map
-  static Map<String, List<Ready>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Ready>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Ready?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Ready?>?> map = <String, List<Ready>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Ready.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -109,11 +109,11 @@ class ReadyStatusEnum {
     ready,
   ];
 
-  static ReadyStatusEnum fromJson(dynamic value) =>
+  static ReadyStatusEnum? fromJson(dynamic value) =>
     ReadyStatusEnumTypeTransformer().decode(value);
 
-  static List<ReadyStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ReadyStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ReadyStatusEnum>[]
       : json
           .map((value) => ReadyStatusEnum.fromJson(value))
@@ -137,7 +137,7 @@ class ReadyStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ReadyStatusEnum decode(dynamic data, {bool allowNull}) {
+  ReadyStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'ready': return ReadyStatusEnum.ready;
       default:
@@ -149,6 +149,6 @@ class ReadyStatusEnumTypeTransformer {
   }
 
   /// Singleton [ReadyStatusEnumTypeTransformer] instance.
-  static ReadyStatusEnumTypeTransformer _instance;
+  static ReadyStatusEnumTypeTransformer? _instance;
 }
 

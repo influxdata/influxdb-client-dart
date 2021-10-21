@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,10 +12,10 @@ part of influxdb_client_api;
 class PasswordResetBody {
   /// Returns a new [PasswordResetBody] instance.
   PasswordResetBody({
-    @required this.password,
+    required this.password,
   });
 
-  String password;
+  String? password;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PasswordResetBody &&
@@ -36,29 +36,29 @@ class PasswordResetBody {
 
   /// Returns a new [PasswordResetBody] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static PasswordResetBody fromJson(Map<String, dynamic> json) => json == null
+  static PasswordResetBody? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : PasswordResetBody(
         password: json[r'password'],
     );
 
-  static List<PasswordResetBody> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PasswordResetBody?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PasswordResetBody>[]
       : json.map((dynamic value) => PasswordResetBody.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, PasswordResetBody> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, PasswordResetBody>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, PasswordResetBody?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, PasswordResetBody?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = PasswordResetBody.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PasswordResetBody-objects as value to a dart map
-  static Map<String, List<PasswordResetBody>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<PasswordResetBody>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<PasswordResetBody?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<PasswordResetBody?>?> map = <String, List<PasswordResetBody>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = PasswordResetBody.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

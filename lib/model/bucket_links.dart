@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -21,22 +21,22 @@ class BucketLinks {
   });
 
   /// URI of resource.
-  String labels;
+  String? labels;
 
   /// URI of resource.
-  String members;
+  String? members;
 
   /// URI of resource.
-  String org;
+  String? org;
 
   /// URI of resource.
-  String owners;
+  String? owners;
 
   /// URI of resource.
-  String self;
+  String? self;
 
   /// URI of resource.
-  String write;
+  String? write;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is BucketLinks &&
@@ -84,7 +84,7 @@ class BucketLinks {
 
   /// Returns a new [BucketLinks] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static BucketLinks fromJson(Map<String, dynamic> json) => json == null
+  static BucketLinks? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : BucketLinks(
         labels: json[r'labels'],
@@ -95,23 +95,23 @@ class BucketLinks {
         write: json[r'write'],
     );
 
-  static List<BucketLinks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<BucketLinks?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <BucketLinks>[]
       : json.map((dynamic value) => BucketLinks.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, BucketLinks> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, BucketLinks>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, BucketLinks?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, BucketLinks?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = BucketLinks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of BucketLinks-objects as value to a dart map
-  static Map<String, List<BucketLinks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<BucketLinks>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<BucketLinks?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<BucketLinks?>?> map = <String, List<BucketLinks>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = BucketLinks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

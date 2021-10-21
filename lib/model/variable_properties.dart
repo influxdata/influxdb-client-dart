@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -16,9 +16,9 @@ class VariableProperties {
     this.values = const {},
   });
 
-  VariablePropertiesTypeEnum type;
+  VariablePropertiesTypeEnum? type;
 
-  Map<String, String> values;
+  Map<String, String>? values;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is VariableProperties &&
@@ -46,7 +46,7 @@ class VariableProperties {
 
   /// Returns a new [VariableProperties] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static VariableProperties fromJson(Map<String, dynamic> json) => json == null
+  static VariableProperties? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : VariableProperties(
         type: VariablePropertiesTypeEnum.fromJson(json[r'type']),
@@ -55,23 +55,23 @@ class VariableProperties {
           (json[r'values'] as Map).cast<String, String>(),
     );
 
-  static List<VariableProperties> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<VariableProperties?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <VariableProperties>[]
       : json.map((dynamic value) => VariableProperties.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, VariableProperties> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, VariableProperties>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, VariableProperties?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, VariableProperties?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = VariableProperties.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of VariableProperties-objects as value to a dart map
-  static Map<String, List<VariableProperties>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<VariableProperties>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<VariableProperties?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<VariableProperties?>?> map = <String, List<VariableProperties>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = VariableProperties.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -100,11 +100,11 @@ class VariablePropertiesTypeEnum {
     map,
   ];
 
-  static VariablePropertiesTypeEnum fromJson(dynamic value) =>
+  static VariablePropertiesTypeEnum? fromJson(dynamic value) =>
     VariablePropertiesTypeEnumTypeTransformer().decode(value);
 
-  static List<VariablePropertiesTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<VariablePropertiesTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <VariablePropertiesTypeEnum>[]
       : json
           .map((value) => VariablePropertiesTypeEnum.fromJson(value))
@@ -128,7 +128,7 @@ class VariablePropertiesTypeEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  VariablePropertiesTypeEnum decode(dynamic data, {bool allowNull}) {
+  VariablePropertiesTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'map': return VariablePropertiesTypeEnum.map;
       default:
@@ -140,6 +140,6 @@ class VariablePropertiesTypeEnumTypeTransformer {
   }
 
   /// Singleton [VariablePropertiesTypeEnumTypeTransformer] instance.
-  static VariablePropertiesTypeEnumTypeTransformer _instance;
+  static VariablePropertiesTypeEnumTypeTransformer? _instance;
 }
 

@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,17 +12,17 @@ part of influxdb_client_api;
 class LabelCreateRequest {
   /// Returns a new [LabelCreateRequest] instance.
   LabelCreateRequest({
-    @required this.orgID,
-    @required this.name,
+    required this.orgID,
+    required this.name,
     this.properties = const {},
   });
 
-  String orgID;
+  String? orgID;
 
-  String name;
+  String? name;
 
   /// Key/Value pairs associated with this label. Keys can be removed by sending an update with an empty value.
-  Map<String, String> properties;
+  Map<String, String>? properties;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is LabelCreateRequest &&
@@ -51,7 +51,7 @@ class LabelCreateRequest {
 
   /// Returns a new [LabelCreateRequest] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static LabelCreateRequest fromJson(Map<String, dynamic> json) => json == null
+  static LabelCreateRequest? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : LabelCreateRequest(
         orgID: json[r'orgID'],
@@ -61,23 +61,23 @@ class LabelCreateRequest {
           (json[r'properties'] as Map).cast<String, String>(),
     );
 
-  static List<LabelCreateRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<LabelCreateRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <LabelCreateRequest>[]
       : json.map((dynamic value) => LabelCreateRequest.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, LabelCreateRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, LabelCreateRequest>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, LabelCreateRequest?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, LabelCreateRequest?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = LabelCreateRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of LabelCreateRequest-objects as value to a dart map
-  static Map<String, List<LabelCreateRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<LabelCreateRequest>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<LabelCreateRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<LabelCreateRequest?>?> map = <String, List<LabelCreateRequest>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = LabelCreateRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

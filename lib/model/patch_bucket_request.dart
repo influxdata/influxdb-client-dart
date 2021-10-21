@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -17,12 +17,12 @@ class PatchBucketRequest {
     this.retentionRules = const [],
   });
 
-  String name;
+  String? name;
 
-  String description;
+  String? description;
 
   /// Updates to rules to expire or retain data. No rules means no updates.
-  List<PatchRetentionRule> retentionRules;
+  List<PatchRetentionRule?>? retentionRules;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is PatchBucketRequest &&
@@ -55,7 +55,7 @@ class PatchBucketRequest {
 
   /// Returns a new [PatchBucketRequest] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static PatchBucketRequest fromJson(Map<String, dynamic> json) => json == null
+  static PatchBucketRequest? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : PatchBucketRequest(
         name: json[r'name'],
@@ -63,23 +63,23 @@ class PatchBucketRequest {
         retentionRules: PatchRetentionRule.listFromJson(json[r'retentionRules']),
     );
 
-  static List<PatchBucketRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PatchBucketRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PatchBucketRequest>[]
       : json.map((dynamic value) => PatchBucketRequest.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, PatchBucketRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, PatchBucketRequest>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, PatchBucketRequest?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, PatchBucketRequest?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = PatchBucketRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PatchBucketRequest-objects as value to a dart map
-  static Map<String, List<PatchBucketRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<PatchBucketRequest>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<PatchBucketRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<PatchBucketRequest?>?> map = <String, List<PatchBucketRequest>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = PatchBucketRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

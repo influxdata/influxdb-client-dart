@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -28,10 +28,10 @@ Iterable<QueryParam> _convertParametersForCollectionFormat(
   final params = <QueryParam>[];
 
   // preconditions
-  if (name != null && name.isNotEmpty && value != null) {
+  if (name.isNotEmpty && value != null) {
     if (value is List) {
       // get the collection format, default: csv
-      collectionFormat = (collectionFormat == null || collectionFormat.isEmpty)
+      collectionFormat = (collectionFormat.isEmpty)
         ? 'csv'
         : collectionFormat;
 
@@ -100,6 +100,6 @@ String parameterToString(dynamic value) {
 Future<String> _decodeBodyBytes(Response response) async {
   final contentType = response.headers['content-type'];
   return contentType != null && contentType.toLowerCase().startsWith('application/json')
-    ? response.bodyBytes == null ? null : utf8.decode(response.bodyBytes)
+    ? utf8.decode(response.bodyBytes)
     : response.body;
 }

@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class DBRPsApi {
-  DBRPsApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  DBRPsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -32,16 +32,11 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> deleteDBRPIDWithHttpInfo(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
-    // Verify required params are set.
-    if (dbrpID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: dbrpID');
-    }
-
+  Future<Response> deleteDBRPIDWithHttpInfo(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
     final path = r'/dbrps/{dbrpID}'
       .replaceAll('{' + 'dbrpID' + '}', dbrpID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -90,7 +85,7 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<void> deleteDBRPID(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
+  Future<void> deleteDBRPID(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
     final response = await deleteDBRPIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -126,12 +121,10 @@ class DBRPsApi {
   ///
   /// * [String] rp:
   ///   Specifies the retention policy to filter on
-  Future<Response> getDBRPsWithHttpInfo({ String zapTraceSpan, String orgID, String org, String id, String bucketID, bool default_, String db, String rp }) async {
-    // Verify required params are set.
-
+  Future<Response> getDBRPsWithHttpInfo({ String? zapTraceSpan, String? orgID, String? org, String? id, String? bucketID, bool? default_, String? db, String? rp }) async {
     final path = r'/dbrps';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -207,7 +200,7 @@ class DBRPsApi {
   ///
   /// * [String] rp:
   ///   Specifies the retention policy to filter on
-  Future<DBRPs> getDBRPs({ String zapTraceSpan, String orgID, String org, String id, String bucketID, bool default_, String db, String rp }) async {
+  Future<DBRPs> getDBRPs({ String? zapTraceSpan, String? orgID, String? org, String? id, String? bucketID, bool? default_, String? db, String? rp }) async {
     final response = await getDBRPsWithHttpInfo( zapTraceSpan: zapTraceSpan, orgID: orgID, org: org, id: id, bucketID: bucketID, default_: default_, db: db, rp: rp );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -215,7 +208,7 @@ class DBRPsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPs',) as DBRPs;
         }
     return Future<DBRPs>.value(null);
@@ -238,16 +231,11 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> getDBRPsIDWithHttpInfo(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
-    // Verify required params are set.
-    if (dbrpID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: dbrpID');
-    }
-
+  Future<Response> getDBRPsIDWithHttpInfo(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
     final path = r'/dbrps/{dbrpID}'
       .replaceAll('{' + 'dbrpID' + '}', dbrpID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -296,7 +284,7 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<DBRPGet> getDBRPsID(String dbrpID, { String zapTraceSpan, String orgID, String org }) async {
+  Future<DBRPGet> getDBRPsID(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
     final response = await getDBRPsIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -304,7 +292,7 @@ class DBRPsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
         }
     return Future<DBRPGet>.value(null);
@@ -330,15 +318,7 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> patchDBRPIDWithHttpInfo(String dbrpID, DBRPUpdate dBRPUpdate, { String zapTraceSpan, String orgID, String org }) async {
-    // Verify required params are set.
-    if (dbrpID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: dbrpID');
-    }
-    if (dBRPUpdate == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: dBRPUpdate');
-    }
-
+  Future<Response> patchDBRPIDWithHttpInfo(String dbrpID, DBRPUpdate dBRPUpdate, { String? zapTraceSpan, String? orgID, String? org }) async {
     final path = r'/dbrps/{dbrpID}'
       .replaceAll('{' + 'dbrpID' + '}', dbrpID.toString());
 
@@ -394,7 +374,7 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<DBRPGet> patchDBRPID(String dbrpID, DBRPUpdate dBRPUpdate, { String zapTraceSpan, String orgID, String org }) async {
+  Future<DBRPGet> patchDBRPID(String dbrpID, DBRPUpdate dBRPUpdate, { String? zapTraceSpan, String? orgID, String? org }) async {
     final response = await patchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -402,8 +382,8 @@ class DBRPsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',);
         }
     return Future<DBRPGet>.value(null);
   }
@@ -419,12 +399,7 @@ class DBRPsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postDBRPWithHttpInfo(DBRPCreate dBRPCreate, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (dBRPCreate == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: dBRPCreate');
-    }
-
+  Future<Response> postDBRPWithHttpInfo(DBRPCreate dBRPCreate, { String? zapTraceSpan }) async {
     final path = r'/dbrps';
 
     Object postBody = dBRPCreate;
@@ -463,7 +438,7 @@ class DBRPsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<DBRP> postDBRP(DBRPCreate dBRPCreate, { String zapTraceSpan }) async {
+  Future<DBRP> postDBRP(DBRPCreate dBRPCreate, { String? zapTraceSpan }) async {
     final response = await postDBRPWithHttpInfo(dBRPCreate,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -471,8 +446,8 @@ class DBRPsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRP',) as DBRP;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRP',);
         }
     return Future<DBRP>.value(null);
   }

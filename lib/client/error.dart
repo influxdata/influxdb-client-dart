@@ -1,23 +1,23 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
 class InfluxDBException implements Exception {
   int statusCode;
-  String code;
-  String message;
-  int retryAfter;
+  String? code;
+  String? message;
+  int? retryAfter;
 
   InfluxDBException(this.statusCode, this.code, this.message, {this.retryAfter = -1});
 
-  static InfluxDBException fromResponse(Response response) {
-    return fromJson(response.body, response.statusCode, response.headers);
+  static InfluxDBException fromResponse(BaseResponse response) {
+    return fromJson(response is Response? response.body : '', response.statusCode, response.headers);
   }
 
   static InfluxDBException fromJson(
       String errorBody, int statusCode, Map<String, String> headers) {
-    String code;
-    String message;
+    String? code;
+    String? message;
     dynamic body;
     try {
       body = json.decode(errorBody);
@@ -27,7 +27,7 @@ class InfluxDBException implements Exception {
     var retryAfter;
     if (headers != null &&  headers[HttpHeaders.retryAfterHeader] != null) {
       try {
-        retryAfter = int.parse(headers[HttpHeaders.retryAfterHeader]);
+        retryAfter = int.parse(headers[HttpHeaders.retryAfterHeader]!);
       } on FormatException {
         //ignore
       }
@@ -51,12 +51,12 @@ class InfluxDBException implements Exception {
 }
 
 class RetryException implements Exception {
-  Exception cause;
+  Exception? cause;
   String message;
 
   RetryException(this.message, [this.cause]);
 
-  Exception getCause() {
+  Exception? getCause() {
     return cause;
   }
 

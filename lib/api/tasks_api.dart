@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class TasksApi {
-  TasksApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  TasksApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -28,16 +28,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> deleteTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -75,7 +70,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteTasksID(String taskID, { String zapTraceSpan }) async {
+  Future<void> deleteTasksID(String taskID, { String? zapTraceSpan }) async {
     final response = await deleteTasksIDWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -96,20 +91,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDLabelsIDWithHttpInfo(String taskID, String labelID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (labelID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
-    }
-
+  Future<Response> deleteTasksIDLabelsIDWithHttpInfo(String taskID, String labelID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/labels/{labelID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'labelID' + '}', labelID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -148,7 +135,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteTasksIDLabelsID(String taskID, String labelID, { String zapTraceSpan }) async {
+  Future<void> deleteTasksIDLabelsID(String taskID, String labelID, { String? zapTraceSpan }) async {
     final response = await deleteTasksIDLabelsIDWithHttpInfo(taskID, labelID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -169,20 +156,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDMembersIDWithHttpInfo(String userID, String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> deleteTasksIDMembersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/members/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -221,7 +200,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteTasksIDMembersID(String userID, String taskID, { String zapTraceSpan }) async {
+  Future<void> deleteTasksIDMembersID(String userID, String taskID, { String? zapTraceSpan }) async {
     final response = await deleteTasksIDMembersIDWithHttpInfo(userID, taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -242,20 +221,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDOwnersIDWithHttpInfo(String userID, String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> deleteTasksIDOwnersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/owners/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString())
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -294,7 +265,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteTasksIDOwnersID(String userID, String taskID, { String zapTraceSpan }) async {
+  Future<void> deleteTasksIDOwnersID(String userID, String taskID, { String? zapTraceSpan }) async {
     final response = await deleteTasksIDOwnersIDWithHttpInfo(userID, taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -315,20 +286,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (runID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
-    }
-
+  Future<Response> deleteTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/runs/{runID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -367,7 +330,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteTasksIDRunsID(String taskID, String runID, { String zapTraceSpan }) async {
+  Future<void> deleteTasksIDRunsID(String taskID, String runID, { String? zapTraceSpan }) async {
     final response = await deleteTasksIDRunsIDWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -403,12 +366,10 @@ class TasksApi {
   ///
   /// * [int] limit:
   ///   The number of tasks to return
-  Future<Response> getTasksWithHttpInfo({ String zapTraceSpan, String name, String after, String user, String org, String orgID, String status, int limit }) async {
-    // Verify required params are set.
-
+  Future<Response> getTasksWithHttpInfo({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit }) async {
     final path = r'/tasks';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -484,7 +445,7 @@ class TasksApi {
   ///
   /// * [int] limit:
   ///   The number of tasks to return
-  Future<Tasks> getTasks({ String zapTraceSpan, String name, String after, String user, String org, String orgID, String status, int limit }) async {
+  Future<Tasks> getTasks({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit }) async {
     final response = await getTasksWithHttpInfo( zapTraceSpan: zapTraceSpan, name: name, after: after, user: user, org: org, orgID: orgID, status: status, limit: limit );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -492,7 +453,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Tasks',) as Tasks;
         }
     return Future<Tasks>.value(null);
@@ -509,16 +470,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -554,7 +510,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Task> getTasksID(String taskID, { String zapTraceSpan }) async {
+  Future<Task> getTasksID(String taskID, { String? zapTraceSpan }) async {
     final response = await getTasksIDWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -562,7 +518,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
         }
     return Future<Task>.value(null);
@@ -579,16 +535,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDLabelsWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDLabelsWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/labels'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -624,7 +575,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelsResponse> getTasksIDLabels(String taskID, { String zapTraceSpan }) async {
+  Future<LabelsResponse> getTasksIDLabels(String taskID, { String? zapTraceSpan }) async {
     final response = await getTasksIDLabelsWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -632,7 +583,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
         }
     return Future<LabelsResponse>.value(null);
@@ -649,16 +600,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDLogsWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDLogsWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/logs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -694,7 +640,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Logs> getTasksIDLogs(String taskID, { String zapTraceSpan }) async {
+  Future<Logs> getTasksIDLogs(String taskID, { String? zapTraceSpan }) async {
     final response = await getTasksIDLogsWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -702,7 +648,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Logs',) as Logs;
         }
     return Future<Logs>.value(null);
@@ -719,16 +665,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDMembersWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDMembersWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/members'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -764,7 +705,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMembers> getTasksIDMembers(String taskID, { String zapTraceSpan }) async {
+  Future<ResourceMembers> getTasksIDMembers(String taskID, { String? zapTraceSpan }) async {
     final response = await getTasksIDMembersWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -772,7 +713,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMembers',) as ResourceMembers;
         }
     return Future<ResourceMembers>.value(null);
@@ -789,16 +730,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDOwnersWithHttpInfo(String taskID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDOwnersWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/owners'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -834,7 +770,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwners> getTasksIDOwners(String taskID, { String zapTraceSpan }) async {
+  Future<ResourceOwners> getTasksIDOwners(String taskID, { String? zapTraceSpan }) async {
     final response = await getTasksIDOwnersWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -842,7 +778,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwners',) as ResourceOwners;
         }
     return Future<ResourceOwners>.value(null);
@@ -871,16 +807,11 @@ class TasksApi {
   ///
   /// * [DateTime] beforeTime:
   ///   Filter runs to those scheduled before this time, RFC3339
-  Future<Response> getTasksIDRunsWithHttpInfo(String taskID, { String zapTraceSpan, String after, int limit, DateTime afterTime, DateTime beforeTime }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> getTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, String? after, int? limit, DateTime? afterTime, DateTime? beforeTime }) async {
     final path = r'/tasks/{taskID}/runs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -941,7 +872,7 @@ class TasksApi {
   ///
   /// * [DateTime] beforeTime:
   ///   Filter runs to those scheduled before this time, RFC3339
-  Future<Runs> getTasksIDRuns(String taskID, { String zapTraceSpan, String after, int limit, DateTime afterTime, DateTime beforeTime }) async {
+  Future<Runs> getTasksIDRuns(String taskID, { String? zapTraceSpan, String? after, int? limit, DateTime? afterTime, DateTime? beforeTime }) async {
     final response = await getTasksIDRunsWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan, after: after, limit: limit, afterTime: afterTime, beforeTime: beforeTime );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -949,7 +880,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Runs',) as Runs;
         }
     return Future<Runs>.value(null);
@@ -969,20 +900,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (runID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
-    }
-
+  Future<Response> getTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/runs/{runID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1021,7 +944,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Run> getTasksIDRunsID(String taskID, String runID, { String zapTraceSpan }) async {
+  Future<Run> getTasksIDRunsID(String taskID, String runID, { String? zapTraceSpan }) async {
     final response = await getTasksIDRunsIDWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1029,7 +952,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
         }
     return Future<Run>.value(null);
@@ -1049,20 +972,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDRunsIDLogsWithHttpInfo(String taskID, String runID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (runID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
-    }
-
+  Future<Response> getTasksIDRunsIDLogsWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/runs/{runID}/logs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1101,7 +1016,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Logs> getTasksIDRunsIDLogs(String taskID, String runID, { String zapTraceSpan }) async {
+  Future<Logs> getTasksIDRunsIDLogs(String taskID, String runID, { String? zapTraceSpan }) async {
     final response = await getTasksIDRunsIDLogsWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1109,7 +1024,7 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Logs',) as Logs;
         }
     return Future<Logs>.value(null);
@@ -1131,15 +1046,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchTasksIDWithHttpInfo(String taskID, TaskUpdateRequest taskUpdateRequest, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (taskUpdateRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskUpdateRequest');
-    }
-
+  Future<Response> patchTasksIDWithHttpInfo(String taskID, TaskUpdateRequest taskUpdateRequest, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -1184,7 +1091,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Task> patchTasksID(String taskID, TaskUpdateRequest taskUpdateRequest, { String zapTraceSpan }) async {
+  Future<Task> patchTasksID(String taskID, TaskUpdateRequest taskUpdateRequest, { String? zapTraceSpan }) async {
     final response = await patchTasksIDWithHttpInfo(taskID, taskUpdateRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1192,8 +1099,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',);
         }
     return Future<Task>.value(null);
   }
@@ -1209,12 +1116,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksWithHttpInfo(TaskCreateRequest taskCreateRequest, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskCreateRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskCreateRequest');
-    }
-
+  Future<Response> postTasksWithHttpInfo(TaskCreateRequest taskCreateRequest, { String? zapTraceSpan }) async {
     final path = r'/tasks';
 
     Object postBody = taskCreateRequest;
@@ -1253,7 +1155,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Task> postTasks(TaskCreateRequest taskCreateRequest, { String zapTraceSpan }) async {
+  Future<Task> postTasks(TaskCreateRequest taskCreateRequest, { String? zapTraceSpan }) async {
     final response = await postTasksWithHttpInfo(taskCreateRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1261,8 +1163,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',);
         }
     return Future<Task>.value(null);
   }
@@ -1281,15 +1183,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDLabelsWithHttpInfo(String taskID, LabelMapping labelMapping, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (labelMapping == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelMapping');
-    }
-
+  Future<Response> postTasksIDLabelsWithHttpInfo(String taskID, LabelMapping labelMapping, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/labels'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -1332,7 +1226,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> postTasksIDLabels(String taskID, LabelMapping labelMapping, { String zapTraceSpan }) async {
+  Future<LabelResponse> postTasksIDLabels(String taskID, LabelMapping labelMapping, { String? zapTraceSpan }) async {
     final response = await postTasksIDLabelsWithHttpInfo(taskID, labelMapping,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1340,8 +1234,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',);
         }
     return Future<LabelResponse>.value(null);
   }
@@ -1360,15 +1254,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDMembersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (addResourceMemberRequestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
-    }
-
+  Future<Response> postTasksIDMembersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/members'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -1411,7 +1297,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMember> postTasksIDMembers(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+  Future<ResourceMember> postTasksIDMembers(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final response = await postTasksIDMembersWithHttpInfo(taskID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1419,8 +1305,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',) as ResourceMember;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',);
         }
     return Future<ResourceMember>.value(null);
   }
@@ -1439,15 +1325,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDOwnersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (addResourceMemberRequestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
-    }
-
+  Future<Response> postTasksIDOwnersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final path = r'/tasks/{taskID}/owners'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
@@ -1490,7 +1368,7 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwner> postTasksIDOwners(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+  Future<ResourceOwner> postTasksIDOwners(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final response = await postTasksIDOwnersWithHttpInfo(taskID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1498,8 +1376,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',) as ResourceOwner;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',);
         }
     return Future<ResourceOwner>.value(null);
   }
@@ -1516,16 +1394,11 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [RunManually] runManually:
-  Future<Response> postTasksIDRunsWithHttpInfo(String taskID, { String zapTraceSpan, RunManually runManually }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-
+  Future<Response> postTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, RunManually? runManually }) async {
     final path = r'/tasks/{taskID}/runs'
       .replaceAll('{' + 'taskID' + '}', taskID.toString());
 
-    Object postBody = runManually;
+    Object? postBody = runManually;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1562,7 +1435,7 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [RunManually] runManually:
-  Future<Run> postTasksIDRuns(String taskID, { String zapTraceSpan, RunManually runManually }) async {
+  Future<Run> postTasksIDRuns(String taskID, { String? zapTraceSpan, RunManually? runManually }) async {
     final response = await postTasksIDRunsWithHttpInfo(taskID,  zapTraceSpan: zapTraceSpan, runManually: runManually );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1570,8 +1443,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',);
         }
     return Future<Run>.value(null);
   }
@@ -1592,20 +1465,12 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [Object] body:
-  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String zapTraceSpan, Object body }) async {
-    // Verify required params are set.
-    if (taskID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: taskID');
-    }
-    if (runID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: runID');
-    }
-
+  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, Object? body }) async {
     final path = r'/tasks/{taskID}/runs/{runID}/retry'
       .replaceAll('{' + 'taskID' + '}', taskID.toString())
       .replaceAll('{' + 'runID' + '}', runID.toString());
 
-    Object postBody = body;
+    Object? postBody = body;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1646,7 +1511,7 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [Object] body:
-  Future<Run> postTasksIDRunsIDRetry(String taskID, String runID, { String zapTraceSpan, Object body }) async {
+  Future<Run> postTasksIDRunsIDRetry(String taskID, String runID, { String? zapTraceSpan, Object? body }) async {
     final response = await postTasksIDRunsIDRetryWithHttpInfo(taskID, runID,  zapTraceSpan: zapTraceSpan, body: body );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1654,8 +1519,8 @@ class TasksApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',);
         }
     return Future<Run>.value(null);
   }

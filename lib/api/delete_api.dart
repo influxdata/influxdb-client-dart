@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class DeleteApi {
-  DeleteApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  DeleteApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -38,12 +38,7 @@ class DeleteApi {
   ///
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
-  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String zapTraceSpan, String org, String bucket, String orgID, String bucketID }) async {
-    // Verify required params are set.
-    if (deletePredicateRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: deletePredicateRequest');
-    }
-
+  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID }) async {
     final path = r'/delete';
 
     Object postBody = deletePredicateRequest;
@@ -107,7 +102,7 @@ class DeleteApi {
   ///
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
-  Future<void> postDelete(DeletePredicateRequest deletePredicateRequest, { String zapTraceSpan, String org, String bucket, String orgID, String bucketID }) async {
+  Future<void> postDelete(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID }) async {
     final response = await postDeleteWithHttpInfo(deletePredicateRequest,  zapTraceSpan: zapTraceSpan, org: org, bucket: bucket, orgID: orgID, bucketID: bucketID );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));

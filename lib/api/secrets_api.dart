@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class SecretsApi {
-  SecretsApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  SecretsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -29,20 +29,12 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDSecretsIDWithHttpInfo(String orgID, String secretID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (secretID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: secretID');
-    }
-
+  Future<Response> deleteOrgsIDSecretsIDWithHttpInfo(String orgID, String secretID, { String? zapTraceSpan }) async {
     final path = r'/orgs/{orgID}/secrets/{secretID}'
       .replaceAll('{' + 'orgID' + '}', orgID.toString())
       .replaceAll('{' + 'secretID' + '}', secretID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -81,7 +73,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsIDSecretsID(String orgID, String secretID, { String zapTraceSpan }) async {
+  Future<void> deleteOrgsIDSecretsID(String orgID, String secretID, { String? zapTraceSpan }) async {
     final response = await deleteOrgsIDSecretsIDWithHttpInfo(orgID, secretID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -99,16 +91,11 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDSecretsWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> getOrgsIDSecretsWithHttpInfo(String orgID, { String? zapTraceSpan }) async {
     final path = r'/orgs/{orgID}/secrets'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -144,7 +131,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<SecretKeysResponse> getOrgsIDSecrets(String orgID, { String zapTraceSpan }) async {
+  Future<SecretKeysResponse> getOrgsIDSecrets(String orgID, { String? zapTraceSpan }) async {
     final response = await getOrgsIDSecretsWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -152,7 +139,7 @@ class SecretsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'SecretKeysResponse',) as SecretKeysResponse;
         }
     return Future<SecretKeysResponse>.value(null);
@@ -172,15 +159,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchOrgsIDSecretsWithHttpInfo(String orgID, Map<String, String> requestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (requestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: requestBody');
-    }
-
+  Future<Response> patchOrgsIDSecretsWithHttpInfo(String orgID, Map<String, String> requestBody, { String? zapTraceSpan }) async {
     final path = r'/orgs/{orgID}/secrets'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
@@ -223,7 +202,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> patchOrgsIDSecrets(String orgID, Map<String, String> requestBody, { String zapTraceSpan }) async {
+  Future<void> patchOrgsIDSecrets(String orgID, Map<String, String> requestBody, { String? zapTraceSpan }) async {
     final response = await patchOrgsIDSecretsWithHttpInfo(orgID, requestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -244,15 +223,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDSecretsWithHttpInfo(String orgID, SecretKeys secretKeys, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (secretKeys == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: secretKeys');
-    }
-
+  Future<Response> postOrgsIDSecretsWithHttpInfo(String orgID, SecretKeys secretKeys, { String? zapTraceSpan }) async {
     final path = r'/orgs/{orgID}/secrets/delete'
       .replaceAll('{' + 'orgID' + '}', orgID.toString());
 
@@ -295,7 +266,7 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> postOrgsIDSecrets(String orgID, SecretKeys secretKeys, { String zapTraceSpan }) async {
+  Future<void> postOrgsIDSecrets(String orgID, SecretKeys secretKeys, { String? zapTraceSpan }) async {
     final response = await postOrgsIDSecretsWithHttpInfo(orgID, secretKeys,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));

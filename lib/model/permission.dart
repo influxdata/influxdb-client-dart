@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,13 +12,13 @@ part of influxdb_client_api;
 class Permission {
   /// Returns a new [Permission] instance.
   Permission({
-    @required this.action,
-    @required this.resource,
+    required this.action,
+    required this.resource,
   });
 
-  PermissionActionEnum action;
+  PermissionActionEnum? action;
 
-  Resource resource;
+  Resource? resource;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Permission &&
@@ -42,30 +42,30 @@ class Permission {
 
   /// Returns a new [Permission] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Permission fromJson(Map<String, dynamic> json) => json == null
+  static Permission? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Permission(
         action: PermissionActionEnum.fromJson(json[r'action']),
         resource: Resource.fromJson(json[r'resource']),
     );
 
-  static List<Permission> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Permission?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Permission>[]
       : json.map((dynamic value) => Permission.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Permission> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Permission>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Permission?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Permission?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Permission.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Permission-objects as value to a dart map
-  static Map<String, List<Permission>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Permission>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Permission?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Permission?>?> map = <String, List<Permission>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Permission.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -96,11 +96,11 @@ class PermissionActionEnum {
     write,
   ];
 
-  static PermissionActionEnum fromJson(dynamic value) =>
+  static PermissionActionEnum? fromJson(dynamic value) =>
     PermissionActionEnumTypeTransformer().decode(value);
 
-  static List<PermissionActionEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<PermissionActionEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <PermissionActionEnum>[]
       : json
           .map((value) => PermissionActionEnum.fromJson(value))
@@ -124,7 +124,7 @@ class PermissionActionEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  PermissionActionEnum decode(dynamic data, {bool allowNull}) {
+  PermissionActionEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'read': return PermissionActionEnum.read;
       case r'write': return PermissionActionEnum.write;
@@ -137,6 +137,6 @@ class PermissionActionEnumTypeTransformer {
   }
 
   /// Singleton [PermissionActionEnumTypeTransformer] instance.
-  static PermissionActionEnumTypeTransformer _instance;
+  static PermissionActionEnumTypeTransformer? _instance;
 }
 

@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,21 +14,21 @@ class UserResponse {
   UserResponse({
     this.id,
     this.oauthID,
-    @required this.name,
+    required this.name,
     this.status = const UserResponseStatusEnum._('active'),
     this.links,
   });
 
-  String id;
+  String? id;
 
-  String oauthID;
+  String? oauthID;
 
-  String name;
+  String? name;
 
   /// If inactive the user is inactive.
-  UserResponseStatusEnum status;
+  UserResponseStatusEnum? status;
 
-  UserResponseLinks links;
+  UserResponseLinks? links;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is UserResponse &&
@@ -69,7 +69,7 @@ class UserResponse {
 
   /// Returns a new [UserResponse] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static UserResponse fromJson(Map<String, dynamic> json) => json == null
+  static UserResponse? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : UserResponse(
         id: json[r'id'],
@@ -79,23 +79,23 @@ class UserResponse {
         links: UserResponseLinks.fromJson(json[r'links']),
     );
 
-  static List<UserResponse> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<UserResponse?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <UserResponse>[]
       : json.map((dynamic value) => UserResponse.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, UserResponse> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, UserResponse>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, UserResponse?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, UserResponse?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = UserResponse.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of UserResponse-objects as value to a dart map
-  static Map<String, List<UserResponse>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<UserResponse>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<UserResponse?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<UserResponse?>?> map = <String, List<UserResponse>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = UserResponse.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -126,11 +126,11 @@ class UserResponseStatusEnum {
     inactive,
   ];
 
-  static UserResponseStatusEnum fromJson(dynamic value) =>
+  static UserResponseStatusEnum? fromJson(dynamic value) =>
     UserResponseStatusEnumTypeTransformer().decode(value);
 
-  static List<UserResponseStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<UserResponseStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <UserResponseStatusEnum>[]
       : json
           .map((value) => UserResponseStatusEnum.fromJson(value))
@@ -154,7 +154,7 @@ class UserResponseStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  UserResponseStatusEnum decode(dynamic data, {bool allowNull}) {
+  UserResponseStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'active': return UserResponseStatusEnum.active;
       case r'inactive': return UserResponseStatusEnum.inactive;
@@ -167,6 +167,6 @@ class UserResponseStatusEnumTypeTransformer {
   }
 
   /// Singleton [UserResponseStatusEnumTypeTransformer] instance.
-  static UserResponseStatusEnumTypeTransformer _instance;
+  static UserResponseStatusEnumTypeTransformer? _instance;
 }
 

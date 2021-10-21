@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class QueryApi {
-  QueryApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  QueryApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -23,12 +23,10 @@ class QueryApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getQuerySuggestionsWithHttpInfo({ String zapTraceSpan }) async {
-    // Verify required params are set.
-
+  Future<Response> getQuerySuggestionsWithHttpInfo({ String? zapTraceSpan }) async {
     final path = r'/query/suggestions';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -79,9 +77,7 @@ class QueryApi {
   ///
   /// * [Query] query:
   ///   Flux query or specification to execute
-  Future<Response> postQueryWithHttpInfo({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
-    // Verify required params are set.
-
+  Future<Response> postQueryWithHttpInfo({ String? zapTraceSpan, String? acceptEncoding, String? contentType, String? org, String? orgID, required Query query }) async {
     final path = r'/query';
 
     Object postBody = query.toJson();
@@ -146,7 +142,7 @@ class QueryApi {
   ///
   /// * [Query] query:
   ///   Flux query or specification to execute
-  Future<String> postQuery({ String zapTraceSpan, String acceptEncoding, String contentType, String org, String orgID, Query query }) async {
+  Future<String> postQuery({ String? zapTraceSpan, String? acceptEncoding, String? contentType, String? org, String? orgID, required Query query }) async {
     final response = await postQueryWithHttpInfo( zapTraceSpan: zapTraceSpan, acceptEncoding: acceptEncoding, contentType: contentType, org: org, orgID: orgID, query: query );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -154,8 +150,8 @@ class QueryApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',);
         }
     return Future<String>.value(null);
   }

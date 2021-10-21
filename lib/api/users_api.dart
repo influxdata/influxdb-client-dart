@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class UsersApi {
-  UsersApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  UsersApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -26,16 +26,11 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteUsersIDWithHttpInfo(String userID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-
+  Future<Response> deleteUsersIDWithHttpInfo(String userID, { String? zapTraceSpan }) async {
     final path = r'/users/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -71,7 +66,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteUsersID(String userID, { String zapTraceSpan }) async {
+  Future<void> deleteUsersID(String userID, { String? zapTraceSpan }) async {
     final response = await deleteUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -86,12 +81,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getFlagsWithHttpInfo({ String zapTraceSpan }) async {
-    // Verify required params are set.
-
+  Future<Response> getFlagsWithHttpInfo({ String? zapTraceSpan }) async {
     final path = r'/flags';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -124,7 +117,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Map<String, Object>> getFlags({ String zapTraceSpan }) async {
+  Future<Map<String, Object>> getFlags({ String? zapTraceSpan }) async {
     final response = await getFlagsWithHttpInfo( zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -132,7 +125,7 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return Map<String, Object>.from(await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Map<String, Object>'),);
     }
     return Future<Map<String, Object>>.value(null);
@@ -146,12 +139,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getMeWithHttpInfo({ String zapTraceSpan }) async {
-    // Verify required params are set.
-
+  Future<Response> getMeWithHttpInfo({ String? zapTraceSpan }) async {
     final path = r'/me';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -184,7 +175,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> getMe({ String zapTraceSpan }) async {
+  Future<UserResponse> getMe({ String? zapTraceSpan }) async {
     final response = await getMeWithHttpInfo( zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -192,7 +183,7 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
         }
     return Future<UserResponse>.value(null);
@@ -217,12 +208,10 @@ class UsersApi {
   /// * [String] name:
   ///
   /// * [String] id:
-  Future<Response> getUsersWithHttpInfo({ String zapTraceSpan, int offset, int limit, String after, String name, String id }) async {
-    // Verify required params are set.
-
+  Future<Response> getUsersWithHttpInfo({ String? zapTraceSpan, int? offset, int? limit, String? after, String? name, String? id }) async {
     final path = r'/users';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -282,7 +271,7 @@ class UsersApi {
   /// * [String] name:
   ///
   /// * [String] id:
-  Future<Users> getUsers({ String zapTraceSpan, int offset, int limit, String after, String name, String id }) async {
+  Future<Users> getUsers({ String? zapTraceSpan, int? offset, int? limit, String? after, String? name, String? id }) async {
     final response = await getUsersWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, name: name, id: id );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -290,7 +279,7 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Users',) as Users;
         }
     return Future<Users>.value(null);
@@ -307,16 +296,11 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getUsersIDWithHttpInfo(String userID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-
+  Future<Response> getUsersIDWithHttpInfo(String userID, { String? zapTraceSpan }) async {
     final path = r'/users/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString());
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -352,7 +336,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> getUsersID(String userID, { String zapTraceSpan }) async {
+  Future<UserResponse> getUsersID(String userID, { String? zapTraceSpan }) async {
     final response = await getUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -360,7 +344,7 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
         }
     return Future<UserResponse>.value(null);
@@ -380,15 +364,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchUsersIDWithHttpInfo(String userID, User user, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (user == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: user');
-    }
-
+  Future<Response> patchUsersIDWithHttpInfo(String userID, User user, { String? zapTraceSpan }) async {
     final path = r'/users/{userID}'
       .replaceAll('{' + 'userID' + '}', userID.toString());
 
@@ -431,7 +407,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> patchUsersID(String userID, User user, { String zapTraceSpan }) async {
+  Future<UserResponse> patchUsersID(String userID, User user, { String? zapTraceSpan }) async {
     final response = await patchUsersIDWithHttpInfo(userID, user,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -439,8 +415,8 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',);
         }
     return Future<UserResponse>.value(null);
   }
@@ -456,12 +432,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersWithHttpInfo(User user, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (user == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: user');
-    }
-
+  Future<Response> postUsersWithHttpInfo(User user, { String? zapTraceSpan }) async {
     final path = r'/users';
 
     Object postBody = user;
@@ -500,7 +471,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> postUsers(User user, { String zapTraceSpan }) async {
+  Future<UserResponse> postUsers(User user, { String? zapTraceSpan }) async {
     final response = await postUsersWithHttpInfo(user,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -508,8 +479,8 @@ class UsersApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
+    if (response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',);
         }
     return Future<UserResponse>.value(null);
   }
@@ -528,15 +499,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersIDPasswordWithHttpInfo(String userID, PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (passwordResetBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: passwordResetBody');
-    }
-
+  Future<Response> postUsersIDPasswordWithHttpInfo(String userID, PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
     final path = r'/users/{userID}/password'
       .replaceAll('{' + 'userID' + '}', userID.toString());
 
@@ -579,7 +542,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> postUsersIDPassword(String userID, PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
+  Future<void> postUsersIDPassword(String userID, PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
     final response = await postUsersIDPasswordWithHttpInfo(userID, passwordResetBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -597,12 +560,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> putMePasswordWithHttpInfo(PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (passwordResetBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: passwordResetBody');
-    }
-
+  Future<Response> putMePasswordWithHttpInfo(PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
     final path = r'/me/password';
 
     Object postBody = passwordResetBody;
@@ -641,7 +599,7 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> putMePassword(PasswordResetBody passwordResetBody, { String zapTraceSpan }) async {
+  Future<void> putMePassword(PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
     final response = await putMePasswordWithHttpInfo(passwordResetBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));

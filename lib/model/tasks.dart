@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -16,9 +16,9 @@ class Tasks {
     this.tasks = const [],
   });
 
-  Links links;
+  Links? links;
 
-  List<Task> tasks;
+  List<Task?>? tasks;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Tasks &&
@@ -46,30 +46,30 @@ class Tasks {
 
   /// Returns a new [Tasks] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Tasks fromJson(Map<String, dynamic> json) => json == null
+  static Tasks? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Tasks(
         links: Links.fromJson(json[r'links']),
         tasks: Task.listFromJson(json[r'tasks']),
     );
 
-  static List<Tasks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Tasks?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Tasks>[]
       : json.map((dynamic value) => Tasks.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Tasks> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Tasks>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Tasks?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Tasks?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Tasks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Tasks-objects as value to a dart map
-  static Map<String, List<Tasks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Tasks>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Tasks?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Tasks?>?> map = <String, List<Tasks>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Tasks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

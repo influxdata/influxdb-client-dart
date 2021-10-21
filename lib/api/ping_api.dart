@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -11,7 +11,7 @@ part of influxdb_client_api;
 
 
 class PingApi {
-  PingApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  PingApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -21,7 +21,7 @@ class PingApi {
   Future<Response> getPingWithHttpInfo() async {
     final path = r'/ping';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -58,7 +58,7 @@ class PingApi {
   Future<Response> headPingWithHttpInfo() async {
     final path = r'/ping';
 
-    Object postBody;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};

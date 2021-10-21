@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -16,9 +16,9 @@ class SecretKeysResponseAllOfLinks {
     this.org,
   });
 
-  String self;
+  String? self;
 
-  String org;
+  String? org;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is SecretKeysResponseAllOfLinks &&
@@ -46,30 +46,30 @@ class SecretKeysResponseAllOfLinks {
 
   /// Returns a new [SecretKeysResponseAllOfLinks] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static SecretKeysResponseAllOfLinks fromJson(Map<String, dynamic> json) => json == null
+  static SecretKeysResponseAllOfLinks? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : SecretKeysResponseAllOfLinks(
         self: json[r'self'],
         org: json[r'org'],
     );
 
-  static List<SecretKeysResponseAllOfLinks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<SecretKeysResponseAllOfLinks?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <SecretKeysResponseAllOfLinks>[]
       : json.map((dynamic value) => SecretKeysResponseAllOfLinks.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, SecretKeysResponseAllOfLinks> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, SecretKeysResponseAllOfLinks>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, SecretKeysResponseAllOfLinks?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, SecretKeysResponseAllOfLinks?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = SecretKeysResponseAllOfLinks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of SecretKeysResponseAllOfLinks-objects as value to a dart map
-  static Map<String, List<SecretKeysResponseAllOfLinks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<SecretKeysResponseAllOfLinks>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<SecretKeysResponseAllOfLinks?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<SecretKeysResponseAllOfLinks?>?> map = <String, List<SecretKeysResponseAllOfLinks>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = SecretKeysResponseAllOfLinks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

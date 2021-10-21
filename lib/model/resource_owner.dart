@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -14,24 +14,24 @@ class ResourceOwner {
   ResourceOwner({
     this.id,
     this.oauthID,
-    @required this.name,
+    required this.name,
     this.status = const ResourceOwnerStatusEnum._('active'),
     this.links,
     this.role = const ResourceOwnerRoleEnum._('owner'),
   });
 
-  String id;
+  String? id;
 
-  String oauthID;
+  String? oauthID;
 
-  String name;
+  String? name;
 
   /// If inactive the user is inactive.
-  ResourceOwnerStatusEnum status;
+  ResourceOwnerStatusEnum? status;
 
-  UserResponseLinks links;
+  UserResponseLinks? links;
 
-  ResourceOwnerRoleEnum role;
+  ResourceOwnerRoleEnum? role;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ResourceOwner &&
@@ -77,7 +77,7 @@ class ResourceOwner {
 
   /// Returns a new [ResourceOwner] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static ResourceOwner fromJson(Map<String, dynamic> json) => json == null
+  static ResourceOwner? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : ResourceOwner(
         id: json[r'id'],
@@ -88,23 +88,23 @@ class ResourceOwner {
         role: ResourceOwnerRoleEnum.fromJson(json[r'role']),
     );
 
-  static List<ResourceOwner> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceOwner?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceOwner>[]
       : json.map((dynamic value) => ResourceOwner.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, ResourceOwner> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, ResourceOwner>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, ResourceOwner?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, ResourceOwner?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = ResourceOwner.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ResourceOwner-objects as value to a dart map
-  static Map<String, List<ResourceOwner>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<ResourceOwner>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<ResourceOwner?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<ResourceOwner?>?> map = <String, List<ResourceOwner>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = ResourceOwner.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -135,11 +135,11 @@ class ResourceOwnerStatusEnum {
     inactive,
   ];
 
-  static ResourceOwnerStatusEnum fromJson(dynamic value) =>
+  static ResourceOwnerStatusEnum? fromJson(dynamic value) =>
     ResourceOwnerStatusEnumTypeTransformer().decode(value);
 
-  static List<ResourceOwnerStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceOwnerStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceOwnerStatusEnum>[]
       : json
           .map((value) => ResourceOwnerStatusEnum.fromJson(value))
@@ -163,7 +163,7 @@ class ResourceOwnerStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ResourceOwnerStatusEnum decode(dynamic data, {bool allowNull}) {
+  ResourceOwnerStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'active': return ResourceOwnerStatusEnum.active;
       case r'inactive': return ResourceOwnerStatusEnum.inactive;
@@ -176,7 +176,7 @@ class ResourceOwnerStatusEnumTypeTransformer {
   }
 
   /// Singleton [ResourceOwnerStatusEnumTypeTransformer] instance.
-  static ResourceOwnerStatusEnumTypeTransformer _instance;
+  static ResourceOwnerStatusEnumTypeTransformer? _instance;
 }
 
 
@@ -199,11 +199,11 @@ class ResourceOwnerRoleEnum {
     owner,
   ];
 
-  static ResourceOwnerRoleEnum fromJson(dynamic value) =>
+  static ResourceOwnerRoleEnum? fromJson(dynamic value) =>
     ResourceOwnerRoleEnumTypeTransformer().decode(value);
 
-  static List<ResourceOwnerRoleEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<ResourceOwnerRoleEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <ResourceOwnerRoleEnum>[]
       : json
           .map((value) => ResourceOwnerRoleEnum.fromJson(value))
@@ -227,7 +227,7 @@ class ResourceOwnerRoleEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  ResourceOwnerRoleEnum decode(dynamic data, {bool allowNull}) {
+  ResourceOwnerRoleEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'owner': return ResourceOwnerRoleEnum.owner;
       default:
@@ -239,6 +239,6 @@ class ResourceOwnerRoleEnumTypeTransformer {
   }
 
   /// Singleton [ResourceOwnerRoleEnumTypeTransformer] instance.
-  static ResourceOwnerRoleEnumTypeTransformer _instance;
+  static ResourceOwnerRoleEnumTypeTransformer? _instance;
 }
 

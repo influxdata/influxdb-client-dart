@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -24,31 +24,31 @@ class AuthorizationAllOf {
     this.links,
   });
 
-  DateTime createdAt;
+  DateTime? createdAt;
 
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
   /// ID of org that authorization is scoped to.
-  String orgID;
+  String? orgID;
 
   /// List of permissions for an auth.  An auth must have at least one Permission.
-  List<Permission> permissions;
+  List<Permission?>? permissions;
 
-  String id;
+  String? id;
 
   /// Passed via the Authorization Header and Token Authentication type.
-  String token;
+  String? token;
 
   /// ID of user that created and owns the token.
-  String userID;
+  String? userID;
 
   /// Name of user that created and owns the token.
-  String user;
+  String? user;
 
   /// Name of the org token is scoped to.
-  String org;
+  String? org;
 
-  AuthorizationAllOfLinks links;
+  AuthorizationAllOfLinks? links;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is AuthorizationAllOf &&
@@ -82,10 +82,10 @@ class AuthorizationAllOf {
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
     if (createdAt != null) {
-      json[r'createdAt'] = createdAt.toUtc().toIso8601String();
+      json[r'createdAt'] = createdAt!.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
-      json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
+      json[r'updatedAt'] = updatedAt!.toUtc().toIso8601String();
     }
     if (orgID != null) {
       json[r'orgID'] = orgID;
@@ -116,7 +116,7 @@ class AuthorizationAllOf {
 
   /// Returns a new [AuthorizationAllOf] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static AuthorizationAllOf fromJson(Map<String, dynamic> json) => json == null
+  static AuthorizationAllOf? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : AuthorizationAllOf(
         createdAt: json[r'createdAt'] == null
@@ -135,23 +135,23 @@ class AuthorizationAllOf {
         links: AuthorizationAllOfLinks.fromJson(json[r'links']),
     );
 
-  static List<AuthorizationAllOf> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<AuthorizationAllOf?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <AuthorizationAllOf>[]
       : json.map((dynamic value) => AuthorizationAllOf.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, AuthorizationAllOf> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, AuthorizationAllOf>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, AuthorizationAllOf?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, AuthorizationAllOf?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = AuthorizationAllOf.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationAllOf-objects as value to a dart map
-  static Map<String, List<AuthorizationAllOf>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<AuthorizationAllOf>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<AuthorizationAllOf?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<AuthorizationAllOf?>?> map = <String, List<AuthorizationAllOf>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = AuthorizationAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });

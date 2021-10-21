@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'commons_test.dart';
 
 void main() {
-  Bucket bucket;
+  late Bucket bucket;
 
   setUp(() async {
     setupClient();
@@ -38,10 +38,8 @@ void main() {
   });
 
   tearDown(() async {
-    if (bucket != null) {
-      print('Delete bucket id: ${bucket.id}');
-      await client.getBucketsApi().deleteBucketsID(bucket.id);
-    }
+    print('Delete bucket id: ${bucket.id}');
+    await client.getBucketsApi().deleteBucketsID(bucket.id);
     client.close();
   });
 

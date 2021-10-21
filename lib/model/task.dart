@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -12,17 +12,17 @@ part of influxdb_client_api;
 class Task {
   /// Returns a new [Task] instance.
   Task({
-    @required this.id,
+    required this.id,
     this.type,
-    @required this.orgID,
+    required this.orgID,
     this.org,
-    @required this.name,
+    required this.name,
     this.ownerID,
     this.description,
     this.status,
     this.labels = const [],
     this.authorizationID,
-    @required this.flux,
+    required this.flux,
     this.every,
     this.cron,
     this.offset,
@@ -34,57 +34,57 @@ class Task {
     this.links,
   });
 
-  String id;
+  String? id;
 
   /// The type of task, this can be used for filtering tasks on list actions.
-  String type;
+  String? type;
 
   /// The ID of the organization that owns this Task.
-  String orgID;
+  String? orgID;
 
   /// The name of the organization that owns this Task.
-  String org;
+  String? org;
 
   /// The name of the task.
-  String name;
+  String? name;
 
   /// The ID of the user who owns this Task.
-  String ownerID;
+  String? ownerID;
 
   /// An optional description of the task.
-  String description;
+  String? description;
 
-  TaskStatusType status;
+  TaskStatusType? status;
 
-  List<Label> labels;
+  List<Label?>? labels;
 
   /// The ID of the authorization used when this task communicates with the query engine.
-  String authorizationID;
+  String? authorizationID;
 
   /// The Flux script to run for this task.
-  String flux;
+  String? flux;
 
   /// A simple task repetition schedule; parsed from Flux.
-  String every;
+  String? every;
 
   /// A task repetition schedule in the form '* * * * * *'; parsed from Flux.
-  String cron;
+  String? cron;
 
   /// Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default.
-  String offset;
+  String? offset;
 
   /// Timestamp of latest scheduled, completed run, RFC3339.
-  DateTime latestCompleted;
+  DateTime? latestCompleted;
 
-  TaskLastRunStatusEnum lastRunStatus;
+  TaskLastRunStatusEnum? lastRunStatus;
 
-  String lastRunError;
+  String? lastRunError;
 
-  DateTime createdAt;
+  DateTime? createdAt;
 
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
-  TaskLinks links;
+  TaskLinks? links;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Task &&
@@ -172,7 +172,7 @@ class Task {
       json[r'offset'] = offset;
     }
     if (latestCompleted != null) {
-      json[r'latestCompleted'] = latestCompleted.toUtc().toIso8601String();
+      json[r'latestCompleted'] = latestCompleted!.toUtc().toIso8601String();
     }
     if (lastRunStatus != null) {
       json[r'lastRunStatus'] = lastRunStatus;
@@ -181,10 +181,10 @@ class Task {
       json[r'lastRunError'] = lastRunError;
     }
     if (createdAt != null) {
-      json[r'createdAt'] = createdAt.toUtc().toIso8601String();
+      json[r'createdAt'] = createdAt!.toUtc().toIso8601String();
     }
     if (updatedAt != null) {
-      json[r'updatedAt'] = updatedAt.toUtc().toIso8601String();
+      json[r'updatedAt'] = updatedAt!.toUtc().toIso8601String();
     }
     if (links != null) {
       json[r'links'] = links;
@@ -194,7 +194,7 @@ class Task {
 
   /// Returns a new [Task] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Task fromJson(Map<String, dynamic> json) => json == null
+  static Task? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Task(
         id: json[r'id'],
@@ -225,23 +225,23 @@ class Task {
         links: TaskLinks.fromJson(json[r'links']),
     );
 
-  static List<Task> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Task?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Task>[]
       : json.map((dynamic value) => Task.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Task> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Task>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Task?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Task?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Task.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Task-objects as value to a dart map
-  static Map<String, List<Task>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Task>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Task?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Task?>?> map = <String, List<Task>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Task.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -274,11 +274,11 @@ class TaskLastRunStatusEnum {
     canceled,
   ];
 
-  static TaskLastRunStatusEnum fromJson(dynamic value) =>
+  static TaskLastRunStatusEnum? fromJson(dynamic value) =>
     TaskLastRunStatusEnumTypeTransformer().decode(value);
 
-  static List<TaskLastRunStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<TaskLastRunStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <TaskLastRunStatusEnum>[]
       : json
           .map((value) => TaskLastRunStatusEnum.fromJson(value))
@@ -302,7 +302,7 @@ class TaskLastRunStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  TaskLastRunStatusEnum decode(dynamic data, {bool allowNull}) {
+  TaskLastRunStatusEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'failed': return TaskLastRunStatusEnum.failed;
       case r'success': return TaskLastRunStatusEnum.success;
@@ -316,6 +316,6 @@ class TaskLastRunStatusEnumTypeTransformer {
   }
 
   /// Singleton [TaskLastRunStatusEnumTypeTransformer] instance.
-  static TaskLastRunStatusEnumTypeTransformer _instance;
+  static TaskLastRunStatusEnumTypeTransformer? _instance;
 }
 
