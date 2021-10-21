@@ -15,14 +15,14 @@ class DeleteApi {
 
   final ApiClient apiClient;
 
-  /// Delete time series data from InfluxDB
+  /// Delete data
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [DeletePredicateRequest] deletePredicateRequest (required):
-  ///   Predicate delete request
+  ///   Deletes data from an InfluxDB bucket.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
@@ -71,7 +71,7 @@ class DeleteApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -86,12 +86,12 @@ class DeleteApi {
     );
   }
 
-  /// Delete time series data from InfluxDB
+  /// Delete data
   ///
   /// Parameters:
   ///
   /// * [DeletePredicateRequest] deletePredicateRequest (required):
-  ///   Predicate delete request
+  ///   Deletes data from an InfluxDB bucket.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context

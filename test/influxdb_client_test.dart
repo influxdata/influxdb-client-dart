@@ -110,5 +110,11 @@ void main() async {
     expect(ready.started.toIso8601String().isNotEmpty ,true);
   });
 
+  test('ping', () async {
+    var future = client.getPingApi().getPing();
+    expect(future, completion(null));
+    future = client.getPingApi().headPing();
+    expect(future, completion(null));
+  });
 }
 

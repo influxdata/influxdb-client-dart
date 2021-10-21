@@ -5,11 +5,8 @@ void main() async {
   var client = InfluxDBClient(
       url: 'http://localhost:8086', token: 'my-token', org: 'my-org');
 
-  var healthCheck = await client.getHealthApi().getHealth();
-  print('Health check: ${healthCheck.name}/${healthCheck.version} - ${healthCheck.message}');
-
-  var ready = await client.getReadyApi().getReady();
-  print('Ready check: ${ready.status}');
+  //check server availability
+  await client.getPingApi().getPing();
 
   var orgs = await client.getOrganizationsApi().getOrgs();
   var myOrgId = orgs.orgs.first.id;

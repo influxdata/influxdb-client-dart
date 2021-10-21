@@ -15,38 +15,40 @@ class WriteApi {
 
   final ApiClient apiClient;
 
-  /// Write time series data into InfluxDB
+  /// Write data
+  ///
+  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api). 
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [String] org (required):
-  ///   Specifies the destination organization for writes. Takes either the ID or Name interchangeably. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   The parameter value specifies the destination organization for writes. The database writes all points in the batch to this organization. If you provide both `orgID` and `org` parameters, `org` takes precedence.
   ///
   /// * [String] bucket (required):
   ///   The destination bucket for writes.
   ///
   /// * [String] body (required):
-  ///   Line protocol body
+  ///   Data in line protocol format.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
   ///
   /// * [String] contentEncoding:
-  ///   When present, its value indicates to the database that compression is applied to the line-protocol body.
+  ///   When present, the header value tells the database that compression is applied to the line protocol in the request body.
   ///
   /// * [String] contentType:
-  ///   Content-Type is used to indicate the format of the data sent to the server.
+  ///   The header value indicates the format of the data in the request body.
   ///
   /// * [int] contentLength:
-  ///   Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent.
+  ///   The header value indicates the size of the entity-body, in bytes, sent to the database. If the length is greater than the database's `max body` configuration option, the server responds with status code `413`.
   ///
   /// * [String] accept:
-  ///   Specifies the return content format.
+  ///   The header value specifies the response format.
   ///
   /// * [String] orgID:
-  ///   Specifies the ID of the destination organization for writes. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   The parameter value specifies the ID of the destination organization for writes. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.
@@ -97,7 +99,7 @@ class WriteApi {
 
     final contentTypes = <String>['text/plain'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>[];
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
     return await apiClient.invokeAPI(
@@ -112,36 +114,38 @@ class WriteApi {
     );
   }
 
-  /// Write time series data into InfluxDB
+  /// Write data
+  ///
+  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api). 
   ///
   /// Parameters:
   ///
   /// * [String] org (required):
-  ///   Specifies the destination organization for writes. Takes either the ID or Name interchangeably. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   The parameter value specifies the destination organization for writes. The database writes all points in the batch to this organization. If you provide both `orgID` and `org` parameters, `org` takes precedence.
   ///
   /// * [String] bucket (required):
   ///   The destination bucket for writes.
   ///
   /// * [String] body (required):
-  ///   Line protocol body
+  ///   Data in line protocol format.
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
   ///
   /// * [String] contentEncoding:
-  ///   When present, its value indicates to the database that compression is applied to the line-protocol body.
+  ///   When present, the header value tells the database that compression is applied to the line protocol in the request body.
   ///
   /// * [String] contentType:
-  ///   Content-Type is used to indicate the format of the data sent to the server.
+  ///   The header value indicates the format of the data in the request body.
   ///
   /// * [int] contentLength:
-  ///   Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent.
+  ///   The header value indicates the size of the entity-body, in bytes, sent to the database. If the length is greater than the database's `max body` configuration option, the server responds with status code `413`.
   ///
   /// * [String] accept:
-  ///   Specifies the return content format.
+  ///   The header value specifies the response format.
   ///
   /// * [String] orgID:
-  ///   Specifies the ID of the destination organization for writes. If both `orgID` and `org` are specified, `org` takes precedence.
+  ///   The parameter value specifies the ID of the destination organization for writes. If both `orgID` and `org` are specified, `org` takes precedence.
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.

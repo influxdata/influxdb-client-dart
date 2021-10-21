@@ -305,6 +305,7 @@ The client supports following management API:
 | [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Health |
 | [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Labels |
 | [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Organizations |
+| [**PingAPI**](lib/api/ping_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ping |
 | [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ready |
 | [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Secrets |
 | [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Setup |
@@ -323,11 +324,8 @@ void main() async {
   var client = InfluxDBClient(
       url: 'http://localhost:8086', token: 'my-token', org: 'my-org');
 
-  var healthCheck = await client.getHealthApi().getHealth();
-  print('Health check: ${healthCheck.name}/${healthCheck.version} - ${healthCheck.message}');
-
-  var ready = await client.getReadyApi().getReady();
-  print('Ready check: ${ready.status}');
+  //check server availability
+  await client.getPingApi().getPing();
 
   var orgs = await client.getOrganizationsApi().getOrgs();
   var myOrgId = orgs.orgs.first.id;
