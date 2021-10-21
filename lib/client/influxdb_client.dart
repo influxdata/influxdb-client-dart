@@ -243,6 +243,7 @@ class InfluxDBClient {
     return BucketsApi(getApiClient());
   }
 
+  @Deprecated('Use [getPingApi] instead')
   HealthApi getHealthApi() {
     return HealthApi(getApiClient(basePath: ''));
   }
