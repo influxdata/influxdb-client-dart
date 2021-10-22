@@ -7,9 +7,9 @@ environment:
   sdk: '>=2.3.0 <3.0.0'
 
 dependencies:
-  archive: '>=2.0.13'
+  archive: ^2.0.13
   http: '>=0.13.0 <0.14.0'
-  csv: '>=4.1.0'
+  csv: ^4.1.0
   intl: ^0.17.0
   meta: ^1.1.8
 
