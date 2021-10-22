@@ -1,5 +1,8 @@
 ## 1.3.0 [unreleased]
 
+### Bug Fixes
+1. [#19](https://github.com/influxdata/influxdb-client-dart/pull/19): Add upper bound to dependencies
+
 ## 1.2.0 [2021-10-22]
 
 ### Bug Fixes
