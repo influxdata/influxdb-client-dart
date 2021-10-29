@@ -1,5 +1,8 @@
 ## 1.3.0 [unreleased]
 
+### Features
+1. [#22](https://github.com/influxdata/influxdb-client-dart/pull/22): Add support for Web platform
+
 ### Bug Fixes
 1. [#19](https://github.com/influxdata/influxdb-client-dart/pull/19): Add upper bound to dependencies
 
