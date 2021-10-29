@@ -8,15 +8,13 @@ library influxdb_client_api;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:collection';
 import 'dart:math' as math;
 import 'package:archive/archive.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
-import 'package:csv/csv.dart';
+import 'package:universal_io/io.dart';
 
 // generated stuff
 part 'api_client.dart';
