@@ -212,7 +212,7 @@ class InfluxDBClient {
   int maxRedirects = 5;
   bool followRedirects = true;
 
-  Client client;
+  late Client client;
 
   /// Closes the client and cleans up any resources associated with it.
   ///
