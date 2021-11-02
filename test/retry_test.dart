@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:influxdb_client/api.dart';
-import 'commons_test.dart';
-
 import 'package:test/test.dart';
+import 'package:universal_io/io.dart';
+
+import 'commons_test.dart';
 
 void main() {
 

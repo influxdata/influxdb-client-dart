@@ -176,7 +176,7 @@ class InfluxDBClient {
       String? token,
       String? bucket,
       String? org,
-      http.Client? client,
+      Client? client,
 
       /// InfluxDB 1.x compatibility only
       String? username,
@@ -192,7 +192,7 @@ class InfluxDBClient {
     this.token = token ?? String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? String.fromEnvironment('INFLUXDB_ORG');
-    this.client = client ?? LoggingClient(debug, http.Client());
+    this.client = client ?? LoggingClient(debug, Client());
     this.debug = debug;
     this.maxRedirects = maxRedirects;
     this.followRedirects = followRedirects;
@@ -212,7 +212,7 @@ class InfluxDBClient {
   int maxRedirects = 5;
   bool followRedirects = true;
 
-  late http.Client client;
+  Client client;
 
   /// Closes the client and cleans up any resources associated with it.
   ///
@@ -243,6 +243,7 @@ class InfluxDBClient {
     return BucketsApi(getApiClient());
   }
 
+  @Deprecated('Use [getPingApi] instead')
   HealthApi getHealthApi() {
     return HealthApi(getApiClient(basePath: ''));
   }

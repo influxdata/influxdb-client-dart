@@ -1,16 +1,17 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
+// @dart=2.0
+
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class BucketsApi {
-  BucketsApi(ApiClient apiClient) : apiClient = apiClient;
+  BucketsApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -25,12 +26,16 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteBucketsIDWithHttpInfo(String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> deleteBucketsIDWithHttpInfo(String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -40,18 +45,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -65,7 +71,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteBucketsID(String bucketID, { String? zapTraceSpan }) async {
+  Future<void> deleteBucketsID(String bucketID, { String zapTraceSpan }) async {
     final response = await deleteBucketsIDWithHttpInfo(bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -86,13 +92,20 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteBucketsIDLabelsIDWithHttpInfo(String bucketID, String labelID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/labels/{labelID}'
-      .replaceAll('{bucketID}', bucketID)
-      .replaceAll('{labelID}', labelID);
+  Future<Response> deleteBucketsIDLabelsIDWithHttpInfo(String bucketID, String labelID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
+    if (labelID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/labels/{labelID}'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString())
+      .replaceAll('{' + 'labelID' + '}', labelID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -102,18 +115,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -130,7 +144,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteBucketsIDLabelsID(String bucketID, String labelID, { String? zapTraceSpan }) async {
+  Future<void> deleteBucketsIDLabelsID(String bucketID, String labelID, { String zapTraceSpan }) async {
     final response = await deleteBucketsIDLabelsIDWithHttpInfo(bucketID, labelID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -151,13 +165,20 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteBucketsIDMembersIDWithHttpInfo(String userID, String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/members/{userID}'
-      .replaceAll('{userID}', userID)
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> deleteBucketsIDMembersIDWithHttpInfo(String userID, String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (userID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
+    }
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/members/{userID}'
+      .replaceAll('{' + 'userID' + '}', userID.toString())
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -167,18 +188,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -195,7 +217,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteBucketsIDMembersID(String userID, String bucketID, { String? zapTraceSpan }) async {
+  Future<void> deleteBucketsIDMembersID(String userID, String bucketID, { String zapTraceSpan }) async {
     final response = await deleteBucketsIDMembersIDWithHttpInfo(userID, bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -216,13 +238,20 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteBucketsIDOwnersIDWithHttpInfo(String userID, String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/owners/{userID}'
-      .replaceAll('{userID}', userID)
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> deleteBucketsIDOwnersIDWithHttpInfo(String userID, String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (userID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
+    }
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/owners/{userID}'
+      .replaceAll('{' + 'userID' + '}', userID.toString())
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -232,18 +261,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -260,7 +290,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteBucketsIDOwnersID(String userID, String bucketID, { String? zapTraceSpan }) async {
+  Future<void> deleteBucketsIDOwnersID(String userID, String bucketID, { String zapTraceSpan }) async {
     final response = await deleteBucketsIDOwnersIDWithHttpInfo(userID, bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -294,11 +324,12 @@ class BucketsApi {
   ///
   /// * [String] id:
   ///   Only returns buckets with a specific ID.
-  Future<Response> getBucketsWithHttpInfo({ String? zapTraceSpan, int? offset, int? limit, String? after, String? org, String? orgID, String? name, String? id, }) async {
+  Future<Response> getBucketsWithHttpInfo({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name, String id }) async {
+    // Verify required params are set.
+
     final path = r'/buckets';
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -330,18 +361,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -371,7 +403,7 @@ class BucketsApi {
   ///
   /// * [String] id:
   ///   Only returns buckets with a specific ID.
-  Future<Buckets> getBuckets({ String? zapTraceSpan, int? offset, int? limit, String? after, String? org, String? orgID, String? name, String? id }) async {
+  Future<Buckets> getBuckets({ String zapTraceSpan, int offset, int limit, String after, String org, String orgID, String name, String id }) async {
     final response = await getBucketsWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, org: org, orgID: orgID, name: name, id: id );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -379,11 +411,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Buckets',) as Buckets;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<Buckets>.value(null);
   }
 
   /// Retrieve a bucket
@@ -397,12 +428,16 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getBucketsIDWithHttpInfo(String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> getBucketsIDWithHttpInfo(String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -412,18 +447,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -437,7 +473,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Bucket> getBucketsID(String bucketID, { String? zapTraceSpan }) async {
+  Future<Bucket> getBucketsID(String bucketID, { String zapTraceSpan }) async {
     final response = await getBucketsIDWithHttpInfo(bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -445,11 +481,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Bucket',) as Bucket;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// List all labels for a bucket
@@ -463,12 +498,16 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getBucketsIDLabelsWithHttpInfo(String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/labels'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> getBucketsIDLabelsWithHttpInfo(String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/labels'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -478,18 +517,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -503,7 +543,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelsResponse> getBucketsIDLabels(String bucketID, { String? zapTraceSpan }) async {
+  Future<LabelsResponse> getBucketsIDLabels(String bucketID, { String zapTraceSpan }) async {
     final response = await getBucketsIDLabelsWithHttpInfo(bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -511,11 +551,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<LabelsResponse>.value(null);
   }
 
   /// List all users with member privileges for a bucket
@@ -529,12 +568,16 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getBucketsIDMembersWithHttpInfo(String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/members'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> getBucketsIDMembersWithHttpInfo(String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/members'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -544,18 +587,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -569,7 +613,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMembers> getBucketsIDMembers(String bucketID, { String? zapTraceSpan }) async {
+  Future<ResourceMembers> getBucketsIDMembers(String bucketID, { String zapTraceSpan }) async {
     final response = await getBucketsIDMembersWithHttpInfo(bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -577,11 +621,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMembers',) as ResourceMembers;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<ResourceMembers>.value(null);
   }
 
   /// List all owners of a bucket
@@ -595,12 +638,16 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getBucketsIDOwnersWithHttpInfo(String bucketID, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/owners'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> getBucketsIDOwnersWithHttpInfo(String bucketID, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/buckets/{bucketID}/owners'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -610,18 +657,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -635,7 +683,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwners> getBucketsIDOwners(String bucketID, { String? zapTraceSpan }) async {
+  Future<ResourceOwners> getBucketsIDOwners(String bucketID, { String zapTraceSpan }) async {
     final response = await getBucketsIDOwnersWithHttpInfo(bucketID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -643,11 +691,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwners',) as ResourceOwners;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<ResourceOwners>.value(null);
   }
 
   /// Get buckets in a source
@@ -664,12 +711,16 @@ class BucketsApi {
   ///
   /// * [String] org:
   ///   The name of the organization.
-  Future<Response> getSourcesIDBucketsWithHttpInfo(String sourceID, { String? zapTraceSpan, String? org, }) async {
-    final path = r'/sources/{sourceID}/buckets'
-      .replaceAll('{sourceID}', sourceID);
+  Future<Response> getSourcesIDBucketsWithHttpInfo(String sourceID, { String zapTraceSpan, String org }) async {
+    // Verify required params are set.
+    if (sourceID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: sourceID');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody;
+    final path = r'/sources/{sourceID}/buckets'
+      .replaceAll('{' + 'sourceID' + '}', sourceID.toString());
+
+    Object postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -683,18 +734,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -711,7 +763,7 @@ class BucketsApi {
   ///
   /// * [String] org:
   ///   The name of the organization.
-  Future<Buckets> getSourcesIDBuckets(String sourceID, { String? zapTraceSpan, String? org }) async {
+  Future<Buckets> getSourcesIDBuckets(String sourceID, { String zapTraceSpan, String org }) async {
     final response = await getSourcesIDBucketsWithHttpInfo(sourceID,  zapTraceSpan: zapTraceSpan, org: org );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -719,11 +771,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Buckets',) as Buckets;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<Buckets>.value(null);
   }
 
   /// Update a bucket
@@ -740,12 +791,19 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchBucketsIDWithHttpInfo(String bucketID, PatchBucketRequest patchBucketRequest, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> patchBucketsIDWithHttpInfo(String bucketID, PatchBucketRequest patchBucketRequest, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
+    if (patchBucketRequest == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: patchBucketRequest');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody = patchBucketRequest;
+    final path = r'/buckets/{bucketID}'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody = patchBucketRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -755,18 +813,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -783,7 +842,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Bucket> patchBucketsID(String bucketID, PatchBucketRequest patchBucketRequest, { String? zapTraceSpan }) async {
+  Future<Bucket> patchBucketsID(String bucketID, PatchBucketRequest patchBucketRequest, { String zapTraceSpan }) async {
     final response = await patchBucketsIDWithHttpInfo(bucketID, patchBucketRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -791,11 +850,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Bucket',) as Bucket;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// Create a bucket
@@ -809,11 +867,15 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postBucketsWithHttpInfo(PostBucketRequest postBucketRequest, { String? zapTraceSpan, }) async {
+  Future<Response> postBucketsWithHttpInfo(PostBucketRequest postBucketRequest, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (postBucketRequest == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: postBucketRequest');
+    }
+
     final path = r'/buckets';
 
-    // ignore: prefer_final_locals
-    Object? postBody = postBucketRequest;
+    Object postBody = postBucketRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -823,18 +885,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -848,7 +911,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Bucket> postBuckets(PostBucketRequest postBucketRequest, { String? zapTraceSpan }) async {
+  Future<Bucket> postBuckets(PostBucketRequest postBucketRequest, { String zapTraceSpan }) async {
     final response = await postBucketsWithHttpInfo(postBucketRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -856,11 +919,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Bucket',) as Bucket;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<Bucket>.value(null);
   }
 
   /// Add a label to a bucket
@@ -877,12 +939,19 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postBucketsIDLabelsWithHttpInfo(String bucketID, LabelMapping labelMapping, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/labels'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> postBucketsIDLabelsWithHttpInfo(String bucketID, LabelMapping labelMapping, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
+    if (labelMapping == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: labelMapping');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody = labelMapping;
+    final path = r'/buckets/{bucketID}/labels'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody = labelMapping;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -892,18 +961,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -920,7 +990,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> postBucketsIDLabels(String bucketID, LabelMapping labelMapping, { String? zapTraceSpan }) async {
+  Future<LabelResponse> postBucketsIDLabels(String bucketID, LabelMapping labelMapping, { String zapTraceSpan }) async {
     final response = await postBucketsIDLabelsWithHttpInfo(bucketID, labelMapping,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -928,11 +998,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<LabelResponse>.value(null);
   }
 
   /// Add a member to a bucket
@@ -949,12 +1018,19 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postBucketsIDMembersWithHttpInfo(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/members'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> postBucketsIDMembersWithHttpInfo(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
+    if (addResourceMemberRequestBody == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody = addResourceMemberRequestBody;
+    final path = r'/buckets/{bucketID}/members'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -964,18 +1040,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -992,7 +1069,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMember> postBucketsIDMembers(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
+  Future<ResourceMember> postBucketsIDMembers(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
     final response = await postBucketsIDMembersWithHttpInfo(bucketID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1000,11 +1077,10 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',) as ResourceMember;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<ResourceMember>.value(null);
   }
 
   /// Add an owner to a bucket
@@ -1021,12 +1097,19 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postBucketsIDOwnersWithHttpInfo(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
-    final path = r'/buckets/{bucketID}/owners'
-      .replaceAll('{bucketID}', bucketID);
+  Future<Response> postBucketsIDOwnersWithHttpInfo(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+    // Verify required params are set.
+    if (bucketID == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: bucketID');
+    }
+    if (addResourceMemberRequestBody == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
+    }
 
-    // ignore: prefer_final_locals
-    Object? postBody = addResourceMemberRequestBody;
+    final path = r'/buckets/{bucketID}/owners'
+      .replaceAll('{' + 'bucketID' + '}', bucketID.toString());
+
+    Object postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1036,18 +1119,19 @@ class BucketsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -1064,7 +1148,7 @@ class BucketsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwner> postBucketsIDOwners(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
+  Future<ResourceOwner> postBucketsIDOwners(String bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
     final response = await postBucketsIDOwnersWithHttpInfo(bucketID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -1072,10 +1156,9 @@ class BucketsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.statusCode != HttpStatus.noContent) {
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',) as ResourceOwner;
-    
-    }
-    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+        }
+    return Future<ResourceOwner>.value(null);
   }
 }
