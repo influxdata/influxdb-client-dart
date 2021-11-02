@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -24,7 +23,7 @@ class HealthCheck {
 
   String? message;
 
-  List<HealthCheck?>? checks;
+  List<HealthCheck>? checks;
 
   HealthCheckStatusEnum? status;
 
@@ -43,6 +42,7 @@ class HealthCheck {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (name == null ? 0 : name.hashCode) +
     (message == null ? 0 : message.hashCode) +
     (checks == null ? 0 : checks.hashCode) +
@@ -72,39 +72,48 @@ class HealthCheck {
     return json;
   }
 
-  /// Returns a new [HealthCheck] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static HealthCheck? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : HealthCheck(
-        name: json[r'name'],
-        message: json[r'message'],
+  /// Returns a new [HealthCheck] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static HealthCheck fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return HealthCheck(
+        name: mapValueOfType<String>(json, r'name'),
+        message: mapValueOfType<String>(json, r'message'),
         checks: HealthCheck.listFromJson(json[r'checks']),
         status: HealthCheckStatusEnum.fromJson(json[r'status']),
-        version: json[r'version'],
-        commit: json[r'commit'],
-    );
+        version: mapValueOfType<String>(json, r'version'),
+        commit: mapValueOfType<String>(json, r'commit'),
+      );
+  }
 
-  static List<HealthCheck?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <HealthCheck>[]
-      : json.map((dynamic value) => HealthCheck.fromJson(value)).toList(growable: true == growable);
+  static List<HealthCheck>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(HealthCheck.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <HealthCheck>[];
 
-  static Map<String, HealthCheck?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, HealthCheck?> mapFromJson(dynamic json) {
     final map = <String, HealthCheck?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = HealthCheck.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = HealthCheck.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of HealthCheck-objects as value to a dart map
-  static Map<String, List<HealthCheck?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<HealthCheck?>?> map = <String, List<HealthCheck>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = HealthCheck.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<HealthCheck?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<HealthCheck?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = HealthCheck.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -135,20 +144,18 @@ class HealthCheckStatusEnum {
   static HealthCheckStatusEnum? fromJson(dynamic value) =>
     HealthCheckStatusEnumTypeTransformer().decode(value);
 
-  static List<HealthCheckStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <HealthCheckStatusEnum>[]
-      : json
-          .map((value) => HealthCheckStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<HealthCheckStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(HealthCheckStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <HealthCheckStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [HealthCheckStatusEnum] to String,
 /// and [decode] dynamic data back to [HealthCheckStatusEnum].
 class HealthCheckStatusEnumTypeTransformer {
-  const HealthCheckStatusEnumTypeTransformer._();
+  factory HealthCheckStatusEnumTypeTransformer() => _instance ??= const HealthCheckStatusEnumTypeTransformer._();
 
-  factory HealthCheckStatusEnumTypeTransformer() => _instance ??= HealthCheckStatusEnumTypeTransformer._();
+  const HealthCheckStatusEnumTypeTransformer._();
 
   String encode(HealthCheckStatusEnum data) => data.value;
 
@@ -161,13 +168,12 @@ class HealthCheckStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   HealthCheckStatusEnum? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'pass': return HealthCheckStatusEnum.pass;
-      case r'fail': return HealthCheckStatusEnum.fail;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'pass': return HealthCheckStatusEnum.pass;
+        case r'fail': return HealthCheckStatusEnum.fail;
+        default: return HealthCheckStatusEnum._(data.toString());
+      }
     }
     return null;
   }
@@ -175,4 +181,5 @@ class HealthCheckStatusEnumTypeTransformer {
   /// Singleton [HealthCheckStatusEnumTypeTransformer] instance.
   static HealthCheckStatusEnumTypeTransformer? _instance;
 }
+
 

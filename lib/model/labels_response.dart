@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -16,7 +15,7 @@ class LabelsResponse {
     this.links,
   });
 
-  List<Label?>? labels;
+  List<Label>? labels;
 
   Links? links;
 
@@ -27,6 +26,7 @@ class LabelsResponse {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (labels == null ? 0 : labels.hashCode) +
     (links == null ? 0 : links.hashCode);
 
@@ -44,35 +44,44 @@ class LabelsResponse {
     return json;
   }
 
-  /// Returns a new [LabelsResponse] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static LabelsResponse? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : LabelsResponse(
+  /// Returns a new [LabelsResponse] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static LabelsResponse fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return LabelsResponse(
         labels: Label.listFromJson(json[r'labels']),
-        links: Links.fromJson(json[r'links']),
-    );
+        links: json[r'links'] == null ? null : Links.fromJson(json[r'links']),
+      );
+  }
 
-  static List<LabelsResponse?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <LabelsResponse>[]
-      : json.map((dynamic value) => LabelsResponse.fromJson(value)).toList(growable: true == growable);
+  static List<LabelsResponse>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(LabelsResponse.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <LabelsResponse>[];
 
-  static Map<String, LabelsResponse?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, LabelsResponse?> mapFromJson(dynamic json) {
     final map = <String, LabelsResponse?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = LabelsResponse.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = LabelsResponse.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of LabelsResponse-objects as value to a dart map
-  static Map<String, List<LabelsResponse?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<LabelsResponse?>?> map = <String, List<LabelsResponse>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = LabelsResponse.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<LabelsResponse?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<LabelsResponse?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = LabelsResponse.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

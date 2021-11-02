@@ -1,10 +1,10 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
-//
-
+// InfluxDB 2.0 client
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -83,8 +83,8 @@ class ApiClient {
     try {
       // Special case for uploading a single file which isn't a 'multipart/form-data'.
       if (
-        body is MultipartFile && (nullableContentType == null ||
-        !nullableContentType.toLowerCase().startsWith('multipart/form-data'))
+      body is MultipartFile && (nullableContentType == null ||
+          !nullableContentType.toLowerCase().startsWith('multipart/form-data'))
       ) {
         final request = StreamedRequest(method, uri);
         request.headers.addAll(headerParams);
@@ -92,7 +92,8 @@ class ApiClient {
         body.finalize().listen(
           request.sink.add,
           onDone: request.sink.close,
-          onError: (error, trace) => request.sink.close(),
+          // ignore: avoid_types_on_closure_parameters
+          onError: (Object error, StackTrace trace) => request.sink.close(),
           cancelOnError: true,
         );
         final response = await _client.send(request);
@@ -110,8 +111,8 @@ class ApiClient {
       }
 
       final msgBody = nullableContentType == 'application/x-www-form-urlencoded'
-        ? formParams
-        : await serializeAsync(body);
+          ? formParams
+          : await serializeAsync(body);
       final nullableHeaderParams = headerParams.isEmpty ? null : headerParams;
 
       switch(method) {
@@ -161,10 +162,10 @@ class ApiClient {
   /// Update query and header parameters based on authentication settings.
   /// @param authNames The authentications to apply
   void _updateParamsForAuth(
-    List<String> authNames,
-    List<QueryParam> queryParams,
-    Map<String, String> headerParams,
-  ) {
+      List<String> authNames,
+      List<QueryParam> queryParams,
+      Map<String, String> headerParams,
+      ) {
     for(final authName in authNames) {
       final auth = _authentications[authName];
       if (auth == null) {

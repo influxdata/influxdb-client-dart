@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class AuthorizationsApi {
-  AuthorizationsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  AuthorizationsApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -26,10 +25,11 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan }) async {
+  Future<Response> deleteAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan, }) async {
     final path = r'/authorizations/{authID}'
-      .replaceAll('{' + 'authID' + '}', authID.toString());
+      .replaceAll('{authID}', authID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -40,19 +40,18 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -93,9 +92,10 @@ class AuthorizationsApi {
   ///
   /// * [String] org:
   ///   Only show authorizations that belong to a organization name.
-  Future<Response> getAuthorizationsWithHttpInfo({ String? zapTraceSpan, String? userID, String? user, String? orgID, String? org }) async {
+  Future<Response> getAuthorizationsWithHttpInfo({ String? zapTraceSpan, String? userID, String? user, String? orgID, String? org, }) async {
     final path = r'/authorizations';
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -119,19 +119,18 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -164,8 +163,9 @@ class AuthorizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorizations',) as Authorizations;
-        }
-    return Future<Authorizations>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve an authorization
@@ -179,10 +179,11 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan }) async {
+  Future<Response> getAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan, }) async {
     final path = r'/authorizations/{authID}'
-      .replaceAll('{' + 'authID' + '}', authID.toString());
+      .replaceAll('{authID}', authID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -193,19 +194,18 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -229,8 +229,9 @@ class AuthorizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
-        }
-    return Future<Authorization>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Update an authorization to be active or inactive
@@ -247,11 +248,12 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchAuthorizationsIDWithHttpInfo(String authID, AuthorizationUpdateRequest authorizationUpdateRequest, { String? zapTraceSpan }) async {
+  Future<Response> patchAuthorizationsIDWithHttpInfo(String authID, AuthorizationUpdateRequest authorizationUpdateRequest, { String? zapTraceSpan, }) async {
     final path = r'/authorizations/{authID}'
-      .replaceAll('{' + 'authID' + '}', authID.toString());
+      .replaceAll('{authID}', authID);
 
-    Object postBody = authorizationUpdateRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = authorizationUpdateRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -261,19 +263,18 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -299,9 +300,10 @@ class AuthorizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',);
-        }
-    return Future<Authorization>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Create an authorization
@@ -315,10 +317,11 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postAuthorizationsWithHttpInfo(AuthorizationPostRequest authorizationPostRequest, { String? zapTraceSpan }) async {
+  Future<Response> postAuthorizationsWithHttpInfo(AuthorizationPostRequest authorizationPostRequest, { String? zapTraceSpan, }) async {
     final path = r'/authorizations';
 
-    Object postBody = authorizationPostRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = authorizationPostRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -328,19 +331,18 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -364,7 +366,8 @@ class AuthorizationsApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
-        }
-    return Future<Authorization>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 }

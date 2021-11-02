@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -31,23 +30,21 @@ class TaskStatusType {
     inactive,
   ];
 
-  static TaskStatusType? fromJson(dynamic value) =>
-    TaskStatusTypeTypeTransformer().decode(value);
+  static TaskStatusType fromJson(dynamic value) =>
+    TaskStatusTypeTypeTransformer().decode(value)!;
 
-  static List<TaskStatusType?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <TaskStatusType>[]
-      : json
-          .map((value) => TaskStatusType.fromJson(value))
-          .toList(growable: true == growable);
+  static List<TaskStatusType>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(TaskStatusType.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <TaskStatusType>[];
 }
 
 /// Transformation class that can [encode] an instance of [TaskStatusType] to String,
 /// and [decode] dynamic data back to [TaskStatusType].
 class TaskStatusTypeTypeTransformer {
-  const TaskStatusTypeTypeTransformer._();
+  factory TaskStatusTypeTypeTransformer() => _instance ??= const TaskStatusTypeTypeTransformer._();
 
-  factory TaskStatusTypeTypeTransformer() => _instance ??= TaskStatusTypeTypeTransformer._();
+  const TaskStatusTypeTypeTransformer._();
 
   String encode(TaskStatusType data) => data.value;
 
@@ -59,14 +56,13 @@ class TaskStatusTypeTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  TaskStatusType? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'active': return TaskStatusType.active;
-      case r'inactive': return TaskStatusType.inactive;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+  TaskStatusType? decode(dynamic data) {
+    if (data != null) {
+      switch (data.toString()) {
+        case r'active': return TaskStatusType.active;
+        case r'inactive': return TaskStatusType.inactive;
+        default: return TaskStatusType._(data.toString());
+      }
     }
     return null;
   }
@@ -74,3 +70,4 @@ class TaskStatusTypeTypeTransformer {
   /// Singleton [TaskStatusTypeTypeTransformer] instance.
   static TaskStatusTypeTypeTransformer? _instance;
 }
+

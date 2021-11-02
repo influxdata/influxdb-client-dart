@@ -81,6 +81,6 @@ class QueryService extends DefaultService {
         headers: headers,
         body: jsonEncode(body.toJson()),
         maxRedirects: influxDB.maxRedirects,
-        stream: true) as FutureOr<BaseResponse>);
+        stream: true));
   }
 }

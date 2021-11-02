@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -23,6 +22,7 @@ class DBRPGet {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (content == null ? 0 : content.hashCode);
 
   @override
@@ -36,34 +36,43 @@ class DBRPGet {
     return json;
   }
 
-  /// Returns a new [DBRPGet] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static DBRPGet? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : DBRPGet(
-        content: DBRP.fromJson(json[r'content']),
-    );
+  /// Returns a new [DBRPGet] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static DBRPGet fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return DBRPGet(
+        content: json[r'content'] == null ? null : DBRP.fromJson(json[r'content']),
+      );
+  }
 
-  static List<DBRPGet?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <DBRPGet>[]
-      : json.map((dynamic value) => DBRPGet.fromJson(value)).toList(growable: true == growable);
+  static List<DBRPGet>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(DBRPGet.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <DBRPGet>[];
 
-  static Map<String, DBRPGet?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, DBRPGet?> mapFromJson(dynamic json) {
     final map = <String, DBRPGet?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = DBRPGet.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = DBRPGet.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of DBRPGet-objects as value to a dart map
-  static Map<String, List<DBRPGet?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<DBRPGet?>?> map = <String, List<DBRPGet>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = DBRPGet.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<DBRPGet?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<DBRPGet?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = DBRPGet.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

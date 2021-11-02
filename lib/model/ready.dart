@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -31,6 +30,7 @@ class Ready {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode) +
     (started == null ? 0 : started.hashCode) +
     (up == null ? 0 : up.hashCode);
@@ -52,38 +52,45 @@ class Ready {
     return json;
   }
 
-  /// Returns a new [Ready] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Ready? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : Ready(
+  /// Returns a new [Ready] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static Ready fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return Ready(
         status: ReadyStatusEnum.fromJson(json[r'status']),
-        started: json[r'started'] == null
-          ? null
-          : DateTime.parse(json[r'started']),
-        up: json[r'up'],
-    );
+        started: mapDateTime(json, r'started', ''),
+        up: mapValueOfType<String>(json, r'up'),
+      );
+  }
 
-  static List<Ready?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <Ready>[]
-      : json.map((dynamic value) => Ready.fromJson(value)).toList(growable: true == growable);
+  static List<Ready>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Ready.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Ready>[];
 
-  static Map<String, Ready?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Ready?> mapFromJson(dynamic json) {
     final map = <String, Ready?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Ready.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Ready.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Ready-objects as value to a dart map
-  static Map<String, List<Ready?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<Ready?>?> map = <String, List<Ready>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Ready.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<Ready?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<Ready?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Ready.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -112,20 +119,18 @@ class ReadyStatusEnum {
   static ReadyStatusEnum? fromJson(dynamic value) =>
     ReadyStatusEnumTypeTransformer().decode(value);
 
-  static List<ReadyStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <ReadyStatusEnum>[]
-      : json
-          .map((value) => ReadyStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<ReadyStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ReadyStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ReadyStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [ReadyStatusEnum] to String,
 /// and [decode] dynamic data back to [ReadyStatusEnum].
 class ReadyStatusEnumTypeTransformer {
-  const ReadyStatusEnumTypeTransformer._();
+  factory ReadyStatusEnumTypeTransformer() => _instance ??= const ReadyStatusEnumTypeTransformer._();
 
-  factory ReadyStatusEnumTypeTransformer() => _instance ??= ReadyStatusEnumTypeTransformer._();
+  const ReadyStatusEnumTypeTransformer._();
 
   String encode(ReadyStatusEnum data) => data.value;
 
@@ -138,12 +143,11 @@ class ReadyStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ReadyStatusEnum? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'ready': return ReadyStatusEnum.ready;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'ready': return ReadyStatusEnum.ready;
+        default: return ReadyStatusEnum._(data.toString());
+      }
     }
     return null;
   }
@@ -151,4 +155,5 @@ class ReadyStatusEnumTypeTransformer {
   /// Singleton [ReadyStatusEnumTypeTransformer] instance.
   static ReadyStatusEnumTypeTransformer? _instance;
 }
+
 

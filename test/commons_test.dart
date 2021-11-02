@@ -22,7 +22,7 @@ Future<Bucket> createTestBucket() async {
 }
 
 Future<void> deleteTestBucket(Bucket bucket) {
-  return client.getBucketsApi().deleteBucketsID(bucket.id);
+  return client.getBucketsApi().deleteBucketsID(bucket.id!);
 }
 
 void setupClient() async {
@@ -47,7 +47,7 @@ InfluxDBClient createClient() {
 
 Future<Organization> findMyOrg() async {
   var orgList = await (client.getOrganizationsApi().getOrgs());
-  return (orgList.orgs!.firstWhere((org) => org!.name == orgName))!;
+  return (orgList.orgs!.firstWhere((org) => org.name == orgName));
 }
 
 void main() {}

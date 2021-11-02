@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class VariablesApi {
-  VariablesApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  VariablesApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -26,10 +25,11 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteVariablesIDWithHttpInfo(String variableID, { String? zapTraceSpan }) async {
+  Future<Response> deleteVariablesIDWithHttpInfo(String variableID, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -40,19 +40,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -87,11 +86,12 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteVariablesIDLabelsIDWithHttpInfo(String variableID, String labelID, { String? zapTraceSpan }) async {
+  Future<Response> deleteVariablesIDLabelsIDWithHttpInfo(String variableID, String labelID, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}/labels/{labelID}'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString())
-      .replaceAll('{' + 'labelID' + '}', labelID.toString());
+      .replaceAll('{variableID}', variableID)
+      .replaceAll('{labelID}', labelID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -102,19 +102,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -152,9 +151,10 @@ class VariablesApi {
   ///
   /// * [String] orgID:
   ///   The organization ID.
-  Future<Response> getVariablesWithHttpInfo({ String? zapTraceSpan, String? org, String? orgID }) async {
+  Future<Response> getVariablesWithHttpInfo({ String? zapTraceSpan, String? org, String? orgID, }) async {
     final path = r'/variables';
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -172,19 +172,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -210,9 +209,10 @@ class VariablesApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variables',);
-        }
-    return Future<Variables>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variables',) as Variables;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve a variable
@@ -226,10 +226,11 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getVariablesIDWithHttpInfo(String variableID, { String? zapTraceSpan }) async {
+  Future<Response> getVariablesIDWithHttpInfo(String variableID, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -240,19 +241,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -276,8 +276,9 @@ class VariablesApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',) as Variable;
-        }
-    return Future<Variable>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all labels for a variable
@@ -291,10 +292,11 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getVariablesIDLabelsWithHttpInfo(String variableID, { String? zapTraceSpan }) async {
+  Future<Response> getVariablesIDLabelsWithHttpInfo(String variableID, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}/labels'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -305,19 +307,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -341,8 +342,9 @@ class VariablesApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
-        }
-    return Future<LabelsResponse>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Update a variable
@@ -359,11 +361,12 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchVariablesIDWithHttpInfo(String variableID, Variable variable, { String? zapTraceSpan }) async {
+  Future<Response> patchVariablesIDWithHttpInfo(String variableID, Variable variable, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
-    Object postBody = variable;
+    // ignore: prefer_final_locals
+    Object? postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -373,19 +376,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -411,9 +413,10 @@ class VariablesApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',);
-        }
-    return Future<Variable>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',) as Variable;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Create a variable
@@ -427,10 +430,11 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postVariablesWithHttpInfo(Variable variable, { String? zapTraceSpan }) async {
+  Future<Response> postVariablesWithHttpInfo(Variable variable, { String? zapTraceSpan, }) async {
     final path = r'/variables';
 
-    Object postBody = variable;
+    // ignore: prefer_final_locals
+    Object? postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -440,19 +444,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -476,8 +479,9 @@ class VariablesApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',) as Variable;
-        }
-    return Future<Variable>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add a label to a variable
@@ -494,11 +498,12 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postVariablesIDLabelsWithHttpInfo(String variableID, LabelMapping labelMapping, { String? zapTraceSpan }) async {
+  Future<Response> postVariablesIDLabelsWithHttpInfo(String variableID, LabelMapping labelMapping, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}/labels'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
-    Object postBody = labelMapping;
+    // ignore: prefer_final_locals
+    Object? postBody = labelMapping;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -508,19 +513,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -546,9 +550,10 @@ class VariablesApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',);
-        }
-    return Future<LabelResponse>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Replace a variable
@@ -565,11 +570,12 @@ class VariablesApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> putVariablesIDWithHttpInfo(String variableID, Variable variable, { String? zapTraceSpan }) async {
+  Future<Response> putVariablesIDWithHttpInfo(String variableID, Variable variable, { String? zapTraceSpan, }) async {
     final path = r'/variables/{variableID}'
-      .replaceAll('{' + 'variableID' + '}', variableID.toString());
+      .replaceAll('{variableID}', variableID);
 
-    Object postBody = variable;
+    // ignore: prefer_final_locals
+    Object? postBody = variable;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -579,19 +585,18 @@ class VariablesApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PUT',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -617,8 +622,9 @@ class VariablesApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',);
-        }
-    return Future<Variable>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Variable',) as Variable;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 }

@@ -153,7 +153,7 @@ class QueryApi {
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',);
         }
-    return Future<String>.value(null);
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
 }

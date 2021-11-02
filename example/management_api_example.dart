@@ -8,7 +8,7 @@ void main() async {
 
   // list organizations
   await orgApi.getOrgs().then((organizations) {
-    organizations.orgs!.forEach((org) => print('Org: ${org!.name} ${org.id}'));
+    organizations.orgs!.forEach((org) => print('Org: ${org.name} ${org.id}'));
   });
 
   // create new organization
@@ -19,11 +19,11 @@ void main() async {
 
   // delete organization
   print('Delete organization');
-  await orgApi.deleteOrgsID(createdOrg.id);
+  await orgApi.deleteOrgsID(createdOrg.id!);
 
   var usersApi = client.getUsersApi();
   await usersApi.getUsers().then((value) => value.users!.forEach((user) {
-        print('user: ${user!.name} / ${user.id}');
+        print('user: ${user.name} / ${user.id}');
       }));
 
   client.close();

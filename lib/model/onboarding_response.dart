@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -35,6 +34,7 @@ class OnboardingResponse {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (user == null ? 0 : user.hashCode) +
     (org == null ? 0 : org.hashCode) +
     (bucket == null ? 0 : bucket.hashCode) +
@@ -60,37 +60,46 @@ class OnboardingResponse {
     return json;
   }
 
-  /// Returns a new [OnboardingResponse] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static OnboardingResponse? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : OnboardingResponse(
-        user: UserResponse.fromJson(json[r'user']),
-        org: Organization.fromJson(json[r'org']),
-        bucket: Bucket.fromJson(json[r'bucket']),
-        auth: Authorization.fromJson(json[r'auth']),
-    );
+  /// Returns a new [OnboardingResponse] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static OnboardingResponse fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return OnboardingResponse(
+        user: json[r'user'] == null ? null : UserResponse.fromJson(json[r'user']),
+        org: json[r'org'] == null ? null : Organization.fromJson(json[r'org']),
+        bucket: json[r'bucket'] == null ? null : Bucket.fromJson(json[r'bucket']),
+        auth: json[r'auth'] == null ? null : Authorization.fromJson(json[r'auth']),
+      );
+  }
 
-  static List<OnboardingResponse?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <OnboardingResponse>[]
-      : json.map((dynamic value) => OnboardingResponse.fromJson(value)).toList(growable: true == growable);
+  static List<OnboardingResponse>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(OnboardingResponse.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <OnboardingResponse>[];
 
-  static Map<String, OnboardingResponse?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, OnboardingResponse?> mapFromJson(dynamic json) {
     final map = <String, OnboardingResponse?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = OnboardingResponse.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = OnboardingResponse.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of OnboardingResponse-objects as value to a dart map
-  static Map<String, List<OnboardingResponse?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<OnboardingResponse?>?> map = <String, List<OnboardingResponse>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = OnboardingResponse.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<OnboardingResponse?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<OnboardingResponse?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = OnboardingResponse.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

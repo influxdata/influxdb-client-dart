@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -29,7 +28,7 @@ class PostBucketRequest {
   String? rp;
 
   /// Rules to expire or retain data.  No rules means data never expires.
-  List<RetentionRule?>? retentionRules;
+  List<RetentionRule>? retentionRules;
 
   SchemaType? schemaType;
 
@@ -44,6 +43,7 @@ class PostBucketRequest {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (orgID == null ? 0 : orgID.hashCode) +
     (name == null ? 0 : name.hashCode) +
     (description == null ? 0 : description.hashCode) +
@@ -71,39 +71,48 @@ class PostBucketRequest {
     return json;
   }
 
-  /// Returns a new [PostBucketRequest] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static PostBucketRequest? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : PostBucketRequest(
-        orgID: json[r'orgID'],
-        name: json[r'name'],
-        description: json[r'description'],
-        rp: json[r'rp'],
+  /// Returns a new [PostBucketRequest] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static PostBucketRequest fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return PostBucketRequest(
+        orgID: mapValueOfType<String>(json, r'orgID'),
+        name: mapValueOfType<String>(json, r'name'),
+        description: mapValueOfType<String>(json, r'description'),
+        rp: mapValueOfType<String>(json, r'rp'),
         retentionRules: RetentionRule.listFromJson(json[r'retentionRules']),
-        schemaType: SchemaType.fromJson(json[r'schemaType']),
-    );
+        schemaType: json[r'schemaType'] == null ? null : SchemaType.fromJson(json[r'schemaType']),
+      );
+  }
 
-  static List<PostBucketRequest?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <PostBucketRequest>[]
-      : json.map((dynamic value) => PostBucketRequest.fromJson(value)).toList(growable: true == growable);
+  static List<PostBucketRequest>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(PostBucketRequest.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <PostBucketRequest>[];
 
-  static Map<String, PostBucketRequest?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, PostBucketRequest?> mapFromJson(dynamic json) {
     final map = <String, PostBucketRequest?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = PostBucketRequest.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = PostBucketRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PostBucketRequest-objects as value to a dart map
-  static Map<String, List<PostBucketRequest?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<PostBucketRequest?>?> map = <String, List<PostBucketRequest>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = PostBucketRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<PostBucketRequest?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<PostBucketRequest?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = PostBucketRequest.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

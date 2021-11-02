@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -34,6 +33,7 @@ class PatchRetentionRule {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (type == null ? 0 : type.hashCode) +
     (everySeconds == null ? 0 : everySeconds.hashCode) +
     (shardGroupDurationSeconds == null ? 0 : shardGroupDurationSeconds.hashCode);
@@ -53,36 +53,45 @@ class PatchRetentionRule {
     return json;
   }
 
-  /// Returns a new [PatchRetentionRule] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static PatchRetentionRule? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : PatchRetentionRule(
+  /// Returns a new [PatchRetentionRule] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static PatchRetentionRule fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return PatchRetentionRule(
         type: PatchRetentionRuleTypeEnum.fromJson(json[r'type']),
-        everySeconds: json[r'everySeconds'],
-        shardGroupDurationSeconds: json[r'shardGroupDurationSeconds'],
-    );
+        everySeconds: mapValueOfType<int>(json, r'everySeconds'),
+        shardGroupDurationSeconds: mapValueOfType<int>(json, r'shardGroupDurationSeconds'),
+      );
+  }
 
-  static List<PatchRetentionRule?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <PatchRetentionRule>[]
-      : json.map((dynamic value) => PatchRetentionRule.fromJson(value)).toList(growable: true == growable);
+  static List<PatchRetentionRule>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(PatchRetentionRule.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <PatchRetentionRule>[];
 
-  static Map<String, PatchRetentionRule?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, PatchRetentionRule?> mapFromJson(dynamic json) {
     final map = <String, PatchRetentionRule?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = PatchRetentionRule.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = PatchRetentionRule.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PatchRetentionRule-objects as value to a dart map
-  static Map<String, List<PatchRetentionRule?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<PatchRetentionRule?>?> map = <String, List<PatchRetentionRule>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = PatchRetentionRule.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<PatchRetentionRule?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<PatchRetentionRule?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = PatchRetentionRule.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -111,20 +120,18 @@ class PatchRetentionRuleTypeEnum {
   static PatchRetentionRuleTypeEnum? fromJson(dynamic value) =>
     PatchRetentionRuleTypeEnumTypeTransformer().decode(value);
 
-  static List<PatchRetentionRuleTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <PatchRetentionRuleTypeEnum>[]
-      : json
-          .map((value) => PatchRetentionRuleTypeEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<PatchRetentionRuleTypeEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(PatchRetentionRuleTypeEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <PatchRetentionRuleTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [PatchRetentionRuleTypeEnum] to String,
 /// and [decode] dynamic data back to [PatchRetentionRuleTypeEnum].
 class PatchRetentionRuleTypeEnumTypeTransformer {
-  const PatchRetentionRuleTypeEnumTypeTransformer._();
+  factory PatchRetentionRuleTypeEnumTypeTransformer() => _instance ??= const PatchRetentionRuleTypeEnumTypeTransformer._();
 
-  factory PatchRetentionRuleTypeEnumTypeTransformer() => _instance ??= PatchRetentionRuleTypeEnumTypeTransformer._();
+  const PatchRetentionRuleTypeEnumTypeTransformer._();
 
   String encode(PatchRetentionRuleTypeEnum data) => data.value;
 
@@ -137,12 +144,11 @@ class PatchRetentionRuleTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   PatchRetentionRuleTypeEnum? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'expire': return PatchRetentionRuleTypeEnum.expire;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'expire': return PatchRetentionRuleTypeEnum.expire;
+        default: return PatchRetentionRuleTypeEnum._(data.toString());
+      }
     }
     return null;
   }
@@ -150,4 +156,5 @@ class PatchRetentionRuleTypeEnumTypeTransformer {
   /// Singleton [PatchRetentionRuleTypeEnumTypeTransformer] instance.
   static PatchRetentionRuleTypeEnumTypeTransformer? _instance;
 }
+
 

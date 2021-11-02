@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -24,6 +23,7 @@ class RunManually {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (scheduledFor == null ? 0 : scheduledFor.hashCode);
 
   @override
@@ -37,36 +37,43 @@ class RunManually {
     return json;
   }
 
-  /// Returns a new [RunManually] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static RunManually? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : RunManually(
-        scheduledFor: json[r'scheduledFor'] == null
-          ? null
-          : DateTime.parse(json[r'scheduledFor']),
-    );
+  /// Returns a new [RunManually] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static RunManually fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return RunManually(
+        scheduledFor: mapDateTime(json, r'scheduledFor', ''),
+      );
+  }
 
-  static List<RunManually?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <RunManually>[]
-      : json.map((dynamic value) => RunManually.fromJson(value)).toList(growable: true == growable);
+  static List<RunManually>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(RunManually.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <RunManually>[];
 
-  static Map<String, RunManually?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, RunManually?> mapFromJson(dynamic json) {
     final map = <String, RunManually?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = RunManually.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = RunManually.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of RunManually-objects as value to a dart map
-  static Map<String, List<RunManually?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<RunManually?>?> map = <String, List<RunManually>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = RunManually.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<RunManually?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<RunManually?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = RunManually.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

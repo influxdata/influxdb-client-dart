@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -18,7 +17,7 @@ class Organizations {
 
   Links? links;
 
-  List<Organization?>? orgs;
+  List<Organization>? orgs;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Organizations &&
@@ -27,6 +26,7 @@ class Organizations {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (links == null ? 0 : links.hashCode) +
     (orgs == null ? 0 : orgs.hashCode);
 
@@ -44,35 +44,44 @@ class Organizations {
     return json;
   }
 
-  /// Returns a new [Organizations] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Organizations? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : Organizations(
-        links: Links.fromJson(json[r'links']),
+  /// Returns a new [Organizations] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static Organizations fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return Organizations(
+        links: json[r'links'] == null ? null : Links.fromJson(json[r'links']),
         orgs: Organization.listFromJson(json[r'orgs']),
-    );
+      );
+  }
 
-  static List<Organizations?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <Organizations>[]
-      : json.map((dynamic value) => Organizations.fromJson(value)).toList(growable: true == growable);
+  static List<Organizations>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Organizations.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Organizations>[];
 
-  static Map<String, Organizations?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Organizations?> mapFromJson(dynamic json) {
     final map = <String, Organizations?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Organizations.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Organizations.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Organizations-objects as value to a dart map
-  static Map<String, List<Organizations?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<Organizations?>?> map = <String, List<Organizations>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Organizations.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<Organizations?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<Organizations?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Organizations.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

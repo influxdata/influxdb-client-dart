@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -24,6 +23,7 @@ class IsOnboarding {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (allowed == null ? 0 : allowed.hashCode);
 
   @override
@@ -37,34 +37,43 @@ class IsOnboarding {
     return json;
   }
 
-  /// Returns a new [IsOnboarding] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static IsOnboarding? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : IsOnboarding(
-        allowed: json[r'allowed'],
-    );
+  /// Returns a new [IsOnboarding] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static IsOnboarding fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return IsOnboarding(
+        allowed: mapValueOfType<bool>(json, r'allowed'),
+      );
+  }
 
-  static List<IsOnboarding?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <IsOnboarding>[]
-      : json.map((dynamic value) => IsOnboarding.fromJson(value)).toList(growable: true == growable);
+  static List<IsOnboarding>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(IsOnboarding.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <IsOnboarding>[];
 
-  static Map<String, IsOnboarding?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, IsOnboarding?> mapFromJson(dynamic json) {
     final map = <String, IsOnboarding?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = IsOnboarding.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = IsOnboarding.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of IsOnboarding-objects as value to a dart map
-  static Map<String, List<IsOnboarding?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<IsOnboarding?>?> map = <String, List<IsOnboarding>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = IsOnboarding.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<IsOnboarding?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<IsOnboarding?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = IsOnboarding.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

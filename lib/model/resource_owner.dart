@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -44,6 +43,7 @@ class ResourceOwner {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (oauthID == null ? 0 : oauthID.hashCode) +
     (name == null ? 0 : name.hashCode) +
@@ -75,39 +75,48 @@ class ResourceOwner {
     return json;
   }
 
-  /// Returns a new [ResourceOwner] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static ResourceOwner? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : ResourceOwner(
-        id: json[r'id'],
-        oauthID: json[r'oauthID'],
-        name: json[r'name'],
+  /// Returns a new [ResourceOwner] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static ResourceOwner fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return ResourceOwner(
+        id: mapValueOfType<String>(json, r'id'),
+        oauthID: mapValueOfType<String>(json, r'oauthID'),
+        name: mapValueOfType<String>(json, r'name'),
         status: ResourceOwnerStatusEnum.fromJson(json[r'status']),
-        links: UserResponseLinks.fromJson(json[r'links']),
+        links: json[r'links'] == null ? null : UserResponseLinks.fromJson(json[r'links']),
         role: ResourceOwnerRoleEnum.fromJson(json[r'role']),
-    );
+      );
+  }
 
-  static List<ResourceOwner?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <ResourceOwner>[]
-      : json.map((dynamic value) => ResourceOwner.fromJson(value)).toList(growable: true == growable);
+  static List<ResourceOwner>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ResourceOwner.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ResourceOwner>[];
 
-  static Map<String, ResourceOwner?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, ResourceOwner?> mapFromJson(dynamic json) {
     final map = <String, ResourceOwner?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = ResourceOwner.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = ResourceOwner.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ResourceOwner-objects as value to a dart map
-  static Map<String, List<ResourceOwner?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<ResourceOwner?>?> map = <String, List<ResourceOwner>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = ResourceOwner.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<ResourceOwner?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<ResourceOwner?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = ResourceOwner.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -138,20 +147,18 @@ class ResourceOwnerStatusEnum {
   static ResourceOwnerStatusEnum? fromJson(dynamic value) =>
     ResourceOwnerStatusEnumTypeTransformer().decode(value);
 
-  static List<ResourceOwnerStatusEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <ResourceOwnerStatusEnum>[]
-      : json
-          .map((value) => ResourceOwnerStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<ResourceOwnerStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ResourceOwnerStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ResourceOwnerStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [ResourceOwnerStatusEnum] to String,
 /// and [decode] dynamic data back to [ResourceOwnerStatusEnum].
 class ResourceOwnerStatusEnumTypeTransformer {
-  const ResourceOwnerStatusEnumTypeTransformer._();
+  factory ResourceOwnerStatusEnumTypeTransformer() => _instance ??= const ResourceOwnerStatusEnumTypeTransformer._();
 
-  factory ResourceOwnerStatusEnumTypeTransformer() => _instance ??= ResourceOwnerStatusEnumTypeTransformer._();
+  const ResourceOwnerStatusEnumTypeTransformer._();
 
   String encode(ResourceOwnerStatusEnum data) => data.value;
 
@@ -164,13 +171,12 @@ class ResourceOwnerStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ResourceOwnerStatusEnum? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'active': return ResourceOwnerStatusEnum.active;
-      case r'inactive': return ResourceOwnerStatusEnum.inactive;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'active': return ResourceOwnerStatusEnum.active;
+        case r'inactive': return ResourceOwnerStatusEnum.inactive;
+        default: return ResourceOwnerStatusEnum._(data.toString());
+      }
     }
     return null;
   }
@@ -178,6 +184,7 @@ class ResourceOwnerStatusEnumTypeTransformer {
   /// Singleton [ResourceOwnerStatusEnumTypeTransformer] instance.
   static ResourceOwnerStatusEnumTypeTransformer? _instance;
 }
+
 
 
 class ResourceOwnerRoleEnum {
@@ -202,20 +209,18 @@ class ResourceOwnerRoleEnum {
   static ResourceOwnerRoleEnum? fromJson(dynamic value) =>
     ResourceOwnerRoleEnumTypeTransformer().decode(value);
 
-  static List<ResourceOwnerRoleEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <ResourceOwnerRoleEnum>[]
-      : json
-          .map((value) => ResourceOwnerRoleEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<ResourceOwnerRoleEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ResourceOwnerRoleEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ResourceOwnerRoleEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [ResourceOwnerRoleEnum] to String,
 /// and [decode] dynamic data back to [ResourceOwnerRoleEnum].
 class ResourceOwnerRoleEnumTypeTransformer {
-  const ResourceOwnerRoleEnumTypeTransformer._();
+  factory ResourceOwnerRoleEnumTypeTransformer() => _instance ??= const ResourceOwnerRoleEnumTypeTransformer._();
 
-  factory ResourceOwnerRoleEnumTypeTransformer() => _instance ??= ResourceOwnerRoleEnumTypeTransformer._();
+  const ResourceOwnerRoleEnumTypeTransformer._();
 
   String encode(ResourceOwnerRoleEnum data) => data.value;
 
@@ -228,12 +233,11 @@ class ResourceOwnerRoleEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ResourceOwnerRoleEnum? decode(dynamic data, {bool? allowNull}) {
-    switch (data) {
-      case r'owner': return ResourceOwnerRoleEnum.owner;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'owner': return ResourceOwnerRoleEnum.owner;
+        default: return ResourceOwnerRoleEnum._(data.toString());
+      }
     }
     return null;
   }
@@ -241,4 +245,5 @@ class ResourceOwnerRoleEnumTypeTransformer {
   /// Singleton [ResourceOwnerRoleEnumTypeTransformer] instance.
   static ResourceOwnerRoleEnumTypeTransformer? _instance;
 }
+
 

@@ -1,9 +1,10 @@
-## 1.2.0 [unreleased]
+## 2.0.0 [unreleased]
 
 ### Bug Fixes
 1. [#14](https://github.com/influxdata/influxdb-client-dart/pull/14): Add missing 'Content-Type' header for streaming queries 
 
 ### API
+1. [#18](https://github.com/influxdata/influxdb-client-dart/pull/18): Add support for Sound null safety
 1. [#17](https://github.com/influxdata/influxdb-client-dart/pull/17): Add `PingApi` to check status of OSS and Cloud instance
 
 ## 1.1.0 [2021-09-17]

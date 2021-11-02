@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class DeleteApi {
-  DeleteApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  DeleteApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -38,10 +37,11 @@ class DeleteApi {
   ///
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
-  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID }) async {
+  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID, }) async {
     final path = r'/delete';
 
-    Object postBody = deletePredicateRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = deletePredicateRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -64,19 +64,18 @@ class DeleteApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }

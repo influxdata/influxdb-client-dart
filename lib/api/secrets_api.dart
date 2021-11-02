@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class SecretsApi {
-  SecretsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  SecretsApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -29,11 +28,12 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDSecretsIDWithHttpInfo(String orgID, String secretID, { String? zapTraceSpan }) async {
+  Future<Response> deleteOrgsIDSecretsIDWithHttpInfo(String orgID, String secretID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/secrets/{secretID}'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString())
-      .replaceAll('{' + 'secretID' + '}', secretID.toString());
+      .replaceAll('{orgID}', orgID)
+      .replaceAll('{secretID}', secretID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -44,19 +44,18 @@ class SecretsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -91,10 +90,11 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDSecretsWithHttpInfo(String orgID, { String? zapTraceSpan }) async {
+  Future<Response> getOrgsIDSecretsWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/secrets'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -105,19 +105,18 @@ class SecretsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -141,8 +140,9 @@ class SecretsApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'SecretKeysResponse',) as SecretKeysResponse;
-        }
-    return Future<SecretKeysResponse>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Update secrets in an organization
@@ -159,11 +159,12 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchOrgsIDSecretsWithHttpInfo(String orgID, Map<String, String> requestBody, { String? zapTraceSpan }) async {
+  Future<Response> patchOrgsIDSecretsWithHttpInfo(String orgID, Map<String, String> requestBody, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/secrets'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody = requestBody;
+    // ignore: prefer_final_locals
+    Object? postBody = requestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -173,19 +174,18 @@ class SecretsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -223,11 +223,12 @@ class SecretsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDSecretsWithHttpInfo(String orgID, SecretKeys secretKeys, { String? zapTraceSpan }) async {
+  Future<Response> postOrgsIDSecretsWithHttpInfo(String orgID, SecretKeys secretKeys, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/secrets/delete'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody = secretKeys;
+    // ignore: prefer_final_locals
+    Object? postBody = secretKeys;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -237,19 +238,18 @@ class SecretsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }

@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -49,6 +48,7 @@ class DBRPCreate {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (orgID == null ? 0 : orgID.hashCode) +
     (org == null ? 0 : org.hashCode) +
     (bucketID == null ? 0 : bucketID.hashCode) +
@@ -76,39 +76,48 @@ class DBRPCreate {
     return json;
   }
 
-  /// Returns a new [DBRPCreate] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static DBRPCreate? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : DBRPCreate(
-        orgID: json[r'orgID'],
-        org: json[r'org'],
-        bucketID: json[r'bucketID'],
-        database: json[r'database'],
-        retentionPolicy: json[r'retention_policy'],
-        default_: json[r'default'],
-    );
+  /// Returns a new [DBRPCreate] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static DBRPCreate fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return DBRPCreate(
+        orgID: mapValueOfType<String>(json, r'orgID'),
+        org: mapValueOfType<String>(json, r'org'),
+        bucketID: mapValueOfType<String>(json, r'bucketID'),
+        database: mapValueOfType<String>(json, r'database'),
+        retentionPolicy: mapValueOfType<String>(json, r'retention_policy'),
+        default_: mapValueOfType<bool>(json, r'default'),
+      );
+  }
 
-  static List<DBRPCreate?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <DBRPCreate>[]
-      : json.map((dynamic value) => DBRPCreate.fromJson(value)).toList(growable: true == growable);
+  static List<DBRPCreate>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(DBRPCreate.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <DBRPCreate>[];
 
-  static Map<String, DBRPCreate?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, DBRPCreate?> mapFromJson(dynamic json) {
     final map = <String, DBRPCreate?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = DBRPCreate.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = DBRPCreate.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of DBRPCreate-objects as value to a dart map
-  static Map<String, List<DBRPCreate?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<DBRPCreate?>?> map = <String, List<DBRPCreate>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = DBRPCreate.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<DBRPCreate?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<DBRPCreate?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = DBRPCreate.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

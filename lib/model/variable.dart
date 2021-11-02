@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -36,7 +35,7 @@ class Variable {
 
   List<String>? selected;
 
-  List<Label?>? labels;
+  List<Label>? labels;
 
   VariableProperties? arguments;
 
@@ -59,6 +58,7 @@ class Variable {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (links == null ? 0 : links.hashCode) +
     (id == null ? 0 : id.hashCode) +
     (orgID == null ? 0 : orgID.hashCode) +
@@ -102,49 +102,54 @@ class Variable {
     return json;
   }
 
-  /// Returns a new [Variable] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Variable? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : Variable(
-        links: VariableLinks.fromJson(json[r'links']),
-        id: json[r'id'],
-        orgID: json[r'orgID'],
-        name: json[r'name'],
-        description: json[r'description'],
-        selected: json[r'selected'] == null
-          ? null
-          : (json[r'selected'] as List).cast<String>(),
+  /// Returns a new [Variable] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static Variable fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return Variable(
+        links: json[r'links'] == null ? null : VariableLinks.fromJson(json[r'links']),
+        id: mapValueOfType<String>(json, r'id'),
+        orgID: mapValueOfType<String>(json, r'orgID'),
+        name: mapValueOfType<String>(json, r'name'),
+        description: mapValueOfType<String>(json, r'description'),
+        selected: json[r'selected'] is List
+          ? (json[r'selected'] as List).cast<String>()
+          : null,
         labels: Label.listFromJson(json[r'labels']),
-        arguments: VariableProperties.fromJson(json[r'arguments']),
-        createdAt: json[r'createdAt'] == null
-          ? null
-          : DateTime.parse(json[r'createdAt']),
-        updatedAt: json[r'updatedAt'] == null
-          ? null
-          : DateTime.parse(json[r'updatedAt']),
-    );
+        arguments: json[r'arguments'] == null ? null : VariableProperties.fromJson(json[r'arguments']),
+        createdAt: mapDateTime(json, r'createdAt', ''),
+        updatedAt: mapDateTime(json, r'updatedAt', ''),
+      );
+  }
 
-  static List<Variable?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <Variable>[]
-      : json.map((dynamic value) => Variable.fromJson(value)).toList(growable: true == growable);
+  static List<Variable>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Variable.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Variable>[];
 
-  static Map<String, Variable?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Variable?> mapFromJson(dynamic json) {
     final map = <String, Variable?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Variable.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Variable.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Variable-objects as value to a dart map
-  static Map<String, List<Variable?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<Variable?>?> map = <String, List<Variable>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Variable.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<Variable?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<Variable?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Variable.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

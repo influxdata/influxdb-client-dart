@@ -1,12 +1,6 @@
-// import 'package:http/http.dart' as http;
-// import 'package:http/http.dart';
-// import 'package:logging/logging.dart';
-
-
-
 part of influxdb_client_api;
 
-String CLIENT_VERSION = '1.0.1';
+String CLIENT_VERSION = '2.0.0';
 String CLIENT_NAME = 'influxdb-client-dart';
 
 ///
@@ -49,7 +43,10 @@ abstract class DefaultService {
   }
 
   Future<BaseResponse> _invoke(Uri uri, String method,
-      {required Map<String, String> headers, body, maxRedirects, stream = false}) {
+      {required Map<String, String> headers,
+      body,
+      maxRedirects,
+      stream = false}) {
     headers.addAll(apiClient.defaultHeaderMap);
 
     if (stream) {
@@ -112,7 +109,7 @@ abstract class DefaultService {
             await (response).stream.bytesToString(),
             response.statusCode,
             response.headers);
-      } else if (response is Response){
+      } else if (response is Response) {
         throw InfluxDBException.fromJson(
             (response).body, response.statusCode, response.headers);
       } else {

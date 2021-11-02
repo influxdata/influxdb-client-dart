@@ -39,7 +39,7 @@ void main() {
 
   tearDown(() async {
     print('Delete bucket id: ${bucket.id}');
-    await client.getBucketsApi().deleteBucketsID(bucket.id);
+    await client.getBucketsApi().deleteBucketsID(bucket.id!);
     client.close();
   });
 

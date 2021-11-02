@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -32,7 +31,7 @@ class AuthorizationAllOf {
   String? orgID;
 
   /// List of permissions for an auth.  An auth must have at least one Permission.
-  List<Permission?>? permissions;
+  List<Permission>? permissions;
 
   String? id;
 
@@ -65,6 +64,7 @@ class AuthorizationAllOf {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (createdAt == null ? 0 : createdAt.hashCode) +
     (updatedAt == null ? 0 : updatedAt.hashCode) +
     (orgID == null ? 0 : orgID.hashCode) +
@@ -114,47 +114,52 @@ class AuthorizationAllOf {
     return json;
   }
 
-  /// Returns a new [AuthorizationAllOf] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static AuthorizationAllOf? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : AuthorizationAllOf(
-        createdAt: json[r'createdAt'] == null
-          ? null
-          : DateTime.parse(json[r'createdAt']),
-        updatedAt: json[r'updatedAt'] == null
-          ? null
-          : DateTime.parse(json[r'updatedAt']),
-        orgID: json[r'orgID'],
+  /// Returns a new [AuthorizationAllOf] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static AuthorizationAllOf fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return AuthorizationAllOf(
+        createdAt: mapDateTime(json, r'createdAt', ''),
+        updatedAt: mapDateTime(json, r'updatedAt', ''),
+        orgID: mapValueOfType<String>(json, r'orgID'),
         permissions: Permission.listFromJson(json[r'permissions']),
-        id: json[r'id'],
-        token: json[r'token'],
-        userID: json[r'userID'],
-        user: json[r'user'],
-        org: json[r'org'],
-        links: AuthorizationAllOfLinks.fromJson(json[r'links']),
-    );
+        id: mapValueOfType<String>(json, r'id'),
+        token: mapValueOfType<String>(json, r'token'),
+        userID: mapValueOfType<String>(json, r'userID'),
+        user: mapValueOfType<String>(json, r'user'),
+        org: mapValueOfType<String>(json, r'org'),
+        links: json[r'links'] == null ? null : AuthorizationAllOfLinks.fromJson(json[r'links']),
+      );
+  }
 
-  static List<AuthorizationAllOf?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <AuthorizationAllOf>[]
-      : json.map((dynamic value) => AuthorizationAllOf.fromJson(value)).toList(growable: true == growable);
+  static List<AuthorizationAllOf>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AuthorizationAllOf.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AuthorizationAllOf>[];
 
-  static Map<String, AuthorizationAllOf?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, AuthorizationAllOf?> mapFromJson(dynamic json) {
     final map = <String, AuthorizationAllOf?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = AuthorizationAllOf.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = AuthorizationAllOf.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationAllOf-objects as value to a dart map
-  static Map<String, List<AuthorizationAllOf?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<AuthorizationAllOf?>?> map = <String, List<AuthorizationAllOf>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = AuthorizationAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<AuthorizationAllOf?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<AuthorizationAllOf?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = AuthorizationAllOf.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

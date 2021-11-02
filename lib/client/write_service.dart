@@ -146,7 +146,7 @@ class WriteService extends DefaultService {
       payload = data;
     }
     return await (_invoke(uri, 'POST',
-        body: payload, headers: headers, maxRedirects: influxDB.maxRedirects) as FutureOr<BaseResponse>);
+        body: payload, headers: headers, maxRedirects: influxDB.maxRedirects));
   }
 
   dynamic _payload(dynamic data, WritePrecision precision, String bucket,

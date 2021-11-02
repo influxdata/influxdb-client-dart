@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class TasksApi {
-  TasksApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  TasksApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -28,10 +27,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> deleteTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -42,19 +42,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -91,11 +90,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDLabelsIDWithHttpInfo(String taskID, String labelID, { String? zapTraceSpan }) async {
+  Future<Response> deleteTasksIDLabelsIDWithHttpInfo(String taskID, String labelID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/labels/{labelID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString())
-      .replaceAll('{' + 'labelID' + '}', labelID.toString());
+      .replaceAll('{taskID}', taskID)
+      .replaceAll('{labelID}', labelID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -106,19 +106,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -156,11 +155,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDMembersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan }) async {
+  Future<Response> deleteTasksIDMembersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/members/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString())
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{userID}', userID)
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -171,19 +171,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -221,11 +220,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDOwnersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan }) async {
+  Future<Response> deleteTasksIDOwnersIDWithHttpInfo(String userID, String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/owners/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString())
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{userID}', userID)
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -236,19 +236,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -286,11 +285,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
+  Future<Response> deleteTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/runs/{runID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString())
-      .replaceAll('{' + 'runID' + '}', runID.toString());
+      .replaceAll('{taskID}', taskID)
+      .replaceAll('{runID}', runID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -301,19 +301,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -366,9 +365,13 @@ class TasksApi {
   ///
   /// * [int] limit:
   ///   The number of tasks to return
-  Future<Response> getTasksWithHttpInfo({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit }) async {
+  ///
+  /// * [String] type:
+  ///   Type of task, unset by default.
+  Future<Response> getTasksWithHttpInfo({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit, String? type, }) async {
     final path = r'/tasks';
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -396,24 +399,26 @@ class TasksApi {
     if (limit != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'limit', limit));
     }
+    if (type != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'type', type));
+    }
 
     if (zapTraceSpan != null) {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -445,8 +450,11 @@ class TasksApi {
   ///
   /// * [int] limit:
   ///   The number of tasks to return
-  Future<Tasks> getTasks({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit }) async {
-    final response = await getTasksWithHttpInfo( zapTraceSpan: zapTraceSpan, name: name, after: after, user: user, org: org, orgID: orgID, status: status, limit: limit );
+  ///
+  /// * [String] type:
+  ///   Type of task, unset by default.
+  Future<Tasks> getTasks({ String? zapTraceSpan, String? name, String? after, String? user, String? org, String? orgID, String? status, int? limit, String? type }) async {
+    final response = await getTasksWithHttpInfo( zapTraceSpan: zapTraceSpan, name: name, after: after, user: user, org: org, orgID: orgID, status: status, limit: limit, type: type );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -455,8 +463,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Tasks',) as Tasks;
-        }
-    return Future<Tasks>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve a task
@@ -470,10 +479,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -484,19 +494,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -520,8 +529,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
-        }
-    return Future<Task>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all labels for a task
@@ -535,10 +545,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDLabelsWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDLabelsWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/labels'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -549,19 +560,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -585,8 +595,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
-        }
-    return Future<LabelsResponse>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve all logs for a task
@@ -600,10 +611,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDLogsWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDLogsWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/logs'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -614,19 +626,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -650,8 +661,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Logs',) as Logs;
-        }
-    return Future<Logs>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all task members
@@ -665,10 +677,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDMembersWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDMembersWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/members'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -679,19 +692,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -715,8 +727,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMembers',) as ResourceMembers;
-        }
-    return Future<ResourceMembers>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all owners of a task
@@ -730,10 +743,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDOwnersWithHttpInfo(String taskID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDOwnersWithHttpInfo(String taskID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/owners'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -744,19 +758,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -780,8 +793,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwners',) as ResourceOwners;
-        }
-    return Future<ResourceOwners>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List runs for a task
@@ -807,10 +821,11 @@ class TasksApi {
   ///
   /// * [DateTime] beforeTime:
   ///   Filter runs to those scheduled before this time, RFC3339
-  Future<Response> getTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, String? after, int? limit, DateTime? afterTime, DateTime? beforeTime }) async {
+  Future<Response> getTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, String? after, int? limit, DateTime? afterTime, DateTime? beforeTime, }) async {
     final path = r'/tasks/{taskID}/runs'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -834,19 +849,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -882,8 +896,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Runs',) as Runs;
-        }
-    return Future<Runs>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve a single run for a task
@@ -900,11 +915,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDRunsIDWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/runs/{runID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString())
-      .replaceAll('{' + 'runID' + '}', runID.toString());
+      .replaceAll('{taskID}', taskID)
+      .replaceAll('{runID}', runID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -915,19 +931,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -954,8 +969,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
-        }
-    return Future<Run>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve all logs for a run
@@ -972,11 +988,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getTasksIDRunsIDLogsWithHttpInfo(String taskID, String runID, { String? zapTraceSpan }) async {
+  Future<Response> getTasksIDRunsIDLogsWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/runs/{runID}/logs'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString())
-      .replaceAll('{' + 'runID' + '}', runID.toString());
+      .replaceAll('{taskID}', taskID)
+      .replaceAll('{runID}', runID);
 
+    // ignore: prefer_final_locals
     Object? postBody;
 
     final queryParams = <QueryParam>[];
@@ -987,19 +1004,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1026,8 +1042,9 @@ class TasksApi {
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Logs',) as Logs;
-        }
-    return Future<Logs>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Update a task
@@ -1046,11 +1063,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchTasksIDWithHttpInfo(String taskID, TaskUpdateRequest taskUpdateRequest, { String? zapTraceSpan }) async {
+  Future<Response> patchTasksIDWithHttpInfo(String taskID, TaskUpdateRequest taskUpdateRequest, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
-    Object postBody = taskUpdateRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = taskUpdateRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1060,19 +1078,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1100,9 +1117,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',);
-        }
-    return Future<Task>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Create a new task
@@ -1116,10 +1134,11 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksWithHttpInfo(TaskCreateRequest taskCreateRequest, { String? zapTraceSpan }) async {
+  Future<Response> postTasksWithHttpInfo(TaskCreateRequest taskCreateRequest, { String? zapTraceSpan, }) async {
     final path = r'/tasks';
 
-    Object postBody = taskCreateRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = taskCreateRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1129,19 +1148,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1164,9 +1182,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',);
-        }
-    return Future<Task>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Task',) as Task;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add a label to a task
@@ -1183,11 +1202,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDLabelsWithHttpInfo(String taskID, LabelMapping labelMapping, { String? zapTraceSpan }) async {
+  Future<Response> postTasksIDLabelsWithHttpInfo(String taskID, LabelMapping labelMapping, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/labels'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
-    Object postBody = labelMapping;
+    // ignore: prefer_final_locals
+    Object? postBody = labelMapping;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1197,19 +1217,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1235,9 +1254,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',);
-        }
-    return Future<LabelResponse>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add a member to a task
@@ -1254,11 +1274,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDMembersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
+  Future<Response> postTasksIDMembersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/members'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
-    Object postBody = addResourceMemberRequestBody;
+    // ignore: prefer_final_locals
+    Object? postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1268,19 +1289,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1306,9 +1326,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',);
-        }
-    return Future<ResourceMember>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',) as ResourceMember;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add an owner to a task
@@ -1325,11 +1346,12 @@ class TasksApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postTasksIDOwnersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
+  Future<Response> postTasksIDOwnersWithHttpInfo(String taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
     final path = r'/tasks/{taskID}/owners'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
-    Object postBody = addResourceMemberRequestBody;
+    // ignore: prefer_final_locals
+    Object? postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -1339,19 +1361,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1377,9 +1398,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',);
-        }
-    return Future<ResourceOwner>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',) as ResourceOwner;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Manually start a task run, overriding the current schedule
@@ -1394,10 +1416,11 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [RunManually] runManually:
-  Future<Response> postTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, RunManually? runManually }) async {
+  Future<Response> postTasksIDRunsWithHttpInfo(String taskID, { String? zapTraceSpan, RunManually? runManually, }) async {
     final path = r'/tasks/{taskID}/runs'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString());
+      .replaceAll('{taskID}', taskID);
 
+    // ignore: prefer_final_locals
     Object? postBody = runManually;
 
     final queryParams = <QueryParam>[];
@@ -1408,19 +1431,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1444,9 +1466,10 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',);
-        }
-    return Future<Run>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retry a task run
@@ -1465,11 +1488,12 @@ class TasksApi {
   ///   OpenTracing span context
   ///
   /// * [Object] body:
-  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, Object? body }) async {
+  Future<Response> postTasksIDRunsIDRetryWithHttpInfo(String taskID, String runID, { String? zapTraceSpan, Object? body, }) async {
     final path = r'/tasks/{taskID}/runs/{runID}/retry'
-      .replaceAll('{' + 'taskID' + '}', taskID.toString())
-      .replaceAll('{' + 'runID' + '}', runID.toString());
+      .replaceAll('{taskID}', taskID)
+      .replaceAll('{runID}', runID);
 
+    // ignore: prefer_final_locals
     Object? postBody = body;
 
     final queryParams = <QueryParam>[];
@@ -1480,19 +1504,18 @@ class TasksApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json; charset=utf-8'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json; charset=utf-8'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -1520,8 +1543,9 @@ class TasksApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',);
-        }
-    return Future<Run>.value(null);
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Run',) as Run;
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 }

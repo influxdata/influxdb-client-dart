@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -23,6 +22,7 @@ class SecretKeysResponseAllOf {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (links == null ? 0 : links.hashCode);
 
   @override
@@ -36,34 +36,43 @@ class SecretKeysResponseAllOf {
     return json;
   }
 
-  /// Returns a new [SecretKeysResponseAllOf] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static SecretKeysResponseAllOf? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : SecretKeysResponseAllOf(
-        links: SecretKeysResponseAllOfLinks.fromJson(json[r'links']),
-    );
+  /// Returns a new [SecretKeysResponseAllOf] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static SecretKeysResponseAllOf fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return SecretKeysResponseAllOf(
+        links: json[r'links'] == null ? null : SecretKeysResponseAllOfLinks.fromJson(json[r'links']),
+      );
+  }
 
-  static List<SecretKeysResponseAllOf?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <SecretKeysResponseAllOf>[]
-      : json.map((dynamic value) => SecretKeysResponseAllOf.fromJson(value)).toList(growable: true == growable);
+  static List<SecretKeysResponseAllOf>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(SecretKeysResponseAllOf.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <SecretKeysResponseAllOf>[];
 
-  static Map<String, SecretKeysResponseAllOf?> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, SecretKeysResponseAllOf?> mapFromJson(dynamic json) {
     final map = <String, SecretKeysResponseAllOf?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = SecretKeysResponseAllOf.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = SecretKeysResponseAllOf.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of SecretKeysResponseAllOf-objects as value to a dart map
-  static Map<String, List<SecretKeysResponseAllOf?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
-    final Map<String, List<SecretKeysResponseAllOf?>?> map = <String, List<SecretKeysResponseAllOf>?>{};
-    if (json.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = SecretKeysResponseAllOf.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<SecretKeysResponseAllOf?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<SecretKeysResponseAllOf?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = SecretKeysResponseAllOf.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
