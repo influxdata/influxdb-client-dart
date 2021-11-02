@@ -1,7 +1,3 @@
-// import 'package:http/http.dart' as http;
-// import 'package:http/http.dart';
-// import 'package:logging/logging.dart';
-
 // @dart=2.0
 
 part of influxdb_client_api;
@@ -176,7 +172,7 @@ class InfluxDBClient {
       String token,
       String bucket,
       String org,
-      http.Client client,
+      Client client,
 
       /// InfluxDB 1.x compatibility only
       String username,
@@ -192,7 +188,7 @@ class InfluxDBClient {
     this.token = token ?? String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? String.fromEnvironment('INFLUXDB_ORG');
-    this.client = client ?? LoggingClient(debug, http.Client());
+    this.client = client ?? LoggingClient(debug, Client());
     this.debug = debug;
     this.maxRedirects = maxRedirects;
     this.followRedirects = followRedirects;
@@ -212,7 +208,7 @@ class InfluxDBClient {
   int maxRedirects;
   bool followRedirects;
 
-  http.Client client;
+  Client client;
 
   /// Closes the client and cleans up any resources associated with it.
   ///
