@@ -104,3 +104,5 @@ cp -r ${SRC}/model/organizations.dart $OUT/model
 cp -r ${SRC}/model/password_reset_body.dart $OUT/model
 
 cp -r ${SRC}/auth/*.dart $OUT/auth
+
+dart format "${SCRIPT_PATH}/.."
