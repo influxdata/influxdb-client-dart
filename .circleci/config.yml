@@ -134,7 +134,7 @@ jobs:
 
   check-code-style:
     docker:
-      - image: "google/dart:2.13"
+      - image: "google/dart:latest"
     steps:
       - checkout
       - run:
