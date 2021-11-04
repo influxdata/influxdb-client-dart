@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:influxdb_client/api.dart';

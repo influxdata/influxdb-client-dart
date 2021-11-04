@@ -1,4 +1,4 @@
-// @dart=2.0
+
 
 /// Retry asynchronous functions with exponential random backoff strategy.
 ///
@@ -45,7 +45,7 @@ class RetryOptions {
   /// Example: for retry_interval=5, exponential_base=2, max_retry_delay=125, total=5
   /// retry delays are random distributed values within the ranges of
   /// [5-10, 10-20, 20-40, 40-80, 80-125]
-  Duration delay(int attempt, int retryAfter, DateTime deadline) {
+  Duration delay(int attempt, int? retryAfter, DateTime? deadline) {
     assert(attempt >= 0, 'attempt cannot be negative');
 
     if (attempt <= 0) {
@@ -66,7 +66,7 @@ class RetryOptions {
     if (rangeStop > maxDelay.inMilliseconds) {
       rangeStop = maxDelay.inMilliseconds;
     }
-    final add = (rangeStop - rangeStart) * rand;
+    final num add = (rangeStop - rangeStart) * rand;
     var duration = Duration(milliseconds: (rangeStart + add).toInt());
     if (deadline != null) {
       final diff = deadline.difference(DateTime.now());
@@ -82,8 +82,8 @@ class RetryOptions {
   }
 
   Future<T> retry<T>(FutureOr<T> Function() fn, {
-    FutureOr<bool> Function(Exception) retryIf,
-    FutureOr<void> Function(Exception) onRetry,
+    FutureOr<bool> Function(Exception)? retryIf,
+    FutureOr<void> Function(Exception)? onRetry,
   }) async {
     final deadline = DateTime.now().add(maxTime);
     var attempt = 0;
@@ -92,7 +92,7 @@ class RetryOptions {
       try {
         return await fn();
       } on Exception catch (e) {
-        var retryAfter = -1;
+        int? retryAfter = -1;
         if (e is InfluxDBException) {
           retryAfter = e.retryAfter;
         }

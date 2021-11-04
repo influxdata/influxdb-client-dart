@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -14,25 +13,25 @@ class AuthorizationPostRequest {
   AuthorizationPostRequest({
     this.status = const AuthorizationPostRequestStatusEnum._('active'),
     this.description,
-    @required this.orgID,
+    required this.orgID,
     this.userID,
     this.permissions = const [],
   });
 
   /// If inactive the token is inactive and requests using the token will be rejected.
-  AuthorizationPostRequestStatusEnum status;
+  AuthorizationPostRequestStatusEnum? status;
 
   /// A description of the token.
-  String description;
+  String? description;
 
   /// ID of org that authorization is scoped to.
-  String orgID;
+  String? orgID;
 
   /// ID of user that authorization is scoped to.
-  String userID;
+  String? userID;
 
   /// List of permissions for an auth.  An auth must have at least one Permission.
-  List<Permission> permissions;
+  List<Permission>? permissions;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is AuthorizationPostRequest &&
@@ -44,6 +43,7 @@ class AuthorizationPostRequest {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode) +
     (description == null ? 0 : description.hashCode) +
     (orgID == null ? 0 : orgID.hashCode) +
@@ -69,38 +69,47 @@ class AuthorizationPostRequest {
     return json;
   }
 
-  /// Returns a new [AuthorizationPostRequest] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static AuthorizationPostRequest fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : AuthorizationPostRequest(
+  /// Returns a new [AuthorizationPostRequest] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static AuthorizationPostRequest fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return AuthorizationPostRequest(
         status: AuthorizationPostRequestStatusEnum.fromJson(json[r'status']),
-        description: json[r'description'],
-        orgID: json[r'orgID'],
-        userID: json[r'userID'],
+        description: mapValueOfType<String>(json, r'description'),
+        orgID: mapValueOfType<String>(json, r'orgID'),
+        userID: mapValueOfType<String>(json, r'userID'),
         permissions: Permission.listFromJson(json[r'permissions']),
-    );
+      );
+  }
 
-  static List<AuthorizationPostRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <AuthorizationPostRequest>[]
-      : json.map((dynamic value) => AuthorizationPostRequest.fromJson(value)).toList(growable: true == growable);
+  static List<AuthorizationPostRequest>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AuthorizationPostRequest.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AuthorizationPostRequest>[];
 
-  static Map<String, AuthorizationPostRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, AuthorizationPostRequest>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = AuthorizationPostRequest.fromJson(value));
+  static Map<String, AuthorizationPostRequest?> mapFromJson(dynamic json) {
+    final map = <String, AuthorizationPostRequest?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = AuthorizationPostRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationPostRequest-objects as value to a dart map
-  static Map<String, List<AuthorizationPostRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<AuthorizationPostRequest>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = AuthorizationPostRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<AuthorizationPostRequest?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<AuthorizationPostRequest?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = AuthorizationPostRequest.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -128,23 +137,21 @@ class AuthorizationPostRequestStatusEnum {
     inactive,
   ];
 
-  static AuthorizationPostRequestStatusEnum fromJson(dynamic value) =>
+  static AuthorizationPostRequestStatusEnum? fromJson(dynamic value) =>
     AuthorizationPostRequestStatusEnumTypeTransformer().decode(value);
 
-  static List<AuthorizationPostRequestStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <AuthorizationPostRequestStatusEnum>[]
-      : json
-          .map((value) => AuthorizationPostRequestStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<AuthorizationPostRequestStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AuthorizationPostRequestStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AuthorizationPostRequestStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [AuthorizationPostRequestStatusEnum] to String,
 /// and [decode] dynamic data back to [AuthorizationPostRequestStatusEnum].
 class AuthorizationPostRequestStatusEnumTypeTransformer {
-  const AuthorizationPostRequestStatusEnumTypeTransformer._();
+  factory AuthorizationPostRequestStatusEnumTypeTransformer() => _instance ??= const AuthorizationPostRequestStatusEnumTypeTransformer._();
 
-  factory AuthorizationPostRequestStatusEnumTypeTransformer() => _instance ??= AuthorizationPostRequestStatusEnumTypeTransformer._();
+  const AuthorizationPostRequestStatusEnumTypeTransformer._();
 
   String encode(AuthorizationPostRequestStatusEnum data) => data.value;
 
@@ -156,19 +163,19 @@ class AuthorizationPostRequestStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  AuthorizationPostRequestStatusEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'active': return AuthorizationPostRequestStatusEnum.active;
-      case r'inactive': return AuthorizationPostRequestStatusEnum.inactive;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+  AuthorizationPostRequestStatusEnum? decode(dynamic data, {bool? allowNull}) {
+    if (data != null) {
+      switch (data.toString()) {
+        case r'active': return AuthorizationPostRequestStatusEnum.active;
+        case r'inactive': return AuthorizationPostRequestStatusEnum.inactive;
+        default: return AuthorizationPostRequestStatusEnum._(data.toString());
+      }
     }
     return null;
   }
 
   /// Singleton [AuthorizationPostRequestStatusEnumTypeTransformer] instance.
-  static AuthorizationPostRequestStatusEnumTypeTransformer _instance;
+  static AuthorizationPostRequestStatusEnumTypeTransformer? _instance;
 }
+
 

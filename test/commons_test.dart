@@ -4,9 +4,9 @@ import 'package:influxdb_client/api.dart';
 bool debugEnabled = true;
 
 /// global test properties
-InfluxDBClient client;
-String orgName;
-Organization organization;
+late InfluxDBClient client;
+late String orgName;
+late Organization organization;
 
 String generateBucketName() {
   var time = DateTime.now();
@@ -14,7 +14,7 @@ String generateBucketName() {
 }
 
 Future<Bucket> createTestBucket() async {
-  var org = organization ?? await findMyOrg();
+  var org = organization;
   var bucketName = generateBucketName();
   var request =
       PostBucketRequest(orgID: org.id, name: bucketName, retentionRules: null);
@@ -22,7 +22,7 @@ Future<Bucket> createTestBucket() async {
 }
 
 Future<void> deleteTestBucket(Bucket bucket) {
-  return client.getBucketsApi().deleteBucketsID(bucket.id);
+  return client.getBucketsApi().deleteBucketsID(bucket.id!);
 }
 
 void setupClient() async {
@@ -46,8 +46,8 @@ InfluxDBClient createClient() {
 }
 
 Future<Organization> findMyOrg() async {
-  var orgList = await client.getOrganizationsApi().getOrgs();
-  return orgList.orgs.firstWhere((org) => org.name == orgName);
+  var orgList = await (client.getOrganizationsApi().getOrgs());
+  return (orgList.orgs!.firstWhere((org) => org.name == orgName));
 }
 
 void main() {}

@@ -1,8 +1,6 @@
-// @dart=2.0
-
 part of influxdb_client_api;
 
-String CLIENT_VERSION = '1.0.1';
+String CLIENT_VERSION = '2.0.0';
 String CLIENT_NAME = 'influxdb-client-dart';
 
 ///
@@ -10,14 +8,14 @@ String CLIENT_NAME = 'influxdb-client-dart';
 ///
 abstract class DefaultService {
   final InfluxDBClient influxDB;
-  ApiClient apiClient;
+  late ApiClient apiClient;
 
   DefaultService(this.influxDB) {
     apiClient = influxDB.getApiClient();
   }
 
   Uri _buildUri(
-      String influxUrl, String path, Map<String, String> queryParams) {
+      String influxUrl, String path, Map<String, String?> queryParams) {
     Uri uri;
     if (influxUrl.startsWith('https://')) {
       uri =
@@ -36,16 +34,19 @@ abstract class DefaultService {
     });
   }
 
-  Client getClient() {
+  Client? getClient() {
     return influxDB.client;
   }
 
-  ApiClient getApiClient(String basePath) {
+  ApiClient? getApiClient(String basePath) {
     return apiClient;
   }
 
   Future<BaseResponse> _invoke(Uri uri, String method,
-      {Map<String, String> headers, body, maxRedirects, stream = false}) {
+      {required Map<String, String> headers,
+      body,
+      maxRedirects,
+      stream = false}) {
     headers.addAll(apiClient.defaultHeaderMap);
 
     if (stream) {
@@ -108,9 +109,12 @@ abstract class DefaultService {
             await (response).stream.bytesToString(),
             response.statusCode,
             response.headers);
+      } else if (response is Response) {
+        throw InfluxDBException.fromJson(
+            (response).body, response.statusCode, response.headers);
       } else {
         throw InfluxDBException.fromJson(
-            (response as Response).body, response.statusCode, response.headers);
+            response.toString(), response.statusCode, response.headers);
       }
     }
 
@@ -168,17 +172,17 @@ class InfluxDBClient {
   /// * [username] and [password] is only for InfluxDB 1.8 comatibility
   ///
   InfluxDBClient(
-      {String url,
-      String token,
-      String bucket,
-      String org,
-      Client client,
+      {String? url,
+      String? token,
+      String? bucket,
+      String? org,
+      Client? client,
 
       /// InfluxDB 1.x compatibility only
-      String username,
+      String? username,
 
       /// InfluxDB 1.x compatibility only
-      String password,
+      String? password,
 
       /// verbose logging of http calls
       bool debug = false,
@@ -200,15 +204,15 @@ class InfluxDBClient {
     defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
   }
 
-  String token;
-  String url;
-  String bucket;
-  String org;
-  bool debug;
-  int maxRedirects;
-  bool followRedirects;
+  String? token;
+  String? url;
+  String? bucket;
+  String? org;
+  bool debug = false;
+  int maxRedirects = 5;
+  bool followRedirects = true;
 
-  Client client;
+  late Client client;
 
   /// Closes the client and cleans up any resources associated with it.
   ///
@@ -219,7 +223,7 @@ class InfluxDBClient {
   Map<String, String> defaultHeaders = {};
 
   ApiClient getApiClient({String basePath = '/api/v2'}) {
-    var api = ApiClient(basePath: url + basePath);
+    var api = ApiClient(basePath: url! + basePath);
     if (token != null) {
       var authentication =
           api.getAuthentication('TokenAuthentication') as ApiKeyAuth;
@@ -280,11 +284,11 @@ class InfluxDBClient {
     return DBRPsApi(getApiClient());
   }
 
-  WriteService getWriteService([WriteOptions writeOptions]) {
+  WriteService getWriteService([WriteOptions? writeOptions]) {
     return WriteService(this, writeOptions: writeOptions);
   }
 
-  QueryService getQueryService({QueryOptions queryOptions}) {
+  QueryService getQueryService({QueryOptions? queryOptions}) {
     return QueryService(this, queryOptions: queryOptions);
   }
 

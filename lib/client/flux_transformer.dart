@@ -1,4 +1,4 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
@@ -30,12 +30,12 @@ class FluxCsvParserException implements Exception {
 /// Parses Flux query result and transforms the CSV stream of List<dynamic>
 /// in to Stream<FluxRecord>
 class FluxTransformer implements StreamTransformer<List, FluxRecord> {
-  StreamController _controller;
+  late StreamController _controller;
 
-  StreamSubscription _subscription;
+  StreamSubscription? _subscription;
 
-  FluxTableMetaData table;
-  bool cancelOnError;
+  FluxTableMetaData? table;
+  bool? cancelOnError;
   var tableIndex = 0;
   var tableId = -1;
   var startNewTable = false;
@@ -43,17 +43,17 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   var groups;
 
   // Original Stream
-  Stream<List> _stream;
+  late Stream<List> _stream;
 
   FluxTransformer({bool sync = false, this.cancelOnError = true}) {
     _controller = StreamController<FluxRecord>(
         onListen: _onListen,
         onCancel: _onCancel,
         onPause: () {
-          _subscription.pause();
+          _subscription!.pause();
         },
         onResume: () {
-          _subscription.resume();
+          _subscription!.resume();
         },
         sync: sync);
   }
@@ -71,7 +71,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   }
 
   void _onCancel() {
-    _subscription.cancel();
+    _subscription!.cancel();
     _subscription = null;
   }
 
@@ -105,16 +105,16 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
           'Unable to parse CSV response. FluxTable definition was not found.');
     }
     if (ANNOTATION_DATATYPE == token) {
-      _addDataTypes(table, csv);
+      _addDataTypes(table!, csv);
     } else if (ANNOTATION_GROUP == token) {
       groups = csv;
     } else if (ANNOTATION_DEFAULT == token) {
-      _addDefaultEmptyValues(table, csv);
+      _addDefaultEmptyValues(table!, csv);
     } else {
       if (startNewTable) {
         // parse column names
-        _addGroups(table, groups);
-        _addColumnNamesAndTags(table, csv);
+        _addGroups(table!, groups);
+        _addColumnNamesAndTags(table!, csv);
         startNewTable = false;
         return;
       }
@@ -131,24 +131,22 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
       if (tableId != currentId) {
         // create new table with previous column headers settings
-        var fluxColumns = table.columns;
+        var fluxColumns = table!.columns;
         table = FluxTableMetaData(tableIndex);
-        table.columns.addAll(fluxColumns);
+        table!.columns.addAll(fluxColumns);
         tableIndex = tableIndex + 1;
         tableId = currentId;
       }
-      // create flux recod from csv line
+      // create flux record from csv line
       var fluxRecord =
-          table.toObject(csv); // parseRecord(tableIndex - 1, table, csv);
+          table!.toObject(csv); // parseRecord(tableIndex - 1, table, csv);
       _controller.add(fluxRecord);
     }
   }
 
   void _addDataTypes(FluxTableMetaData table, List csv) {
     for (var i = 1; i < csv.length; i++) {
-      var column = FluxColumn();
-      column.index = i - 1;
-      column.dataType = csv[i];
+      var column = FluxColumn(csv[i], i -1);
       table.columns.add(column);
     }
   }
@@ -169,10 +167,10 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
     }
   }
 
-  void _addGroups(FluxTableMetaData table, List csv) {
+  void _addGroups(FluxTableMetaData table, List? csv) {
     var i = 1;
     for (var column in table.columns) {
-      column.group = csv[i] == 'true';
+      column.group = csv![i] == 'true';
       i++;
     }
   }
@@ -180,7 +178,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   @override
   Stream<FluxRecord> bind(Stream<List> stream) {
     _stream = stream;
-    return _controller.stream;
+    return _controller.stream as Stream<FluxRecord>;
   }
 
   @override

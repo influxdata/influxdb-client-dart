@@ -9,16 +9,16 @@ void main() async {
   await client.getPingApi().getPing();
 
   var orgs = await client.getOrganizationsApi().getOrgs();
-  var myOrgId = orgs.orgs.first.id;
+  var myOrgId = orgs.orgs!.first.id;
 
   var bucketsApi = client.getBucketsApi();
   var bucketName = 'bucket-my-org';
 
   // find and delete bucket 'bucket-my-org'
   var buckets = await bucketsApi.getBuckets(name: bucketName);
-  if (buckets.buckets.isNotEmpty) {
-    var bucketID = buckets.buckets.first.id;
-    await bucketsApi.deleteBucketsID(bucketID);
+  if (buckets.buckets!.isNotEmpty) {
+    var bucketID = buckets.buckets!.first.id;
+    await bucketsApi.deleteBucketsID(bucketID!);
     print('Bucket $bucketID was deleted.');
   }
 

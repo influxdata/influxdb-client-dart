@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -14,18 +13,18 @@ class User {
   User({
     this.id,
     this.oauthID,
-    @required this.name,
+    required this.name,
     this.status = const UserStatusEnum._('active'),
   });
 
-  String id;
+  String? id;
 
-  String oauthID;
+  String? oauthID;
 
-  String name;
+  String? name;
 
   /// If inactive the user is inactive.
-  UserStatusEnum status;
+  UserStatusEnum? status;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is User &&
@@ -36,6 +35,7 @@ class User {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (oauthID == null ? 0 : oauthID.hashCode) +
     (name == null ? 0 : name.hashCode) +
@@ -59,37 +59,46 @@ class User {
     return json;
   }
 
-  /// Returns a new [User] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static User fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : User(
-        id: json[r'id'],
-        oauthID: json[r'oauthID'],
-        name: json[r'name'],
+  /// Returns a new [User] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static User fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return User(
+        id: mapValueOfType<String>(json, r'id'),
+        oauthID: mapValueOfType<String>(json, r'oauthID'),
+        name: mapValueOfType<String>(json, r'name'),
         status: UserStatusEnum.fromJson(json[r'status']),
-    );
+      );
+  }
 
-  static List<User> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <User>[]
-      : json.map((dynamic value) => User.fromJson(value)).toList(growable: true == growable);
+  static List<User>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(User.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <User>[];
 
-  static Map<String, User> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, User>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = User.fromJson(value));
+  static Map<String, User?> mapFromJson(dynamic json) {
+    final map = <String, User?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = User.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of User-objects as value to a dart map
-  static Map<String, List<User>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<User>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = User.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<User?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<User?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = User.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -117,23 +126,21 @@ class UserStatusEnum {
     inactive,
   ];
 
-  static UserStatusEnum fromJson(dynamic value) =>
+  static UserStatusEnum? fromJson(dynamic value) =>
     UserStatusEnumTypeTransformer().decode(value);
 
-  static List<UserStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <UserStatusEnum>[]
-      : json
-          .map((value) => UserStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<UserStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(UserStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <UserStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [UserStatusEnum] to String,
 /// and [decode] dynamic data back to [UserStatusEnum].
 class UserStatusEnumTypeTransformer {
-  const UserStatusEnumTypeTransformer._();
+  factory UserStatusEnumTypeTransformer() => _instance ??= const UserStatusEnumTypeTransformer._();
 
-  factory UserStatusEnumTypeTransformer() => _instance ??= UserStatusEnumTypeTransformer._();
+  const UserStatusEnumTypeTransformer._();
 
   String encode(UserStatusEnum data) => data.value;
 
@@ -145,19 +152,19 @@ class UserStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  UserStatusEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'active': return UserStatusEnum.active;
-      case r'inactive': return UserStatusEnum.inactive;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+  UserStatusEnum? decode(dynamic data, {bool? allowNull}) {
+    if (data != null) {
+      switch (data.toString()) {
+        case r'active': return UserStatusEnum.active;
+        case r'inactive': return UserStatusEnum.inactive;
+        default: return UserStatusEnum._(data.toString());
+      }
     }
     return null;
   }
 
   /// Singleton [UserStatusEnumTypeTransformer] instance.
-  static UserStatusEnumTypeTransformer _instance;
+  static UserStatusEnumTypeTransformer? _instance;
 }
+
 

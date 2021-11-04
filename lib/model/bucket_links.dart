@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -21,22 +20,22 @@ class BucketLinks {
   });
 
   /// URI of resource.
-  String labels;
+  String? labels;
 
   /// URI of resource.
-  String members;
+  String? members;
 
   /// URI of resource.
-  String org;
+  String? org;
 
   /// URI of resource.
-  String owners;
+  String? owners;
 
   /// URI of resource.
-  String self;
+  String? self;
 
   /// URI of resource.
-  String write;
+  String? write;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is BucketLinks &&
@@ -49,6 +48,7 @@ class BucketLinks {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (labels == null ? 0 : labels.hashCode) +
     (members == null ? 0 : members.hashCode) +
     (org == null ? 0 : org.hashCode) +
@@ -82,39 +82,48 @@ class BucketLinks {
     return json;
   }
 
-  /// Returns a new [BucketLinks] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static BucketLinks fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : BucketLinks(
-        labels: json[r'labels'],
-        members: json[r'members'],
-        org: json[r'org'],
-        owners: json[r'owners'],
-        self: json[r'self'],
-        write: json[r'write'],
-    );
+  /// Returns a new [BucketLinks] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static BucketLinks fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return BucketLinks(
+        labels: mapValueOfType<String>(json, r'labels'),
+        members: mapValueOfType<String>(json, r'members'),
+        org: mapValueOfType<String>(json, r'org'),
+        owners: mapValueOfType<String>(json, r'owners'),
+        self: mapValueOfType<String>(json, r'self'),
+        write: mapValueOfType<String>(json, r'write'),
+      );
+  }
 
-  static List<BucketLinks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <BucketLinks>[]
-      : json.map((dynamic value) => BucketLinks.fromJson(value)).toList(growable: true == growable);
+  static List<BucketLinks>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(BucketLinks.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <BucketLinks>[];
 
-  static Map<String, BucketLinks> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, BucketLinks>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = BucketLinks.fromJson(value));
+  static Map<String, BucketLinks?> mapFromJson(dynamic json) {
+    final map = <String, BucketLinks?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = BucketLinks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of BucketLinks-objects as value to a dart map
-  static Map<String, List<BucketLinks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<BucketLinks>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = BucketLinks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<BucketLinks?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<BucketLinks?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = BucketLinks.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

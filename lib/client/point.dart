@@ -1,4 +1,4 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
@@ -50,7 +50,7 @@ class Point {
 
   /// Creates an InfluxDB protocol line out of this instance.
   /// |measurement,tag_set field_set timestamp
-  String toLineProtocol(WritePrecision precision, {Map defaultTags}) {
+  String toLineProtocol(WritePrecision precision, {Map? defaultTags}) {
     var sb = StringBuffer();
 
     _escapeKey(sb, name, false);
@@ -102,7 +102,7 @@ class Point {
     _escapeKey(sb, value, true);
   }
 
-  void _appendTags(StringBuffer sb, {Map defaultTags}) {
+  void _appendTags(StringBuffer sb, {Map? defaultTags}) {
     if (defaultTags != null) {
       defaultTags.forEach((k, v) => _addTag(k, v, sb));
     }

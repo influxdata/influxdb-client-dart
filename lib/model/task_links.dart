@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -21,22 +20,22 @@ class TaskLinks {
   });
 
   /// URI of resource.
-  String self;
+  String? self;
 
   /// URI of resource.
-  String owners;
+  String? owners;
 
   /// URI of resource.
-  String members;
+  String? members;
 
   /// URI of resource.
-  String runs;
+  String? runs;
 
   /// URI of resource.
-  String logs;
+  String? logs;
 
   /// URI of resource.
-  String labels;
+  String? labels;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is TaskLinks &&
@@ -49,6 +48,7 @@ class TaskLinks {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (self == null ? 0 : self.hashCode) +
     (owners == null ? 0 : owners.hashCode) +
     (members == null ? 0 : members.hashCode) +
@@ -82,39 +82,48 @@ class TaskLinks {
     return json;
   }
 
-  /// Returns a new [TaskLinks] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static TaskLinks fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : TaskLinks(
-        self: json[r'self'],
-        owners: json[r'owners'],
-        members: json[r'members'],
-        runs: json[r'runs'],
-        logs: json[r'logs'],
-        labels: json[r'labels'],
-    );
+  /// Returns a new [TaskLinks] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static TaskLinks fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return TaskLinks(
+        self: mapValueOfType<String>(json, r'self'),
+        owners: mapValueOfType<String>(json, r'owners'),
+        members: mapValueOfType<String>(json, r'members'),
+        runs: mapValueOfType<String>(json, r'runs'),
+        logs: mapValueOfType<String>(json, r'logs'),
+        labels: mapValueOfType<String>(json, r'labels'),
+      );
+  }
 
-  static List<TaskLinks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <TaskLinks>[]
-      : json.map((dynamic value) => TaskLinks.fromJson(value)).toList(growable: true == growable);
+  static List<TaskLinks>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(TaskLinks.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <TaskLinks>[];
 
-  static Map<String, TaskLinks> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, TaskLinks>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = TaskLinks.fromJson(value));
+  static Map<String, TaskLinks?> mapFromJson(dynamic json) {
+    final map = <String, TaskLinks?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = TaskLinks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of TaskLinks-objects as value to a dart map
-  static Map<String, List<TaskLinks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<TaskLinks>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = TaskLinks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<TaskLinks?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<TaskLinks?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = TaskLinks.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

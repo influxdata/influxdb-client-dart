@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -17,9 +16,9 @@ class DBRPUpdate {
   });
 
   /// InfluxDB v1 retention policy
-  String retentionPolicy;
+  String? retentionPolicy;
 
-  bool default_;
+  bool? default_;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is DBRPUpdate &&
@@ -28,6 +27,7 @@ class DBRPUpdate {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (retentionPolicy == null ? 0 : retentionPolicy.hashCode) +
     (default_ == null ? 0 : default_.hashCode);
 
@@ -45,35 +45,44 @@ class DBRPUpdate {
     return json;
   }
 
-  /// Returns a new [DBRPUpdate] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static DBRPUpdate fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : DBRPUpdate(
-        retentionPolicy: json[r'retention_policy'],
-        default_: json[r'default'],
-    );
+  /// Returns a new [DBRPUpdate] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static DBRPUpdate fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return DBRPUpdate(
+        retentionPolicy: mapValueOfType<String>(json, r'retention_policy'),
+        default_: mapValueOfType<bool>(json, r'default'),
+      );
+  }
 
-  static List<DBRPUpdate> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <DBRPUpdate>[]
-      : json.map((dynamic value) => DBRPUpdate.fromJson(value)).toList(growable: true == growable);
+  static List<DBRPUpdate>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(DBRPUpdate.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <DBRPUpdate>[];
 
-  static Map<String, DBRPUpdate> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, DBRPUpdate>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = DBRPUpdate.fromJson(value));
+  static Map<String, DBRPUpdate?> mapFromJson(dynamic json) {
+    final map = <String, DBRPUpdate?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = DBRPUpdate.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of DBRPUpdate-objects as value to a dart map
-  static Map<String, List<DBRPUpdate>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<DBRPUpdate>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = DBRPUpdate.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<DBRPUpdate?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<DBRPUpdate?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = DBRPUpdate.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

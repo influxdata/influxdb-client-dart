@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -13,28 +13,28 @@ class Query {
   /// Returns a new [Query] instance.
   Query({
     this.extern,
-    @required this.query,
+    required this.query,
     this.type,
     this.params = const {},
     this.dialect,
     this.now,
   });
 
-  File extern;
+  File? extern;
 
   /// Query script to execute.
-  String query;
+  String? query;
 
   /// The type of query. Must be \"flux\".
-  QueryTypeEnum type;
+  QueryTypeEnum? type;
 
   /// Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both) 
-  Map<String, Object> params;
+  Map<String, Object>? params;
 
-  Dialect dialect;
+  Dialect? dialect;
 
   /// Specifies the time that should be reported as \"now\" in the query. Default is the server's now time.
-  DateTime now;
+  DateTime? now;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Query &&
@@ -73,14 +73,14 @@ class Query {
       json[r'dialect'] = dialect;
     }
     if (now != null) {
-      json[r'now'] = now.toUtc().toIso8601String();
+      json[r'now'] = now!.toUtc().toIso8601String();
     }
     return json;
   }
 
   /// Returns a new [Query] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static Query fromJson(Map<String, dynamic> json) => json == null
+  static Query? fromJson(Map<String, dynamic>? json) => json == null
     ? null
     : Query(
         query: json[r'query'],
@@ -92,23 +92,23 @@ class Query {
           : DateTime.parse(json[r'now']),
     );
 
-  static List<Query> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<Query?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <Query>[]
       : json.map((dynamic value) => Query.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Query> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, Query>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, Query?> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, Query?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) => map[key] = Query.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Query-objects as value to a dart map
-  static Map<String, List<Query>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<Query>>{};
-    if (json?.isNotEmpty == true) {
+  static Map<String, List<Query?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+    final Map<String, List<Query?>?> map = <String, List<Query>?>{};
+    if (json.isNotEmpty == true) {
       json.forEach((key, value) {
         map[key] = Query.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
@@ -137,11 +137,11 @@ class QueryTypeEnum {
     flux,
   ];
 
-  static QueryTypeEnum fromJson(dynamic value) =>
+  static QueryTypeEnum? fromJson(dynamic value) =>
     QueryTypeEnumTypeTransformer().decode(value);
 
-  static List<QueryTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
+  static List<QueryTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
+     json.isEmpty
       ? true == emptyIsNull ? null : <QueryTypeEnum>[]
       : json
           .map((value) => QueryTypeEnum.fromJson(value))
@@ -165,7 +165,7 @@ class QueryTypeEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  QueryTypeEnum decode(dynamic data, {bool allowNull}) {
+  QueryTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
       case r'flux': return QueryTypeEnum.flux;
       default:
@@ -177,6 +177,6 @@ class QueryTypeEnumTypeTransformer {
   }
 
   /// Singleton [QueryTypeEnumTypeTransformer] instance.
-  static QueryTypeEnumTypeTransformer _instance;
+  static QueryTypeEnumTypeTransformer? _instance;
 }
 

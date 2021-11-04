@@ -1,9 +1,8 @@
-// @dart=2.0
-
 part of influxdb_client_api;
 
 class QueryOptions {
   bool gzip;
+
   QueryOptions({this.gzip = false});
 }
 
@@ -24,11 +23,11 @@ final Dialect DEFAULT_dialect = Dialect(
 /// See {@link https://v2.docs.influxdata.com/v2.0/api/#operation/PostQuery }
 
 class QueryService extends DefaultService {
-  QueryApi queryApi;
+  QueryApi? queryApi;
   bool gzip = false;
-  QueryOptions queryOptions;
+  late QueryOptions queryOptions;
 
-  QueryService(InfluxDBClient client, {QueryOptions queryOptions})
+  QueryService(InfluxDBClient client, {QueryOptions? queryOptions})
       : super(client) {
     this.queryOptions = queryOptions ?? defaultQueryOptions;
     queryApi = QueryApi(client.getApiClient());
@@ -38,9 +37,9 @@ class QueryService extends DefaultService {
   ///
   /// Use this with care, all response is stored in memory.
   /// Result CSV format can be changed using [dialect].
-  Future<String> queryRaw(String fluxQuery, {Dialect dialect}) async {
+  Future<String> queryRaw(String fluxQuery, {Dialect? dialect}) async {
     var query = Query(dialect: dialect, query: fluxQuery);
-    var uri = _buildUri(influxDB.url, '/api/v2/query', {'org': influxDB.org});
+    var uri = _buildUri(influxDB.url!, '/api/v2/query', {'org': influxDB.org});
     var body = jsonEncode(query);
     Map<String, String> headers = {};
     _updateParamsForAuth(headers);
@@ -53,10 +52,12 @@ class QueryService extends DefaultService {
   ///
   /// Each line is CSV parsed list of objects.
   Future<Stream<List<dynamic>>> queryLines(String fluxQuery,
-      {Dialect dialect}) async {
+      {Dialect? dialect}) async {
     var q = Query(query: fluxQuery, dialect: dialect);
     var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
-    return utf8.decoder.bind(response.stream).transform(CsvToListConverter());
+    return utf8.decoder
+        .bind((response as StreamedResponse).stream)
+        .transform(CsvToListConverter());
   }
 
   /// Streams the result of query into [Stream<FluxRecord>]
@@ -64,22 +65,22 @@ class QueryService extends DefaultService {
     var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
     var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
     return utf8.decoder
-        .bind(response.stream)
+        .bind((response as StreamedResponse).stream)
         .transform(CsvToListConverter())
         .transform(FluxTransformer());
   }
 
-  Future<StreamedResponse> _send(
-      String path, Map<String, String> queryParams, body) async {
-    var uri = _buildUri(influxDB.url, path, queryParams);
+  Future<BaseResponse> _send(
+      String path, Map<String, String?> queryParams, body) async {
+    var uri = _buildUri(influxDB.url!, path, queryParams);
     Map<String, String> headers = {};
     headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
     headers[r'Content-Type'] = 'application/json';
     _updateParamsForAuth(headers);
-    return await _invoke(uri, 'POST',
+    return await (_invoke(uri, 'POST',
         headers: headers,
         body: jsonEncode(body.toJson()),
         maxRedirects: influxDB.maxRedirects,
-        stream: true);
+        stream: true));
   }
 }

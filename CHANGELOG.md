@@ -1,6 +1,7 @@
-## 1.3.0 [unreleased]
+## 2.0.0 [unreleased]
 
 ### Features
+1. [#18](https://github.com/influxdata/influxdb-client-dart/pull/18): Add support for Sound null safety
 1. [#22](https://github.com/influxdata/influxdb-client-dart/pull/22): Add support for Web platform
 
 ### Bug Fixes

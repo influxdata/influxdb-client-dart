@@ -1,9 +1,8 @@
 import 'package:influxdb_client/api.dart';
-
 import 'package:test/test.dart';
 
 void main() async {
-  InfluxDBClient client;
+  late InfluxDBClient client;
 
   setUpAll(() {
     final token =
@@ -13,11 +12,7 @@ void main() async {
         defaultValue: 'http://localhost:8086');
 
     client = InfluxDBClient(
-        token: token,
-        url: url,
-        org: org,
-        bucket: 'my-bucket',
-        debug: true);
+        token: token, url: url, org: org, bucket: 'my-bucket', debug: true);
   });
 
   tearDownAll(() {
@@ -26,9 +21,9 @@ void main() async {
 
   group('buckets', () {
     test('list', () async {
-      var buckets =
-          await BucketsApi(client.getApiClient()).getBuckets(name: 'my-bucket');
-      expect(buckets.buckets.length, 1);
+      var buckets = await (BucketsApi(client.getApiClient())
+          .getBuckets(name: 'my-bucket'));
+      expect(buckets.buckets!.length, 1);
     });
   });
 }

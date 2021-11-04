@@ -1,16 +1,17 @@
 import 'package:influxdb_client/api.dart';
 import 'package:test/test.dart';
+
 import 'commons_test.dart';
 
 void main() async {
-  WriteService writeApi;
+  late WriteService writeApi;
 
   setUp(() {
     writeApi = client.getWriteService();
   });
 
   tearDown(() async {
-   await writeApi.close();
+    await writeApi.close();
   });
 
   setUpAll(() {
@@ -34,8 +35,7 @@ void main() async {
 
   test('writeNonExistentBucket', () async {
     try {
-      await writeApi.writeLineProtocol(
-          'temperature,location=north value=60.0',
+      await writeApi.writeLineProtocol('temperature,location=north value=60.0',
           bucket: 'not-existent');
       fail('Exception should be thrown');
     } on InfluxDBException catch (e) {
@@ -98,16 +98,16 @@ void main() async {
 
   test('health', () async {
     var health = await client.getHealthApi().getHealth();
-    print (health);
-    expect(health.status.value ,'pass');
+    print(health);
+    expect(health.status!.value, 'pass');
     expect(health.name, 'influxdb');
   });
 
   test('ready', () async {
     var ready = await client.getReadyApi().getReady();
-    print (ready);
-    expect(ready.status.value ,'ready');
-    expect(ready.started.toIso8601String().isNotEmpty ,true);
+    print(ready);
+    expect(ready.status!.value, 'ready');
+    expect(ready.started!.toIso8601String().isNotEmpty, true);
   });
 
   test('ping', () async {
@@ -117,4 +117,3 @@ void main() async {
     expect(future, completion(null));
   });
 }
-

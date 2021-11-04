@@ -1,10 +1,9 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
@@ -17,10 +16,10 @@ class AuthorizationUpdateRequest {
   });
 
   /// If inactive the token is inactive and requests using the token will be rejected.
-  AuthorizationUpdateRequestStatusEnum status;
+  AuthorizationUpdateRequestStatusEnum? status;
 
   /// A description of the token.
-  String description;
+  String? description;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is AuthorizationUpdateRequest &&
@@ -29,6 +28,7 @@ class AuthorizationUpdateRequest {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode) +
     (description == null ? 0 : description.hashCode);
 
@@ -46,35 +46,44 @@ class AuthorizationUpdateRequest {
     return json;
   }
 
-  /// Returns a new [AuthorizationUpdateRequest] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static AuthorizationUpdateRequest fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : AuthorizationUpdateRequest(
+  /// Returns a new [AuthorizationUpdateRequest] instance and imports
+  // ignore: prefer_constructors_over_static_methods
+  static AuthorizationUpdateRequest fromJson(dynamic value) {
+      final json = value.cast<String, dynamic>();
+      return AuthorizationUpdateRequest(
         status: AuthorizationUpdateRequestStatusEnum.fromJson(json[r'status']),
-        description: json[r'description'],
-    );
+        description: mapValueOfType<String>(json, r'description'),
+      );
+  }
 
-  static List<AuthorizationUpdateRequest> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <AuthorizationUpdateRequest>[]
-      : json.map((dynamic value) => AuthorizationUpdateRequest.fromJson(value)).toList(growable: true == growable);
+  static List<AuthorizationUpdateRequest>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AuthorizationUpdateRequest.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AuthorizationUpdateRequest>[];
 
-  static Map<String, AuthorizationUpdateRequest> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, AuthorizationUpdateRequest>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = AuthorizationUpdateRequest.fromJson(value));
+  static Map<String, AuthorizationUpdateRequest?> mapFromJson(dynamic json) {
+    final map = <String, AuthorizationUpdateRequest?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = AuthorizationUpdateRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationUpdateRequest-objects as value to a dart map
-  static Map<String, List<AuthorizationUpdateRequest>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<AuthorizationUpdateRequest>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = AuthorizationUpdateRequest.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+  static Map<String, List<AuthorizationUpdateRequest?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+    final map = <String, List<AuthorizationUpdateRequest?>?>{};
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = AuthorizationUpdateRequest.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -102,23 +111,21 @@ class AuthorizationUpdateRequestStatusEnum {
     inactive,
   ];
 
-  static AuthorizationUpdateRequestStatusEnum fromJson(dynamic value) =>
+  static AuthorizationUpdateRequestStatusEnum? fromJson(dynamic value) =>
     AuthorizationUpdateRequestStatusEnumTypeTransformer().decode(value);
 
-  static List<AuthorizationUpdateRequestStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <AuthorizationUpdateRequestStatusEnum>[]
-      : json
-          .map((value) => AuthorizationUpdateRequestStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<AuthorizationUpdateRequestStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AuthorizationUpdateRequestStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AuthorizationUpdateRequestStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [AuthorizationUpdateRequestStatusEnum] to String,
 /// and [decode] dynamic data back to [AuthorizationUpdateRequestStatusEnum].
 class AuthorizationUpdateRequestStatusEnumTypeTransformer {
-  const AuthorizationUpdateRequestStatusEnumTypeTransformer._();
+  factory AuthorizationUpdateRequestStatusEnumTypeTransformer() => _instance ??= const AuthorizationUpdateRequestStatusEnumTypeTransformer._();
 
-  factory AuthorizationUpdateRequestStatusEnumTypeTransformer() => _instance ??= AuthorizationUpdateRequestStatusEnumTypeTransformer._();
+  const AuthorizationUpdateRequestStatusEnumTypeTransformer._();
 
   String encode(AuthorizationUpdateRequestStatusEnum data) => data.value;
 
@@ -130,19 +137,19 @@ class AuthorizationUpdateRequestStatusEnumTypeTransformer {
   ///
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
-  AuthorizationUpdateRequestStatusEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'active': return AuthorizationUpdateRequestStatusEnum.active;
-      case r'inactive': return AuthorizationUpdateRequestStatusEnum.inactive;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+  AuthorizationUpdateRequestStatusEnum? decode(dynamic data, {bool? allowNull}) {
+    if (data != null) {
+      switch (data.toString()) {
+        case r'active': return AuthorizationUpdateRequestStatusEnum.active;
+        case r'inactive': return AuthorizationUpdateRequestStatusEnum.inactive;
+        default: return AuthorizationUpdateRequestStatusEnum._(data.toString());
+      }
     }
     return null;
   }
 
   /// Singleton [AuthorizationUpdateRequestStatusEnumTypeTransformer] instance.
-  static AuthorizationUpdateRequestStatusEnumTypeTransformer _instance;
+  static AuthorizationUpdateRequestStatusEnumTypeTransformer? _instance;
 }
+
 

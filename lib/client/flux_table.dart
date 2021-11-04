@@ -1,20 +1,16 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
 /// Holds metadata about the column the in the table
 class FluxColumn {
-  String label;
+  String? label;
   String dataType;
-  bool group;
+  bool? group;
   dynamic defaultValue;
-  num index;
+  int index;
 
-  FluxColumn(
-      {this.label, this.dataType, this.group, this.defaultValue, this.index});
-
-  FluxColumn.name(
-      this.label, this.dataType, this.group, this.defaultValue, this.index);
+  FluxColumn(this.dataType, this.index);
 
   @override
   String toString() {
@@ -64,27 +60,27 @@ class FluxTableMetaData {
 }
 
 /// FluxRecord represents row in the Flux query response.
-class FluxRecord extends MapMixin<String, dynamic> {
+class FluxRecord extends MapMixin<String?, dynamic> {
   /// index of table
   final int tableIndex;
-  final Map<String, dynamic> _values = {};
+  final Map<String?, dynamic> _values = {};
 
   FluxRecord(this.tableIndex);
 
   @override
-  Iterable<String> get keys => _values.keys;
+  Iterable<String?> get keys => _values.keys;
 
   @override
   void clear() => _values.clear();
 
   @override
-  dynamic remove(Object key) => _values.remove(key);
+  dynamic remove(Object? key) => _values.remove(key);
 
   @override
-  dynamic operator [](Object key) => _values[key];
+  dynamic operator [](Object? key) => _values[key as String];
 
   @override
-  operator []=(String key, dynamic value) => _values[key] = value;
+  operator []=(String? key, dynamic value) => _values[key] = value;
 
   @override
   String toString() {

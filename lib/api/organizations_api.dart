@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class OrganizationsApi {
-  OrganizationsApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  OrganizationsApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -26,16 +25,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> deleteOrgsIDWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -45,19 +40,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -71,7 +65,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsID(String orgID, { String zapTraceSpan }) async {
+  Future<void> deleteOrgsID(String orgID, { String? zapTraceSpan }) async {
     final response = await deleteOrgsIDWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -92,20 +86,13 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDMembersIDWithHttpInfo(String userID, String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> deleteOrgsIDMembersIDWithHttpInfo(String userID, String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/members/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString())
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{userID}', userID)
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -115,19 +102,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -144,7 +130,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsIDMembersID(String userID, String orgID, { String zapTraceSpan }) async {
+  Future<void> deleteOrgsIDMembersID(String userID, String orgID, { String? zapTraceSpan }) async {
     final response = await deleteOrgsIDMembersIDWithHttpInfo(userID, orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -165,20 +151,13 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDOwnersIDWithHttpInfo(String userID, String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (userID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: userID');
-    }
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> deleteOrgsIDOwnersIDWithHttpInfo(String userID, String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/owners/{userID}'
-      .replaceAll('{' + 'userID' + '}', userID.toString())
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{userID}', userID)
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -188,19 +167,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'DELETE',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -217,7 +195,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsIDOwnersID(String userID, String orgID, { String zapTraceSpan }) async {
+  Future<void> deleteOrgsIDOwnersID(String userID, String orgID, { String? zapTraceSpan }) async {
     final response = await deleteOrgsIDOwnersIDWithHttpInfo(userID, orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -247,12 +225,11 @@ class OrganizationsApi {
   ///
   /// * [String] userID:
   ///   Filter organizations to a specific user ID.
-  Future<Response> getOrgsWithHttpInfo({ String zapTraceSpan, int offset, int limit, bool descending, String org, String orgID, String userID }) async {
-    // Verify required params are set.
-
+  Future<Response> getOrgsWithHttpInfo({ String? zapTraceSpan, int? offset, int? limit, bool? descending, String? org, String? orgID, String? userID, }) async {
     final path = r'/orgs';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -281,19 +258,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -319,7 +295,7 @@ class OrganizationsApi {
   ///
   /// * [String] userID:
   ///   Filter organizations to a specific user ID.
-  Future<Organizations> getOrgs({ String zapTraceSpan, int offset, int limit, bool descending, String org, String orgID, String userID }) async {
+  Future<Organizations> getOrgs({ String? zapTraceSpan, int? offset, int? limit, bool? descending, String? org, String? orgID, String? userID }) async {
     final response = await getOrgsWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, descending: descending, org: org, orgID: orgID, userID: userID );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -327,10 +303,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organizations',) as Organizations;
-        }
-    return Future<Organizations>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Retrieve an organization
@@ -344,16 +321,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> getOrgsIDWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -363,19 +336,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -389,7 +361,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> getOrgsID(String orgID, { String zapTraceSpan }) async {
+  Future<Organization> getOrgsID(String orgID, { String? zapTraceSpan }) async {
     final response = await getOrgsIDWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -397,10 +369,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-        }
-    return Future<Organization>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all members of an organization
@@ -414,16 +387,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDMembersWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> getOrgsIDMembersWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/members'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -433,19 +402,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -459,7 +427,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMembers> getOrgsIDMembers(String orgID, { String zapTraceSpan }) async {
+  Future<ResourceMembers> getOrgsIDMembers(String orgID, { String? zapTraceSpan }) async {
     final response = await getOrgsIDMembersWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -467,10 +435,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMembers',) as ResourceMembers;
-        }
-    return Future<ResourceMembers>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// List all owners of an organization
@@ -484,16 +453,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDOwnersWithHttpInfo(String orgID, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-
+  Future<Response> getOrgsIDOwnersWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/owners'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -503,19 +468,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -529,7 +493,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwners> getOrgsIDOwners(String orgID, { String zapTraceSpan }) async {
+  Future<ResourceOwners> getOrgsIDOwners(String orgID, { String? zapTraceSpan }) async {
     final response = await getOrgsIDOwnersWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -537,10 +501,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwners',) as ResourceOwners;
-        }
-    return Future<ResourceOwners>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Update an organization
@@ -557,19 +522,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchOrgsIDWithHttpInfo(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (patchOrganizationRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: patchOrganizationRequest');
-    }
-
+  Future<Response> patchOrgsIDWithHttpInfo(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody = patchOrganizationRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = patchOrganizationRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -579,19 +537,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'PATCH',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -608,7 +565,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> patchOrgsID(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String zapTraceSpan }) async {
+  Future<Organization> patchOrgsID(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String? zapTraceSpan }) async {
     final response = await patchOrgsIDWithHttpInfo(orgID, patchOrganizationRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -616,10 +573,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-        }
-    return Future<Organization>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Create an organization
@@ -633,15 +591,11 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsWithHttpInfo(PostOrganizationRequest postOrganizationRequest, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (postOrganizationRequest == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: postOrganizationRequest');
-    }
-
+  Future<Response> postOrgsWithHttpInfo(PostOrganizationRequest postOrganizationRequest, { String? zapTraceSpan, }) async {
     final path = r'/orgs';
 
-    Object postBody = postOrganizationRequest;
+    // ignore: prefer_final_locals
+    Object? postBody = postOrganizationRequest;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -651,19 +605,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -677,7 +630,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> postOrgs(PostOrganizationRequest postOrganizationRequest, { String zapTraceSpan }) async {
+  Future<Organization> postOrgs(PostOrganizationRequest postOrganizationRequest, { String? zapTraceSpan }) async {
     final response = await postOrgsWithHttpInfo(postOrganizationRequest,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -685,10 +638,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-        }
-    return Future<Organization>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add a member to an organization
@@ -705,19 +659,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDMembersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (addResourceMemberRequestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
-    }
-
+  Future<Response> postOrgsIDMembersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/members'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody = addResourceMemberRequestBody;
+    // ignore: prefer_final_locals
+    Object? postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -727,19 +674,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -756,7 +702,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMember> postOrgsIDMembers(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+  Future<ResourceMember> postOrgsIDMembers(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final response = await postOrgsIDMembersWithHttpInfo(orgID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -764,10 +710,11 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',) as ResourceMember;
-        }
-    return Future<ResourceMember>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 
   /// Add an owner to an organization
@@ -784,19 +731,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDOwnersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
-    // Verify required params are set.
-    if (orgID == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: orgID');
-    }
-    if (addResourceMemberRequestBody == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: addResourceMemberRequestBody');
-    }
-
+  Future<Response> postOrgsIDOwnersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
     final path = r'/orgs/{orgID}/owners'
-      .replaceAll('{' + 'orgID' + '}', orgID.toString());
+      .replaceAll('{orgID}', orgID);
 
-    Object postBody = addResourceMemberRequestBody;
+    // ignore: prefer_final_locals
+    Object? postBody = addResourceMemberRequestBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -806,19 +746,18 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -835,7 +774,7 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwner> postOrgsIDOwners(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String zapTraceSpan }) async {
+  Future<ResourceOwner> postOrgsIDOwners(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
     final response = await postOrgsIDOwnersWithHttpInfo(orgID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -843,9 +782,10 @@ class OrganizationsApi {
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',) as ResourceOwner;
-        }
-    return Future<ResourceOwner>.value(null);
+    
+    }
+    throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
 }

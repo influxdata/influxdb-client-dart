@@ -1,17 +1,17 @@
-// @dart=2.0
+
 
 part of influxdb_client_api;
 
 class WriteService extends DefaultService {
-  WriteOptions writeOptions;
-  _WriteBatch writeBatch;
-  Timer batchTimer;
+  WriteOptions? writeOptions;
+  late _WriteBatch writeBatch;
+  Timer? batchTimer;
   bool enableDebug = true;
 
   ///
   /// Creates [WriteApi] with optional custom [writeOptions]
   ///
-  WriteService(InfluxDBClient client, {WriteOptions writeOptions})
+  WriteService(InfluxDBClient client, {WriteOptions? writeOptions})
       : super(client) {
     this.writeOptions = writeOptions ?? WriteOptions();
     writeBatch = _WriteBatch(this.writeOptions, this);
@@ -21,19 +21,18 @@ class WriteService extends DefaultService {
   /// Write line protocol string [record] into [bucket] and [org]
   ///
   Future<void> writeLineProtocol(String record,
-      {String bucket,
-      String org,
+      {String? bucket,
+      String? org,
       WritePrecision precision = WritePrecision.ns}) async {
-    assert(record != null);
 
-    if (writeOptions.maxRetries > 0) {
+    if (writeOptions!.maxRetries > 0) {
       var retry = RetryOptions(
-        exponentialBase: writeOptions.exponentialBase,
-        retryInterval: Duration(milliseconds: writeOptions.retryInterval),
-        maxDelay: Duration(milliseconds: writeOptions.maxRetryDelay),
-        maxTime: Duration(milliseconds: writeOptions.maxRetryTime),
-        maxRetries: writeOptions.maxRetries,
-        retryJitter: Duration(milliseconds: writeOptions.retryJitter),
+        exponentialBase: writeOptions!.exponentialBase,
+        retryInterval: Duration(milliseconds: writeOptions!.retryInterval),
+        maxDelay: Duration(milliseconds: writeOptions!.maxRetryDelay),
+        maxTime: Duration(milliseconds: writeOptions!.maxRetryTime),
+        maxRetries: writeOptions!.maxRetries,
+        retryJitter: Duration(milliseconds: writeOptions!.retryJitter),
       );
       return retry.retry(
           () => _write(record, bucket: bucket, org: org, precision: precision),
@@ -47,13 +46,12 @@ class WriteService extends DefaultService {
   /// Write line protocol string [record] into [bucket] and [org]
   ///
   Future<void> _write(String record,
-      {String bucket,
-      String org,
+      {String? bucket,
+      String? org,
       WritePrecision precision = WritePrecision.ns}) async {
-    assert(record != null);
 
     var response = await _writePost(record, bucket ?? influxDB.bucket,
-        org ?? influxDB.org, precision ?? writeOptions.precision);
+        org ?? influxDB.org, precision);
 
     if (response.statusCode == 204) {
       // write successful
@@ -74,8 +72,8 @@ class WriteService extends DefaultService {
   /// [precision] specifies write precission
   ///
   void batchWrite(dynamic data,
-      {String bucket, String org, WritePrecision precision}) {
-    precision ??= writeOptions.precision;
+      {String? bucket, String? org, WritePrecision? precision}) {
+    precision ??= writeOptions!.precision;
     bucket ??= influxDB.bucket;
     org ??= influxDB.org;
 
@@ -83,7 +81,7 @@ class WriteService extends DefaultService {
     _checkNotNull('bucket', bucket);
     _checkNotNull('org', org);
 
-    var payload = _payload(data, precision, bucket, org, true);
+    var payload = _payload(data, precision, bucket!, org!, true);
     writeBatch.push(payload);
   }
 
@@ -107,8 +105,8 @@ class WriteService extends DefaultService {
   /// []
   ///
   Future<void> write(dynamic data,
-      {String bucket, String org, WritePrecision precision}) async {
-    precision ??= writeOptions.precision;
+      {String? bucket, String? org, WritePrecision? precision}) async {
+    precision ??= writeOptions!.precision;
     bucket ??= influxDB.bucket;
     org ??= influxDB.org;
 
@@ -116,7 +114,7 @@ class WriteService extends DefaultService {
     _checkNotNull('bucket', bucket);
     _checkNotNull('org', org);
 
-    var payload = _payload(data, precision, bucket, org, false);
+    var payload = _payload(data, precision, bucket!, org!, false);
 
     if (payload == null) {
       throw ArgumentError('Unable to write, no data');
@@ -126,10 +124,10 @@ class WriteService extends DefaultService {
         bucket: bucket, org: org, precision: precision);
   }
 
-  Future<Response> _writePost(String data, String bucket, String organization,
+  Future<BaseResponse> _writePost(String data, String? bucket, String? organization,
       WritePrecision precision) async {
     // create uri
-    var uri = _buildUri(influxDB.url, '/api/v2/write', {
+    var uri = _buildUri(influxDB.url!, '/api/v2/write', {
       'precision': precision.value,
       'bucket': bucket,
       'org': organization,
@@ -139,7 +137,7 @@ class WriteService extends DefaultService {
     };
     _updateParamsForAuth(headers);
     var payload;
-    if (writeOptions.gzip) {
+    if (writeOptions!.gzip) {
       var stringBytes = utf8.encode(data);
       payload = GZipEncoder().encode(stringBytes);
       headers['Content-Encoding'] = 'gzip';
@@ -147,8 +145,8 @@ class WriteService extends DefaultService {
       headers['Content-Encoding'] = 'identity';
       payload = data;
     }
-    return await _invoke(uri, 'POST',
-        body: payload, headers: headers, maxRedirects: influxDB.maxRedirects);
+    return await (_invoke(uri, 'POST',
+        body: payload, headers: headers, maxRedirects: influxDB.maxRedirects));
   }
 
   dynamic _payload(dynamic data, WritePrecision precision, String bucket,
@@ -158,7 +156,7 @@ class WriteService extends DefaultService {
     }
     if (data is Point) {
       var lineProtocol =
-          data.toLineProtocol(precision, defaultTags: writeOptions.defaultTags);
+          data.toLineProtocol(precision, defaultTags: writeOptions!.defaultTags);
       return _payload(lineProtocol, precision, bucket, org, batching);
     }
     if (data is String) {
@@ -193,7 +191,7 @@ class WriteService extends DefaultService {
     }
   }
 
-  void _handleError(Response response) {
+  void _handleError(BaseResponse response) {
     throw InfluxDBException.fromResponse(response);
   }
 }
@@ -226,11 +224,11 @@ class _BatchItemKey {
 }
 
 class _WriteBatch {
-  WriteService writeService;
-  WriteOptions writeOptions;
+  late WriteService writeService;
+  WriteOptions? writeOptions;
   ListQueue<_BatchItem> queue = ListQueue();
 
-  _WriteBatch(WriteOptions writeOptions, WriteService writeService) {
+  _WriteBatch(WriteOptions? writeOptions, WriteService writeService) {
     this.writeOptions = writeOptions;
     this.writeService = writeService;
   }
@@ -250,13 +248,13 @@ class _WriteBatch {
     var flushBuffer = HashMap<_BatchItemKey, List<String>>();
     var counter = 0;
 
-    while (counter < writeOptions.batchSize && !queue.isEmpty) {
+    while (counter < writeOptions!.batchSize && !queue.isEmpty) {
       var batchItem = queue.removeFirst();
       var key = batchItem.key;
       if (flushBuffer[key] == null) {
         flushBuffer[key] = [];
       }
-      flushBuffer[key].insert(0, batchItem.data);
+      flushBuffer[key]!.insert(0, batchItem.data);
       counter++;
     }
 

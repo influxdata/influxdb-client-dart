@@ -1,17 +1,16 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of influxdb_client_api;
 
 
 class PingApi {
-  PingApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  PingApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -21,25 +20,25 @@ class PingApi {
   Future<Response> getPingWithHttpInfo() async {
     final path = r'/ping';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -58,25 +57,25 @@ class PingApi {
   Future<Response> headPingWithHttpInfo() async {
     final path = r'/ping';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'HEAD',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }

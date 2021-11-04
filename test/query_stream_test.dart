@@ -28,7 +28,7 @@ void main() {
 
     r.body = jsonEncode(q.toJson());
 
-    var headers = <String, String>{'Authorization': 'Token ' + client.token};
+    var headers = <String, String>{'Authorization': 'Token ' + client.token!};
     r.headers.addAll(headers);
 
     var resp = await client.client.send(r);
@@ -54,7 +54,7 @@ void main() {
         'POST', Uri.parse('http://localhost:8086/api/v2/query?org=my-org'));
 
     r.body = jsonEncode(q.toJson());
-    var headers = <String, String>{'Authorization': 'Token ' + client.token};
+    var headers = <String, String>{'Authorization': 'Token ' + client.token!};
     r.headers.addAll(headers);
     var resp = await client.client.send(r);
     await resp.stream
@@ -112,7 +112,7 @@ void main() {
         queryService.query(fluxQuery),
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 400 &&
-            e.message.contains('found unexpected argument Xbucket')))));
+            e.message!.contains('found unexpected argument Xbucket')))));
   });
 
   test('queryUnauthorizedError', () async {
