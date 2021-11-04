@@ -33,28 +33,31 @@ class Resource {
   String? org;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Resource &&
-     other.type == type &&
-     other.id == id &&
-     other.name == name &&
-     other.orgID == orgID &&
-     other.org == org;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Resource &&
+          other.type == type &&
+          other.id == id &&
+          other.name == name &&
+          other.orgID == orgID &&
+          other.org == org;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (type == null ? 0 : type.hashCode) +
-    (id == null ? 0 : id.hashCode) +
-    (name == null ? 0 : name.hashCode) +
-    (orgID == null ? 0 : orgID.hashCode) +
-    (org == null ? 0 : org.hashCode);
+      // ignore: unnecessary_parenthesis
+      (type == null ? 0 : type.hashCode) +
+      (id == null ? 0 : id.hashCode) +
+      (name == null ? 0 : name.hashCode) +
+      (orgID == null ? 0 : orgID.hashCode) +
+      (org == null ? 0 : org.hashCode);
 
   @override
-  String toString() => 'Resource[type=$type, id=$id, name=$name, orgID=$orgID, org=$org]';
+  String toString() =>
+      'Resource[type=$type, id=$id, name=$name, orgID=$orgID, org=$org]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-      json[r'type'] = type;
+    json[r'type'] = type;
     if (id != null) {
       json[r'id'] = id;
     }
@@ -73,49 +76,56 @@ class Resource {
   /// Returns a new [Resource] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static Resource fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return Resource(
-        type: ResourceTypeEnum.fromJson(json[r'type']),
-        id: mapValueOfType<String>(json, r'id'),
-        name: mapValueOfType<String>(json, r'name'),
-        orgID: mapValueOfType<String>(json, r'orgID'),
-        org: mapValueOfType<String>(json, r'org'),
-      );
+    final json = value.cast<String, dynamic>();
+    return Resource(
+      type: ResourceTypeEnum.fromJson(json[r'type']),
+      id: mapValueOfType<String>(json, r'id'),
+      name: mapValueOfType<String>(json, r'name'),
+      orgID: mapValueOfType<String>(json, r'orgID'),
+      org: mapValueOfType<String>(json, r'org'),
+    );
   }
 
-  static List<Resource>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Resource.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Resource>[];
+  static List<Resource>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(Resource.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <Resource>[];
 
   static Map<String, Resource?> mapFromJson(dynamic json) {
     final map = <String, Resource?>{};
     if (json is Map && json.isNotEmpty) {
       json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Resource.fromJson(value));
+          .cast<String, dynamic>()
+          .forEach((key, dynamic value) => map[key] = Resource.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Resource-objects as value to a dart map
-  static Map<String, List<Resource?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<Resource?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<Resource?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Resource.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = Resource.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class ResourceTypeEnum {
   /// Instantiate a new enum with the provided [value].
@@ -144,7 +154,8 @@ class ResourceTypeEnum {
   static const views = ResourceTypeEnum._(r'views');
   static const documents = ResourceTypeEnum._(r'documents');
   static const notificationRules = ResourceTypeEnum._(r'notificationRules');
-  static const notificationEndpoints = ResourceTypeEnum._(r'notificationEndpoints');
+  static const notificationEndpoints =
+      ResourceTypeEnum._(r'notificationEndpoints');
   static const checks = ResourceTypeEnum._(r'checks');
   static const dbrp = ResourceTypeEnum._(r'dbrp');
   static const notebooks = ResourceTypeEnum._(r'notebooks');
@@ -179,18 +190,27 @@ class ResourceTypeEnum {
   ];
 
   static ResourceTypeEnum? fromJson(dynamic value) =>
-    ResourceTypeEnumTypeTransformer().decode(value);
+      ResourceTypeEnumTypeTransformer().decode(value);
 
-  static List<ResourceTypeEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ResourceTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ResourceTypeEnum>[];
+  static List<ResourceTypeEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(ResourceTypeEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <ResourceTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [ResourceTypeEnum] to String,
 /// and [decode] dynamic data back to [ResourceTypeEnum].
 class ResourceTypeEnumTypeTransformer {
-  factory ResourceTypeEnumTypeTransformer() => _instance ??= const ResourceTypeEnumTypeTransformer._();
+  factory ResourceTypeEnumTypeTransformer() =>
+      _instance ??= const ResourceTypeEnumTypeTransformer._();
 
   const ResourceTypeEnumTypeTransformer._();
 
@@ -207,29 +227,52 @@ class ResourceTypeEnumTypeTransformer {
   ResourceTypeEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'authorizations': return ResourceTypeEnum.authorizations;
-        case r'buckets': return ResourceTypeEnum.buckets;
-        case r'dashboards': return ResourceTypeEnum.dashboards;
-        case r'orgs': return ResourceTypeEnum.orgs;
-        case r'sources': return ResourceTypeEnum.sources;
-        case r'tasks': return ResourceTypeEnum.tasks;
-        case r'telegrafs': return ResourceTypeEnum.telegrafs;
-        case r'users': return ResourceTypeEnum.users;
-        case r'variables': return ResourceTypeEnum.variables;
-        case r'scrapers': return ResourceTypeEnum.scrapers;
-        case r'secrets': return ResourceTypeEnum.secrets;
-        case r'labels': return ResourceTypeEnum.labels;
-        case r'views': return ResourceTypeEnum.views;
-        case r'documents': return ResourceTypeEnum.documents;
-        case r'notificationRules': return ResourceTypeEnum.notificationRules;
-        case r'notificationEndpoints': return ResourceTypeEnum.notificationEndpoints;
-        case r'checks': return ResourceTypeEnum.checks;
-        case r'dbrp': return ResourceTypeEnum.dbrp;
-        case r'notebooks': return ResourceTypeEnum.notebooks;
-        case r'annotations': return ResourceTypeEnum.annotations;
-        case r'remotes': return ResourceTypeEnum.remotes;
-        case r'replications': return ResourceTypeEnum.replications;
-        default: return ResourceTypeEnum._(data.toString());
+        case r'authorizations':
+          return ResourceTypeEnum.authorizations;
+        case r'buckets':
+          return ResourceTypeEnum.buckets;
+        case r'dashboards':
+          return ResourceTypeEnum.dashboards;
+        case r'orgs':
+          return ResourceTypeEnum.orgs;
+        case r'sources':
+          return ResourceTypeEnum.sources;
+        case r'tasks':
+          return ResourceTypeEnum.tasks;
+        case r'telegrafs':
+          return ResourceTypeEnum.telegrafs;
+        case r'users':
+          return ResourceTypeEnum.users;
+        case r'variables':
+          return ResourceTypeEnum.variables;
+        case r'scrapers':
+          return ResourceTypeEnum.scrapers;
+        case r'secrets':
+          return ResourceTypeEnum.secrets;
+        case r'labels':
+          return ResourceTypeEnum.labels;
+        case r'views':
+          return ResourceTypeEnum.views;
+        case r'documents':
+          return ResourceTypeEnum.documents;
+        case r'notificationRules':
+          return ResourceTypeEnum.notificationRules;
+        case r'notificationEndpoints':
+          return ResourceTypeEnum.notificationEndpoints;
+        case r'checks':
+          return ResourceTypeEnum.checks;
+        case r'dbrp':
+          return ResourceTypeEnum.dbrp;
+        case r'notebooks':
+          return ResourceTypeEnum.notebooks;
+        case r'annotations':
+          return ResourceTypeEnum.annotations;
+        case r'remotes':
+          return ResourceTypeEnum.remotes;
+        case r'replications':
+          return ResourceTypeEnum.replications;
+        default:
+          return ResourceTypeEnum._(data.toString());
       }
     }
     return null;
@@ -238,5 +281,3 @@ class ResourceTypeEnumTypeTransformer {
   /// Singleton [ResourceTypeEnumTypeTransformer] instance.
   static ResourceTypeEnumTypeTransformer? _instance;
 }
-
-

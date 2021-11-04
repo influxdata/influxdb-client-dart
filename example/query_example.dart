@@ -37,9 +37,8 @@ void main() async {
   var stream = await queryService.query(fluxQuery);
   var subscription;
   subscription = stream.listen((record) {
-    print(
-        'record: ${count++} ${record['_time']}: '
-            '${record['host']} ${record['cpu']} ${record['_value']}');
+    print('record: ${count++} ${record['_time']}: '
+        '${record['host']} ${record['cpu']} ${record['_value']}');
     if (record.tableIndex > 5) {
       print('Cancel after 5 table');
       subscription.cancel();

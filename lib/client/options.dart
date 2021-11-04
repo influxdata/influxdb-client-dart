@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 /// Options used by [WriteApi] .

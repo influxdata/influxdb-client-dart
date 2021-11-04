@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class WriteApi {
   WriteApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -16,7 +15,7 @@ class WriteApi {
 
   /// Write data
   ///
-  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api). 
+  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api).
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -51,7 +50,18 @@ class WriteApi {
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.
-  Future<Response> postWriteWithHttpInfo(String org, String bucket, String body, { String? zapTraceSpan, String? contentEncoding, String? contentType, int? contentLength, String? accept, String? orgID, WritePrecision? precision, }) async {
+  Future<Response> postWriteWithHttpInfo(
+    String org,
+    String bucket,
+    String body, {
+    String? zapTraceSpan,
+    String? contentEncoding,
+    String? contentType,
+    int? contentLength,
+    String? accept,
+    String? orgID,
+    WritePrecision? precision,
+  }) async {
     final path = r'/write';
 
     // ignore: prefer_final_locals
@@ -61,13 +71,16 @@ class WriteApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
+    queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucket', bucket));
+    queryParams
+        .addAll(_convertParametersForCollectionFormat('', 'bucket', bucket));
     if (precision != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'precision', precision));
+      queryParams.addAll(
+          _convertParametersForCollectionFormat('', 'precision', precision));
     }
 
     if (zapTraceSpan != null) {
@@ -86,9 +99,12 @@ class WriteApi {
       headerParams[r'Accept'] = parameterToString(accept);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['text/plain'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -104,7 +120,7 @@ class WriteApi {
 
   /// Write data
   ///
-  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api). 
+  /// Writes data to a bucket.  To write data into InfluxDB, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.0/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.0/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.0/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.0/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol) format.  For more information and examples, see [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.0/write-data/developer-tools/api).
   ///
   /// Parameters:
   ///
@@ -137,8 +153,22 @@ class WriteApi {
   ///
   /// * [WritePrecision] precision:
   ///   The precision for the unix timestamps within the body line-protocol.
-  Future<void> postWrite(String org, String bucket, String body, { String? zapTraceSpan, String? contentEncoding, String? contentType, int? contentLength, String? accept, String? orgID, WritePrecision? precision }) async {
-    final response = await postWriteWithHttpInfo(org, bucket, body,  zapTraceSpan: zapTraceSpan, contentEncoding: contentEncoding, contentType: contentType, contentLength: contentLength, accept: accept, orgID: orgID, precision: precision );
+  Future<void> postWrite(String org, String bucket, String body,
+      {String? zapTraceSpan,
+      String? contentEncoding,
+      String? contentType,
+      int? contentLength,
+      String? accept,
+      String? orgID,
+      WritePrecision? precision}) async {
+    final response = await postWriteWithHttpInfo(org, bucket, body,
+        zapTraceSpan: zapTraceSpan,
+        contentEncoding: contentEncoding,
+        contentType: contentType,
+        contentLength: contentLength,
+        accept: accept,
+        orgID: orgID,
+        precision: precision);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

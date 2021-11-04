@@ -50,34 +50,37 @@ class AuthorizationAllOf {
   AuthorizationAllOfLinks? links;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is AuthorizationAllOf &&
-     other.createdAt == createdAt &&
-     other.updatedAt == updatedAt &&
-     other.orgID == orgID &&
-     other.permissions == permissions &&
-     other.id == id &&
-     other.token == token &&
-     other.userID == userID &&
-     other.user == user &&
-     other.org == org &&
-     other.links == links;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AuthorizationAllOf &&
+          other.createdAt == createdAt &&
+          other.updatedAt == updatedAt &&
+          other.orgID == orgID &&
+          other.permissions == permissions &&
+          other.id == id &&
+          other.token == token &&
+          other.userID == userID &&
+          other.user == user &&
+          other.org == org &&
+          other.links == links;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (createdAt == null ? 0 : createdAt.hashCode) +
-    (updatedAt == null ? 0 : updatedAt.hashCode) +
-    (orgID == null ? 0 : orgID.hashCode) +
-    (permissions == null ? 0 : permissions.hashCode) +
-    (id == null ? 0 : id.hashCode) +
-    (token == null ? 0 : token.hashCode) +
-    (userID == null ? 0 : userID.hashCode) +
-    (user == null ? 0 : user.hashCode) +
-    (org == null ? 0 : org.hashCode) +
-    (links == null ? 0 : links.hashCode);
+      // ignore: unnecessary_parenthesis
+      (createdAt == null ? 0 : createdAt.hashCode) +
+      (updatedAt == null ? 0 : updatedAt.hashCode) +
+      (orgID == null ? 0 : orgID.hashCode) +
+      (permissions == null ? 0 : permissions.hashCode) +
+      (id == null ? 0 : id.hashCode) +
+      (token == null ? 0 : token.hashCode) +
+      (userID == null ? 0 : userID.hashCode) +
+      (user == null ? 0 : user.hashCode) +
+      (org == null ? 0 : org.hashCode) +
+      (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'AuthorizationAllOf[createdAt=$createdAt, updatedAt=$updatedAt, orgID=$orgID, permissions=$permissions, id=$id, token=$token, userID=$userID, user=$user, org=$org, links=$links]';
+  String toString() =>
+      'AuthorizationAllOf[createdAt=$createdAt, updatedAt=$updatedAt, orgID=$orgID, permissions=$permissions, id=$id, token=$token, userID=$userID, user=$user, org=$org, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -117,51 +120,61 @@ class AuthorizationAllOf {
   /// Returns a new [AuthorizationAllOf] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static AuthorizationAllOf fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return AuthorizationAllOf(
-        createdAt: mapDateTime(json, r'createdAt', ''),
-        updatedAt: mapDateTime(json, r'updatedAt', ''),
-        orgID: mapValueOfType<String>(json, r'orgID'),
-        permissions: Permission.listFromJson(json[r'permissions']),
-        id: mapValueOfType<String>(json, r'id'),
-        token: mapValueOfType<String>(json, r'token'),
-        userID: mapValueOfType<String>(json, r'userID'),
-        user: mapValueOfType<String>(json, r'user'),
-        org: mapValueOfType<String>(json, r'org'),
-        links: json[r'links'] == null ? null : AuthorizationAllOfLinks.fromJson(json[r'links']),
-      );
+    final json = value.cast<String, dynamic>();
+    return AuthorizationAllOf(
+      createdAt: mapDateTime(json, r'createdAt', ''),
+      updatedAt: mapDateTime(json, r'updatedAt', ''),
+      orgID: mapValueOfType<String>(json, r'orgID'),
+      permissions: Permission.listFromJson(json[r'permissions']),
+      id: mapValueOfType<String>(json, r'id'),
+      token: mapValueOfType<String>(json, r'token'),
+      userID: mapValueOfType<String>(json, r'userID'),
+      user: mapValueOfType<String>(json, r'user'),
+      org: mapValueOfType<String>(json, r'org'),
+      links: json[r'links'] == null
+          ? null
+          : AuthorizationAllOfLinks.fromJson(json[r'links']),
+    );
   }
 
-  static List<AuthorizationAllOf>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(AuthorizationAllOf.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <AuthorizationAllOf>[];
+  static List<AuthorizationAllOf>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(AuthorizationAllOf.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <AuthorizationAllOf>[];
 
   static Map<String, AuthorizationAllOf?> mapFromJson(dynamic json) {
     final map = <String, AuthorizationAllOf?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = AuthorizationAllOf.fromJson(value));
+      json.cast<String, dynamic>().forEach((key, dynamic value) =>
+          map[key] = AuthorizationAllOf.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationAllOf-objects as value to a dart map
-  static Map<String, List<AuthorizationAllOf?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<AuthorizationAllOf?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<AuthorizationAllOf?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = AuthorizationAllOf.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = AuthorizationAllOf.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-

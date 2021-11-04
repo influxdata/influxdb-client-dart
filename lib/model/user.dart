@@ -27,22 +27,25 @@ class User {
   UserStatusEnum? status;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is User &&
-     other.id == id &&
-     other.oauthID == oauthID &&
-     other.name == name &&
-     other.status == status;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User &&
+          other.id == id &&
+          other.oauthID == oauthID &&
+          other.name == name &&
+          other.status == status;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (id == null ? 0 : id.hashCode) +
-    (oauthID == null ? 0 : oauthID.hashCode) +
-    (name == null ? 0 : name.hashCode) +
-    (status == null ? 0 : status.hashCode);
+      // ignore: unnecessary_parenthesis
+      (id == null ? 0 : id.hashCode) +
+      (oauthID == null ? 0 : oauthID.hashCode) +
+      (name == null ? 0 : name.hashCode) +
+      (status == null ? 0 : status.hashCode);
 
   @override
-  String toString() => 'User[id=$id, oauthID=$oauthID, name=$name, status=$status]';
+  String toString() =>
+      'User[id=$id, oauthID=$oauthID, name=$name, status=$status]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -52,7 +55,7 @@ class User {
     if (oauthID != null) {
       json[r'oauthID'] = oauthID;
     }
-      json[r'name'] = name;
+    json[r'name'] = name;
     if (status != null) {
       json[r'status'] = status;
     }
@@ -62,43 +65,51 @@ class User {
   /// Returns a new [User] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static User fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return User(
-        id: mapValueOfType<String>(json, r'id'),
-        oauthID: mapValueOfType<String>(json, r'oauthID'),
-        name: mapValueOfType<String>(json, r'name'),
-        status: UserStatusEnum.fromJson(json[r'status']),
-      );
+    final json = value.cast<String, dynamic>();
+    return User(
+      id: mapValueOfType<String>(json, r'id'),
+      oauthID: mapValueOfType<String>(json, r'oauthID'),
+      name: mapValueOfType<String>(json, r'name'),
+      status: UserStatusEnum.fromJson(json[r'status']),
+    );
   }
 
-  static List<User>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(User.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <User>[];
+  static List<User>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(User.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <User>[];
 
   static Map<String, User?> mapFromJson(dynamic json) {
     final map = <String, User?>{};
     if (json is Map && json.isNotEmpty) {
       json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = User.fromJson(value));
+          .cast<String, dynamic>()
+          .forEach((key, dynamic value) => map[key] = User.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of User-objects as value to a dart map
-  static Map<String, List<User?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<User?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<User?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = User.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = User.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
@@ -127,18 +138,25 @@ class UserStatusEnum {
   ];
 
   static UserStatusEnum? fromJson(dynamic value) =>
-    UserStatusEnumTypeTransformer().decode(value);
+      UserStatusEnumTypeTransformer().decode(value);
 
-  static List<UserStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(UserStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <UserStatusEnum>[];
+  static List<UserStatusEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(UserStatusEnum.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <UserStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [UserStatusEnum] to String,
 /// and [decode] dynamic data back to [UserStatusEnum].
 class UserStatusEnumTypeTransformer {
-  factory UserStatusEnumTypeTransformer() => _instance ??= const UserStatusEnumTypeTransformer._();
+  factory UserStatusEnumTypeTransformer() =>
+      _instance ??= const UserStatusEnumTypeTransformer._();
 
   const UserStatusEnumTypeTransformer._();
 
@@ -155,9 +173,12 @@ class UserStatusEnumTypeTransformer {
   UserStatusEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'active': return UserStatusEnum.active;
-        case r'inactive': return UserStatusEnum.inactive;
-        default: return UserStatusEnum._(data.toString());
+        case r'active':
+          return UserStatusEnum.active;
+        case r'inactive':
+          return UserStatusEnum.inactive;
+        default:
+          return UserStatusEnum._(data.toString());
       }
     }
     return null;
@@ -166,5 +187,3 @@ class UserStatusEnumTypeTransformer {
   /// Singleton [UserStatusEnumTypeTransformer] instance.
   static UserStatusEnumTypeTransformer? _instance;
 }
-
-

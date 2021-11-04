@@ -46,7 +46,6 @@ void main() {
 
     writeService.batchWrite(p);
     await writeService.flush();
-
   });
 
   test('writeGzip', () async {

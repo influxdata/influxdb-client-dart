@@ -116,7 +116,8 @@ void main() {
   });
 
   test('queryUnauthorizedError', () async {
-    var unauthorizedClient = InfluxDBClient(url: client.url, token: 'wrong_token', bucket: 'my-bucket');
+    var unauthorizedClient = InfluxDBClient(
+        url: client.url, token: 'wrong_token', bucket: 'my-bucket');
     var queryService = unauthorizedClient.getQueryService();
     var fluxQuery = 'from(bucket: "my-bucket") |> range(start: 0)';
     expect(
@@ -124,12 +125,12 @@ void main() {
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 401 &&
             e.code == 'unauthorized' &&
-            e.message == 'unauthorized access'
-            ))));
+            e.message == 'unauthorized access'))));
   });
 
   test('queryUnauthorizedAsyncError', () async {
-    var unauthorizedClient = InfluxDBClient(url: client.url, token: 'wrong_token', bucket: 'my-bucket');
+    var unauthorizedClient = InfluxDBClient(
+        url: client.url, token: 'wrong_token', bucket: 'my-bucket');
     var queryService = unauthorizedClient.getQueryService();
     var fluxQuery = 'from(bucket: "my-bucket") |> range(start: 0)';
     expect(
@@ -137,31 +138,30 @@ void main() {
         throwsA(predicate((e) => (e is InfluxDBException &&
             e.statusCode == 401 &&
             e.code == 'unauthorized' &&
-            e.message == 'unauthorized access'
-        ))));
+            e.message == 'unauthorized access'))));
   });
 
   test('queryGzip', () async {
-    var queryService = client.getQueryService(queryOptions: QueryOptions(gzip: true));
+    var queryService =
+        client.getQueryService(queryOptions: QueryOptions(gzip: true));
     var fluxQuery = '''
       from(bucket: "my-bucket")
       |> range(start: 0)
       |> filter(fn: (r) => r["_measurement"] == "temperature")
     ''';
-    var x  = await queryService.queryRaw(fluxQuery);
+    var x = await queryService.queryRaw(fluxQuery);
     print(x);
   });
 
   test('queryGzipStream', () async {
-    var queryService = client.getQueryService(queryOptions: QueryOptions(gzip: true));
+    var queryService =
+        client.getQueryService(queryOptions: QueryOptions(gzip: true));
     var fluxQuery = '''
       from(bucket: "my-bucket")
       |> range(start: 0)
       |> filter(fn: (r) => r["_measurement"] == "temperature")
     ''';
-    var x  = await queryService.query(fluxQuery);
+    var x = await queryService.query(fluxQuery);
     print(await x.toList());
   });
-
-
 }

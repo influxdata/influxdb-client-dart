@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class DeleteApi {
   DeleteApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -37,7 +36,14 @@ class DeleteApi {
   ///
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
-  Future<Response> postDeleteWithHttpInfo(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID, }) async {
+  Future<Response> postDeleteWithHttpInfo(
+    DeletePredicateRequest deletePredicateRequest, {
+    String? zapTraceSpan,
+    String? org,
+    String? bucket,
+    String? orgID,
+    String? bucketID,
+  }) async {
     final path = r'/delete';
 
     // ignore: prefer_final_locals
@@ -51,22 +57,28 @@ class DeleteApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
     }
     if (bucket != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucket', bucket));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'bucket', bucket));
     }
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (bucketID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucketID', bucketID));
+      queryParams.addAll(
+          _convertParametersForCollectionFormat('', 'bucketID', bucketID));
     }
 
     if (zapTraceSpan != null) {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -101,8 +113,18 @@ class DeleteApi {
   ///
   /// * [String] bucketID:
   ///   Specifies the bucket ID to delete data from.
-  Future<void> postDelete(DeletePredicateRequest deletePredicateRequest, { String? zapTraceSpan, String? org, String? bucket, String? orgID, String? bucketID }) async {
-    final response = await postDeleteWithHttpInfo(deletePredicateRequest,  zapTraceSpan: zapTraceSpan, org: org, bucket: bucket, orgID: orgID, bucketID: bucketID );
+  Future<void> postDelete(DeletePredicateRequest deletePredicateRequest,
+      {String? zapTraceSpan,
+      String? org,
+      String? bucket,
+      String? orgID,
+      String? bucketID}) async {
+    final response = await postDeleteWithHttpInfo(deletePredicateRequest,
+        zapTraceSpan: zapTraceSpan,
+        org: org,
+        bucket: bucket,
+        orgID: orgID,
+        bucketID: bucketID);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

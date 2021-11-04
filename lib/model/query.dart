@@ -2,7 +2,6 @@
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
 
-
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
 // ignore_for_file: lines_longer_than_80_chars
@@ -28,7 +27,7 @@ class Query {
   /// The type of query. Must be \"flux\".
   QueryTypeEnum? type;
 
-  /// Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both) 
+  /// Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both)
   Map<String, Object>? params;
 
   Dialect? dialect;
@@ -37,32 +36,35 @@ class Query {
   DateTime? now;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Query &&
-     other.extern == extern &&
-     other.query == query &&
-     other.type == type &&
-     other.params == params &&
-     other.dialect == dialect &&
-     other.now == now;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Query &&
+          other.extern == extern &&
+          other.query == query &&
+          other.type == type &&
+          other.params == params &&
+          other.dialect == dialect &&
+          other.now == now;
 
   @override
   int get hashCode =>
-    (extern == null ? 0 : extern.hashCode) +
-    (query == null ? 0 : query.hashCode) +
-    (type == null ? 0 : type.hashCode) +
-    (params == null ? 0 : params.hashCode) +
-    (dialect == null ? 0 : dialect.hashCode) +
-    (now == null ? 0 : now.hashCode);
+      (extern == null ? 0 : extern.hashCode) +
+      (query == null ? 0 : query.hashCode) +
+      (type == null ? 0 : type.hashCode) +
+      (params == null ? 0 : params.hashCode) +
+      (dialect == null ? 0 : dialect.hashCode) +
+      (now == null ? 0 : now.hashCode);
 
   @override
-  String toString() => 'Query[extern=$extern, query=$query, type=$type, params=$params, dialect=$dialect, now=$now]';
+  String toString() =>
+      'Query[extern=$extern, query=$query, type=$type, params=$params, dialect=$dialect, now=$now]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
     if (extern != null) {
       json[r'extern'] = extern;
     }
-      json[r'query'] = query;
+    json[r'query'] = query;
     if (type != null) {
       json[r'type'] = type;
     }
@@ -81,21 +83,27 @@ class Query {
   /// Returns a new [Query] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
   static Query? fromJson(Map<String, dynamic>? json) => json == null
-    ? null
-    : Query(
-        query: json[r'query'],
-        type: QueryTypeEnum.fromJson(json[r'type']),
-        params: json[r'params'],
-        dialect: Dialect.fromJson(json[r'dialect']),
-        now: json[r'now'] == null
-          ? null
-          : DateTime.parse(json[r'now']),
-    );
+      ? null
+      : Query(
+          query: json[r'query'],
+          type: QueryTypeEnum.fromJson(json[r'type']),
+          params: json[r'params'],
+          dialect: Dialect.fromJson(json[r'dialect']),
+          now: json[r'now'] == null ? null : DateTime.parse(json[r'now']),
+        );
 
-  static List<Query?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <Query>[]
-      : json.map((dynamic value) => Query.fromJson(value)).toList(growable: true == growable);
+  static List<Query?>? listFromJson(
+    List<dynamic> json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json.isEmpty
+          ? true == emptyIsNull
+              ? null
+              : <Query>[]
+          : json
+              .map((dynamic value) => Query.fromJson(value))
+              .toList(growable: true == growable);
 
   static Map<String, Query?> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Query?>{};
@@ -106,11 +114,19 @@ class Query {
   }
 
   // maps a json object with a list of Query-objects as value to a dart map
-  static Map<String, List<Query?>?> mapListFromJson(Map<String, dynamic> json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<Query?>?> mapListFromJson(
+    Map<String, dynamic> json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final Map<String, List<Query?>?> map = <String, List<Query>?>{};
     if (json.isNotEmpty == true) {
       json.forEach((key, value) {
-        map[key] = Query.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+        map[key] = Query.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
       });
     }
     return map;
@@ -138,14 +154,20 @@ class QueryTypeEnum {
   ];
 
   static QueryTypeEnum? fromJson(dynamic value) =>
-    QueryTypeEnumTypeTransformer().decode(value);
+      QueryTypeEnumTypeTransformer().decode(value);
 
-  static List<QueryTypeEnum?>? listFromJson(List<dynamic> json, {bool? emptyIsNull, bool? growable,}) =>
-     json.isEmpty
-      ? true == emptyIsNull ? null : <QueryTypeEnum>[]
-      : json
-          .map((value) => QueryTypeEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<QueryTypeEnum?>? listFromJson(
+    List<dynamic> json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json.isEmpty
+          ? true == emptyIsNull
+              ? null
+              : <QueryTypeEnum>[]
+          : json
+              .map((value) => QueryTypeEnum.fromJson(value))
+              .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [QueryTypeEnum] to String,
@@ -153,7 +175,8 @@ class QueryTypeEnum {
 class QueryTypeEnumTypeTransformer {
   const QueryTypeEnumTypeTransformer._();
 
-  factory QueryTypeEnumTypeTransformer() => _instance ??= QueryTypeEnumTypeTransformer._();
+  factory QueryTypeEnumTypeTransformer() =>
+      _instance ??= QueryTypeEnumTypeTransformer._();
 
   String encode(QueryTypeEnum data) => data.value;
 
@@ -167,7 +190,8 @@ class QueryTypeEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   QueryTypeEnum? decode(dynamic data, {bool? allowNull}) {
     switch (data) {
-      case r'flux': return QueryTypeEnum.flux;
+      case r'flux':
+        return QueryTypeEnum.flux;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');
@@ -179,4 +203,3 @@ class QueryTypeEnumTypeTransformer {
   /// Singleton [QueryTypeEnumTypeTransformer] instance.
   static QueryTypeEnumTypeTransformer? _instance;
 }
-

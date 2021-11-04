@@ -15,19 +15,16 @@ void main() {
         Response('', 307,
             headers: {'location': 'http://localhost:8086'}, isRedirect: true),
         Response('', 204),
-
         Response('', 307,
             headers: {'location': 'http://localhost:8086'}, isRedirect: true),
         Response('', 307,
             headers: {'location': 'http://localhost:8086'}, isRedirect: true),
         Response(oneTable, 204),
-
         Response('', 307,
             headers: {'location': 'http://localhost:8086'}, isRedirect: true),
         Response('', 307,
             headers: {'location': 'http://localhost:8086'}, isRedirect: true),
         Response(oneTable, 204),
-
       ];
       var counter = 0;
       var mockClient = MockClient((request) async {
@@ -64,7 +61,6 @@ void main() {
       // stream.toList((element) {
       //   print(element);
       // });
-
     });
 
     test('testMaxRedirects', () async {

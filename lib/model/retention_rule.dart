@@ -26,25 +26,30 @@ class RetentionRule {
   int? shardGroupDurationSeconds;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is RetentionRule &&
-     other.type == type &&
-     other.everySeconds == everySeconds &&
-     other.shardGroupDurationSeconds == shardGroupDurationSeconds;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RetentionRule &&
+          other.type == type &&
+          other.everySeconds == everySeconds &&
+          other.shardGroupDurationSeconds == shardGroupDurationSeconds;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (type == null ? 0 : type.hashCode) +
-    (everySeconds == null ? 0 : everySeconds.hashCode) +
-    (shardGroupDurationSeconds == null ? 0 : shardGroupDurationSeconds.hashCode);
+      // ignore: unnecessary_parenthesis
+      (type == null ? 0 : type.hashCode) +
+      (everySeconds == null ? 0 : everySeconds.hashCode) +
+      (shardGroupDurationSeconds == null
+          ? 0
+          : shardGroupDurationSeconds.hashCode);
 
   @override
-  String toString() => 'RetentionRule[type=$type, everySeconds=$everySeconds, shardGroupDurationSeconds=$shardGroupDurationSeconds]';
+  String toString() =>
+      'RetentionRule[type=$type, everySeconds=$everySeconds, shardGroupDurationSeconds=$shardGroupDurationSeconds]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-      json[r'type'] = type;
-      json[r'everySeconds'] = everySeconds;
+    json[r'type'] = type;
+    json[r'everySeconds'] = everySeconds;
     if (shardGroupDurationSeconds != null) {
       json[r'shardGroupDurationSeconds'] = shardGroupDurationSeconds;
     }
@@ -54,47 +59,54 @@ class RetentionRule {
   /// Returns a new [RetentionRule] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static RetentionRule fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return RetentionRule(
-        type: RetentionRuleTypeEnum.fromJson(json[r'type']),
-        everySeconds: mapValueOfType<int>(json, r'everySeconds'),
-        shardGroupDurationSeconds: mapValueOfType<int>(json, r'shardGroupDurationSeconds'),
-      );
+    final json = value.cast<String, dynamic>();
+    return RetentionRule(
+      type: RetentionRuleTypeEnum.fromJson(json[r'type']),
+      everySeconds: mapValueOfType<int>(json, r'everySeconds'),
+      shardGroupDurationSeconds:
+          mapValueOfType<int>(json, r'shardGroupDurationSeconds'),
+    );
   }
 
-  static List<RetentionRule>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(RetentionRule.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <RetentionRule>[];
+  static List<RetentionRule>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(RetentionRule.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <RetentionRule>[];
 
   static Map<String, RetentionRule?> mapFromJson(dynamic json) {
     final map = <String, RetentionRule?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = RetentionRule.fromJson(value));
+      json.cast<String, dynamic>().forEach(
+          (key, dynamic value) => map[key] = RetentionRule.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of RetentionRule-objects as value to a dart map
-  static Map<String, List<RetentionRule?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<RetentionRule?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<RetentionRule?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = RetentionRule.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = RetentionRule.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class RetentionRuleTypeEnum {
   /// Instantiate a new enum with the provided [value].
@@ -116,18 +128,27 @@ class RetentionRuleTypeEnum {
   ];
 
   static RetentionRuleTypeEnum? fromJson(dynamic value) =>
-    RetentionRuleTypeEnumTypeTransformer().decode(value);
+      RetentionRuleTypeEnumTypeTransformer().decode(value);
 
-  static List<RetentionRuleTypeEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(RetentionRuleTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <RetentionRuleTypeEnum>[];
+  static List<RetentionRuleTypeEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(RetentionRuleTypeEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <RetentionRuleTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [RetentionRuleTypeEnum] to String,
 /// and [decode] dynamic data back to [RetentionRuleTypeEnum].
 class RetentionRuleTypeEnumTypeTransformer {
-  factory RetentionRuleTypeEnumTypeTransformer() => _instance ??= const RetentionRuleTypeEnumTypeTransformer._();
+  factory RetentionRuleTypeEnumTypeTransformer() =>
+      _instance ??= const RetentionRuleTypeEnumTypeTransformer._();
 
   const RetentionRuleTypeEnumTypeTransformer._();
 
@@ -144,8 +165,10 @@ class RetentionRuleTypeEnumTypeTransformer {
   RetentionRuleTypeEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'expire': return RetentionRuleTypeEnum.expire;
-        default: return RetentionRuleTypeEnum._(data.toString());
+        case r'expire':
+          return RetentionRuleTypeEnum.expire;
+        default:
+          return RetentionRuleTypeEnum._(data.toString());
       }
     }
     return null;
@@ -154,5 +177,3 @@ class RetentionRuleTypeEnumTypeTransformer {
   /// Singleton [RetentionRuleTypeEnumTypeTransformer] instance.
   static RetentionRuleTypeEnumTypeTransformer? _instance;
 }
-
-

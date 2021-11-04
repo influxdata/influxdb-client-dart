@@ -1,5 +1,3 @@
-
-
 /// Retry asynchronous functions with exponential random backoff strategy.
 ///
 part of influxdb_client_api;
@@ -61,8 +59,10 @@ class RetryOptions {
       return Duration(seconds: retryAfter, milliseconds: addMilliseconds);
     }
 
-    var rangeStart = retryInterval.inMilliseconds * math.pow(exponentialBase, attempt - 1);
-    var rangeStop = retryInterval.inMilliseconds * math.pow(exponentialBase, attempt);
+    var rangeStart =
+        retryInterval.inMilliseconds * math.pow(exponentialBase, attempt - 1);
+    var rangeStop =
+        retryInterval.inMilliseconds * math.pow(exponentialBase, attempt);
     if (rangeStop > maxDelay.inMilliseconds) {
       rangeStop = maxDelay.inMilliseconds;
     }
@@ -81,7 +81,8 @@ class RetryOptions {
     return duration;
   }
 
-  Future<T> retry<T>(FutureOr<T> Function() fn, {
+  Future<T> retry<T>(
+    FutureOr<T> Function() fn, {
     FutureOr<bool> Function(Exception)? retryIf,
     FutureOr<void> Function(Exception)? onRetry,
   }) async {
@@ -109,7 +110,8 @@ class RetryOptions {
 
         // Bail out when max retry time is exceeded
         if (DateTime.now().isAfter(deadline)) {
-          throw RetryException('Maximum retry time (${maxTime.inMilliseconds}ms) exceeded', e);
+          throw RetryException(
+              'Maximum retry time (${maxTime.inMilliseconds}ms) exceeded', e);
         }
 
         // Execute handler if any

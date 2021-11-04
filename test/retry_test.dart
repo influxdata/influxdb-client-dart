@@ -9,7 +9,6 @@ import 'package:universal_io/io.dart';
 import 'commons_test.dart';
 
 void main() {
-
   setUpAll(() {
     setupClient();
   });
@@ -19,17 +18,15 @@ void main() {
     logPrint = print;
   });
 
-
   group('RetryTest', () {
     test('test429', () async {
-      
       logPrint = (line) {
         print(line);
         if (line is String) {
           if (line.startsWith('>>') || line.startsWith('<<')) {
             return;
           }
-            expect(line, contains('Next retry in: 4s.'));
+          expect(line, contains('Next retry in: 4s.'));
         }
       };
       var mockClient = MockClient((request) async {
@@ -41,13 +38,11 @@ void main() {
       var writeService = client.getWriteService();
 
       try {
-        await writeService.write(
-                  'temperature,location=north value=60.0',
-                  bucket: 'my-bucket');
+        await writeService.write('temperature,location=north value=60.0',
+            bucket: 'my-bucket');
       } catch (e) {
         print(e);
       }
-
     });
 
     test('testSocketExceptionRetryMaxTime', () async {
@@ -55,8 +50,7 @@ void main() {
       var onRetryCounter = 0;
       var invokeCounter = 0;
 
-      var options = RetryOptions(
-          maxTime: Duration(seconds: 30));
+      var options = RetryOptions(maxTime: Duration(seconds: 30));
       try {
         await options.retry(
             // Make a GET request
@@ -83,7 +77,8 @@ void main() {
         expect(e.toString(), contains('Maximum retry time (30000ms) exceeded'));
         expect((e as RetryException).getCause(), isNotNull);
         expect((e).getCause() is SocketException, isTrue);
-        expect((e).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        expect((e).getCause().toString(),
+            startsWith('SocketException: Failed host lookup'));
         // First call is not counted as a retry
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);
@@ -125,7 +120,8 @@ void main() {
         expect(e.toString(), contains('Maximum retry attempts reached'));
         expect((e as RetryException).getCause(), isNotNull);
         expect((e).getCause() is SocketException, isTrue);
-        expect((e).getCause().toString(), startsWith('SocketException: Failed host lookup'));
+        expect((e).getCause().toString(),
+            startsWith('SocketException: Failed host lookup'));
         // First call is not counted as a retry
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);

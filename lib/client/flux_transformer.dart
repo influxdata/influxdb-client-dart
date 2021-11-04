@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 const ANNOTATION_DEFAULT = '#default';
@@ -146,7 +144,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
   void _addDataTypes(FluxTableMetaData table, List csv) {
     for (var i = 1; i < csv.length; i++) {
-      var column = FluxColumn(csv[i], i -1);
+      var column = FluxColumn(csv[i], i - 1);
       table.columns.add(column);
     }
   }

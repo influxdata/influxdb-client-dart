@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 /// Point defines values of a single measurement.

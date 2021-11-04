@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class DBRPsApi {
   DBRPsApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -31,9 +30,13 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> deleteDBRPIDWithHttpInfo(String dbrpID, { String? zapTraceSpan, String? orgID, String? org, }) async {
-    final path = r'/dbrps/{dbrpID}'
-      .replaceAll('{dbrpID}', dbrpID);
+  Future<Response> deleteDBRPIDWithHttpInfo(
+    String dbrpID, {
+    String? zapTraceSpan,
+    String? orgID,
+    String? org,
+  }) async {
+    final path = r'/dbrps/{dbrpID}'.replaceAll('{dbrpID}', dbrpID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -43,7 +46,8 @@ class DBRPsApi {
     final formParams = <String, String>{};
 
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
@@ -53,9 +57,12 @@ class DBRPsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -84,8 +91,10 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<void> deleteDBRPID(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
-    final response = await deleteDBRPIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
+  Future<void> deleteDBRPID(String dbrpID,
+      {String? zapTraceSpan, String? orgID, String? org}) async {
+    final response = await deleteDBRPIDWithHttpInfo(dbrpID,
+        zapTraceSpan: zapTraceSpan, orgID: orgID, org: org);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -120,7 +129,16 @@ class DBRPsApi {
   ///
   /// * [String] rp:
   ///   Specifies the retention policy to filter on
-  Future<Response> getDBRPsWithHttpInfo({ String? zapTraceSpan, String? orgID, String? org, String? id, String? bucketID, bool? default_, String? db, String? rp, }) async {
+  Future<Response> getDBRPsWithHttpInfo({
+    String? zapTraceSpan,
+    String? orgID,
+    String? org,
+    String? id,
+    String? bucketID,
+    bool? default_,
+    String? db,
+    String? rp,
+  }) async {
     final path = r'/dbrps';
 
     // ignore: prefer_final_locals
@@ -131,7 +149,8 @@ class DBRPsApi {
     final formParams = <String, String>{};
 
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
@@ -140,10 +159,12 @@ class DBRPsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'id', id));
     }
     if (bucketID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bucketID', bucketID));
+      queryParams.addAll(
+          _convertParametersForCollectionFormat('', 'bucketID', bucketID));
     }
     if (default_ != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'default', default_));
+      queryParams.addAll(
+          _convertParametersForCollectionFormat('', 'default', default_));
     }
     if (db != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'db', db));
@@ -156,9 +177,12 @@ class DBRPsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -199,8 +223,24 @@ class DBRPsApi {
   ///
   /// * [String] rp:
   ///   Specifies the retention policy to filter on
-  Future<DBRPs> getDBRPs({ String? zapTraceSpan, String? orgID, String? org, String? id, String? bucketID, bool? default_, String? db, String? rp }) async {
-    final response = await getDBRPsWithHttpInfo( zapTraceSpan: zapTraceSpan, orgID: orgID, org: org, id: id, bucketID: bucketID, default_: default_, db: db, rp: rp );
+  Future<DBRPs> getDBRPs(
+      {String? zapTraceSpan,
+      String? orgID,
+      String? org,
+      String? id,
+      String? bucketID,
+      bool? default_,
+      String? db,
+      String? rp}) async {
+    final response = await getDBRPsWithHttpInfo(
+        zapTraceSpan: zapTraceSpan,
+        orgID: orgID,
+        org: org,
+        id: id,
+        bucketID: bucketID,
+        default_: default_,
+        db: db,
+        rp: rp);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -208,8 +248,10 @@ class DBRPsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPs',) as DBRPs;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'DBRPs',
+      ) as DBRPs;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -231,9 +273,13 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> getDBRPsIDWithHttpInfo(String dbrpID, { String? zapTraceSpan, String? orgID, String? org, }) async {
-    final path = r'/dbrps/{dbrpID}'
-      .replaceAll('{dbrpID}', dbrpID);
+  Future<Response> getDBRPsIDWithHttpInfo(
+    String dbrpID, {
+    String? zapTraceSpan,
+    String? orgID,
+    String? org,
+  }) async {
+    final path = r'/dbrps/{dbrpID}'.replaceAll('{dbrpID}', dbrpID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -243,7 +289,8 @@ class DBRPsApi {
     final formParams = <String, String>{};
 
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
@@ -253,9 +300,12 @@ class DBRPsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -284,8 +334,10 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<DBRPGet> getDBRPsID(String dbrpID, { String? zapTraceSpan, String? orgID, String? org }) async {
-    final response = await getDBRPsIDWithHttpInfo(dbrpID,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
+  Future<DBRPGet> getDBRPsID(String dbrpID,
+      {String? zapTraceSpan, String? orgID, String? org}) async {
+    final response = await getDBRPsIDWithHttpInfo(dbrpID,
+        zapTraceSpan: zapTraceSpan, orgID: orgID, org: org);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -293,8 +345,10 @@ class DBRPsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'DBRPGet',
+      ) as DBRPGet;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -319,9 +373,14 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<Response> patchDBRPIDWithHttpInfo(String dbrpID, DBRPUpdate dBRPUpdate, { String? zapTraceSpan, String? orgID, String? org, }) async {
-    final path = r'/dbrps/{dbrpID}'
-      .replaceAll('{dbrpID}', dbrpID);
+  Future<Response> patchDBRPIDWithHttpInfo(
+    String dbrpID,
+    DBRPUpdate dBRPUpdate, {
+    String? zapTraceSpan,
+    String? orgID,
+    String? org,
+  }) async {
+    final path = r'/dbrps/{dbrpID}'.replaceAll('{dbrpID}', dbrpID);
 
     // ignore: prefer_final_locals
     Object? postBody = dBRPUpdate;
@@ -331,7 +390,8 @@ class DBRPsApi {
     final formParams = <String, String>{};
 
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
@@ -341,9 +401,12 @@ class DBRPsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -375,8 +438,10 @@ class DBRPsApi {
   ///
   /// * [String] org:
   ///   Specifies the organization name of the mapping
-  Future<DBRPGet> patchDBRPID(String dbrpID, DBRPUpdate dBRPUpdate, { String? zapTraceSpan, String? orgID, String? org }) async {
-    final response = await patchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate,  zapTraceSpan: zapTraceSpan, orgID: orgID, org: org );
+  Future<DBRPGet> patchDBRPID(String dbrpID, DBRPUpdate dBRPUpdate,
+      {String? zapTraceSpan, String? orgID, String? org}) async {
+    final response = await patchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate,
+        zapTraceSpan: zapTraceSpan, orgID: orgID, org: org);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -384,8 +449,10 @@ class DBRPsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRPGet',) as DBRPGet;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'DBRPGet',
+      ) as DBRPGet;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -401,7 +468,10 @@ class DBRPsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postDBRPWithHttpInfo(DBRPCreate dBRPCreate, { String? zapTraceSpan, }) async {
+  Future<Response> postDBRPWithHttpInfo(
+    DBRPCreate dBRPCreate, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/dbrps';
 
     // ignore: prefer_final_locals
@@ -415,9 +485,12 @@ class DBRPsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -440,8 +513,9 @@ class DBRPsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<DBRP> postDBRP(DBRPCreate dBRPCreate, { String? zapTraceSpan }) async {
-    final response = await postDBRPWithHttpInfo(dBRPCreate,  zapTraceSpan: zapTraceSpan );
+  Future<DBRP> postDBRP(DBRPCreate dBRPCreate, {String? zapTraceSpan}) async {
+    final response =
+        await postDBRPWithHttpInfo(dBRPCreate, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -449,8 +523,10 @@ class DBRPsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'DBRP',) as DBRP;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'DBRP',
+      ) as DBRP;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

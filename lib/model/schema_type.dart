@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class SchemaType {
   /// Instantiate a new enum with the provided [value].
   const SchemaType._(this.value);
@@ -31,18 +30,25 @@ class SchemaType {
   ];
 
   static SchemaType fromJson(dynamic value) =>
-    SchemaTypeTypeTransformer().decode(value)!;
+      SchemaTypeTypeTransformer().decode(value)!;
 
-  static List<SchemaType>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(SchemaType.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <SchemaType>[];
+  static List<SchemaType>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(SchemaType.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <SchemaType>[];
 }
 
 /// Transformation class that can [encode] an instance of [SchemaType] to String,
 /// and [decode] dynamic data back to [SchemaType].
 class SchemaTypeTypeTransformer {
-  factory SchemaTypeTypeTransformer() => _instance ??= const SchemaTypeTypeTransformer._();
+  factory SchemaTypeTypeTransformer() =>
+      _instance ??= const SchemaTypeTypeTransformer._();
 
   const SchemaTypeTypeTransformer._();
 
@@ -59,9 +65,12 @@ class SchemaTypeTypeTransformer {
   SchemaType? decode(dynamic data) {
     if (data != null) {
       switch (data.toString()) {
-        case r'implicit': return SchemaType.implicit;
-        case r'explicit': return SchemaType.explicit;
-        default: return SchemaType._(data.toString());
+        case r'implicit':
+          return SchemaType.implicit;
+        case r'explicit':
+          return SchemaType.explicit;
+        default:
+          return SchemaType._(data.toString());
       }
     }
     return null;
@@ -70,4 +79,3 @@ class SchemaTypeTypeTransformer {
   /// Singleton [SchemaTypeTypeTransformer] instance.
   static SchemaTypeTypeTransformer? _instance;
 }
-

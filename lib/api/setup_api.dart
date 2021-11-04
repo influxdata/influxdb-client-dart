@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class SetupApi {
   SetupApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -24,7 +23,9 @@ class SetupApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getSetupWithHttpInfo({ String? zapTraceSpan, }) async {
+  Future<Response> getSetupWithHttpInfo({
+    String? zapTraceSpan,
+  }) async {
     final path = r'/setup';
 
     // ignore: prefer_final_locals
@@ -38,9 +39,12 @@ class SetupApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -62,8 +66,8 @@ class SetupApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<IsOnboarding> getSetup({ String? zapTraceSpan }) async {
-    final response = await getSetupWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  Future<IsOnboarding> getSetup({String? zapTraceSpan}) async {
+    final response = await getSetupWithHttpInfo(zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -71,8 +75,10 @@ class SetupApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'IsOnboarding',) as IsOnboarding;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'IsOnboarding',
+      ) as IsOnboarding;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -90,7 +96,10 @@ class SetupApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postSetupWithHttpInfo(OnboardingRequest onboardingRequest, { String? zapTraceSpan, }) async {
+  Future<Response> postSetupWithHttpInfo(
+    OnboardingRequest onboardingRequest, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/setup';
 
     // ignore: prefer_final_locals
@@ -104,9 +113,12 @@ class SetupApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -131,8 +143,10 @@ class SetupApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<OnboardingResponse> postSetup(OnboardingRequest onboardingRequest, { String? zapTraceSpan }) async {
-    final response = await postSetupWithHttpInfo(onboardingRequest,  zapTraceSpan: zapTraceSpan );
+  Future<OnboardingResponse> postSetup(OnboardingRequest onboardingRequest,
+      {String? zapTraceSpan}) async {
+    final response = await postSetupWithHttpInfo(onboardingRequest,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -140,8 +154,10 @@ class SetupApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'OnboardingResponse',) as OnboardingResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'OnboardingResponse',
+      ) as OnboardingResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

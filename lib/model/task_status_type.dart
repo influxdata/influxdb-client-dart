@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class TaskStatusType {
   /// Instantiate a new enum with the provided [value].
   const TaskStatusType._(this.value);
@@ -31,18 +30,25 @@ class TaskStatusType {
   ];
 
   static TaskStatusType fromJson(dynamic value) =>
-    TaskStatusTypeTypeTransformer().decode(value)!;
+      TaskStatusTypeTypeTransformer().decode(value)!;
 
-  static List<TaskStatusType>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(TaskStatusType.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <TaskStatusType>[];
+  static List<TaskStatusType>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(TaskStatusType.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <TaskStatusType>[];
 }
 
 /// Transformation class that can [encode] an instance of [TaskStatusType] to String,
 /// and [decode] dynamic data back to [TaskStatusType].
 class TaskStatusTypeTypeTransformer {
-  factory TaskStatusTypeTypeTransformer() => _instance ??= const TaskStatusTypeTypeTransformer._();
+  factory TaskStatusTypeTypeTransformer() =>
+      _instance ??= const TaskStatusTypeTypeTransformer._();
 
   const TaskStatusTypeTypeTransformer._();
 
@@ -59,9 +65,12 @@ class TaskStatusTypeTypeTransformer {
   TaskStatusType? decode(dynamic data) {
     if (data != null) {
       switch (data.toString()) {
-        case r'active': return TaskStatusType.active;
-        case r'inactive': return TaskStatusType.inactive;
-        default: return TaskStatusType._(data.toString());
+        case r'active':
+          return TaskStatusType.active;
+        case r'inactive':
+          return TaskStatusType.inactive;
+        default:
+          return TaskStatusType._(data.toString());
       }
     }
     return null;
@@ -70,4 +79,3 @@ class TaskStatusTypeTypeTransformer {
   /// Singleton [TaskStatusTypeTypeTransformer] instance.
   static TaskStatusTypeTypeTransformer? _instance;
 }
-

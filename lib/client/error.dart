@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 class InfluxDBException implements Exception {
@@ -8,10 +6,12 @@ class InfluxDBException implements Exception {
   String? message;
   int? retryAfter;
 
-  InfluxDBException(this.statusCode, this.code, this.message, {this.retryAfter = -1});
+  InfluxDBException(this.statusCode, this.code, this.message,
+      {this.retryAfter = -1});
 
   static InfluxDBException fromResponse(BaseResponse response) {
-    return fromJson(response is Response? response.body : '', response.statusCode, response.headers);
+    return fromJson(response is Response ? response.body : '',
+        response.statusCode, response.headers);
   }
 
   static InfluxDBException fromJson(
@@ -39,7 +39,6 @@ class InfluxDBException implements Exception {
       if (body['code'] != null) {
         code = body['code'].toString();
       }
-
     }
     return InfluxDBException(statusCode, code, message, retryAfter: retryAfter);
   }

@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class OrganizationsApi {
   OrganizationsApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -25,9 +24,11 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> deleteOrgsIDWithHttpInfo(
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -40,9 +41,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -65,8 +69,9 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsID(String orgID, { String? zapTraceSpan }) async {
-    final response = await deleteOrgsIDWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteOrgsID(String orgID, {String? zapTraceSpan}) async {
+    final response =
+        await deleteOrgsIDWithHttpInfo(orgID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -86,10 +91,14 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDMembersIDWithHttpInfo(String userID, String orgID, { String? zapTraceSpan, }) async {
+  Future<Response> deleteOrgsIDMembersIDWithHttpInfo(
+    String userID,
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/orgs/{orgID}/members/{userID}'
-      .replaceAll('{userID}', userID)
-      .replaceAll('{orgID}', orgID);
+        .replaceAll('{userID}', userID)
+        .replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -102,9 +111,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -130,8 +142,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsIDMembersID(String userID, String orgID, { String? zapTraceSpan }) async {
-    final response = await deleteOrgsIDMembersIDWithHttpInfo(userID, orgID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteOrgsIDMembersID(String userID, String orgID,
+      {String? zapTraceSpan}) async {
+    final response = await deleteOrgsIDMembersIDWithHttpInfo(userID, orgID,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -151,10 +165,14 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteOrgsIDOwnersIDWithHttpInfo(String userID, String orgID, { String? zapTraceSpan, }) async {
+  Future<Response> deleteOrgsIDOwnersIDWithHttpInfo(
+    String userID,
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/orgs/{orgID}/owners/{userID}'
-      .replaceAll('{userID}', userID)
-      .replaceAll('{orgID}', orgID);
+        .replaceAll('{userID}', userID)
+        .replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -167,9 +185,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -195,8 +216,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteOrgsIDOwnersID(String userID, String orgID, { String? zapTraceSpan }) async {
-    final response = await deleteOrgsIDOwnersIDWithHttpInfo(userID, orgID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteOrgsIDOwnersID(String userID, String orgID,
+      {String? zapTraceSpan}) async {
+    final response = await deleteOrgsIDOwnersIDWithHttpInfo(userID, orgID,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -225,7 +248,15 @@ class OrganizationsApi {
   ///
   /// * [String] userID:
   ///   Filter organizations to a specific user ID.
-  Future<Response> getOrgsWithHttpInfo({ String? zapTraceSpan, int? offset, int? limit, bool? descending, String? org, String? orgID, String? userID, }) async {
+  Future<Response> getOrgsWithHttpInfo({
+    String? zapTraceSpan,
+    int? offset,
+    int? limit,
+    bool? descending,
+    String? org,
+    String? orgID,
+    String? userID,
+  }) async {
     final path = r'/orgs';
 
     // ignore: prefer_final_locals
@@ -236,31 +267,39 @@ class OrganizationsApi {
     final formParams = <String, String>{};
 
     if (offset != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'offset', offset));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'offset', offset));
     }
     if (limit != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'limit', limit));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'limit', limit));
     }
     if (descending != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'descending', descending));
+      queryParams.addAll(
+          _convertParametersForCollectionFormat('', 'descending', descending));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
     }
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (userID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'userID', userID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'userID', userID));
     }
 
     if (zapTraceSpan != null) {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -295,8 +334,22 @@ class OrganizationsApi {
   ///
   /// * [String] userID:
   ///   Filter organizations to a specific user ID.
-  Future<Organizations> getOrgs({ String? zapTraceSpan, int? offset, int? limit, bool? descending, String? org, String? orgID, String? userID }) async {
-    final response = await getOrgsWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, descending: descending, org: org, orgID: orgID, userID: userID );
+  Future<Organizations> getOrgs(
+      {String? zapTraceSpan,
+      int? offset,
+      int? limit,
+      bool? descending,
+      String? org,
+      String? orgID,
+      String? userID}) async {
+    final response = await getOrgsWithHttpInfo(
+        zapTraceSpan: zapTraceSpan,
+        offset: offset,
+        limit: limit,
+        descending: descending,
+        org: org,
+        orgID: orgID,
+        userID: userID);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -304,8 +357,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organizations',) as Organizations;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Organizations',
+      ) as Organizations;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -321,9 +376,11 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> getOrgsIDWithHttpInfo(
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -336,9 +393,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -361,8 +421,9 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> getOrgsID(String orgID, { String? zapTraceSpan }) async {
-    final response = await getOrgsIDWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
+  Future<Organization> getOrgsID(String orgID, {String? zapTraceSpan}) async {
+    final response =
+        await getOrgsIDWithHttpInfo(orgID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -370,8 +431,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Organization',
+      ) as Organization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -387,9 +450,11 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDMembersWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}/members'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> getOrgsIDMembersWithHttpInfo(
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}/members'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -402,9 +467,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -427,8 +495,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMembers> getOrgsIDMembers(String orgID, { String? zapTraceSpan }) async {
-    final response = await getOrgsIDMembersWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
+  Future<ResourceMembers> getOrgsIDMembers(String orgID,
+      {String? zapTraceSpan}) async {
+    final response =
+        await getOrgsIDMembersWithHttpInfo(orgID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -436,8 +506,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMembers',) as ResourceMembers;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ResourceMembers',
+      ) as ResourceMembers;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -453,9 +525,11 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getOrgsIDOwnersWithHttpInfo(String orgID, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}/owners'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> getOrgsIDOwnersWithHttpInfo(
+    String orgID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}/owners'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -468,9 +542,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -493,8 +570,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwners> getOrgsIDOwners(String orgID, { String? zapTraceSpan }) async {
-    final response = await getOrgsIDOwnersWithHttpInfo(orgID,  zapTraceSpan: zapTraceSpan );
+  Future<ResourceOwners> getOrgsIDOwners(String orgID,
+      {String? zapTraceSpan}) async {
+    final response =
+        await getOrgsIDOwnersWithHttpInfo(orgID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -502,8 +581,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwners',) as ResourceOwners;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ResourceOwners',
+      ) as ResourceOwners;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -522,9 +603,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchOrgsIDWithHttpInfo(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> patchOrgsIDWithHttpInfo(
+    String orgID,
+    PatchOrganizationRequest patchOrganizationRequest, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody = patchOrganizationRequest;
@@ -537,9 +621,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -565,8 +652,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> patchOrgsID(String orgID, PatchOrganizationRequest patchOrganizationRequest, { String? zapTraceSpan }) async {
-    final response = await patchOrgsIDWithHttpInfo(orgID, patchOrganizationRequest,  zapTraceSpan: zapTraceSpan );
+  Future<Organization> patchOrgsID(
+      String orgID, PatchOrganizationRequest patchOrganizationRequest,
+      {String? zapTraceSpan}) async {
+    final response = await patchOrgsIDWithHttpInfo(
+        orgID, patchOrganizationRequest,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -574,8 +665,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Organization',
+      ) as Organization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -591,7 +684,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsWithHttpInfo(PostOrganizationRequest postOrganizationRequest, { String? zapTraceSpan, }) async {
+  Future<Response> postOrgsWithHttpInfo(
+    PostOrganizationRequest postOrganizationRequest, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/orgs';
 
     // ignore: prefer_final_locals
@@ -605,9 +701,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -630,8 +729,10 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Organization> postOrgs(PostOrganizationRequest postOrganizationRequest, { String? zapTraceSpan }) async {
-    final response = await postOrgsWithHttpInfo(postOrganizationRequest,  zapTraceSpan: zapTraceSpan );
+  Future<Organization> postOrgs(PostOrganizationRequest postOrganizationRequest,
+      {String? zapTraceSpan}) async {
+    final response = await postOrgsWithHttpInfo(postOrganizationRequest,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -639,8 +740,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Organization',) as Organization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Organization',
+      ) as Organization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -659,9 +762,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDMembersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}/members'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> postOrgsIDMembersWithHttpInfo(
+    String orgID,
+    AddResourceMemberRequestBody addResourceMemberRequestBody, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}/members'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody = addResourceMemberRequestBody;
@@ -674,9 +780,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -702,8 +811,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceMember> postOrgsIDMembers(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
-    final response = await postOrgsIDMembersWithHttpInfo(orgID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
+  Future<ResourceMember> postOrgsIDMembers(
+      String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody,
+      {String? zapTraceSpan}) async {
+    final response = await postOrgsIDMembersWithHttpInfo(
+        orgID, addResourceMemberRequestBody,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -711,8 +824,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceMember',) as ResourceMember;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ResourceMember',
+      ) as ResourceMember;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -731,9 +846,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postOrgsIDOwnersWithHttpInfo(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan, }) async {
-    final path = r'/orgs/{orgID}/owners'
-      .replaceAll('{orgID}', orgID);
+  Future<Response> postOrgsIDOwnersWithHttpInfo(
+    String orgID,
+    AddResourceMemberRequestBody addResourceMemberRequestBody, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/orgs/{orgID}/owners'.replaceAll('{orgID}', orgID);
 
     // ignore: prefer_final_locals
     Object? postBody = addResourceMemberRequestBody;
@@ -746,9 +864,12 @@ class OrganizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -774,8 +895,12 @@ class OrganizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<ResourceOwner> postOrgsIDOwners(String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, { String? zapTraceSpan }) async {
-    final response = await postOrgsIDOwnersWithHttpInfo(orgID, addResourceMemberRequestBody,  zapTraceSpan: zapTraceSpan );
+  Future<ResourceOwner> postOrgsIDOwners(
+      String orgID, AddResourceMemberRequestBody addResourceMemberRequestBody,
+      {String? zapTraceSpan}) async {
+    final response = await postOrgsIDOwnersWithHttpInfo(
+        orgID, addResourceMemberRequestBody,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -783,8 +908,10 @@ class OrganizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ResourceOwner',) as ResourceOwner;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ResourceOwner',
+      ) as ResourceOwner;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class ApiException implements Exception {
   ApiException(this.code, String? message) {
     if (message != null) {

@@ -7,15 +7,15 @@ import 'commons_test.dart';
 var EOL = defaultEol; //'\r\n'
 
 var oneTable = '#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string$EOL'
-    '#group,false,false,true,true,false,false,true,true,true$EOL'
-    '#default,_result,,,,,,,,$EOL' +
+        '#group,false,false,true,true,false,false,true,true,true$EOL'
+        '#default,_result,,,,,,,,$EOL' +
     ',result,table,_start,_stop,_time,_value,_field,_measurement,host$EOL' +
     ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:05Z,11125907456,used,mem,mac.local$EOL' +
     ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:06Z,11127103488,used,mem,mac.local$EOL' +
     ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:07Z,11127291904,used,mem,mac.local$EOL' +
     ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:08Z,11126190080,used,mem,mac.local$EOL' +
     ',,0,2019-11-12T08:09:04.795385031Z,2019-11-12T08:09:09.795385031Z,2019-11-12T08:09:09Z,11127832576,used,mem,mac.local$EOL';
-var multipleQueries  = '#datatype,string,long,string,string,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string$EOL' +
+var multipleQueries = '#datatype,string,long,string,string,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string$EOL' +
     '#group,false,false,true,true,true,true,false,false,true$EOL' +
     '#default,t1,,,,,,,,$EOL' +
     ',result,table,_field,_measurement,_start,_stop,_time,_value,tag$EOL' +
@@ -54,7 +54,6 @@ var multipleQueries  = '#datatype,string,long,string,string,dateTime:RFC3339,dat
     ',,1,value,dart_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:30:00Z,2,test2';
 
 void main() {
-
   setUpAll(() {
     setupClient();
   });
@@ -97,7 +96,9 @@ void main() {
 
     var list = await resp.toList();
 
-    list.forEach((element) {print('-> $element');});
+    list.forEach((element) {
+      print('-> $element');
+    });
     expect(list.length, 9);
   });
 
@@ -123,17 +124,16 @@ void main() {
       expect(r['host'], 'mac.local');
     }
 
-    expect(res[0]['_value'],11125907456);
-    expect(res[0]['_time'],'2019-11-12T08:09:05Z');
-    expect(res[1]['_value'],11127103488);
-    expect(res[1]['_time'],'2019-11-12T08:09:06Z');
-    expect(res[2]['_value'],11127291904);
-    expect(res[2]['_time'],'2019-11-12T08:09:07Z');
-    expect(res[3]['_value'],11126190080);
-    expect(res[3]['_time'],'2019-11-12T08:09:08Z');
-    expect(res[4]['_value'],11127832576);
-    expect(res[4]['_time'],'2019-11-12T08:09:09Z');
-
+    expect(res[0]['_value'], 11125907456);
+    expect(res[0]['_time'], '2019-11-12T08:09:05Z');
+    expect(res[1]['_value'], 11127103488);
+    expect(res[1]['_time'], '2019-11-12T08:09:06Z');
+    expect(res[2]['_value'], 11127291904);
+    expect(res[2]['_time'], '2019-11-12T08:09:07Z');
+    expect(res[3]['_value'], 11126190080);
+    expect(res[3]['_time'], '2019-11-12T08:09:08Z');
+    expect(res[4]['_value'], 11127832576);
+    expect(res[4]['_time'], '2019-11-12T08:09:09Z');
   });
 
   test('queryMultipleTableFluxRecord', () async {
@@ -151,22 +151,22 @@ void main() {
     var resp = await client.getQueryService().query(query);
 
     var res = await resp.toList();
-    var i=0;
+    var i = 0;
     for (var r in res) {
       print('${i} : ${r.tableIndex} -> $r');
       if (i >= 0 && i < 14) {
-        expect(r['result'],'t1');
+        expect(r['result'], 't1');
       } else if (i >= 14 && i < 28) {
-        expect(r['result'],'t2');
-      };
+        expect(r['result'], 't2');
+      }
+      ;
       expect(r['_measurement'], 'dart_client_test');
-      expect(r['_value'],2);
+      expect(r['_value'], 2);
       i++;
     }
     expect(res[27]['_time'], '2020-02-27T16:30:00Z');
     expect(res[27]['tag'], 'test2');
     expect(res.length, 28);
-
   });
 
   test('infinityValues', () async {
@@ -186,8 +186,7 @@ void main() {
           ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,80,0$EOL' +
           ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,90,0$EOL' +
           ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,+Inf,15$EOL' +
-          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,-Inf,15$EOL'
-      ;
+          ',,0,2021-06-23T06:50:11.897825012Z,2021-06-25T06:50:11.897825012Z,stars,github_repository,C#,MIT License,influxdb-client-csharp,influxdata,-Inf,15$EOL';
       return Response(body, 200);
     });
 
@@ -205,7 +204,8 @@ void main() {
 
   test('contentType', () async {
     var mockClient = MockClient((request) async {
-      expect(request.headers['Content-Type'], 'application/json; charset=utf-8');
+      expect(
+          request.headers['Content-Type'], 'application/json; charset=utf-8');
       return Response(oneTable, 200);
     });
 
