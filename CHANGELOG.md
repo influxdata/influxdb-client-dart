@@ -7,6 +7,9 @@
 ### Bug Fixes
 1. [#19](https://github.com/influxdata/influxdb-client-dart/pull/19): Add upper bound to dependencies
 
+### CI
+1. [#23](https://github.com/influxdata/influxdb-client-dart/pull/23): Add check for correct dart formatting 
+
 ## 1.2.0 [2021-10-22]
 
 ### Bug Fixes
