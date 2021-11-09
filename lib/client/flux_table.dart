@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 /// Holds metadata about the column the in the table
@@ -36,7 +34,8 @@ class FluxTableMetaData {
       var index = column.index + 1;
       ////
       if (index >= values.length) {
-        throw FluxCsvParserException('Invalid data $values - columns: $columns');
+        throw FluxCsvParserException(
+            'Invalid data $values - columns: $columns');
       }
       var csvValue = values[index];
       record[columnName] = _toValue(csvValue, column);

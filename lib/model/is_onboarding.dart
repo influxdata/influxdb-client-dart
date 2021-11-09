@@ -18,13 +18,14 @@ class IsOnboarding {
   bool? allowed;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is IsOnboarding &&
-     other.allowed == allowed;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is IsOnboarding && other.allowed == allowed;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (allowed == null ? 0 : allowed.hashCode);
+      // ignore: unnecessary_parenthesis
+      (allowed == null ? 0 : allowed.hashCode);
 
   @override
   String toString() => 'IsOnboarding[allowed=$allowed]';
@@ -40,42 +41,48 @@ class IsOnboarding {
   /// Returns a new [IsOnboarding] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static IsOnboarding fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return IsOnboarding(
-        allowed: mapValueOfType<bool>(json, r'allowed'),
-      );
+    final json = value.cast<String, dynamic>();
+    return IsOnboarding(
+      allowed: mapValueOfType<bool>(json, r'allowed'),
+    );
   }
 
-  static List<IsOnboarding>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(IsOnboarding.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <IsOnboarding>[];
+  static List<IsOnboarding>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(IsOnboarding.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <IsOnboarding>[];
 
   static Map<String, IsOnboarding?> mapFromJson(dynamic json) {
     final map = <String, IsOnboarding?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = IsOnboarding.fromJson(value));
+      json.cast<String, dynamic>().forEach(
+          (key, dynamic value) => map[key] = IsOnboarding.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of IsOnboarding-objects as value to a dart map
-  static Map<String, List<IsOnboarding?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<IsOnboarding?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<IsOnboarding?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = IsOnboarding.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = IsOnboarding.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-

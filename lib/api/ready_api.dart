@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class ReadyApi {
   ReadyApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -22,7 +21,9 @@ class ReadyApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getReadyWithHttpInfo({ String? zapTraceSpan, }) async {
+  Future<Response> getReadyWithHttpInfo({
+    String? zapTraceSpan,
+  }) async {
     final path = r'/ready';
 
     // ignore: prefer_final_locals
@@ -36,9 +37,12 @@ class ReadyApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -58,8 +62,8 @@ class ReadyApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Ready> getReady({ String? zapTraceSpan }) async {
-    final response = await getReadyWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  Future<Ready> getReady({String? zapTraceSpan}) async {
+    final response = await getReadyWithHttpInfo(zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -67,8 +71,10 @@ class ReadyApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Ready',) as Ready;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Ready',
+      ) as Ready;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

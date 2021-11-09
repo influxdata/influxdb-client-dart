@@ -20,15 +20,17 @@ class VariableProperties {
   Map<String, String>? values;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is VariableProperties &&
-     other.type == type &&
-     other.values == values;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VariableProperties &&
+          other.type == type &&
+          other.values == values;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (type == null ? 0 : type.hashCode) +
-    (values == null ? 0 : values.hashCode);
+      // ignore: unnecessary_parenthesis
+      (type == null ? 0 : type.hashCode) +
+      (values == null ? 0 : values.hashCode);
 
   @override
   String toString() => 'VariableProperties[type=$type, values=$values]';
@@ -47,46 +49,54 @@ class VariableProperties {
   /// Returns a new [VariableProperties] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static VariableProperties fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return VariableProperties(
-        type: VariablePropertiesTypeEnum.fromJson(json[r'type']),
-        values: mapCastOfType<String, String>(json, r'values'),
-      );
+    final json = value.cast<String, dynamic>();
+    return VariableProperties(
+      type: VariablePropertiesTypeEnum.fromJson(json[r'type']),
+      values: mapCastOfType<String, String>(json, r'values'),
+    );
   }
 
-  static List<VariableProperties>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(VariableProperties.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <VariableProperties>[];
+  static List<VariableProperties>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(VariableProperties.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <VariableProperties>[];
 
   static Map<String, VariableProperties?> mapFromJson(dynamic json) {
     final map = <String, VariableProperties?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = VariableProperties.fromJson(value));
+      json.cast<String, dynamic>().forEach((key, dynamic value) =>
+          map[key] = VariableProperties.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of VariableProperties-objects as value to a dart map
-  static Map<String, List<VariableProperties?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<VariableProperties?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<VariableProperties?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = VariableProperties.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = VariableProperties.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class VariablePropertiesTypeEnum {
   /// Instantiate a new enum with the provided [value].
@@ -108,18 +118,27 @@ class VariablePropertiesTypeEnum {
   ];
 
   static VariablePropertiesTypeEnum? fromJson(dynamic value) =>
-    VariablePropertiesTypeEnumTypeTransformer().decode(value);
+      VariablePropertiesTypeEnumTypeTransformer().decode(value);
 
-  static List<VariablePropertiesTypeEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(VariablePropertiesTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <VariablePropertiesTypeEnum>[];
+  static List<VariablePropertiesTypeEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(VariablePropertiesTypeEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <VariablePropertiesTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [VariablePropertiesTypeEnum] to String,
 /// and [decode] dynamic data back to [VariablePropertiesTypeEnum].
 class VariablePropertiesTypeEnumTypeTransformer {
-  factory VariablePropertiesTypeEnumTypeTransformer() => _instance ??= const VariablePropertiesTypeEnumTypeTransformer._();
+  factory VariablePropertiesTypeEnumTypeTransformer() =>
+      _instance ??= const VariablePropertiesTypeEnumTypeTransformer._();
 
   const VariablePropertiesTypeEnumTypeTransformer._();
 
@@ -136,8 +155,10 @@ class VariablePropertiesTypeEnumTypeTransformer {
   VariablePropertiesTypeEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'map': return VariablePropertiesTypeEnum.map;
-        default: return VariablePropertiesTypeEnum._(data.toString());
+        case r'map':
+          return VariablePropertiesTypeEnum.map;
+        default:
+          return VariablePropertiesTypeEnum._(data.toString());
       }
     }
     return null;
@@ -146,5 +167,3 @@ class VariablePropertiesTypeEnumTypeTransformer {
   /// Singleton [VariablePropertiesTypeEnumTypeTransformer] instance.
   static VariablePropertiesTypeEnumTypeTransformer? _instance;
 }
-
-

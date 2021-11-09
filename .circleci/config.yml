@@ -80,6 +80,7 @@ workflows:
           name: dart-2.12-nightly
           dart-image: "google/dart:2.12"
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
+      - check-code-style
 #  disable build for mac (circleci commertial plan is required)
 #      - build-mac:
 #          requires:
@@ -129,7 +130,16 @@ jobs:
       - store_test_results:
           path: test-results
       - store_test_results:
-          path: test-results/dart-tests/influxdb_client_test-report.xml   
+          path: test-results/dart-tests/influxdb_client_test-report.xml
+
+  check-code-style:
+    docker:
+      - image: "google/dart:latest"
+    steps:
+      - checkout
+      - run:
+          name: Check correct formatting
+          command: dart format --set-exit-if-changed .
 
 #  build-mac:
 #    macos:

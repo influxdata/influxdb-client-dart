@@ -20,15 +20,15 @@ class LabelResponse {
   Links? links;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is LabelResponse &&
-     other.label == label &&
-     other.links == links;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LabelResponse && other.label == label && other.links == links;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (label == null ? 0 : label.hashCode) +
-    (links == null ? 0 : links.hashCode);
+      // ignore: unnecessary_parenthesis
+      (label == null ? 0 : label.hashCode) +
+      (links == null ? 0 : links.hashCode);
 
   @override
   String toString() => 'LabelResponse[label=$label, links=$links]';
@@ -47,43 +47,49 @@ class LabelResponse {
   /// Returns a new [LabelResponse] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static LabelResponse fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return LabelResponse(
-        label: json[r'label'] == null ? null : Label.fromJson(json[r'label']),
-        links: json[r'links'] == null ? null : Links.fromJson(json[r'links']),
-      );
+    final json = value.cast<String, dynamic>();
+    return LabelResponse(
+      label: json[r'label'] == null ? null : Label.fromJson(json[r'label']),
+      links: json[r'links'] == null ? null : Links.fromJson(json[r'links']),
+    );
   }
 
-  static List<LabelResponse>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(LabelResponse.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <LabelResponse>[];
+  static List<LabelResponse>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(LabelResponse.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <LabelResponse>[];
 
   static Map<String, LabelResponse?> mapFromJson(dynamic json) {
     final map = <String, LabelResponse?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = LabelResponse.fromJson(value));
+      json.cast<String, dynamic>().forEach(
+          (key, dynamic value) => map[key] = LabelResponse.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of LabelResponse-objects as value to a dart map
-  static Map<String, List<LabelResponse?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<LabelResponse?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<LabelResponse?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = LabelResponse.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = LabelResponse.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-

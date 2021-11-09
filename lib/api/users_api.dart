@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class UsersApi {
   UsersApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -25,9 +24,11 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteUsersIDWithHttpInfo(String userID, { String? zapTraceSpan, }) async {
-    final path = r'/users/{userID}'
-      .replaceAll('{userID}', userID);
+  Future<Response> deleteUsersIDWithHttpInfo(
+    String userID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/users/{userID}'.replaceAll('{userID}', userID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -40,9 +41,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -65,8 +69,9 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteUsersID(String userID, { String? zapTraceSpan }) async {
-    final response = await deleteUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteUsersID(String userID, {String? zapTraceSpan}) async {
+    final response =
+        await deleteUsersIDWithHttpInfo(userID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -80,7 +85,9 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getFlagsWithHttpInfo({ String? zapTraceSpan, }) async {
+  Future<Response> getFlagsWithHttpInfo({
+    String? zapTraceSpan,
+  }) async {
     final path = r'/flags';
 
     // ignore: prefer_final_locals
@@ -94,9 +101,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -116,8 +126,8 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Map<String, Object>> getFlags({ String? zapTraceSpan }) async {
-    final response = await getFlagsWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  Future<Map<String, Object>> getFlags({String? zapTraceSpan}) async {
+    final response = await getFlagsWithHttpInfo(zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -125,8 +135,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return Map<String, Object>.from(await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Map<String, Object>'),);
-
+      return Map<String, Object>.from(
+        await apiClient.deserializeAsync(
+            await _decodeBodyBytes(response), 'Map<String, Object>'),
+      );
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -139,7 +151,9 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getMeWithHttpInfo({ String? zapTraceSpan, }) async {
+  Future<Response> getMeWithHttpInfo({
+    String? zapTraceSpan,
+  }) async {
     final path = r'/me';
 
     // ignore: prefer_final_locals
@@ -153,9 +167,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -175,8 +192,8 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> getMe({ String? zapTraceSpan }) async {
-    final response = await getMeWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  Future<UserResponse> getMe({String? zapTraceSpan}) async {
+    final response = await getMeWithHttpInfo(zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -184,8 +201,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'UserResponse',
+      ) as UserResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -204,12 +223,19 @@ class UsersApi {
   /// * [int] limit:
   ///
   /// * [String] after:
-  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
+  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`.
   ///
   /// * [String] name:
   ///
   /// * [String] id:
-  Future<Response> getUsersWithHttpInfo({ String? zapTraceSpan, int? offset, int? limit, String? after, String? name, String? id, }) async {
+  Future<Response> getUsersWithHttpInfo({
+    String? zapTraceSpan,
+    int? offset,
+    int? limit,
+    String? after,
+    String? name,
+    String? id,
+  }) async {
     final path = r'/users';
 
     // ignore: prefer_final_locals
@@ -220,16 +246,20 @@ class UsersApi {
     final formParams = <String, String>{};
 
     if (offset != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'offset', offset));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'offset', offset));
     }
     if (limit != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'limit', limit));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'limit', limit));
     }
     if (after != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'after', after));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'after', after));
     }
     if (name != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'name', name));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'name', name));
     }
     if (id != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'id', id));
@@ -239,9 +269,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -267,13 +300,25 @@ class UsersApi {
   /// * [int] limit:
   ///
   /// * [String] after:
-  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`. 
+  ///   The last resource ID from which to seek from (but not including). This is to be used instead of `offset`.
   ///
   /// * [String] name:
   ///
   /// * [String] id:
-  Future<Users> getUsers({ String? zapTraceSpan, int? offset, int? limit, String? after, String? name, String? id }) async {
-    final response = await getUsersWithHttpInfo( zapTraceSpan: zapTraceSpan, offset: offset, limit: limit, after: after, name: name, id: id );
+  Future<Users> getUsers(
+      {String? zapTraceSpan,
+      int? offset,
+      int? limit,
+      String? after,
+      String? name,
+      String? id}) async {
+    final response = await getUsersWithHttpInfo(
+        zapTraceSpan: zapTraceSpan,
+        offset: offset,
+        limit: limit,
+        after: after,
+        name: name,
+        id: id);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -281,8 +326,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Users',) as Users;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Users',
+      ) as Users;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -298,9 +345,11 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getUsersIDWithHttpInfo(String userID, { String? zapTraceSpan, }) async {
-    final path = r'/users/{userID}'
-      .replaceAll('{userID}', userID);
+  Future<Response> getUsersIDWithHttpInfo(
+    String userID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/users/{userID}'.replaceAll('{userID}', userID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -313,9 +362,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -338,8 +390,9 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> getUsersID(String userID, { String? zapTraceSpan }) async {
-    final response = await getUsersIDWithHttpInfo(userID,  zapTraceSpan: zapTraceSpan );
+  Future<UserResponse> getUsersID(String userID, {String? zapTraceSpan}) async {
+    final response =
+        await getUsersIDWithHttpInfo(userID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -347,8 +400,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'UserResponse',
+      ) as UserResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -367,9 +422,12 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchUsersIDWithHttpInfo(String userID, User user, { String? zapTraceSpan, }) async {
-    final path = r'/users/{userID}'
-      .replaceAll('{userID}', userID);
+  Future<Response> patchUsersIDWithHttpInfo(
+    String userID,
+    User user, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/users/{userID}'.replaceAll('{userID}', userID);
 
     // ignore: prefer_final_locals
     Object? postBody = user;
@@ -382,9 +440,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -410,8 +471,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> patchUsersID(String userID, User user, { String? zapTraceSpan }) async {
-    final response = await patchUsersIDWithHttpInfo(userID, user,  zapTraceSpan: zapTraceSpan );
+  Future<UserResponse> patchUsersID(String userID, User user,
+      {String? zapTraceSpan}) async {
+    final response = await patchUsersIDWithHttpInfo(userID, user,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -419,8 +482,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'UserResponse',
+      ) as UserResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -436,7 +501,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersWithHttpInfo(User user, { String? zapTraceSpan, }) async {
+  Future<Response> postUsersWithHttpInfo(
+    User user, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/users';
 
     // ignore: prefer_final_locals
@@ -450,9 +518,12 @@ class UsersApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -475,8 +546,9 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<UserResponse> postUsers(User user, { String? zapTraceSpan }) async {
-    final response = await postUsersWithHttpInfo(user,  zapTraceSpan: zapTraceSpan );
+  Future<UserResponse> postUsers(User user, {String? zapTraceSpan}) async {
+    final response =
+        await postUsersWithHttpInfo(user, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -484,8 +556,10 @@ class UsersApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UserResponse',) as UserResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'UserResponse',
+      ) as UserResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -504,9 +578,12 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postUsersIDPasswordWithHttpInfo(String userID, PasswordResetBody passwordResetBody, { String? zapTraceSpan, }) async {
-    final path = r'/users/{userID}/password'
-      .replaceAll('{userID}', userID);
+  Future<Response> postUsersIDPasswordWithHttpInfo(
+    String userID,
+    PasswordResetBody passwordResetBody, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/users/{userID}/password'.replaceAll('{userID}', userID);
 
     // ignore: prefer_final_locals
     Object? postBody = passwordResetBody;
@@ -522,7 +599,6 @@ class UsersApi {
     const authNames = <String>['BasicAuthentication'];
     const contentTypes = <String>['application/json'];
 
-
     return apiClient.invokeAPI(
       path,
       'POST',
@@ -547,8 +623,12 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> postUsersIDPassword(String userID, PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
-    final response = await postUsersIDPasswordWithHttpInfo(userID, passwordResetBody,  zapTraceSpan: zapTraceSpan );
+  Future<void> postUsersIDPassword(
+      String userID, PasswordResetBody passwordResetBody,
+      {String? zapTraceSpan}) async {
+    final response = await postUsersIDPasswordWithHttpInfo(
+        userID, passwordResetBody,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -565,7 +645,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> putMePasswordWithHttpInfo(PasswordResetBody passwordResetBody, { String? zapTraceSpan, }) async {
+  Future<Response> putMePasswordWithHttpInfo(
+    PasswordResetBody passwordResetBody, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/me/password';
 
     // ignore: prefer_final_locals
@@ -581,7 +664,6 @@ class UsersApi {
 
     const authNames = <String>['BasicAuthentication'];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -604,8 +686,10 @@ class UsersApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> putMePassword(PasswordResetBody passwordResetBody, { String? zapTraceSpan }) async {
-    final response = await putMePasswordWithHttpInfo(passwordResetBody,  zapTraceSpan: zapTraceSpan );
+  Future<void> putMePassword(PasswordResetBody passwordResetBody,
+      {String? zapTraceSpan}) async {
+    final response = await putMePasswordWithHttpInfo(passwordResetBody,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

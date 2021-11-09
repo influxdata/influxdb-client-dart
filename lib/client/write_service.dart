@@ -1,5 +1,3 @@
-
-
 part of influxdb_client_api;
 
 class WriteService extends DefaultService {
@@ -24,7 +22,6 @@ class WriteService extends DefaultService {
       {String? bucket,
       String? org,
       WritePrecision precision = WritePrecision.ns}) async {
-
     if (writeOptions!.maxRetries > 0) {
       var retry = RetryOptions(
         exponentialBase: writeOptions!.exponentialBase,
@@ -49,9 +46,8 @@ class WriteService extends DefaultService {
       {String? bucket,
       String? org,
       WritePrecision precision = WritePrecision.ns}) async {
-
-    var response = await _writePost(record, bucket ?? influxDB.bucket,
-        org ?? influxDB.org, precision);
+    var response = await _writePost(
+        record, bucket ?? influxDB.bucket, org ?? influxDB.org, precision);
 
     if (response.statusCode == 204) {
       // write successful
@@ -124,17 +120,15 @@ class WriteService extends DefaultService {
         bucket: bucket, org: org, precision: precision);
   }
 
-  Future<BaseResponse> _writePost(String data, String? bucket, String? organization,
-      WritePrecision precision) async {
+  Future<BaseResponse> _writePost(String data, String? bucket,
+      String? organization, WritePrecision precision) async {
     // create uri
     var uri = _buildUri(influxDB.url!, '/api/v2/write', {
       'precision': precision.value,
       'bucket': bucket,
       'org': organization,
     });
-    var headers = {
-      'Content-Type': 'text/plain; charset=utf-8'
-    };
+    var headers = {'Content-Type': 'text/plain; charset=utf-8'};
     _updateParamsForAuth(headers);
     var payload;
     if (writeOptions!.gzip) {
@@ -155,8 +149,8 @@ class WriteService extends DefaultService {
       return null;
     }
     if (data is Point) {
-      var lineProtocol =
-          data.toLineProtocol(precision, defaultTags: writeOptions!.defaultTags);
+      var lineProtocol = data.toLineProtocol(precision,
+          defaultTags: writeOptions!.defaultTags);
       return _payload(lineProtocol, precision, bucket, org, batching);
     }
     if (data is String) {

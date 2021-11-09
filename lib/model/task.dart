@@ -86,66 +86,69 @@ class Task {
   TaskLinks? links;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Task &&
-     other.id == id &&
-     other.type == type &&
-     other.orgID == orgID &&
-     other.org == org &&
-     other.name == name &&
-     other.ownerID == ownerID &&
-     other.description == description &&
-     other.status == status &&
-     other.labels == labels &&
-     other.authorizationID == authorizationID &&
-     other.flux == flux &&
-     other.every == every &&
-     other.cron == cron &&
-     other.offset == offset &&
-     other.latestCompleted == latestCompleted &&
-     other.lastRunStatus == lastRunStatus &&
-     other.lastRunError == lastRunError &&
-     other.createdAt == createdAt &&
-     other.updatedAt == updatedAt &&
-     other.links == links;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Task &&
+          other.id == id &&
+          other.type == type &&
+          other.orgID == orgID &&
+          other.org == org &&
+          other.name == name &&
+          other.ownerID == ownerID &&
+          other.description == description &&
+          other.status == status &&
+          other.labels == labels &&
+          other.authorizationID == authorizationID &&
+          other.flux == flux &&
+          other.every == every &&
+          other.cron == cron &&
+          other.offset == offset &&
+          other.latestCompleted == latestCompleted &&
+          other.lastRunStatus == lastRunStatus &&
+          other.lastRunError == lastRunError &&
+          other.createdAt == createdAt &&
+          other.updatedAt == updatedAt &&
+          other.links == links;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (id == null ? 0 : id.hashCode) +
-    (type == null ? 0 : type.hashCode) +
-    (orgID == null ? 0 : orgID.hashCode) +
-    (org == null ? 0 : org.hashCode) +
-    (name == null ? 0 : name.hashCode) +
-    (ownerID == null ? 0 : ownerID.hashCode) +
-    (description == null ? 0 : description.hashCode) +
-    (status == null ? 0 : status.hashCode) +
-    (labels == null ? 0 : labels.hashCode) +
-    (authorizationID == null ? 0 : authorizationID.hashCode) +
-    (flux == null ? 0 : flux.hashCode) +
-    (every == null ? 0 : every.hashCode) +
-    (cron == null ? 0 : cron.hashCode) +
-    (offset == null ? 0 : offset.hashCode) +
-    (latestCompleted == null ? 0 : latestCompleted.hashCode) +
-    (lastRunStatus == null ? 0 : lastRunStatus.hashCode) +
-    (lastRunError == null ? 0 : lastRunError.hashCode) +
-    (createdAt == null ? 0 : createdAt.hashCode) +
-    (updatedAt == null ? 0 : updatedAt.hashCode) +
-    (links == null ? 0 : links.hashCode);
+      // ignore: unnecessary_parenthesis
+      (id == null ? 0 : id.hashCode) +
+      (type == null ? 0 : type.hashCode) +
+      (orgID == null ? 0 : orgID.hashCode) +
+      (org == null ? 0 : org.hashCode) +
+      (name == null ? 0 : name.hashCode) +
+      (ownerID == null ? 0 : ownerID.hashCode) +
+      (description == null ? 0 : description.hashCode) +
+      (status == null ? 0 : status.hashCode) +
+      (labels == null ? 0 : labels.hashCode) +
+      (authorizationID == null ? 0 : authorizationID.hashCode) +
+      (flux == null ? 0 : flux.hashCode) +
+      (every == null ? 0 : every.hashCode) +
+      (cron == null ? 0 : cron.hashCode) +
+      (offset == null ? 0 : offset.hashCode) +
+      (latestCompleted == null ? 0 : latestCompleted.hashCode) +
+      (lastRunStatus == null ? 0 : lastRunStatus.hashCode) +
+      (lastRunError == null ? 0 : lastRunError.hashCode) +
+      (createdAt == null ? 0 : createdAt.hashCode) +
+      (updatedAt == null ? 0 : updatedAt.hashCode) +
+      (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'Task[id=$id, type=$type, orgID=$orgID, org=$org, name=$name, ownerID=$ownerID, description=$description, status=$status, labels=$labels, authorizationID=$authorizationID, flux=$flux, every=$every, cron=$cron, offset=$offset, latestCompleted=$latestCompleted, lastRunStatus=$lastRunStatus, lastRunError=$lastRunError, createdAt=$createdAt, updatedAt=$updatedAt, links=$links]';
+  String toString() =>
+      'Task[id=$id, type=$type, orgID=$orgID, org=$org, name=$name, ownerID=$ownerID, description=$description, status=$status, labels=$labels, authorizationID=$authorizationID, flux=$flux, every=$every, cron=$cron, offset=$offset, latestCompleted=$latestCompleted, lastRunStatus=$lastRunStatus, lastRunError=$lastRunError, createdAt=$createdAt, updatedAt=$updatedAt, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-      json[r'id'] = id;
+    json[r'id'] = id;
     if (type != null) {
       json[r'type'] = type;
     }
-      json[r'orgID'] = orgID;
+    json[r'orgID'] = orgID;
     if (org != null) {
       json[r'org'] = org;
     }
-      json[r'name'] = name;
+    json[r'name'] = name;
     if (ownerID != null) {
       json[r'ownerID'] = ownerID;
     }
@@ -161,7 +164,7 @@ class Task {
     if (authorizationID != null) {
       json[r'authorizationID'] = authorizationID;
     }
-      json[r'flux'] = flux;
+    json[r'flux'] = flux;
     if (every != null) {
       json[r'every'] = every;
     }
@@ -195,64 +198,73 @@ class Task {
   /// Returns a new [Task] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static Task fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return Task(
-        id: mapValueOfType<String>(json, r'id'),
-        type: mapValueOfType<String>(json, r'type'),
-        orgID: mapValueOfType<String>(json, r'orgID'),
-        org: mapValueOfType<String>(json, r'org'),
-        name: mapValueOfType<String>(json, r'name'),
-        ownerID: mapValueOfType<String>(json, r'ownerID'),
-        description: mapValueOfType<String>(json, r'description'),
-        status: json[r'status'] == null ? null : TaskStatusType.fromJson(json[r'status']),
-        labels: Label.listFromJson(json[r'labels']),
-        authorizationID: mapValueOfType<String>(json, r'authorizationID'),
-        flux: mapValueOfType<String>(json, r'flux'),
-        every: mapValueOfType<String>(json, r'every'),
-        cron: mapValueOfType<String>(json, r'cron'),
-        offset: mapValueOfType<String>(json, r'offset'),
-        latestCompleted: mapDateTime(json, r'latestCompleted', ''),
-        lastRunStatus: TaskLastRunStatusEnum.fromJson(json[r'lastRunStatus']),
-        lastRunError: mapValueOfType<String>(json, r'lastRunError'),
-        createdAt: mapDateTime(json, r'createdAt', ''),
-        updatedAt: mapDateTime(json, r'updatedAt', ''),
-        links: json[r'links'] == null ? null : TaskLinks.fromJson(json[r'links']),
-      );
+    final json = value.cast<String, dynamic>();
+    return Task(
+      id: mapValueOfType<String>(json, r'id'),
+      type: mapValueOfType<String>(json, r'type'),
+      orgID: mapValueOfType<String>(json, r'orgID'),
+      org: mapValueOfType<String>(json, r'org'),
+      name: mapValueOfType<String>(json, r'name'),
+      ownerID: mapValueOfType<String>(json, r'ownerID'),
+      description: mapValueOfType<String>(json, r'description'),
+      status: json[r'status'] == null
+          ? null
+          : TaskStatusType.fromJson(json[r'status']),
+      labels: Label.listFromJson(json[r'labels']),
+      authorizationID: mapValueOfType<String>(json, r'authorizationID'),
+      flux: mapValueOfType<String>(json, r'flux'),
+      every: mapValueOfType<String>(json, r'every'),
+      cron: mapValueOfType<String>(json, r'cron'),
+      offset: mapValueOfType<String>(json, r'offset'),
+      latestCompleted: mapDateTime(json, r'latestCompleted', ''),
+      lastRunStatus: TaskLastRunStatusEnum.fromJson(json[r'lastRunStatus']),
+      lastRunError: mapValueOfType<String>(json, r'lastRunError'),
+      createdAt: mapDateTime(json, r'createdAt', ''),
+      updatedAt: mapDateTime(json, r'updatedAt', ''),
+      links: json[r'links'] == null ? null : TaskLinks.fromJson(json[r'links']),
+    );
   }
 
-  static List<Task>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Task.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Task>[];
+  static List<Task>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(Task.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <Task>[];
 
   static Map<String, Task?> mapFromJson(dynamic json) {
     final map = <String, Task?>{};
     if (json is Map && json.isNotEmpty) {
       json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Task.fromJson(value));
+          .cast<String, dynamic>()
+          .forEach((key, dynamic value) => map[key] = Task.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Task-objects as value to a dart map
-  static Map<String, List<Task?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<Task?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<Task?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Task.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = Task.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class TaskLastRunStatusEnum {
   /// Instantiate a new enum with the provided [value].
@@ -278,18 +290,27 @@ class TaskLastRunStatusEnum {
   ];
 
   static TaskLastRunStatusEnum? fromJson(dynamic value) =>
-    TaskLastRunStatusEnumTypeTransformer().decode(value);
+      TaskLastRunStatusEnumTypeTransformer().decode(value);
 
-  static List<TaskLastRunStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(TaskLastRunStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <TaskLastRunStatusEnum>[];
+  static List<TaskLastRunStatusEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(TaskLastRunStatusEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <TaskLastRunStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [TaskLastRunStatusEnum] to String,
 /// and [decode] dynamic data back to [TaskLastRunStatusEnum].
 class TaskLastRunStatusEnumTypeTransformer {
-  factory TaskLastRunStatusEnumTypeTransformer() => _instance ??= const TaskLastRunStatusEnumTypeTransformer._();
+  factory TaskLastRunStatusEnumTypeTransformer() =>
+      _instance ??= const TaskLastRunStatusEnumTypeTransformer._();
 
   const TaskLastRunStatusEnumTypeTransformer._();
 
@@ -306,10 +327,14 @@ class TaskLastRunStatusEnumTypeTransformer {
   TaskLastRunStatusEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'failed': return TaskLastRunStatusEnum.failed;
-        case r'success': return TaskLastRunStatusEnum.success;
-        case r'canceled': return TaskLastRunStatusEnum.canceled;
-        default: return TaskLastRunStatusEnum._(data.toString());
+        case r'failed':
+          return TaskLastRunStatusEnum.failed;
+        case r'success':
+          return TaskLastRunStatusEnum.success;
+        case r'canceled':
+          return TaskLastRunStatusEnum.canceled;
+        default:
+          return TaskLastRunStatusEnum._(data.toString());
       }
     }
     return null;
@@ -318,5 +343,3 @@ class TaskLastRunStatusEnumTypeTransformer {
   /// Singleton [TaskLastRunStatusEnumTypeTransformer] instance.
   static TaskLastRunStatusEnumTypeTransformer? _instance;
 }
-
-

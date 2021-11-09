@@ -1,4 +1,3 @@
-
 part of influxdb_client_api;
 
 class DeleteService extends DefaultService {
@@ -37,15 +36,15 @@ class DeleteService extends DefaultService {
   ///   Specifies the bucket ID to delete data from.
   Future<void> delete(
       {required DateTime start,
-        required DateTime stop,
+      required DateTime stop,
       String? predicate,
       String? zapTraceSpan,
       String? org,
       String? bucket,
       String? orgID,
       String? bucketID}) async {
-
-    var deletePredicateRequest = DeletePredicateRequest(start: start, stop: stop, predicate: predicate);
+    var deletePredicateRequest =
+        DeletePredicateRequest(start: start, stop: stop, predicate: predicate);
 
     return await _service.postDelete(deletePredicateRequest,
         zapTraceSpan: zapTraceSpan,

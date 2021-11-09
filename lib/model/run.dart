@@ -46,32 +46,35 @@ class Run {
   RunLinks? links;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Run &&
-     other.id == id &&
-     other.taskID == taskID &&
-     other.status == status &&
-     other.scheduledFor == scheduledFor &&
-     other.log == log &&
-     other.startedAt == startedAt &&
-     other.finishedAt == finishedAt &&
-     other.requestedAt == requestedAt &&
-     other.links == links;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Run &&
+          other.id == id &&
+          other.taskID == taskID &&
+          other.status == status &&
+          other.scheduledFor == scheduledFor &&
+          other.log == log &&
+          other.startedAt == startedAt &&
+          other.finishedAt == finishedAt &&
+          other.requestedAt == requestedAt &&
+          other.links == links;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (id == null ? 0 : id.hashCode) +
-    (taskID == null ? 0 : taskID.hashCode) +
-    (status == null ? 0 : status.hashCode) +
-    (scheduledFor == null ? 0 : scheduledFor.hashCode) +
-    (log == null ? 0 : log.hashCode) +
-    (startedAt == null ? 0 : startedAt.hashCode) +
-    (finishedAt == null ? 0 : finishedAt.hashCode) +
-    (requestedAt == null ? 0 : requestedAt.hashCode) +
-    (links == null ? 0 : links.hashCode);
+      // ignore: unnecessary_parenthesis
+      (id == null ? 0 : id.hashCode) +
+      (taskID == null ? 0 : taskID.hashCode) +
+      (status == null ? 0 : status.hashCode) +
+      (scheduledFor == null ? 0 : scheduledFor.hashCode) +
+      (log == null ? 0 : log.hashCode) +
+      (startedAt == null ? 0 : startedAt.hashCode) +
+      (finishedAt == null ? 0 : finishedAt.hashCode) +
+      (requestedAt == null ? 0 : requestedAt.hashCode) +
+      (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'Run[id=$id, taskID=$taskID, status=$status, scheduledFor=$scheduledFor, log=$log, startedAt=$startedAt, finishedAt=$finishedAt, requestedAt=$requestedAt, links=$links]';
+  String toString() =>
+      'Run[id=$id, taskID=$taskID, status=$status, scheduledFor=$scheduledFor, log=$log, startedAt=$startedAt, finishedAt=$finishedAt, requestedAt=$requestedAt, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -108,53 +111,60 @@ class Run {
   /// Returns a new [Run] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static Run fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return Run(
-        id: mapValueOfType<String>(json, r'id'),
-        taskID: mapValueOfType<String>(json, r'taskID'),
-        status: RunStatusEnum.fromJson(json[r'status']),
-        scheduledFor: mapDateTime(json, r'scheduledFor', ''),
-        log: LogEvent.listFromJson(json[r'log']),
-        startedAt: mapDateTime(json, r'startedAt', ''),
-        finishedAt: mapDateTime(json, r'finishedAt', ''),
-        requestedAt: mapDateTime(json, r'requestedAt', ''),
-        links: json[r'links'] == null ? null : RunLinks.fromJson(json[r'links']),
-      );
+    final json = value.cast<String, dynamic>();
+    return Run(
+      id: mapValueOfType<String>(json, r'id'),
+      taskID: mapValueOfType<String>(json, r'taskID'),
+      status: RunStatusEnum.fromJson(json[r'status']),
+      scheduledFor: mapDateTime(json, r'scheduledFor', ''),
+      log: LogEvent.listFromJson(json[r'log']),
+      startedAt: mapDateTime(json, r'startedAt', ''),
+      finishedAt: mapDateTime(json, r'finishedAt', ''),
+      requestedAt: mapDateTime(json, r'requestedAt', ''),
+      links: json[r'links'] == null ? null : RunLinks.fromJson(json[r'links']),
+    );
   }
 
-  static List<Run>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Run.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Run>[];
+  static List<Run>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(Run.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <Run>[];
 
   static Map<String, Run?> mapFromJson(dynamic json) {
     final map = <String, Run?>{};
     if (json is Map && json.isNotEmpty) {
       json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Run.fromJson(value));
+          .cast<String, dynamic>()
+          .forEach((key, dynamic value) => map[key] = Run.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Run-objects as value to a dart map
-  static Map<String, List<Run?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<Run?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<Run?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Run.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = Run.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class RunStatusEnum {
   /// Instantiate a new enum with the provided [value].
@@ -184,18 +194,25 @@ class RunStatusEnum {
   ];
 
   static RunStatusEnum? fromJson(dynamic value) =>
-    RunStatusEnumTypeTransformer().decode(value);
+      RunStatusEnumTypeTransformer().decode(value);
 
-  static List<RunStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(RunStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <RunStatusEnum>[];
+  static List<RunStatusEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(RunStatusEnum.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <RunStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [RunStatusEnum] to String,
 /// and [decode] dynamic data back to [RunStatusEnum].
 class RunStatusEnumTypeTransformer {
-  factory RunStatusEnumTypeTransformer() => _instance ??= const RunStatusEnumTypeTransformer._();
+  factory RunStatusEnumTypeTransformer() =>
+      _instance ??= const RunStatusEnumTypeTransformer._();
 
   const RunStatusEnumTypeTransformer._();
 
@@ -212,12 +229,18 @@ class RunStatusEnumTypeTransformer {
   RunStatusEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'scheduled': return RunStatusEnum.scheduled;
-        case r'started': return RunStatusEnum.started;
-        case r'failed': return RunStatusEnum.failed;
-        case r'success': return RunStatusEnum.success;
-        case r'canceled': return RunStatusEnum.canceled;
-        default: return RunStatusEnum._(data.toString());
+        case r'scheduled':
+          return RunStatusEnum.scheduled;
+        case r'started':
+          return RunStatusEnum.started;
+        case r'failed':
+          return RunStatusEnum.failed;
+        case r'success':
+          return RunStatusEnum.success;
+        case r'canceled':
+          return RunStatusEnum.canceled;
+        default:
+          return RunStatusEnum._(data.toString());
       }
     }
     return null;
@@ -226,5 +249,3 @@ class RunStatusEnumTypeTransformer {
   /// Singleton [RunStatusEnumTypeTransformer] instance.
   static RunStatusEnumTypeTransformer? _instance;
 }
-
-

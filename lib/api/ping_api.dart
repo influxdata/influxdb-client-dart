@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class PingApi {
   PingApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -27,9 +26,12 @@ class PingApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -64,9 +66,12 @@ class PingApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,

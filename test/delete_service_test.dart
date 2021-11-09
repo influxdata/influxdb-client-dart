@@ -68,7 +68,8 @@ void main() {
         .addTag('location', 'coyote_creek')
         .addField('watter_level', 10.0)
         .time(4);
-    await write_api.write([p3, p4], bucket: bucket.name, precision: WritePrecision.s);
+    await write_api
+        .write([p3, p4], bucket: bucket.name, precision: WritePrecision.s);
 
     var p5 = Point('h2o')
         .addTag('location', 'coyote_creek')
@@ -78,7 +79,8 @@ void main() {
         .addTag('location', 'coyote_creek')
         .addField('watter_level', 12.0)
         .time(6);
-    await write_api.write([p5, p6], bucket: bucket.name, precision: WritePrecision.s);
+    await write_api
+        .write([p5, p6], bucket: bucket.name, precision: WritePrecision.s);
 
     var p7 = Point('h2o')
         .addTag('location', 'coyote_creek')
@@ -101,7 +103,8 @@ void main() {
         .addField('watter_level', 11.0)
         .time(10);
 
-    await write_api.write([p9, p10], bucket: bucket.name, precision: WritePrecision.s);
+    await write_api
+        .write([p9, p10], bucket: bucket.name, precision: WritePrecision.s);
 
     var p11 = Point('h2o')
         .addTag('location', 'coyote_creek')
@@ -113,7 +116,8 @@ void main() {
         .addField('watter_level', 13.0)
         .time(12);
 
-    await write_api.write([p11, p12], bucket: bucket.name,precision: WritePrecision.s);
+    await write_api
+        .write([p11, p12], bucket: bucket.name, precision: WritePrecision.s);
     await write_api.flush();
   }
 
@@ -131,9 +135,11 @@ void main() {
       var start = '1970-01-01T00:00:01Z';
       var stop = '1970-01-01T00:00:12Z';
 
-      await client
-          .getDeleteService()
-          .delete(start: DateTime.parse(start), stop: DateTime.parse(stop), bucketID: bucket.id, orgID: organization.id);
+      await client.getDeleteService().delete(
+          start: DateTime.parse(start),
+          stop: DateTime.parse(stop),
+          bucketID: bucket.id,
+          orgID: organization.id);
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);
@@ -155,9 +161,11 @@ void main() {
       var start = '1970-01-01T00:00:01Z';
       var stop = '1970-01-01T00:00:12Z';
 
-      await client
-          .getDeleteService()
-          .delete(start: DateTime.parse(start), stop: DateTime.parse(stop), bucket: bucket.name, orgID: organization.id);
+      await client.getDeleteService().delete(
+          start: DateTime.parse(start),
+          stop: DateTime.parse(stop),
+          bucket: bucket.name,
+          orgID: organization.id);
 
       var resp = await client.getQueryService().queryRaw(fluxQuery);
       print(resp);

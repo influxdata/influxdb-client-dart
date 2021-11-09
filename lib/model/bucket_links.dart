@@ -38,26 +38,29 @@ class BucketLinks {
   String? write;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is BucketLinks &&
-     other.labels == labels &&
-     other.members == members &&
-     other.org == org &&
-     other.owners == owners &&
-     other.self == self &&
-     other.write == write;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BucketLinks &&
+          other.labels == labels &&
+          other.members == members &&
+          other.org == org &&
+          other.owners == owners &&
+          other.self == self &&
+          other.write == write;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (labels == null ? 0 : labels.hashCode) +
-    (members == null ? 0 : members.hashCode) +
-    (org == null ? 0 : org.hashCode) +
-    (owners == null ? 0 : owners.hashCode) +
-    (self == null ? 0 : self.hashCode) +
-    (write == null ? 0 : write.hashCode);
+      // ignore: unnecessary_parenthesis
+      (labels == null ? 0 : labels.hashCode) +
+      (members == null ? 0 : members.hashCode) +
+      (org == null ? 0 : org.hashCode) +
+      (owners == null ? 0 : owners.hashCode) +
+      (self == null ? 0 : self.hashCode) +
+      (write == null ? 0 : write.hashCode);
 
   @override
-  String toString() => 'BucketLinks[labels=$labels, members=$members, org=$org, owners=$owners, self=$self, write=$write]';
+  String toString() =>
+      'BucketLinks[labels=$labels, members=$members, org=$org, owners=$owners, self=$self, write=$write]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -85,47 +88,53 @@ class BucketLinks {
   /// Returns a new [BucketLinks] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static BucketLinks fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return BucketLinks(
-        labels: mapValueOfType<String>(json, r'labels'),
-        members: mapValueOfType<String>(json, r'members'),
-        org: mapValueOfType<String>(json, r'org'),
-        owners: mapValueOfType<String>(json, r'owners'),
-        self: mapValueOfType<String>(json, r'self'),
-        write: mapValueOfType<String>(json, r'write'),
-      );
+    final json = value.cast<String, dynamic>();
+    return BucketLinks(
+      labels: mapValueOfType<String>(json, r'labels'),
+      members: mapValueOfType<String>(json, r'members'),
+      org: mapValueOfType<String>(json, r'org'),
+      owners: mapValueOfType<String>(json, r'owners'),
+      self: mapValueOfType<String>(json, r'self'),
+      write: mapValueOfType<String>(json, r'write'),
+    );
   }
 
-  static List<BucketLinks>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(BucketLinks.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <BucketLinks>[];
+  static List<BucketLinks>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(BucketLinks.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <BucketLinks>[];
 
   static Map<String, BucketLinks?> mapFromJson(dynamic json) {
     final map = <String, BucketLinks?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = BucketLinks.fromJson(value));
+      json.cast<String, dynamic>().forEach(
+          (key, dynamic value) => map[key] = BucketLinks.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of BucketLinks-objects as value to a dart map
-  static Map<String, List<BucketLinks?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<BucketLinks?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<BucketLinks?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = BucketLinks.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = BucketLinks.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-

@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class AuthorizationsApi {
   AuthorizationsApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -25,9 +24,11 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan, }) async {
-    final path = r'/authorizations/{authID}'
-      .replaceAll('{authID}', authID);
+  Future<Response> deleteAuthorizationsIDWithHttpInfo(
+    String authID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/authorizations/{authID}'.replaceAll('{authID}', authID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -40,9 +41,12 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -65,8 +69,10 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteAuthorizationsID(String authID, { String? zapTraceSpan }) async {
-    final response = await deleteAuthorizationsIDWithHttpInfo(authID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteAuthorizationsID(String authID,
+      {String? zapTraceSpan}) async {
+    final response = await deleteAuthorizationsIDWithHttpInfo(authID,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -92,7 +98,13 @@ class AuthorizationsApi {
   ///
   /// * [String] org:
   ///   Only show authorizations that belong to a organization name.
-  Future<Response> getAuthorizationsWithHttpInfo({ String? zapTraceSpan, String? userID, String? user, String? orgID, String? org, }) async {
+  Future<Response> getAuthorizationsWithHttpInfo({
+    String? zapTraceSpan,
+    String? userID,
+    String? user,
+    String? orgID,
+    String? org,
+  }) async {
     final path = r'/authorizations';
 
     // ignore: prefer_final_locals
@@ -103,13 +115,16 @@ class AuthorizationsApi {
     final formParams = <String, String>{};
 
     if (userID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'userID', userID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'userID', userID));
     }
     if (user != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'user', user));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'user', user));
     }
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
     if (org != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'org', org));
@@ -119,9 +134,12 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -153,8 +171,18 @@ class AuthorizationsApi {
   ///
   /// * [String] org:
   ///   Only show authorizations that belong to a organization name.
-  Future<Authorizations> getAuthorizations({ String? zapTraceSpan, String? userID, String? user, String? orgID, String? org }) async {
-    final response = await getAuthorizationsWithHttpInfo( zapTraceSpan: zapTraceSpan, userID: userID, user: user, orgID: orgID, org: org );
+  Future<Authorizations> getAuthorizations(
+      {String? zapTraceSpan,
+      String? userID,
+      String? user,
+      String? orgID,
+      String? org}) async {
+    final response = await getAuthorizationsWithHttpInfo(
+        zapTraceSpan: zapTraceSpan,
+        userID: userID,
+        user: user,
+        orgID: orgID,
+        org: org);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -162,8 +190,10 @@ class AuthorizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorizations',) as Authorizations;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Authorizations',
+      ) as Authorizations;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -179,9 +209,11 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getAuthorizationsIDWithHttpInfo(String authID, { String? zapTraceSpan, }) async {
-    final path = r'/authorizations/{authID}'
-      .replaceAll('{authID}', authID);
+  Future<Response> getAuthorizationsIDWithHttpInfo(
+    String authID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/authorizations/{authID}'.replaceAll('{authID}', authID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -194,9 +226,12 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -219,8 +254,10 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Authorization> getAuthorizationsID(String authID, { String? zapTraceSpan }) async {
-    final response = await getAuthorizationsIDWithHttpInfo(authID,  zapTraceSpan: zapTraceSpan );
+  Future<Authorization> getAuthorizationsID(String authID,
+      {String? zapTraceSpan}) async {
+    final response = await getAuthorizationsIDWithHttpInfo(authID,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -228,8 +265,10 @@ class AuthorizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Authorization',
+      ) as Authorization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -248,9 +287,12 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchAuthorizationsIDWithHttpInfo(String authID, AuthorizationUpdateRequest authorizationUpdateRequest, { String? zapTraceSpan, }) async {
-    final path = r'/authorizations/{authID}'
-      .replaceAll('{authID}', authID);
+  Future<Response> patchAuthorizationsIDWithHttpInfo(
+    String authID,
+    AuthorizationUpdateRequest authorizationUpdateRequest, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/authorizations/{authID}'.replaceAll('{authID}', authID);
 
     // ignore: prefer_final_locals
     Object? postBody = authorizationUpdateRequest;
@@ -263,9 +305,12 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -291,8 +336,12 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Authorization> patchAuthorizationsID(String authID, AuthorizationUpdateRequest authorizationUpdateRequest, { String? zapTraceSpan }) async {
-    final response = await patchAuthorizationsIDWithHttpInfo(authID, authorizationUpdateRequest,  zapTraceSpan: zapTraceSpan );
+  Future<Authorization> patchAuthorizationsID(
+      String authID, AuthorizationUpdateRequest authorizationUpdateRequest,
+      {String? zapTraceSpan}) async {
+    final response = await patchAuthorizationsIDWithHttpInfo(
+        authID, authorizationUpdateRequest,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -300,8 +349,10 @@ class AuthorizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Authorization',
+      ) as Authorization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -317,7 +368,10 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> postAuthorizationsWithHttpInfo(AuthorizationPostRequest authorizationPostRequest, { String? zapTraceSpan, }) async {
+  Future<Response> postAuthorizationsWithHttpInfo(
+    AuthorizationPostRequest authorizationPostRequest, {
+    String? zapTraceSpan,
+  }) async {
     final path = r'/authorizations';
 
     // ignore: prefer_final_locals
@@ -331,9 +385,12 @@ class AuthorizationsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -356,8 +413,12 @@ class AuthorizationsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Authorization> postAuthorizations(AuthorizationPostRequest authorizationPostRequest, { String? zapTraceSpan }) async {
-    final response = await postAuthorizationsWithHttpInfo(authorizationPostRequest,  zapTraceSpan: zapTraceSpan );
+  Future<Authorization> postAuthorizations(
+      AuthorizationPostRequest authorizationPostRequest,
+      {String? zapTraceSpan}) async {
+    final response = await postAuthorizationsWithHttpInfo(
+        authorizationPostRequest,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -365,8 +426,10 @@ class AuthorizationsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Authorization',) as Authorization;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Authorization',
+      ) as Authorization;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

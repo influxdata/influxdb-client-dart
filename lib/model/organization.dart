@@ -36,28 +36,31 @@ class Organization {
   OrganizationStatusEnum? status;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Organization &&
-     other.links == links &&
-     other.id == id &&
-     other.name == name &&
-     other.description == description &&
-     other.createdAt == createdAt &&
-     other.updatedAt == updatedAt &&
-     other.status == status;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Organization &&
+          other.links == links &&
+          other.id == id &&
+          other.name == name &&
+          other.description == description &&
+          other.createdAt == createdAt &&
+          other.updatedAt == updatedAt &&
+          other.status == status;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (links == null ? 0 : links.hashCode) +
-    (id == null ? 0 : id.hashCode) +
-    (name == null ? 0 : name.hashCode) +
-    (description == null ? 0 : description.hashCode) +
-    (createdAt == null ? 0 : createdAt.hashCode) +
-    (updatedAt == null ? 0 : updatedAt.hashCode) +
-    (status == null ? 0 : status.hashCode);
+      // ignore: unnecessary_parenthesis
+      (links == null ? 0 : links.hashCode) +
+      (id == null ? 0 : id.hashCode) +
+      (name == null ? 0 : name.hashCode) +
+      (description == null ? 0 : description.hashCode) +
+      (createdAt == null ? 0 : createdAt.hashCode) +
+      (updatedAt == null ? 0 : updatedAt.hashCode) +
+      (status == null ? 0 : status.hashCode);
 
   @override
-  String toString() => 'Organization[links=$links, id=$id, name=$name, description=$description, createdAt=$createdAt, updatedAt=$updatedAt, status=$status]';
+  String toString() =>
+      'Organization[links=$links, id=$id, name=$name, description=$description, createdAt=$createdAt, updatedAt=$updatedAt, status=$status]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -67,7 +70,7 @@ class Organization {
     if (id != null) {
       json[r'id'] = id;
     }
-      json[r'name'] = name;
+    json[r'name'] = name;
     if (description != null) {
       json[r'description'] = description;
     }
@@ -86,46 +89,55 @@ class Organization {
   /// Returns a new [Organization] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static Organization fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return Organization(
-        links: json[r'links'] == null ? null : OrganizationLinks.fromJson(json[r'links']),
-        id: mapValueOfType<String>(json, r'id'),
-        name: mapValueOfType<String>(json, r'name'),
-        description: mapValueOfType<String>(json, r'description'),
-        createdAt: mapDateTime(json, r'createdAt', ''),
-        updatedAt: mapDateTime(json, r'updatedAt', ''),
-        status: OrganizationStatusEnum.fromJson(json[r'status']),
-      );
+    final json = value.cast<String, dynamic>();
+    return Organization(
+      links: json[r'links'] == null
+          ? null
+          : OrganizationLinks.fromJson(json[r'links']),
+      id: mapValueOfType<String>(json, r'id'),
+      name: mapValueOfType<String>(json, r'name'),
+      description: mapValueOfType<String>(json, r'description'),
+      createdAt: mapDateTime(json, r'createdAt', ''),
+      updatedAt: mapDateTime(json, r'updatedAt', ''),
+      status: OrganizationStatusEnum.fromJson(json[r'status']),
+    );
   }
 
-  static List<Organization>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Organization.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Organization>[];
+  static List<Organization>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(Organization.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <Organization>[];
 
   static Map<String, Organization?> mapFromJson(dynamic json) {
     final map = <String, Organization?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Organization.fromJson(value));
+      json.cast<String, dynamic>().forEach(
+          (key, dynamic value) => map[key] = Organization.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Organization-objects as value to a dart map
-  static Map<String, List<Organization?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<Organization?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<Organization?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Organization.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = Organization.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
@@ -154,18 +166,27 @@ class OrganizationStatusEnum {
   ];
 
   static OrganizationStatusEnum? fromJson(dynamic value) =>
-    OrganizationStatusEnumTypeTransformer().decode(value);
+      OrganizationStatusEnumTypeTransformer().decode(value);
 
-  static List<OrganizationStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrganizationStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrganizationStatusEnum>[];
+  static List<OrganizationStatusEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(OrganizationStatusEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <OrganizationStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [OrganizationStatusEnum] to String,
 /// and [decode] dynamic data back to [OrganizationStatusEnum].
 class OrganizationStatusEnumTypeTransformer {
-  factory OrganizationStatusEnumTypeTransformer() => _instance ??= const OrganizationStatusEnumTypeTransformer._();
+  factory OrganizationStatusEnumTypeTransformer() =>
+      _instance ??= const OrganizationStatusEnumTypeTransformer._();
 
   const OrganizationStatusEnumTypeTransformer._();
 
@@ -182,9 +203,12 @@ class OrganizationStatusEnumTypeTransformer {
   OrganizationStatusEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'active': return OrganizationStatusEnum.active;
-        case r'inactive': return OrganizationStatusEnum.inactive;
-        default: return OrganizationStatusEnum._(data.toString());
+        case r'active':
+          return OrganizationStatusEnum.active;
+        case r'inactive':
+          return OrganizationStatusEnum.inactive;
+        default:
+          return OrganizationStatusEnum._(data.toString());
       }
     }
     return null;
@@ -193,5 +217,3 @@ class OrganizationStatusEnumTypeTransformer {
   /// Singleton [OrganizationStatusEnumTypeTransformer] instance.
   static OrganizationStatusEnumTypeTransformer? _instance;
 }
-
-

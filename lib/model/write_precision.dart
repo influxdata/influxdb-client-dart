@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class WritePrecision {
   /// Instantiate a new enum with the provided [value].
   const WritePrecision._(this.value);
@@ -35,18 +34,25 @@ class WritePrecision {
   ];
 
   static WritePrecision fromJson(dynamic value) =>
-    WritePrecisionTypeTransformer().decode(value)!;
+      WritePrecisionTypeTransformer().decode(value)!;
 
-  static List<WritePrecision>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(WritePrecision.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <WritePrecision>[];
+  static List<WritePrecision>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json.map(WritePrecision.fromJson).toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <WritePrecision>[];
 }
 
 /// Transformation class that can [encode] an instance of [WritePrecision] to String,
 /// and [decode] dynamic data back to [WritePrecision].
 class WritePrecisionTypeTransformer {
-  factory WritePrecisionTypeTransformer() => _instance ??= const WritePrecisionTypeTransformer._();
+  factory WritePrecisionTypeTransformer() =>
+      _instance ??= const WritePrecisionTypeTransformer._();
 
   const WritePrecisionTypeTransformer._();
 
@@ -63,11 +69,16 @@ class WritePrecisionTypeTransformer {
   WritePrecision? decode(dynamic data) {
     if (data != null) {
       switch (data.toString()) {
-        case r'ms': return WritePrecision.ms;
-        case r's': return WritePrecision.s;
-        case r'us': return WritePrecision.us;
-        case r'ns': return WritePrecision.ns;
-        default: return WritePrecision._(data.toString());
+        case r'ms':
+          return WritePrecision.ms;
+        case r's':
+          return WritePrecision.s;
+        case r'us':
+          return WritePrecision.us;
+        case r'ns':
+          return WritePrecision.ns;
+        default:
+          return WritePrecision._(data.toString());
       }
     }
     return null;
@@ -76,4 +87,3 @@ class WritePrecisionTypeTransformer {
   /// Singleton [WritePrecisionTypeTransformer] instance.
   static WritePrecisionTypeTransformer? _instance;
 }
-

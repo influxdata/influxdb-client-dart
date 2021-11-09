@@ -34,24 +34,27 @@ class AuthorizationPostRequest {
   List<Permission>? permissions;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is AuthorizationPostRequest &&
-     other.status == status &&
-     other.description == description &&
-     other.orgID == orgID &&
-     other.userID == userID &&
-     other.permissions == permissions;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AuthorizationPostRequest &&
+          other.status == status &&
+          other.description == description &&
+          other.orgID == orgID &&
+          other.userID == userID &&
+          other.permissions == permissions;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (status == null ? 0 : status.hashCode) +
-    (description == null ? 0 : description.hashCode) +
-    (orgID == null ? 0 : orgID.hashCode) +
-    (userID == null ? 0 : userID.hashCode) +
-    (permissions == null ? 0 : permissions.hashCode);
+      // ignore: unnecessary_parenthesis
+      (status == null ? 0 : status.hashCode) +
+      (description == null ? 0 : description.hashCode) +
+      (orgID == null ? 0 : orgID.hashCode) +
+      (userID == null ? 0 : userID.hashCode) +
+      (permissions == null ? 0 : permissions.hashCode);
 
   @override
-  String toString() => 'AuthorizationPostRequest[status=$status, description=$description, orgID=$orgID, userID=$userID, permissions=$permissions]';
+  String toString() =>
+      'AuthorizationPostRequest[status=$status, description=$description, orgID=$orgID, userID=$userID, permissions=$permissions]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -61,55 +64,64 @@ class AuthorizationPostRequest {
     if (description != null) {
       json[r'description'] = description;
     }
-      json[r'orgID'] = orgID;
+    json[r'orgID'] = orgID;
     if (userID != null) {
       json[r'userID'] = userID;
     }
-      json[r'permissions'] = permissions;
+    json[r'permissions'] = permissions;
     return json;
   }
 
   /// Returns a new [AuthorizationPostRequest] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static AuthorizationPostRequest fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return AuthorizationPostRequest(
-        status: AuthorizationPostRequestStatusEnum.fromJson(json[r'status']),
-        description: mapValueOfType<String>(json, r'description'),
-        orgID: mapValueOfType<String>(json, r'orgID'),
-        userID: mapValueOfType<String>(json, r'userID'),
-        permissions: Permission.listFromJson(json[r'permissions']),
-      );
+    final json = value.cast<String, dynamic>();
+    return AuthorizationPostRequest(
+      status: AuthorizationPostRequestStatusEnum.fromJson(json[r'status']),
+      description: mapValueOfType<String>(json, r'description'),
+      orgID: mapValueOfType<String>(json, r'orgID'),
+      userID: mapValueOfType<String>(json, r'userID'),
+      permissions: Permission.listFromJson(json[r'permissions']),
+    );
   }
 
-  static List<AuthorizationPostRequest>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(AuthorizationPostRequest.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <AuthorizationPostRequest>[];
+  static List<AuthorizationPostRequest>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(AuthorizationPostRequest.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <AuthorizationPostRequest>[];
 
   static Map<String, AuthorizationPostRequest?> mapFromJson(dynamic json) {
     final map = <String, AuthorizationPostRequest?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = AuthorizationPostRequest.fromJson(value));
+      json.cast<String, dynamic>().forEach((key, dynamic value) =>
+          map[key] = AuthorizationPostRequest.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of AuthorizationPostRequest-objects as value to a dart map
-  static Map<String, List<AuthorizationPostRequest?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<AuthorizationPostRequest?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<AuthorizationPostRequest?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = AuthorizationPostRequest.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = AuthorizationPostRequest.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
@@ -138,18 +150,27 @@ class AuthorizationPostRequestStatusEnum {
   ];
 
   static AuthorizationPostRequestStatusEnum? fromJson(dynamic value) =>
-    AuthorizationPostRequestStatusEnumTypeTransformer().decode(value);
+      AuthorizationPostRequestStatusEnumTypeTransformer().decode(value);
 
-  static List<AuthorizationPostRequestStatusEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(AuthorizationPostRequestStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <AuthorizationPostRequestStatusEnum>[];
+  static List<AuthorizationPostRequestStatusEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(AuthorizationPostRequestStatusEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <AuthorizationPostRequestStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [AuthorizationPostRequestStatusEnum] to String,
 /// and [decode] dynamic data back to [AuthorizationPostRequestStatusEnum].
 class AuthorizationPostRequestStatusEnumTypeTransformer {
-  factory AuthorizationPostRequestStatusEnumTypeTransformer() => _instance ??= const AuthorizationPostRequestStatusEnumTypeTransformer._();
+  factory AuthorizationPostRequestStatusEnumTypeTransformer() =>
+      _instance ??= const AuthorizationPostRequestStatusEnumTypeTransformer._();
 
   const AuthorizationPostRequestStatusEnumTypeTransformer._();
 
@@ -166,9 +187,12 @@ class AuthorizationPostRequestStatusEnumTypeTransformer {
   AuthorizationPostRequestStatusEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'active': return AuthorizationPostRequestStatusEnum.active;
-        case r'inactive': return AuthorizationPostRequestStatusEnum.inactive;
-        default: return AuthorizationPostRequestStatusEnum._(data.toString());
+        case r'active':
+          return AuthorizationPostRequestStatusEnum.active;
+        case r'inactive':
+          return AuthorizationPostRequestStatusEnum.inactive;
+        default:
+          return AuthorizationPostRequestStatusEnum._(data.toString());
       }
     }
     return null;
@@ -177,5 +201,3 @@ class AuthorizationPostRequestStatusEnumTypeTransformer {
   /// Singleton [AuthorizationPostRequestStatusEnumTypeTransformer] instance.
   static AuthorizationPostRequestStatusEnumTypeTransformer? _instance;
 }
-
-

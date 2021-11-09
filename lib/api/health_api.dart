@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class HealthApi {
   HealthApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -22,7 +21,9 @@ class HealthApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getHealthWithHttpInfo({ String? zapTraceSpan, }) async {
+  Future<Response> getHealthWithHttpInfo({
+    String? zapTraceSpan,
+  }) async {
     final path = r'/health';
 
     // ignore: prefer_final_locals
@@ -36,9 +37,12 @@ class HealthApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -58,8 +62,8 @@ class HealthApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<HealthCheck> getHealth({ String? zapTraceSpan }) async {
-    final response = await getHealthWithHttpInfo( zapTraceSpan: zapTraceSpan );
+  Future<HealthCheck> getHealth({String? zapTraceSpan}) async {
+    final response = await getHealthWithHttpInfo(zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -67,8 +71,10 @@ class HealthApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'HealthCheck',) as HealthCheck;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'HealthCheck',
+      ) as HealthCheck;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

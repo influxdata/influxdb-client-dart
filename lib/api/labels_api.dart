@@ -8,7 +8,6 @@
 
 part of influxdb_client_api;
 
-
 class LabelsApi {
   LabelsApi(ApiClient apiClient) : apiClient = apiClient;
 
@@ -25,9 +24,11 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> deleteLabelsIDWithHttpInfo(String labelID, { String? zapTraceSpan, }) async {
-    final path = r'/labels/{labelID}'
-      .replaceAll('{labelID}', labelID);
+  Future<Response> deleteLabelsIDWithHttpInfo(
+    String labelID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/labels/{labelID}'.replaceAll('{labelID}', labelID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -40,9 +41,12 @@ class LabelsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -65,8 +69,9 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<void> deleteLabelsID(String labelID, { String? zapTraceSpan }) async {
-    final response = await deleteLabelsIDWithHttpInfo(labelID,  zapTraceSpan: zapTraceSpan );
+  Future<void> deleteLabelsID(String labelID, {String? zapTraceSpan}) async {
+    final response =
+        await deleteLabelsIDWithHttpInfo(labelID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -83,7 +88,10 @@ class LabelsApi {
   ///
   /// * [String] orgID:
   ///   The organization ID.
-  Future<Response> getLabelsWithHttpInfo({ String? zapTraceSpan, String? orgID, }) async {
+  Future<Response> getLabelsWithHttpInfo({
+    String? zapTraceSpan,
+    String? orgID,
+  }) async {
     final path = r'/labels';
 
     // ignore: prefer_final_locals
@@ -94,16 +102,20 @@ class LabelsApi {
     final formParams = <String, String>{};
 
     if (orgID != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat('', 'orgID', orgID));
     }
 
     if (zapTraceSpan != null) {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -126,8 +138,10 @@ class LabelsApi {
   ///
   /// * [String] orgID:
   ///   The organization ID.
-  Future<LabelsResponse> getLabels({ String? zapTraceSpan, String? orgID }) async {
-    final response = await getLabelsWithHttpInfo( zapTraceSpan: zapTraceSpan, orgID: orgID );
+  Future<LabelsResponse> getLabels(
+      {String? zapTraceSpan, String? orgID}) async {
+    final response =
+        await getLabelsWithHttpInfo(zapTraceSpan: zapTraceSpan, orgID: orgID);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -135,8 +149,10 @@ class LabelsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelsResponse',) as LabelsResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'LabelsResponse',
+      ) as LabelsResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -152,9 +168,11 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> getLabelsIDWithHttpInfo(String labelID, { String? zapTraceSpan, }) async {
-    final path = r'/labels/{labelID}'
-      .replaceAll('{labelID}', labelID);
+  Future<Response> getLabelsIDWithHttpInfo(
+    String labelID, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/labels/{labelID}'.replaceAll('{labelID}', labelID);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -167,9 +185,12 @@ class LabelsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -192,8 +213,10 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> getLabelsID(String labelID, { String? zapTraceSpan }) async {
-    final response = await getLabelsIDWithHttpInfo(labelID,  zapTraceSpan: zapTraceSpan );
+  Future<LabelResponse> getLabelsID(String labelID,
+      {String? zapTraceSpan}) async {
+    final response =
+        await getLabelsIDWithHttpInfo(labelID, zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -201,8 +224,10 @@ class LabelsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'LabelResponse',
+      ) as LabelResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -221,9 +246,12 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<Response> patchLabelsIDWithHttpInfo(String labelID, LabelUpdate labelUpdate, { String? zapTraceSpan, }) async {
-    final path = r'/labels/{labelID}'
-      .replaceAll('{labelID}', labelID);
+  Future<Response> patchLabelsIDWithHttpInfo(
+    String labelID,
+    LabelUpdate labelUpdate, {
+    String? zapTraceSpan,
+  }) async {
+    final path = r'/labels/{labelID}'.replaceAll('{labelID}', labelID);
 
     // ignore: prefer_final_locals
     Object? postBody = labelUpdate;
@@ -236,9 +264,12 @@ class LabelsApi {
       headerParams[r'Zap-Trace-Span'] = parameterToString(zapTraceSpan);
     }
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -264,8 +295,10 @@ class LabelsApi {
   ///
   /// * [String] zapTraceSpan:
   ///   OpenTracing span context
-  Future<LabelResponse> patchLabelsID(String labelID, LabelUpdate labelUpdate, { String? zapTraceSpan }) async {
-    final response = await patchLabelsIDWithHttpInfo(labelID, labelUpdate,  zapTraceSpan: zapTraceSpan );
+  Future<LabelResponse> patchLabelsID(String labelID, LabelUpdate labelUpdate,
+      {String? zapTraceSpan}) async {
+    final response = await patchLabelsIDWithHttpInfo(labelID, labelUpdate,
+        zapTraceSpan: zapTraceSpan);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -273,8 +306,10 @@ class LabelsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'LabelResponse',
+      ) as LabelResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }
@@ -287,7 +322,9 @@ class LabelsApi {
   ///
   /// * [LabelCreateRequest] labelCreateRequest (required):
   ///   Label to create
-  Future<Response> postLabelsWithHttpInfo(LabelCreateRequest labelCreateRequest,) async {
+  Future<Response> postLabelsWithHttpInfo(
+    LabelCreateRequest labelCreateRequest,
+  ) async {
     final path = r'/labels';
 
     // ignore: prefer_final_locals
@@ -297,9 +334,12 @@ class LabelsApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const authNames = <String>['BasicAuthentication', 'QuerystringAuthentication', 'TokenAuthentication'];
+    const authNames = <String>[
+      'BasicAuthentication',
+      'QuerystringAuthentication',
+      'TokenAuthentication'
+    ];
     const contentTypes = <String>['application/json'];
-
 
     return apiClient.invokeAPI(
       path,
@@ -319,7 +359,8 @@ class LabelsApi {
   ///
   /// * [LabelCreateRequest] labelCreateRequest (required):
   ///   Label to create
-  Future<LabelResponse> postLabels(LabelCreateRequest labelCreateRequest) async {
+  Future<LabelResponse> postLabels(
+      LabelCreateRequest labelCreateRequest) async {
     final response = await postLabelsWithHttpInfo(labelCreateRequest);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -328,8 +369,10 @@ class LabelsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'LabelResponse',) as LabelResponse;
-    
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'LabelResponse',
+      ) as LabelResponse;
     }
     throw ApiException(response.statusCode, await _decodeBodyBytes(response));
   }

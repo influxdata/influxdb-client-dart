@@ -17,13 +17,14 @@ class ResourceMemberAllOf {
   ResourceMemberAllOfRoleEnum? role;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is ResourceMemberAllOf &&
-     other.role == role;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResourceMemberAllOf && other.role == role;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
-    (role == null ? 0 : role.hashCode);
+      // ignore: unnecessary_parenthesis
+      (role == null ? 0 : role.hashCode);
 
   @override
   String toString() => 'ResourceMemberAllOf[role=$role]';
@@ -39,45 +40,53 @@ class ResourceMemberAllOf {
   /// Returns a new [ResourceMemberAllOf] instance and imports
   // ignore: prefer_constructors_over_static_methods
   static ResourceMemberAllOf fromJson(dynamic value) {
-      final json = value.cast<String, dynamic>();
-      return ResourceMemberAllOf(
-        role: ResourceMemberAllOfRoleEnum.fromJson(json[r'role']),
-      );
+    final json = value.cast<String, dynamic>();
+    return ResourceMemberAllOf(
+      role: ResourceMemberAllOfRoleEnum.fromJson(json[r'role']),
+    );
   }
 
-  static List<ResourceMemberAllOf>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ResourceMemberAllOf.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ResourceMemberAllOf>[];
+  static List<ResourceMemberAllOf>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(ResourceMemberAllOf.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <ResourceMemberAllOf>[];
 
   static Map<String, ResourceMemberAllOf?> mapFromJson(dynamic json) {
     final map = <String, ResourceMemberAllOf?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = ResourceMemberAllOf.fromJson(value));
+      json.cast<String, dynamic>().forEach((key, dynamic value) =>
+          map[key] = ResourceMemberAllOf.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ResourceMemberAllOf-objects as value to a dart map
-  static Map<String, List<ResourceMemberAllOf?>?> mapListFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) {
+  static Map<String, List<ResourceMemberAllOf?>?> mapListFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) {
     final map = <String, List<ResourceMemberAllOf?>?>{};
     if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = ResourceMemberAllOf.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+      json.cast<String, dynamic>().forEach((key, dynamic value) {
+        map[key] = ResourceMemberAllOf.listFromJson(
+          value,
+          emptyIsNull: emptyIsNull,
+          growable: growable,
+        );
+      });
     }
     return map;
   }
 }
-
 
 class ResourceMemberAllOfRoleEnum {
   /// Instantiate a new enum with the provided [value].
@@ -99,18 +108,27 @@ class ResourceMemberAllOfRoleEnum {
   ];
 
   static ResourceMemberAllOfRoleEnum? fromJson(dynamic value) =>
-    ResourceMemberAllOfRoleEnumTypeTransformer().decode(value);
+      ResourceMemberAllOfRoleEnumTypeTransformer().decode(value);
 
-  static List<ResourceMemberAllOfRoleEnum?>? listFromJson(dynamic json, {bool? emptyIsNull, bool? growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ResourceMemberAllOfRoleEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ResourceMemberAllOfRoleEnum>[];
+  static List<ResourceMemberAllOfRoleEnum?>? listFromJson(
+    dynamic json, {
+    bool? emptyIsNull,
+    bool? growable,
+  }) =>
+      json is List && json.isNotEmpty
+          ? json
+              .map(ResourceMemberAllOfRoleEnum.fromJson)
+              .toList(growable: true == growable)
+          : true == emptyIsNull
+              ? null
+              : <ResourceMemberAllOfRoleEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [ResourceMemberAllOfRoleEnum] to String,
 /// and [decode] dynamic data back to [ResourceMemberAllOfRoleEnum].
 class ResourceMemberAllOfRoleEnumTypeTransformer {
-  factory ResourceMemberAllOfRoleEnumTypeTransformer() => _instance ??= const ResourceMemberAllOfRoleEnumTypeTransformer._();
+  factory ResourceMemberAllOfRoleEnumTypeTransformer() =>
+      _instance ??= const ResourceMemberAllOfRoleEnumTypeTransformer._();
 
   const ResourceMemberAllOfRoleEnumTypeTransformer._();
 
@@ -127,8 +145,10 @@ class ResourceMemberAllOfRoleEnumTypeTransformer {
   ResourceMemberAllOfRoleEnum? decode(dynamic data, {bool? allowNull}) {
     if (data != null) {
       switch (data.toString()) {
-        case r'member': return ResourceMemberAllOfRoleEnum.member;
-        default: return ResourceMemberAllOfRoleEnum._(data.toString());
+        case r'member':
+          return ResourceMemberAllOfRoleEnum.member;
+        default:
+          return ResourceMemberAllOfRoleEnum._(data.toString());
       }
     }
     return null;
@@ -137,5 +157,3 @@ class ResourceMemberAllOfRoleEnumTypeTransformer {
   /// Singleton [ResourceMemberAllOfRoleEnumTypeTransformer] instance.
   static ResourceMemberAllOfRoleEnumTypeTransformer? _instance;
 }
-
-
