@@ -41,9 +41,7 @@ commands:
       - run:
           name: Get junitreporter
           shell: << parameters.shell >>
-          command: |
-            dart pub global activate junitreport
-            export PATH="$PATH":"$HOME/.pub-cache/bin"
+          command: dart pub global activate junitreport
       - save_cache:
           key: v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
           paths:
@@ -136,7 +134,7 @@ jobs:
           command: mkdir -p test-results/dart-tests
       - run:
           name: Run tests
-          command: dart run test --reporter json --platform << parameters.dart-platform >> | tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
+          command: dart run test --reporter json --platform << parameters.dart-platform >> | $HOME/.pub-cache/bin/tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
       - store_test_results:
           path: test-results
       - store_test_results:
