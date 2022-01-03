@@ -199,7 +199,7 @@ class InfluxDBClient {
 
     // 1.8 compatibility token
     if (username != null && password != null && token == null) {
-      token = '$username:$password';
+      this.token = '$username:$password';
     }
     defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
   }
