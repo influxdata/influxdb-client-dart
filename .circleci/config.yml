@@ -71,19 +71,19 @@ workflows:
     jobs:
       - test:
           name: dart-2.12
-          dart-image: "google/dart:2.12"
+          dart-image: "dart:2.12"
       - test:
           name: dart-latest
-          dart-image: "google/dart:latest"
+          dart-image: "dart:latest"
           influxdb-image: "influxdb:latest"
       - test:
-          name: dart-web
+          name: dart-latest-web
           dart-image: "dart:latest"
           dart-platform: "chrome"
           influxdb-image: "influxdb:latest"
       - test:
           name: dart-2.12-nightly
-          dart-image: "google/dart:2.12"
+          dart-image: "dart:2.12"
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
       - check-code-style
 #  disable build for mac (circleci commertial plan is required)
@@ -105,7 +105,7 @@ jobs:
     parameters:
       dart-image:
         type: string
-        default: &default-dart-image "google/dart:2.12"
+        default: &default-dart-image "dart:2.12"
       dart-platform:
         type: string
         default: "vm"
@@ -142,7 +142,7 @@ jobs:
 
   check-code-style:
     docker:
-      - image: "google/dart:latest"
+      - image: "dart:latest"
     steps:
       - checkout
       - run:

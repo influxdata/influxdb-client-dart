@@ -5,9 +5,10 @@ void main() async {
   late InfluxDBClient client;
 
   setUpAll(() {
-    final token =
-        const String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-    final org = const String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
+    final token = const String.fromEnvironment('INFLUXDB_API_TOKEN',
+        defaultValue: 'my-token');
+    final org =
+        const String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
     final url = const String.fromEnvironment('INFLUXDB_URL',
         defaultValue: 'http://localhost:8086');
 
