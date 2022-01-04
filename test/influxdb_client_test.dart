@@ -136,4 +136,9 @@ void main() async {
 
     client.close();
   });
+
+  test('initialize from sys envs', () async {
+    client = InfluxDBClient();
+    expect(client, isNot(null));
+  });
 }

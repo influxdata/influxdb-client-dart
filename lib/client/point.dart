@@ -121,11 +121,11 @@ class Point {
       _escapeKey(sb, key, true);
       sb.write('=');
       if (value is num) {
-        if (value is double) {
-          sb.write(value);
-        } else {
+        if (value is int) {
           sb.write(value);
           sb.write('i');
+        } else {
+          sb.write(value);
         }
       } else if (value is String) {
         sb.write('"');

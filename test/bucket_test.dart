@@ -6,9 +6,9 @@ void main() async {
 
   setUpAll(() {
     final token =
-        String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-    final org = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
-    final url = String.fromEnvironment('INFLUXDB_URL',
+        const String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
+    final org = const String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
+    final url = const String.fromEnvironment('INFLUXDB_URL',
         defaultValue: 'http://localhost:8086');
 
     client = InfluxDBClient(

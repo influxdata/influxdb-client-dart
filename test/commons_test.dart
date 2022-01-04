@@ -32,9 +32,9 @@ void setupClient() async {
 
 InfluxDBClient createClient() {
   final token =
-      String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-  orgName = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
-  final url = String.fromEnvironment('INFLUXDB_URL',
+      const String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
+  orgName = const String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
+  final url = const String.fromEnvironment('INFLUXDB_URL',
       defaultValue: 'http://localhost:8086');
 
   return InfluxDBClient(
