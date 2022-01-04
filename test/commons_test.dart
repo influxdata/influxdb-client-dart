@@ -2,6 +2,8 @@ import 'package:influxdb_client/api.dart';
 
 /// enable HTTP tracing
 bool debugEnabled = true;
+/// check if a platform is WEB
+const bool isWeb = identical(0, 0.0);
 
 /// global test properties
 late InfluxDBClient client;

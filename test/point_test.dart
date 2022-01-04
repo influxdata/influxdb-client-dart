@@ -1,4 +1,5 @@
 import 'package:influxdb_client/api.dart';
+import 'commons_test.dart';
 
 import 'package:test/test.dart';
 
@@ -34,14 +35,14 @@ void main() {
           .addTag('loc1', 'europe')
           .addTag('loc2', 'america')
           .addField('int', 1)
-          .addField('double', 2.0)
+          .addField('double', 2.2)
           .addField('bigInt', BigInt.from(8))
           .addField('boolFalse', false)
           .addField('boolTrue', true)
           .addField('string', 'string value');
 
       var expected = 'h2o,loc1=europe,loc2=america bigInt=8,boolFalse=false,'
-          'boolTrue=true,double=2.0,int=1i,string="string value"';
+          'boolTrue=true,double=2.2,int=1i,string="string value"';
       expect(point.toLineProtocol(WritePrecision.ns), expected);
     });
 
@@ -53,7 +54,7 @@ void main() {
       expect(point.toLineProtocol(WritePrecision.ns),
           'h2o,location=europe level=2i 123');
 
-      var date = 9223372036854775807;
+      var date = 9007199254740991;
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
@@ -61,7 +62,7 @@ void main() {
           .time(date);
 
       expect(point.toLineProtocol(WritePrecision.ns),
-          'h2o,location=europe level=2i 9223372036854775807');
+          'h2o,location=europe level=2i 9007199254740991');
 
       var time = DateTime.parse('2020-06-22T10:26:03.800123456Z');
 
@@ -70,16 +71,18 @@ void main() {
           .addField('level', 2)
           .time(time);
 
+      final ns_precision = isWeb ? '1592821563800000000' : '1592821563800123000';
       expect(point.toLineProtocol(WritePrecision.ns),
-          'h2o,location=europe level=2i 1592821563800123000');
+          'h2o,location=europe level=2i $ns_precision');
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
           .addField('level', 2)
           .time(time);
 
+      final us_precision = isWeb ? '1592821563800000' : '1592821563800123';
       expect(point.toLineProtocol(WritePrecision.us),
-          'h2o,location=europe level=2i 1592821563800123');
+          'h2o,location=europe level=2i $us_precision');
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
