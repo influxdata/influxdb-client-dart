@@ -58,7 +58,7 @@ commands:
       - run:
           name: Native compile
           shell: << parameters.shell >>
-          command: dart2native test/influxdb_client_test.dart -o unit-tests.exe
+          command: dart compile exe test/influxdb_client_test.dart -o unit-tests.exe
 #      - store_artifacts:
 #          path: circleci_dart_demo.exe
 

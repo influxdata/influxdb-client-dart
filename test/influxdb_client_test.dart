@@ -1,4 +1,6 @@
 import 'package:influxdb_client/api.dart';
+import 'package:http/http.dart';
+import 'package:http/testing.dart';
 import 'package:test/test.dart';
 
 import 'commons_test.dart';
@@ -115,5 +117,23 @@ void main() async {
     expect(future, completion(null));
     future = client.getPingApi().headPing();
     expect(future, completion(null));
+  });
+
+  test('v1 authentication', () async {
+    client = InfluxDBClient(
+        url: 'http://localhost:8086',
+        org: 'my-org',
+        username: 'my-username',
+        password: 'my-password');
+
+    var mockClient = MockClient((request) async {
+      expect(request.headers['Authorization'], 'Token my-username:my-password');
+      return Response('', 200);
+    });
+    client.client = mockClient;
+
+    await client.getPingApi().getPing();
+
+    client.close();
   });
 }
