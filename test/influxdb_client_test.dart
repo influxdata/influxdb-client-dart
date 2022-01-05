@@ -103,6 +103,9 @@ void main() async {
     print(health);
     expect(health.status!.value, 'pass');
     expect(health.name, 'influxdb');
+  }, onPlatform: {
+    'chrome': Skip(
+        'TODO enable after https://github.com/influxdata/influxdb/pull/23038')
   });
 
   test('ready', () async {
@@ -110,6 +113,9 @@ void main() async {
     print(ready);
     expect(ready.status!.value, 'ready');
     expect(ready.started!.toIso8601String().isNotEmpty, true);
+  }, onPlatform: {
+    'chrome': Skip(
+        'TODO enable after https://github.com/influxdata/influxdb/pull/23038')
   });
 
   test('ping', () async {
@@ -117,6 +123,9 @@ void main() async {
     expect(future, completion(null));
     future = client.getPingApi().headPing();
     expect(future, completion(null));
+  }, onPlatform: {
+    'chrome': Skip(
+        'TODO enable after https://github.com/influxdata/influxdb/pull/23038')
   });
 
   test('v1 authentication', () async {
