@@ -147,7 +147,7 @@ jobs:
           name: Run tests
           command: |
             export DART_TEST_CONFIG=./dart_ci_test.yaml
-            dart run test --platform << parameters.dart-platform >>
+            dart run test --reporter json --platform << parameters.dart-platform >> | $HOME/.pub-cache/bin/tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
       - store_test_results:
           path: test-results
 
