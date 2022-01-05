@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 1. [#26](https://github.com/influxdata/influxdb-client-dart/pull/26): Authorization for InfluxDB 1.x
+1. [#27](https://github.com/influxdata/influxdb-client-dart/pull/27): Compatibility with Web platforms
 
 ## 2.0.0 [2021-11-26]
 
