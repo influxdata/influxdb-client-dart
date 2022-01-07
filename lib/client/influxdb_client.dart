@@ -188,10 +188,10 @@ class InfluxDBClient {
       bool debug = false,
       maxRedirects = 5,
       followRedirects = true}) {
-    this.url = url ?? String.fromEnvironment('INFLUXDB_URL');
-    this.token = token ?? String.fromEnvironment('INFLUXDB_TOKEN');
-    this.bucket = bucket ?? String.fromEnvironment('INFLUXDB_BUCKET');
-    this.org = org ?? String.fromEnvironment('INFLUXDB_ORG');
+    this.url = url ?? const String.fromEnvironment('INFLUXDB_URL');
+    this.token = token ?? const String.fromEnvironment('INFLUXDB_TOKEN');
+    this.bucket = bucket ?? const String.fromEnvironment('INFLUXDB_BUCKET');
+    this.org = org ?? const String.fromEnvironment('INFLUXDB_ORG');
     this.client = client ?? LoggingClient(debug, Client());
     this.debug = debug;
     this.maxRedirects = maxRedirects;

@@ -136,7 +136,8 @@ class WriteService extends DefaultService {
       payload = GZipEncoder().encode(stringBytes);
       headers['Content-Encoding'] = 'gzip';
     } else {
-      headers['Content-Encoding'] = 'identity';
+      // TODO enable after https://github.com/influxdata/influxdb/pull/23038
+      // headers['Content-Encoding'] = 'identity';
       payload = data;
     }
     return await (_invoke(uri, 'POST',

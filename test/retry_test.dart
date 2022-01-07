@@ -83,7 +83,9 @@ void main() {
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);
       }
-    }, timeout: Timeout(Duration(seconds: 60)));
+    }, timeout: Timeout(Duration(seconds: 60)), onPlatform: {
+      'chrome': Skip('Cannot do CORS preflight for non running server.')
+    });
 
     test('testSocketExceptionRetryMaxAttempts', () async {
       var client = HttpClient();
@@ -126,6 +128,8 @@ void main() {
         expect(invokeCounter, 4);
         expect(onRetryCounter, 3);
       }
+    }, onPlatform: {
+      'chrome': Skip('Cannot do CORS preflight for non running server.')
     });
 
     test('testDelaySequenceDefault', () async {

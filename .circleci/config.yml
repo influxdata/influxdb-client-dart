@@ -32,18 +32,18 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
-            - v1.4-dependencies-{{ arch }}-
+            - v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+            - v1.5-dependencies-{{ arch }}-
       - run:
           name: Download deps
           shell: << parameters.shell >>
-          command: pub get
+          command: dart pub get
       - run:
           name: Get junitreporter
           shell: << parameters.shell >>
-          command: pub global activate junitreport
+          command: dart pub global activate junitreport
       - save_cache:
-          key: v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+          key: v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
           paths:
             - .dart_tool
             - << parameters.pub-cache >>
@@ -71,14 +71,19 @@ workflows:
     jobs:
       - test:
           name: dart-2.12
-          dart-image: "google/dart:2.12"
+          dart-image: "dart:2.12"
       - test:
           name: dart-latest
+          dart-image: "dart:latest"
+          influxdb-image: "influxdb:latest"
+      - test:
+          name: dart-latest-web
           dart-image: "google/dart:latest"
+          dart-platform: "chrome"
           influxdb-image: "influxdb:latest"
       - test:
           name: dart-2.12-nightly
-          dart-image: "google/dart:2.12"
+          dart-image: "dart:2.12"
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
       - check-code-style
 #  disable build for mac (circleci commertial plan is required)
@@ -100,7 +105,10 @@ jobs:
     parameters:
       dart-image:
         type: string
-        default: &default-dart-image "google/dart:2.12"
+        default: &default-dart-image "dart:2.12"
+      dart-platform:
+        type: string
+        default: "vm"
       influxdb-image:
         type: string
         default: &default-influxdb-image "influxdb:latest"
@@ -119,22 +127,33 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get update && apt-get install wget
+            apt-get update && apt-get -y install wget gnupg
+      - when:
+          condition:
+            equal: [ 'chrome', << parameters.dart-platform >>]
+          steps:
+            - run:
+                name: Install Google Chrome
+                command: |
+                  echo 'deb http://dl.google.com/linux/chrome/deb stable main' >> /etc/apt/sources.list.d/google-chrome.list
+                  curl -fL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+                  apt-get update
+                  apt-get install --no-install-recommends -y -q google-chrome-stable
       - influxdb-onboarding
       - run:
           name: Make folder for test results
           command: mkdir -p test-results/dart-tests
       - run:
           name: Run tests
-          command: pub run test --reporter json | tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
+          command: |
+            export DART_TEST_CONFIG=./dart_ci_test.yaml
+            dart run test --reporter json --platform << parameters.dart-platform >> | $HOME/.pub-cache/bin/tojunit --output test-results/dart-tests/influxdb_client_test-report.xml
       - store_test_results:
           path: test-results
-      - store_test_results:
-          path: test-results/dart-tests/influxdb_client_test-report.xml
 
   check-code-style:
     docker:
-      - image: "google/dart:latest"
+      - image: "dart:latest"
     steps:
       - checkout
       - run:

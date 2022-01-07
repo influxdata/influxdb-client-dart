@@ -71,6 +71,9 @@ void main() {
     });
 
     await deleteTestBucket(bucket);
+  }, onPlatform: {
+    'chrome': Skip(
+        'TODO enable after https://github.com/influxdata/influxdb/pull/23038')
   });
 
   test('queryRaw', () async {

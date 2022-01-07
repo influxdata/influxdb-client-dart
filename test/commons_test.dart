@@ -3,6 +3,9 @@ import 'package:influxdb_client/api.dart';
 /// enable HTTP tracing
 bool debugEnabled = true;
 
+/// check if a platform is WEB
+const bool isWeb = identical(0, 0.0);
+
 /// global test properties
 late InfluxDBClient client;
 late String orgName;
@@ -31,10 +34,11 @@ void setupClient() async {
 }
 
 InfluxDBClient createClient() {
-  final token =
-      String.fromEnvironment('INFLUXDB_API_TOKEN', defaultValue: 'my-token');
-  orgName = String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
-  final url = String.fromEnvironment('INFLUXDB_URL',
+  final token = const String.fromEnvironment('INFLUXDB_API_TOKEN',
+      defaultValue: 'my-token');
+  orgName =
+      const String.fromEnvironment('INFLUXDB_ORG', defaultValue: 'my-org');
+  final url = const String.fromEnvironment('INFLUXDB_URL',
       defaultValue: 'http://localhost:8086');
 
   return InfluxDBClient(

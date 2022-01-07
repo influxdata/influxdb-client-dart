@@ -53,6 +53,9 @@ class WriteOptions {
       this.gzip = false});
 
   /// Create a WriteOptions from current instance with merging attributes.
+  ///
+  /// The gzip compression cannot be enabled if you are using web platform as a
+  /// target of your application; for more info see https://github.com/influxdata/influxdb/pull/23038.
   WriteOptions merge(
       {int? batchSize,
       int? flushInterval,

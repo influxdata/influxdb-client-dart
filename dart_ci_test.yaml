@@ -1,0 +1,5 @@
+concurrency: 4
+override_platforms:
+  chrome:
+    settings:
+      arguments: --no-sandbox
