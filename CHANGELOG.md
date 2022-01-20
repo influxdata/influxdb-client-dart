@@ -1,4 +1,4 @@
-## 2.1.0 [unreleased]
+## 2.1.0 [2022-01-20]
 
 ### Bug Fixes
 1. [#26](https://github.com/influxdata/influxdb-client-dart/pull/26): Authorization for InfluxDB 1.x
