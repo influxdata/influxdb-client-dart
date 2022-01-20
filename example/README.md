@@ -13,3 +13,4 @@
 
 ## Others
 - [delete_data_example.dart](delete_data_example.dart) - How to delete data from InfluxDB by client
+- [main.dart](main.dart) - How to write, query and delete data from InfluxDB
