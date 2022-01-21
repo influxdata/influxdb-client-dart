@@ -30,7 +30,8 @@ void main() async {
   }
 
   // Write data to InfluxDB
-  print('\n\n-------------------------------- Write data -------------------------------\n');
+  print(
+      '\n\n-------------------------------- Write data -------------------------------\n');
   await writeApi.write(data).then((value) {
     print('Write completed 1');
   }).catchError((exception) {
@@ -47,25 +48,28 @@ void main() async {
                              and r["location"] == "Prague")''';
 
   // query to stream and iterate all records
-  print('\n\n---------------------------------- Query ---------------------------------\n');
+  print(
+      '\n\n---------------------------------- Query ---------------------------------\n');
   var recordStream = await queryService.query(fluxQuery);
 
-  print('\n\n------------------------------ Query result ------------------------------\n');
+  print(
+      '\n\n------------------------------ Query result ------------------------------\n');
   await recordStream.forEach((record) {
     print(
         'Temperature in ${record['location']} at ${record['_time']} is ${record['_value']} °C');
   });
 
   // delete data
-  print('\n\n------------------------------- Delete data -------------------------------\n');
+  print(
+      '\n\n------------------------------- Delete data -------------------------------\n');
   await client
       .getDeleteService()
       .delete(
-      predicate: '_measurement="weather"',
-      start: DateTime.parse('1970-01-01T00:00:00Z'),
-      stop: DateTime.now().toUtc(),
-      bucket: 'my-bucket',
-      org: 'my-org')
+          predicate: '_measurement="weather"',
+          start: DateTime.parse('1970-01-01T00:00:00Z'),
+          stop: DateTime.now().toUtc(),
+          bucket: 'my-bucket',
+          org: 'my-org')
       .catchError((e) => print(e));
 
   await Future.delayed(Duration(seconds: 10));
