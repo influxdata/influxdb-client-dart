@@ -6,6 +6,7 @@
 ## Queries
 - [query_example.dart](query_example.dart) - How to query data into `Stream` and `CSV string`
 - [query_lines_example.dart](query_lines_example.dart) - How to query data into `CSV Stream`
+- [parameterized_query_example.dart](parameterized_query_example.dart) - How to use parameterized Flux queries
 
 ## Management API
 - [create_bucket_example.dart](create_bucket_example.dart) - How to create Buckets
