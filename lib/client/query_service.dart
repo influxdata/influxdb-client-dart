@@ -61,7 +61,6 @@ class QueryService extends DefaultService {
     var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
 
     query.params = params ?? query.params;
-    query.dialect = query.dialect ?? DEFAULT_dialect;
     query.dialect = dialect ?? query.dialect;
 
     var response = await _send('/api/v2/query', {'org': influxDB.org}, query);
