@@ -37,7 +37,8 @@ class QueryService extends DefaultService {
   ///
   /// Use this with care, all response is stored in memory.
   /// Result CSV format can be changed using [dialect].
-  Future<String> queryRaw(fluxQuery, {Dialect? dialect, Map<String,Object>? params}) async {
+  Future<String> queryRaw(fluxQuery,
+      {Dialect? dialect, Map<String, Object>? params}) async {
     var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
 
     query.params = params ?? query.params;
@@ -57,7 +58,7 @@ class QueryService extends DefaultService {
   ///
   /// Each line is CSV parsed list of objects.
   Future<Stream<List<dynamic>>> queryLines(fluxQuery,
-      {Dialect? dialect, Map<String,Object>? params}) async {
+      {Dialect? dialect, Map<String, Object>? params}) async {
     var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
 
     query.params = params ?? query.params;
@@ -71,7 +72,8 @@ class QueryService extends DefaultService {
   }
 
   /// Streams the result of query into [Stream<FluxRecord>]
-  Future<Stream<FluxRecord>> query(fluxQuery, {Map<String,Object>? params}) async {
+  Future<Stream<FluxRecord>> query(fluxQuery,
+      {Map<String, Object>? params}) async {
     var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
 
     query.params = params ?? query.params;

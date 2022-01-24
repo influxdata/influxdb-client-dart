@@ -41,7 +41,7 @@ void main() async {
             |> range(start: duration(v: params.startParam))
             |> filter(fn: (r) => r["_measurement"] == "weather" 
                              and r["location"] == "Prague")''';
-  var queryParams = {'bucketParam':'my-bucket', 'startParam':'-10d'};
+  var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-10d'};
 
   // Using string for query and Map for params
   print(
@@ -50,7 +50,8 @@ void main() async {
   print(
       '\n            --------------------- Result ---------------------            \n');
   await recordStream.forEach((record) {
-    print('\t\t  Temperature in ${record['location']} at ${record['_time']} is ${record['_value']} °C');
+    print(
+        '\t\t  Temperature in ${record['location']} at ${record['_time']} is ${record['_value']} °C');
   });
 
   // Using Query class
@@ -61,7 +62,8 @@ void main() async {
   print(
       '\n            --------------------- Result ---------------------            \n');
   await recordStream.forEach((record) {
-    print('\t\t  Temperature in ${record['location']} at ${record['_time']} is ${record['_value']} °C');
+    print(
+        '\t\t  Temperature in ${record['location']} at ${record['_time']} is ${record['_value']} °C');
   });
 
   await Future.delayed(Duration(seconds: 10));

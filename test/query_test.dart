@@ -91,9 +91,10 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
 
-    var resp = await client.getQueryService().queryRaw(query, params: queryParams);
+    var resp =
+        await client.getQueryService().queryRaw(query, params: queryParams);
     expect(resp, oneTable);
   });
 
@@ -109,7 +110,7 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
     var query = Query(query: queryString, params: queryParams);
 
     var resp = await client.getQueryService().queryRaw(query);
@@ -152,8 +153,9 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
-    var resp = await client.getQueryService().queryLines(query, params: queryParams);
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var resp =
+        await client.getQueryService().queryLines(query, params: queryParams);
 
     var list = await resp.toList();
 
@@ -175,9 +177,10 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
     var query = Query(query: queryString, params: queryParams);
-    var resp = await client.getQueryService().queryLines(query, params: queryParams);
+    var resp =
+        await client.getQueryService().queryLines(query, params: queryParams);
 
     var list = await resp.toList();
 
@@ -186,7 +189,6 @@ void main() {
     });
     expect(list.length, 9);
   });
-
 
   test('queryOneTableFluxRecord', () async {
     var mockClient = MockClient((request) async {
@@ -234,7 +236,7 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
     var resp = await client.getQueryService().query(query, params: queryParams);
 
     var res = await resp.toList();
@@ -269,7 +271,7 @@ void main() {
         |> filter(fn: (r) => r._measurement == 'mem') 
         |> filter(fn: (r) => r._field == 'used')
         ''';
-    var queryParams = {'bucketParam':'my-bucket', 'startParam':'-5s'};
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
     var query = Query(query: queryString, params: queryParams);
     var resp = await client.getQueryService().query(query, params: queryParams);
 

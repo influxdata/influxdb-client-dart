@@ -1,5 +1,12 @@
 ## 2.2.0 [unreleased]
 
+### Features
+1. [#33](https://github.com/influxdata/influxdb-client-dart/pull/33): Add support for Parameterized Queries
+
+### Documentation
+1. [#33](https://github.com/influxdata/influxdb-client-dart/pull/33): Add Parameterized Queries example
+
+
 ## 2.1.0 [2022-01-20]
 
 ### Bug Fixes
