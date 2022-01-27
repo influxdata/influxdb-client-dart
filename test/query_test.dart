@@ -1,6 +1,7 @@
 import 'package:csv/csv.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
+import 'package:influxdb_client/api.dart';
 import 'package:test/test.dart';
 import 'commons_test.dart';
 
@@ -78,6 +79,44 @@ void main() {
     expect(resp, oneTable);
   });
 
+  test('queryRawParameterized', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+
+    var resp =
+        await client.getQueryService().queryRaw(query, params: queryParams);
+    expect(resp, oneTable);
+  });
+
+  test('queryRawParameterizedClass', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var queryString = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var query = Query(query: queryString, params: queryParams);
+
+    var resp = await client.getQueryService().queryRaw(query);
+    expect(resp, oneTable);
+  });
+
   test('queryOneTableStream', () async {
     var mockClient = MockClient((request) async {
       return Response(oneTable, 200);
@@ -102,6 +141,55 @@ void main() {
     expect(list.length, 9);
   });
 
+  test('queryStreamParameterized', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var resp =
+        await client.getQueryService().queryLines(query, params: queryParams);
+
+    var list = await resp.toList();
+
+    list.forEach((element) {
+      print('-> $element');
+    });
+    expect(list.length, 9);
+  });
+
+  test('queryStreamParameterizedClass', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var queryString = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var query = Query(query: queryString, params: queryParams);
+    var resp =
+        await client.getQueryService().queryLines(query, params: queryParams);
+
+    var list = await resp.toList();
+
+    list.forEach((element) {
+      print('-> $element');
+    });
+    expect(list.length, 9);
+  });
+
   test('queryOneTableFluxRecord', () async {
     var mockClient = MockClient((request) async {
       return Response(oneTable, 200);
@@ -115,6 +203,77 @@ void main() {
         |> filter(fn: (r) => r._field == 'used')
         ''';
     var resp = await client.getQueryService().query(query);
+
+    var res = await resp.toList();
+    for (var r in res) {
+      print(r);
+      expect(r['table'], 0);
+      expect(r['_measurement'], 'mem');
+      expect(r['host'], 'mac.local');
+    }
+
+    expect(res[0]['_value'], 11125907456);
+    expect(res[0]['_time'], '2019-11-12T08:09:05Z');
+    expect(res[1]['_value'], 11127103488);
+    expect(res[1]['_time'], '2019-11-12T08:09:06Z');
+    expect(res[2]['_value'], 11127291904);
+    expect(res[2]['_time'], '2019-11-12T08:09:07Z');
+    expect(res[3]['_value'], 11126190080);
+    expect(res[3]['_time'], '2019-11-12T08:09:08Z');
+    expect(res[4]['_value'], 11127832576);
+    expect(res[4]['_time'], '2019-11-12T08:09:09Z');
+  });
+
+  test('queryFluxRecordParameterized', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var query = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var resp = await client.getQueryService().query(query, params: queryParams);
+
+    var res = await resp.toList();
+    for (var r in res) {
+      print(r);
+      expect(r['table'], 0);
+      expect(r['_measurement'], 'mem');
+      expect(r['host'], 'mac.local');
+    }
+
+    expect(res[0]['_value'], 11125907456);
+    expect(res[0]['_time'], '2019-11-12T08:09:05Z');
+    expect(res[1]['_value'], 11127103488);
+    expect(res[1]['_time'], '2019-11-12T08:09:06Z');
+    expect(res[2]['_value'], 11127291904);
+    expect(res[2]['_time'], '2019-11-12T08:09:07Z');
+    expect(res[3]['_value'], 11126190080);
+    expect(res[3]['_time'], '2019-11-12T08:09:08Z');
+    expect(res[4]['_value'], 11127832576);
+    expect(res[4]['_time'], '2019-11-12T08:09:09Z');
+  });
+
+  test('queryFluxRecordParameterizedClass', () async {
+    var mockClient = MockClient((request) async {
+      return Response(oneTable, 200);
+    });
+
+    client.client = mockClient;
+
+    var queryString = '''from(bucket: params.bucketParam) 
+        |> range(start: duration(v: params.startParam), stop: now()) 
+        |> filter(fn: (r) => r._measurement == 'mem') 
+        |> filter(fn: (r) => r._field == 'used')
+        ''';
+    var queryParams = {'bucketParam': 'my-bucket', 'startParam': '-5s'};
+    var query = Query(query: queryString, params: queryParams);
+    var resp = await client.getQueryService().query(query, params: queryParams);
 
     var res = await resp.toList();
     for (var r in res) {

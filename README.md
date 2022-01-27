@@ -242,6 +242,54 @@ main() async {
 
 
 ```
+
+#### Parameterized queries
+InfluxDB Cloud supports [Parameterized Queries](https://docs.influxdata.com/influxdb/cloud/query-data/parameterized-queries/)
+that let you dynamically change values in a query using the InfluxDB API. Parameterized queries make Flux queries more
+reusable and can also be used to help prevent injection attacks.
+
+InfluxDB Cloud inserts the params object into the Flux query as a Flux record named `params`. Use dot or bracket
+notation to access parameters in the `params` record in your Flux query. Parameterized Flux queries support only `int`
+, `float`, and `string` data types. To convert the supported data types into
+other [Flux basic data types, use Flux type conversion functions](https://docs.influxdata.com/influxdb/cloud/query-data/parameterized-queries/#supported-parameter-data-types).
+
+Parameterized query example:
+> :warning: Parameterized Queries are supported only in InfluxDB Cloud, currently there is no support in InfluxDB OSS.
+
+```dart
+
+import 'package:influxdb_client/api.dart';
+
+void main() async {
+  var client = InfluxDBClient(
+    url: 'http://localhost:8086',
+    token: 'my-token',
+    org: 'my-org',
+    bucket: 'my-bucket',
+  );
+
+  var queryService = client.getQueryService();
+
+  var queryService = client.getQueryService();
+  var queryString = '''
+       from(bucket: params.bucketParam)
+            |> range(start: duration(v: params.startParam))
+            |> filter(fn: (r) => r["_measurement"] == "weather" 
+                             and r["location"] == "Prague")''';
+  var queryParams = {'bucketParam':'my-bucket', 'startParam':'-10d'};
+  var query = Query(query: queryString, params: queryParams);
+
+  // Using string for query and Map for params
+  var recordMap = await queryService.query(queryString, params: queryParams);
+
+  // Using Query class
+  var recordClass = await queryService.query(query);
+
+  client.close();
+}
+
+```
+
 ### Delete points
 
 The [DeleteService](lib/client/delete_service.dart) supports deletes

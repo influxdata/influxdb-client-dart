@@ -37,8 +37,13 @@ class QueryService extends DefaultService {
   ///
   /// Use this with care, all response is stored in memory.
   /// Result CSV format can be changed using [dialect].
-  Future<String> queryRaw(String fluxQuery, {Dialect? dialect}) async {
-    var query = Query(dialect: dialect, query: fluxQuery);
+  Future<String> queryRaw(fluxQuery,
+      {Dialect? dialect, Map<String, Object>? params}) async {
+    var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
+
+    query.params = params ?? query.params;
+    query.dialect = dialect ?? query.dialect;
+
     var uri = _buildUri(influxDB.url!, '/api/v2/query', {'org': influxDB.org});
     var body = jsonEncode(query);
     Map<String, String> headers = {};
@@ -51,19 +56,28 @@ class QueryService extends DefaultService {
   /// Streams the result of [fluxQuery] using [Dialect].
   ///
   /// Each line is CSV parsed list of objects.
-  Future<Stream<List<dynamic>>> queryLines(String fluxQuery,
-      {Dialect? dialect}) async {
-    var q = Query(query: fluxQuery, dialect: dialect);
-    var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
+  Future<Stream<List<dynamic>>> queryLines(fluxQuery,
+      {Dialect? dialect, Map<String, Object>? params}) async {
+    var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
+
+    query.params = params ?? query.params;
+    query.dialect = dialect ?? query.dialect;
+
+    var response = await _send('/api/v2/query', {'org': influxDB.org}, query);
     return utf8.decoder
         .bind((response as StreamedResponse).stream)
         .transform(CsvToListConverter());
   }
 
   /// Streams the result of query into [Stream<FluxRecord>]
-  Future<Stream<FluxRecord>> query(String fluxQuery) async {
-    var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
-    var response = await _send('/api/v2/query', {'org': influxDB.org}, q);
+  Future<Stream<FluxRecord>> query(fluxQuery,
+      {Map<String, Object>? params}) async {
+    var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
+
+    query.params = params ?? query.params;
+    query.dialect = query.dialect ?? DEFAULT_dialect;
+
+    var response = await _send('/api/v2/query', {'org': influxDB.org}, query);
     return utf8.decoder
         .bind((response as StreamedResponse).stream)
         .transform(CsvToListConverter())
