@@ -216,6 +216,7 @@ jobs:
 
   build-linux:
     machine: true
+      image: ubuntu-2004:202010-01
     steps:
       - run:
           name: Install Dart SDK
