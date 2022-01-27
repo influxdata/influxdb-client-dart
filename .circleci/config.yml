@@ -233,7 +233,8 @@ jobs:
             sudo apt install dart
 
             # Set PATH in profile for downstream commands
-            echo "export PATH=$PATH:/usr/lib/dart/bin" >> $BASH_ENV
+            export PATH="$PATH:/usr/lib/dart/bin"
+            echo 'export PATH="$PATH:/usr/lib/dart/bin"' >> ~/.bash_profile
       - dependencies
       - native-build
 
