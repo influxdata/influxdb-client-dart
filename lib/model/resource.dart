@@ -162,6 +162,8 @@ class ResourceTypeEnum {
   static const annotations = ResourceTypeEnum._(r'annotations');
   static const remotes = ResourceTypeEnum._(r'remotes');
   static const replications = ResourceTypeEnum._(r'replications');
+  static const flows = ResourceTypeEnum._(r'flows');
+  static const functions = ResourceTypeEnum._(r'functions');
 
   /// List of all possible values in this [enum][ResourceTypeEnum].
   static const values = <ResourceTypeEnum>[
@@ -187,6 +189,8 @@ class ResourceTypeEnum {
     annotations,
     remotes,
     replications,
+    flows,
+    functions,
   ];
 
   static ResourceTypeEnum? fromJson(dynamic value) =>
@@ -271,6 +275,10 @@ class ResourceTypeEnumTypeTransformer {
           return ResourceTypeEnum.remotes;
         case r'replications':
           return ResourceTypeEnum.replications;
+        case r'flows':
+          return ResourceTypeEnum.flows;
+        case r'functions':
+          return ResourceTypeEnum.functions;
         default:
           return ResourceTypeEnum._(data.toString());
       }
