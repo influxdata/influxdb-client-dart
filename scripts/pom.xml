@@ -15,9 +15,7 @@ http://maven.apache.org/POM/4.0.0 ">
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>5.3.0</version>
                 <configuration>
-                    <inputSpec>
-                        https://raw.githubusercontent.com/influxdata/openapi/master/contracts/oss.yml
-                    </inputSpec>
+					<inputSpec>./oss.yml</inputSpec>
                     <generatorName>dart</generatorName>
                     <configOptions>
                         <projectName>InfluxDB2</projectName>

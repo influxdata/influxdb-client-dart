@@ -23,4 +23,7 @@ test-results
 *.js_
 *.js.deps
 *.js.map
+scripts/cloud.yml
+scripts/oss.yml
 scripts/generated
+scripts/influxdb-clients-apigen

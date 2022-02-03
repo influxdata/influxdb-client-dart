@@ -3,6 +3,9 @@
 ### Features
 1. [#33](https://github.com/influxdata/influxdb-client-dart/pull/33): Add support for Parameterized Queries
 
+### Bug Fixes
+1. [#35](https://github.com/influxdata/influxdb-client-dart/pull/35): Add missing PermissionResources from Cloud API definition
+
 ### Documentation
 1. [#33](https://github.com/influxdata/influxdb-client-dart/pull/33): Add Parameterized Queries example
 
