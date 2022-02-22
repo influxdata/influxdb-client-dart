@@ -127,7 +127,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get update && apt-get -y install wget gnupg
+            apt-get update && apt-get -y install wget gnupg libdigest-sha-perl
       - when:
           condition:
             equal: [ 'chrome', << parameters.dart-platform >>]
