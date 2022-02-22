@@ -1,5 +1,8 @@
 ## 2.3.0 [unreleased]
 
+### CI
+1. [#38](https://github.com/influxdata/influxdb-client-dart/pull/38): Report code coverage to Codecov
+
 ## 2.2.0 [2022-02-18]
 
 ### Features
