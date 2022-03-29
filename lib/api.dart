@@ -154,6 +154,7 @@ part 'model/scripts.dart';
 part 'model/script_create_request.dart';
 part 'model/script_invocation_params.dart';
 part 'model/script_update_request.dart';
+part 'model/script_language.dart';
 
 //api stuff
 part 'client/influxdb_client.dart';
