@@ -164,6 +164,7 @@ part 'client/point.dart';
 part 'client/delete_service.dart';
 part 'client/write_service.dart';
 part 'client/query_service.dart';
+part 'client/invocable_scripts_service.dart';
 part 'client/flux_transformer.dart';
 part 'client/flux_table.dart';
 part 'client/retry.dart';
