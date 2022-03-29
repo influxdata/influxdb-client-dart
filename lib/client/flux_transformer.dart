@@ -25,6 +25,15 @@ class FluxCsvParserException implements Exception {
   FluxCsvParserException(this.cause);
 }
 
+/// The configuration for expected amount of metadata response from InfluxDB.
+enum FluxResponseMode {
+  /// full information about types, default values and groups
+  full,
+
+  /// useful for Invocable scripts
+  only_names
+}
+
 /// Parses Flux query result and transforms the CSV stream of List<dynamic>
 /// in to Stream<FluxRecord>
 class FluxTransformer implements StreamTransformer<List, FluxRecord> {
@@ -34,6 +43,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
   FluxTableMetaData? table;
   bool? cancelOnError;
+  FluxResponseMode responseMode;
   var tableIndex = 0;
   var tableId = -1;
   var startNewTable = false;
@@ -43,7 +53,10 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   // Original Stream
   late Stream<List> _stream;
 
-  FluxTransformer({bool sync = false, this.cancelOnError = true}) {
+  FluxTransformer(
+      {bool sync = false,
+      this.cancelOnError = true,
+      this.responseMode = FluxResponseMode.full}) {
     _controller = StreamController<FluxRecord>(
         onListen: _onListen,
         onCancel: _onCancel,
@@ -56,7 +69,10 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
         sync: sync);
   }
 
-  FluxTransformer.broadcast({bool sync = false, this.cancelOnError}) {
+  FluxTransformer.broadcast(
+      {bool sync = false,
+      this.cancelOnError,
+      this.responseMode = FluxResponseMode.full}) {
     _controller = StreamController<FluxRecord>.broadcast(
         onListen: _onListen, onCancel: _onCancel, sync: sync);
   }
@@ -93,7 +109,8 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
     // check csv annotations
     var token = csv[0];
-    if (ANNOTATIONS.contains(token) && !startNewTable) {
+    if ((ANNOTATIONS.contains(token) && !startNewTable) ||
+        (responseMode == FluxResponseMode.only_names && table == null)) {
       startNewTable = true;
       table = FluxTableMetaData(tableIndex);
       tableIndex++;
@@ -110,6 +127,11 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
       _addDefaultEmptyValues(table!, csv);
     } else {
       if (startNewTable) {
+        if (responseMode == FluxResponseMode.only_names &&
+            table!.columns.isEmpty) {
+          _addDataTypes(table!, csv.map((e) => 'string').toList());
+          groups = csv.map((e) => 'false').toList();
+        }
         // parse column names
         _addGroups(table!, groups);
         _addColumnNamesAndTags(table!, csv);
