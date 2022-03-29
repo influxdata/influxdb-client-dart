@@ -97,7 +97,7 @@ class WriteOptions {
 }
 
 /// Precision for write operations.
-/// See [https://v2.docs.influxdata.com/v2.0/api/#operation/PostWrite ]
+/// See [https://docs.influxdata.com/influxdb/latest/api/#operation/PostWrite]
 /*
 enum WritePrecision {
   /// nanosecond
