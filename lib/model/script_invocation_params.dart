@@ -11,10 +11,10 @@ part of influxdb_client_api;
 class ScriptInvocationParams {
   /// Returns a new [ScriptInvocationParams] instance.
   ScriptInvocationParams({
-    this.params,
+    this.params = const {},
   });
 
-  Object? params;
+  Map<String, Object>? params;
 
   @override
   bool operator ==(Object other) =>
@@ -42,7 +42,7 @@ class ScriptInvocationParams {
   static ScriptInvocationParams fromJson(dynamic value) {
     final json = value.cast<String, dynamic>();
     return ScriptInvocationParams(
-      params: mapValueOfType<Object>(json, r'params'),
+      params: mapValueOfType<Map<String, Object>>(json, r'params'),
     );
   }
 
