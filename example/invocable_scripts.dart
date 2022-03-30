@@ -10,8 +10,7 @@ void main() async {
       url: 'https://us-west-2-1.aws.cloud2.influxdata.com',
       token: 'my-token',
       org: 'my-org',
-      bucket: 'my-bucket',
-      debug: true);
+      bucket: 'my-bucket');
 
   //
   // Prepare data
@@ -23,6 +22,51 @@ void main() async {
       .addTag('location', 'London')
       .addField('temperature', 24.3);
   await client.getWriteService().write([point1, point2]);
+
+  var scriptsService = client.getInvocableScriptsService();
+
+  //
+  // Create Invocable Script
+  //
+  print('\n------- Create -------\n');
+  var scriptQuery =
+      'from(bucket: params.bucket_name) |> range(start: -30d) |> limit(n:2)';
+  var createRequest = ScriptCreateRequest(
+      name: 'my_script_${DateTime.now().millisecondsSinceEpoch}',
+      description: 'my first try',
+      language: ScriptLanguage.flux,
+      script: scriptQuery);
+
+  var createdScript = await scriptsService.createScript(createRequest);
+  print(createdScript);
+
+  //
+  // Update Invocable Script
+  //
+  print('\n------- Update -------\n');
+  var updateRequest =
+      ScriptUpdateRequest(description: 'my updated description');
+  createdScript =
+      await scriptsService.updateScript(createdScript.id!, updateRequest);
+  print(createdScript);
+
+  //
+  // List scripts
+  //
+  print('\n------- List -------\n');
+  var scripts = await scriptsService.findScripts();
+  scripts.forEach((script) {
+    print(
+        ' ---\n ID: ${script.id}\n Name: ${script.name}\n Description: ${script.description}');
+  });
+  print('---');
+
+  //
+  // Delete previously created Script
+  //
+  print('\n------- Delete -------\n');
+  await scriptsService.deleteScript(createdScript.id!);
+  print("Successfully deleted script: '${createdScript.name}'");
 
   client.close();
 }
