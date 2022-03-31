@@ -55,4 +55,50 @@ class InvocableScriptsService extends DefaultService {
         .getScripts(limit: limit, offset: offset)
         .then((value) => value.scripts ?? <Script>[]);
   }
+
+  /// Invoke a script and return result as a stream of [FluxRecord].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] scriptId: The ID of the script to invoke. (required)
+  /// * [Map<String, Object>] params: Represents key/value pairs parameters to be injected into script
+  Future<Stream<FluxRecord>> invokeScript(String scriptId,
+      {Map<String, Object>? params}) async {
+    return _invokeScript(scriptId, params: params).then((value) => utf8.decoder
+        .bind(value.stream)
+        .transform(CsvToListConverter())
+        .transform(FluxTransformer(responseMode: FluxResponseMode.only_names)));
+  }
+
+  /// Invoke a script and return result as a row of CSV response.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] scriptId: The ID of the script to invoke. (required)
+  /// * [Map<String, Object>] params: Represents key/value pairs parameters to be injected into script
+  Future<Stream<List<dynamic>>> invokeScriptLines(String scriptId,
+      {Map<String, Object>? params}) async {
+    return _invokeScript(scriptId, params: params).then((value) =>
+        utf8.decoder.bind(value.stream).transform(CsvToListConverter()));
+  }
+
+  /// Invoke a script and return result as a raw string.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] scriptId: The ID of the script to invoke. (required)
+  /// * [Map<String, Object>] params: Represents key/value pairs parameters to be injected into script
+  Future<String> invokeScriptRaw(String scriptId,
+      {Map<String, Object>? params}) async {
+    return service.postScriptsIDInvoke(scriptId,
+        scriptInvocationParams: ScriptInvocationParams(params: params));
+  }
+
+  Future<StreamedResponse> _invokeScript(String scriptId,
+      {Map<String, Object>? params}) {
+    final path =
+        r'/api/v2/scripts/{scriptID}/invoke'.replaceAll('{scriptID}', scriptId);
+    return _post(path, {}, false, ScriptInvocationParams(params: params))
+        .then((value) => value as StreamedResponse);
+  }
 }

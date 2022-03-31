@@ -6,11 +6,11 @@ import 'package:influxdb_client/api.dart';
 
 void main() async {
   // Create InfluxDBClient
-  var client = InfluxDBClient(
-      url: 'https://us-west-2-1.aws.cloud2.influxdata.com',
-      token: 'my-token',
-      org: 'my-org',
-      bucket: 'my-bucket');
+  var url = 'https://us-west-2-1.aws.cloud2.influxdata.com';
+  var bucket = 'my-bucket';
+  var token = 'my-token';
+  var org = 'my-org';
+  var client = InfluxDBClient(url: url, token: token, org: org, bucket: bucket);
 
   //
   // Prepare data
@@ -49,6 +49,33 @@ void main() async {
   createdScript =
       await scriptsService.updateScript(createdScript.id!, updateRequest);
   print(createdScript);
+
+  //
+  // Invoke a script
+  //
+
+  // Stream of FluxRecords
+  print('\n------- Invoke to Stream of FluxRecords -------\n');
+  var records = await scriptsService
+      .invokeScript(createdScript.id!, params: {'bucket_name': bucket});
+  await records.forEach((record) {
+    print(
+        '${record['_time']} ${record['location']}: ${record['_field']} ${record['_value']}');
+  });
+
+  // Stream of CSV rows
+  print('\n------- Invoke to Stream of CSV rows -------\n');
+  var rows = await scriptsService
+      .invokeScriptLines(createdScript.id!, params: {'bucket_name': bucket});
+  await rows.forEach((row) {
+    print(row);
+  });
+
+  // Raw
+  print('\n------- Invoke to Raw-------\n');
+  var raw = await scriptsService
+      .invokeScriptRaw(createdScript.id!, params: {'bucket_name': bucket});
+  print('RAW output:\n ${raw}');
 
   //
   // List scripts

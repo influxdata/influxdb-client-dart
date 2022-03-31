@@ -86,15 +86,7 @@ class QueryService extends DefaultService {
 
   Future<BaseResponse> _send(
       String path, Map<String, String?> queryParams, body) async {
-    var uri = _buildUri(influxDB.url!, path, queryParams);
-    Map<String, String> headers = {};
-    headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
-    headers[r'Content-Type'] = 'application/json';
-    _updateParamsForAuth(headers);
-    return await (_invoke(uri, 'POST',
-        headers: headers,
-        body: jsonEncode(body.toJson()),
-        maxRedirects: influxDB.maxRedirects,
-        stream: true));
+    var enableGzip = queryOptions.gzip;
+    return await _post(path, queryParams, enableGzip, body);
   }
 }
