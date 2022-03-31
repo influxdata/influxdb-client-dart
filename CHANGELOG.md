@@ -1,5 +1,8 @@
 ## 2.3.0 [unreleased]
 
+### Features
+1. [#41](https://github.com/influxdata/influxdb-client-dart/pull/41): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+
 ### CI
 1. [#38](https://github.com/influxdata/influxdb-client-dart/pull/38): Report code coverage to Codecov
 
