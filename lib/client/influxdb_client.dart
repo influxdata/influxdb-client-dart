@@ -42,6 +42,20 @@ abstract class DefaultService {
     return apiClient;
   }
 
+  Future<BaseResponse> _post(String path, Map<String, String?> queryParams,
+      bool enableGzip, body) async {
+    var uri = _buildUri(influxDB.url!, path, queryParams);
+    Map<String, String> headers = {};
+    headers[r'Accept-Encoding'] = enableGzip ? 'gzip' : 'identity';
+    headers[r'Content-Type'] = 'application/json';
+    _updateParamsForAuth(headers);
+    return await (_invoke(uri, 'POST',
+        headers: headers,
+        body: jsonEncode(body.toJson()),
+        maxRedirects: influxDB.maxRedirects,
+        stream: true));
+  }
+
   Future<BaseResponse> _invoke(Uri uri, String method,
       {required Map<String, String> headers,
       body,
@@ -298,6 +312,11 @@ class InfluxDBClient {
 
   PingApi getPingApi() {
     return PingApi(getApiClient(basePath: ''));
+  }
+
+  /// Create an InvocableScripts API instance.
+  InvocableScriptsService getInvocableScriptsService() {
+    return InvocableScriptsService(this);
   }
 }
 

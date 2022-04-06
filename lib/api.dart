@@ -147,6 +147,15 @@ part 'model/is_onboarding.dart';
 part 'model/onboarding_request.dart';
 part 'model/onboarding_response.dart';
 
+//invocable_scripts
+part 'api/invocable_scripts_api.dart';
+part 'model/script.dart';
+part 'model/scripts.dart';
+part 'model/script_create_request.dart';
+part 'model/script_invocation_params.dart';
+part 'model/script_update_request.dart';
+part 'model/script_language.dart';
+
 //api stuff
 part 'client/influxdb_client.dart';
 part 'client/error.dart';
@@ -155,6 +164,7 @@ part 'client/point.dart';
 part 'client/delete_service.dart';
 part 'client/write_service.dart';
 part 'client/query_service.dart';
+part 'client/invocable_scripts_service.dart';
 part 'client/flux_transformer.dart';
 part 'client/flux_table.dart';
 part 'client/retry.dart';

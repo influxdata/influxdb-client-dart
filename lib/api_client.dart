@@ -940,6 +940,12 @@ class ApiClient {
         //   return Views.fromJson(value);
         case 'WritePrecision':
           return WritePrecisionTypeTransformer().decode(value);
+        case 'Script':
+          return Script.fromJson(value);
+        case 'Scripts':
+          return Scripts.fromJson(value);
+        case 'ScriptLanguage':
+          return ScriptLanguage.fromJson(value);
 
         // case 'XYGeom':
         //   return XYGeomTypeTransformer().decode(value);

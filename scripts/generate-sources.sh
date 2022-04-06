@@ -10,7 +10,9 @@ rm -rf "${SCRIPT_PATH}"/cloud.yml || true
 rm -rf "${SCRIPT_PATH}"/influxdb-clients-apigen || true
 wget https://raw.githubusercontent.com/influxdata/openapi/master/contracts/oss.yml -O "${SCRIPT_PATH}/oss.yml"
 wget https://raw.githubusercontent.com/influxdata/openapi/master/contracts/cloud.yml -O "${SCRIPT_PATH}/cloud.yml"
+wget https://raw.githubusercontent.com/influxdata/openapi/master/contracts/invocable-scripts.yml -O "${SCRIPT_PATH}/invocable-scripts.yml"
 git clone --single-branch --branch master https://github.com/bonitoo-io/influxdb-clients-apigen "${SCRIPT_PATH}/influxdb-clients-apigen"
+mvn -f "$SCRIPT_PATH"/influxdb-clients-apigen/openapi-generator/pom.xml compile exec:java -Dexec.mainClass="com.influxdb.MergeContracts" -Dexec.args="$SCRIPT_PATH/oss.yml $SCRIPT_PATH/invocable-scripts.yml"
 mvn -f "$SCRIPT_PATH"/influxdb-clients-apigen/openapi-generator/pom.xml compile exec:java -Dexec.mainClass="com.influxdb.AppendCloudDefinitions" -Dexec.args="$SCRIPT_PATH/oss.yml $SCRIPT_PATH/cloud.yml"
 
 # Generate client
@@ -51,6 +53,7 @@ cp -r ${SRC}/api/dbrps_api.dart $OUT/api
 cp -r ${SRC}/api/setup_api.dart $OUT/api
 cp -r ${SRC}/api/write_api.dart $OUT/api
 cp -r ${SRC}/api/ping_api.dart $OUT/api
+cp -r ${SRC}/api/invocable_scripts_api.dart $OUT/api
 
 ### needs manual modification
 #cp -r ${SRC}/api/query_api.dart $OUT/api
@@ -87,6 +90,7 @@ cp -r ${SRC}/model/task*.dart $OUT/model
 cp -r ${SRC}/model/secret*.dart $OUT/model
 cp -r ${SRC}/model/run*.dart $OUT/model
 cp -r ${SRC}/model/retention_rule.dart $OUT/model
+cp -r ${SRC}/model/script*.dart $OUT/model
 
 ## need to manualy fix extern File
 #cp -r ${SRC}/model/query.dart $OUT/model

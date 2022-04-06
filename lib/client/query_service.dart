@@ -19,8 +19,8 @@ final Dialect DEFAULT_dialect = Dialect(
     commentPrefix: '#',
     dateTimeFormat: DialectDateTimeFormatEnum.rFC3339);
 
-/// Query InfluxDB 2.0. Provides methods for stream Flux query.
-/// See {@link https://v2.docs.influxdata.com/v2.0/api/#operation/PostQuery }
+/// Query InfluxDB 2.x. Provides methods for stream Flux query.
+/// See {@link https://docs.influxdata.com/influxdb/latest/api/#operation/PostQuery }
 
 class QueryService extends DefaultService {
   QueryApi? queryApi;
@@ -86,15 +86,7 @@ class QueryService extends DefaultService {
 
   Future<BaseResponse> _send(
       String path, Map<String, String?> queryParams, body) async {
-    var uri = _buildUri(influxDB.url!, path, queryParams);
-    Map<String, String> headers = {};
-    headers[r'Accept-Encoding'] = queryOptions.gzip ? 'gzip' : 'identity';
-    headers[r'Content-Type'] = 'application/json';
-    _updateParamsForAuth(headers);
-    return await (_invoke(uri, 'POST',
-        headers: headers,
-        body: jsonEncode(body.toJson()),
-        maxRedirects: influxDB.maxRedirects,
-        stream: true));
+    var enableGzip = queryOptions.gzip;
+    return await _post(path, queryParams, enableGzip, body);
   }
 }

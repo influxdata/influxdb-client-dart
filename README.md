@@ -9,7 +9,7 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
-This repository contains the reference Dart client for the InfluxDB 2.0.
+This repository contains the reference Dart client for the InfluxDB 2.x.
 It works on all platforms including web, server, and Flutter. 
 Please submit issues and pull requests, help out, or just give encouragement.
 
@@ -32,14 +32,14 @@ Please submit issues and pull requests, help out, or just give encouragement.
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#installation)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#installation)
 * [Examples](example)
 * [API Reference](https://pub.dev/documentation/influxdb_client/latest/influxdb_client_api/InfluxDBClient-class.html)
 * [Changelog](CHANGELOG.md)
 
 ## Features
 
-InfluxDB 2.0 client supports:
+InfluxDB 2.x client supports:
 
 - Querying data using the Flux language
     - Streaming result to `Stream<FluxRecord>` 
@@ -47,7 +47,7 @@ InfluxDB 2.0 client supports:
     - batched in chunks on background
     - automatic retries on write failures
 - Management API 
-    - provides all other InfluxDB 2.0 APIs for managing
+    - provides all other InfluxDB 2.x APIs for managing
         - health check
         - sources, buckets
         - tasks
@@ -113,7 +113,7 @@ var client = InfluxDBClient(
 
 ### Writes
 
-The WriteApi supports asynchronous writes into InfluxDB 2.0.
+The WriteApi supports asynchronous writes into InfluxDB 2.x.
 
 The data could be written as:
 
@@ -294,7 +294,7 @@ void main() async {
 ### Delete points
 
 The [DeleteService](lib/client/delete_service.dart) supports deletes
-[points](https://v2.docs.influxdata.com/v2.0/reference/glossary/#point) from an InfluxDB bucket.
+[points](https://docs.influxdata.com/influxdb/latest/reference/glossary/#point) from an InfluxDB bucket.
 
 InfluxDB uses an InfluxQL-like [predicate](https://docs.influxdata.com/influxdb/cloud/reference/syntax/delete-predicate/)
 syntax to determine what data points to delete.
@@ -345,25 +345,25 @@ The client supports following management API:
 
 The client supports following management API:
 
-|  | API docs |
-| --- | --- |
-| [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Authorizations |
-| [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Buckets |
-| [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/DBRPs |
-| [**DeleteAPI**](lib/api/delete_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Delete |
-| [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Health |
-| [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Labels |
-| [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Organizations |
-| [**PingAPI**](lib/api/ping_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ping |
-| [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Ready |
-| [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Secrets |
-| [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Setup |
-| [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Tasks |
-| [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Users |
-| [**VariablesAPI**](lib/api/variables_api.dart) | https://docs.influxdata.com/influxdb/v2.0/api/#tag/Variables |
+|  | API docs                                            |
+| --- |-----------------------------------------------------|
+| [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Authorizations |
+| [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Buckets |
+| [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/DBRPs |
+| [**DeleteAPI**](lib/api/delete_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Delete |
+| [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Health |
+| [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Labels |
+| [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Organizations |
+| [**PingAPI**](lib/api/ping_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Ping |
+| [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Ready |
+| [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Secrets |
+| [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Setup |
+| [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Tasks |
+| [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Users |
+| [**VariablesAPI**](lib/api/variables_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Variables |
 
 
-The following example demonstrates how to use a InfluxDB 2.0 Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).
+The following example demonstrates how to use a InfluxDB 2.x Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).
 
 ```dart
 import 'package:influxdb_client/api.dart';

@@ -150,4 +150,9 @@ void main() async {
     client = InfluxDBClient();
     expect(client, isNot(null));
   });
+
+  test('create InvocableScriptsService', () async {
+    var invocableScriptsService = client.getInvocableScriptsService();
+    expect(invocableScriptsService, isNot(null));
+  });
 }
