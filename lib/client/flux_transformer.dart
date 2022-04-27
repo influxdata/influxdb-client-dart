@@ -30,7 +30,7 @@ enum FluxResponseMode {
   /// full information about types, default values and groups
   full,
 
-  /// useful for Invocable scripts
+  /// useful for Invokable scripts
   only_names
 }
 

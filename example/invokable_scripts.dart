@@ -1,7 +1,7 @@
 import 'package:influxdb_client/api.dart';
 
 /*
- *  warning: Invocable Scripts are supported only in InfluxDB Cloud, currently there is no support in InfluxDB OSS.
+ *  warning: Invokable Scripts are supported only in InfluxDB Cloud, currently there is no support in InfluxDB OSS.
  */
 
 void main() async {
@@ -23,10 +23,10 @@ void main() async {
       .addField('temperature', 24.3);
   await client.getWriteService().write([point1, point2]);
 
-  var scriptsService = client.getInvocableScriptsService();
+  var scriptsService = client.getInvokableScriptsService();
 
   //
-  // Create Invocable Script
+  // Create Invokable Script
   //
   print('\n------- Create -------\n');
   var scriptQuery =
@@ -41,7 +41,7 @@ void main() async {
   print(createdScript);
 
   //
-  // Update Invocable Script
+  // Update Invokable Script
   //
   print('\n------- Update -------\n');
   var updateRequest =

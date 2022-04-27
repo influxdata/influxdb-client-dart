@@ -53,7 +53,7 @@ cp -r ${SRC}/api/dbrps_api.dart $OUT/api
 cp -r ${SRC}/api/setup_api.dart $OUT/api
 cp -r ${SRC}/api/write_api.dart $OUT/api
 cp -r ${SRC}/api/ping_api.dart $OUT/api
-cp -r ${SRC}/api/invocable_scripts_api.dart $OUT/api
+cp -r ${SRC}/api/invokable_scripts_api.dart $OUT/api
 
 ### needs manual modification
 #cp -r ${SRC}/api/query_api.dart $OUT/api
