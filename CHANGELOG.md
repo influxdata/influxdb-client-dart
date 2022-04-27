@@ -1,5 +1,8 @@
 ## 2.4.0 [unreleased]
 
+### Breaking Changes
+1. [#42](https://github.com/influxdata/influxdb-client-dart/pull/42): Rename `InvocableScripts` to `InvokableScripts`
+
 ## 2.3.0 [2022-04-19]
 
 ### Features
