@@ -314,9 +314,9 @@ class InfluxDBClient {
     return PingApi(getApiClient(basePath: ''));
   }
 
-  /// Create an InvocableScripts API instance.
-  InvocableScriptsService getInvocableScriptsService() {
-    return InvocableScriptsService(this);
+  /// Create an InvokableScripts API instance.
+  InvokableScriptsService getInvokableScriptsService() {
+    return InvokableScriptsService(this);
   }
 }
 

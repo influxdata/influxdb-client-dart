@@ -5,14 +5,14 @@ part of influxdb_client_api;
 ///
 /// API invokable scripts let you assign scripts to API endpoints and then
 /// execute them as standard REST operations in InfluxDB Cloud.
-class InvocableScriptsService extends DefaultService {
-  late InvocableScriptsApi service;
+class InvokableScriptsService extends DefaultService {
+  late InvokableScriptsApi service;
 
   ///
-  /// Creates [InvocableScriptsService] with optional custom [writeOptions]
+  /// Creates [InvokableScriptsService] with optional custom [writeOptions]
   ///
-  InvocableScriptsService(InfluxDBClient client) : super(client) {
-    service = InvocableScriptsApi(client.getApiClient());
+  InvokableScriptsService(InfluxDBClient client) : super(client) {
+    service = InvokableScriptsApi(client.getApiClient());
   }
 
   /// Create a script.

@@ -8,8 +8,8 @@
 
 part of influxdb_client_api;
 
-class InvocableScriptsApi {
-  InvocableScriptsApi(ApiClient apiClient) : apiClient = apiClient;
+class InvokableScriptsApi {
+  InvokableScriptsApi(ApiClient apiClient) : apiClient = apiClient;
 
   final ApiClient apiClient;
 
@@ -141,7 +141,7 @@ class InvocableScriptsApi {
 
   /// Retrieve a script
   ///
-  /// Uses script ID to retrieve details of an invocable script.
+  /// Uses script ID to retrieve details of an invokable script.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -178,7 +178,7 @@ class InvocableScriptsApi {
 
   /// Retrieve a script
   ///
-  /// Uses script ID to retrieve details of an invocable script.
+  /// Uses script ID to retrieve details of an invokable script.
   ///
   /// Parameters:
   ///
@@ -203,7 +203,7 @@ class InvocableScriptsApi {
 
   /// Update a script
   ///
-  /// Updates properties (`name`, `description`, and `script`) of an invocable script.
+  /// Updates properties (`name`, `description`, and `script`) of an invokable script.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -244,7 +244,7 @@ class InvocableScriptsApi {
 
   /// Update a script
   ///
-  /// Updates properties (`name`, `description`, and `script`) of an invocable script.
+  /// Updates properties (`name`, `description`, and `script`) of an invokable script.
   ///
   /// Parameters:
   ///

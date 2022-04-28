@@ -151,8 +151,8 @@ void main() async {
     expect(client, isNot(null));
   });
 
-  test('create InvocableScriptsService', () async {
-    var invocableScriptsService = client.getInvocableScriptsService();
-    expect(invocableScriptsService, isNot(null));
+  test('create InvokableScriptsService', () async {
+    var invokableScriptsService = client.getInvokableScriptsService();
+    expect(invokableScriptsService, isNot(null));
   });
 }
