@@ -32,8 +32,8 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v1.6-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
-            - v1.6-dependencies-{{ arch }}-
+            - v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+            - v1.5-dependencies-{{ arch }}-
       - run:
           name: Download deps
           shell: << parameters.shell >>
@@ -43,7 +43,7 @@ commands:
           shell: << parameters.shell >>
           command: dart pub global activate junitreport
       - save_cache:
-          key: v1.6-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+          key: v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
           paths:
             - .dart_tool
             - << parameters.pub-cache >>
@@ -157,7 +157,7 @@ jobs:
           name: Collecting coverage reports
           command: |
             dart pub global activate coverage
-            dart pub global run coverage:format_coverage --packages=.packages --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
+            dart pub global run coverage:format_coverage --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
             curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
