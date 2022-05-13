@@ -59,8 +59,6 @@ commands:
           name: Native compile
           shell: << parameters.shell >>
           command: dart compile exe test/influxdb_client_test.dart -o unit-tests.exe
-#      - store_artifacts:
-#          path: circleci_dart_demo.exe
 
 ######################
 # Workflow Definition
@@ -86,16 +84,26 @@ workflows:
           dart-image: "dart:2.12"
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
       - check-code-style
-#  disable build for mac (circleci commertial plan is required)
-#      - build-mac:
-#          requires:
-#            - dart-2.12
       - build-windows:
           requires:
             - dart-2.12
       - build-linux:
           requires:
             - dart-2.12
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test:
+          name: dart-latest
+          dart-image: "dart:latest"
+          influxdb-image: "influxdb:latest"
 
 ##################
 # Job Definitions
@@ -118,9 +126,6 @@ jobs:
       - image: &influx-image << parameters.influxdb-image >>
         environment:
           INFLUXD_HTTP_BIND_ADDRESS: :8086
-#        auth:
-#          username: mydockerhub-user
-#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
@@ -152,7 +157,7 @@ jobs:
           name: Collecting coverage reports
           command: |
             dart pub global activate coverage
-            dart pub global run coverage:format_coverage --packages=.packages --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
+            dart pub global run coverage:format_coverage --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
             curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
@@ -172,18 +177,6 @@ jobs:
       - run:
           name: Check correct formatting
           command: dart format --set-exit-if-changed .
-
-#  build-mac:
-#    macos:
-#      xcode: "11.3.0"
-#    steps:
-#      - run:
-#          name: Install Dart SDK
-#          command: |
-#            HOMEBREW_NO_AUTO_UPDATE=1 brew tap dart-lang/dart
-#            HOMEBREW_NO_AUTO_UPDATE=1 brew install dart
-#      - dependencies
-#      - native-build
 
   build-windows:
     executor: win/default
