@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:influxdb_client/api.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
@@ -155,4 +157,65 @@ void main() async {
     var invokableScriptsService = client.getInvokableScriptsService();
     expect(invokableScriptsService, isNot(null));
   });
+
+  test('store Dynamic structure', () async {
+    var client = createClient();
+    var configID = DateTime.now().millisecondsSinceEpoch.toString();
+
+    var temperature = CustomConfig('Temperature', 'Temperature', '°C');
+    var pressure = CustomConfig('Pressure', 'Pressure', 'Pa');
+
+    var toWrite = [temperature, pressure];
+    var point = Point('config')
+        .addTag('id', configID)
+        .addField('value', jsonEncode(toWrite));
+    await client.getWriteService().write(point).whenComplete(() => {});
+
+    var query = '''from(bucket: "my-bucket") 
+        |> range(start: 0)
+        |> filter(fn: (r) => r["_measurement"] == "config")
+        |> filter(fn: (r) => r["id"] == "${configID}")
+        |> filter(fn: (r) => r["_field"] == "value")
+        ''';
+    var resp = await client.getQueryService().query(query);
+    var json = (await resp.toList())[0]['_value'];
+
+    List<CustomConfig> fromQuery = (jsonDecode(json) as List<dynamic>)
+        .map((config) => CustomConfig.fromJson(config))
+        .toList();
+    expect(toWrite, fromQuery);
+
+    client.close();
+  });
+}
+
+class CustomConfig {
+  final String measurement;
+  final String label;
+  final String unit;
+
+  CustomConfig(this.measurement, this.label, this.unit);
+
+  CustomConfig.fromJson(Map<String, dynamic> json)
+      : measurement = json['measurement'],
+        label = json['label'],
+        unit = json['unit'];
+
+  Map<String, dynamic> toJson() => {
+        'measurement': measurement,
+        'label': label,
+        'unit': unit,
+      };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CustomConfig &&
+          runtimeType == other.runtimeType &&
+          measurement == other.measurement &&
+          label == other.label &&
+          unit == other.unit;
+
+  @override
+  int get hashCode => measurement.hashCode ^ label.hashCode ^ unit.hashCode;
 }

@@ -148,9 +148,8 @@ class Point {
         case '\"':
           sb.write('\\');
           break;
-        default:
-          sb.write(value[i]);
       }
+      sb.write(value[i]);
     }
   }
 

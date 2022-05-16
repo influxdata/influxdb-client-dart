@@ -101,5 +101,21 @@ void main() {
       expect(point.toLineProtocol(WritePrecision.s),
           'h2o,location=europe level=2i 1592821564');
     });
+
+    test('fieldEscape', () {
+      var point = Point.measurement('h2o')
+          .addTag('location', 'europe')
+          .addField('level', 'string esc\\ape value');
+
+      expect(point.toLineProtocol(WritePrecision.ns),
+          'h2o,location=europe level=\"string esc\\\\ape value\"');
+
+      point = Point.measurement('h2o')
+          .addTag('location', 'europe')
+          .addField('level', 'string esc\"ape value');
+
+      expect(point.toLineProtocol(WritePrecision.ns),
+          'h2o,location=europe level=\"string esc\\\"ape value\"');
+    });
   });
 }
