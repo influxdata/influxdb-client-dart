@@ -1,5 +1,8 @@
 ## 2.4.0 [unreleased]
 
+### Bug Fixes
+1. [#46](https://github.com/influxdata/influxdb-client-dart/pull/46): Serialisation double-quotes in DataPoint `string` fields
+
 ### Breaking Changes
 1. [#42](https://github.com/influxdata/influxdb-client-dart/pull/42): Rename `InvocableScripts` to `InvokableScripts`
 

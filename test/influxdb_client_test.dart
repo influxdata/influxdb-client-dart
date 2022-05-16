@@ -159,7 +159,7 @@ void main() async {
   });
 
   test('store Dynamic structure', () async {
-
+    var client = createClient();
     var configID = DateTime.now().millisecondsSinceEpoch.toString();
 
     var temperature = CustomConfig('Temperature', 'Temperature', '°C');
@@ -169,9 +169,7 @@ void main() async {
     var point = Point('config')
         .addTag('id', configID)
         .addField('value', jsonEncode(toWrite));
-    await writeApi
-        .write(point)
-        .whenComplete(() => {});
+    await client.getWriteService().write(point).whenComplete(() => {});
 
     var query = '''from(bucket: "my-bucket") 
         |> range(start: 0)
@@ -186,6 +184,8 @@ void main() async {
         .map((config) => CustomConfig.fromJson(config))
         .toList();
     expect(toWrite, fromQuery);
+
+    client.close();
   });
 }
 
@@ -202,17 +202,19 @@ class CustomConfig {
         unit = json['unit'];
 
   Map<String, dynamic> toJson() => {
-    'measurement': measurement,
-    'label': label,
-    'unit': unit,
-  };
+        'measurement': measurement,
+        'label': label,
+        'unit': unit,
+      };
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is CustomConfig && runtimeType == other.runtimeType &&
-              measurement == other.measurement && label == other.label &&
-              unit == other.unit;
+      other is CustomConfig &&
+          runtimeType == other.runtimeType &&
+          measurement == other.measurement &&
+          label == other.label &&
+          unit == other.unit;
 
   @override
   int get hashCode => measurement.hashCode ^ label.hashCode ^ unit.hashCode;
