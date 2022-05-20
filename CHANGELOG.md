@@ -1,4 +1,4 @@
-## 2.4.0 [unreleased]
+## 2.4.0 [2022-05-20]
 
 ### Bug Fixes
 1. [#46](https://github.com/influxdata/influxdb-client-dart/pull/46): Serialisation double-quotes in DataPoint `string` fields

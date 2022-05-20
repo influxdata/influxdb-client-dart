@@ -1,6 +1,6 @@
 part of influxdb_client_api;
 
-String CLIENT_VERSION = '2.4.0-dev';
+String CLIENT_VERSION = '2.4.0';
 String CLIENT_NAME = 'influxdb-client-dart';
 
 ///
