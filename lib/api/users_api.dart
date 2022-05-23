@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class UsersApi {
-  UsersApi(ApiClient apiClient) : apiClient = apiClient;
+  UsersApi(this.apiClient);
 
   final ApiClient apiClient;
 

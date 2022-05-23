@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class InvokableScriptsApi {
-  InvokableScriptsApi(ApiClient apiClient) : apiClient = apiClient;
+  InvokableScriptsApi(this.apiClient);
 
   final ApiClient apiClient;
 

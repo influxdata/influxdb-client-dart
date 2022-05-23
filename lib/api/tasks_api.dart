@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class TasksApi {
-  TasksApi(ApiClient apiClient) : apiClient = apiClient;
+  TasksApi(this.apiClient);
 
   final ApiClient apiClient;
 

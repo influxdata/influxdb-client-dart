@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class ReadyApi {
-  ReadyApi(ApiClient apiClient) : apiClient = apiClient;
+  ReadyApi(this.apiClient);
 
   final ApiClient apiClient;
 

@@ -49,7 +49,7 @@ class RetryOptions {
     if (attempt <= 0) {
       return Duration.zero;
     } else if (attempt > maxRetries) {
-      throw RetryException('Retry attempt beyond limit (${maxRetries})');
+      throw RetryException('Retry attempt beyond limit ($maxRetries)');
     }
 
     final rand = _rand.nextDouble();
@@ -122,7 +122,7 @@ class RetryOptions {
         // Sleep for suggested delay but respect timeout
         final duration = delay(attempt, retryAfter, deadline);
         logPrint('The retryable error occurred during request. '
-            'Reason: ${e} Attempt: ${attempt} '
+            'Reason: $e Attempt: $attempt '
             'Next retry in: ${duration.inSeconds}s. (${duration.toString()})');
         await Future.delayed(duration);
       }

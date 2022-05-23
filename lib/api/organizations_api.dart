@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class OrganizationsApi {
-  OrganizationsApi(ApiClient apiClient) : apiClient = apiClient;
+  OrganizationsApi(this.apiClient);
 
   final ApiClient apiClient;
 

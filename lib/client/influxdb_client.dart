@@ -199,17 +199,14 @@ class InfluxDBClient {
       String? password,
 
       /// verbose logging of http calls
-      bool debug = false,
-      maxRedirects = 5,
-      followRedirects = true}) {
+      this.debug = false,
+      this.maxRedirects = 5,
+      this.followRedirects = true}) {
     this.url = url ?? const String.fromEnvironment('INFLUXDB_URL');
     this.token = token ?? const String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? const String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? const String.fromEnvironment('INFLUXDB_ORG');
     this.client = client ?? LoggingClient(debug, Client());
-    this.debug = debug;
-    this.maxRedirects = maxRedirects;
-    this.followRedirects = followRedirects;
 
     // 1.8 compatibility token
     if (username != null && password != null && token == null) {

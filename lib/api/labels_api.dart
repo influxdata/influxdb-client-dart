@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class LabelsApi {
-  LabelsApi(ApiClient apiClient) : apiClient = apiClient;
+  LabelsApi(this.apiClient);
 
   final ApiClient apiClient;
 

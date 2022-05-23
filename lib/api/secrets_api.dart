@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class SecretsApi {
-  SecretsApi(ApiClient apiClient) : apiClient = apiClient;
+  SecretsApi(this.apiClient);
 
   final ApiClient apiClient;
 

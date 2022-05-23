@@ -182,7 +182,7 @@ class WriteService extends DefaultService {
   void _checkNotNull(String parameter, dynamic value) {
     if (value == null) {
       throw ArgumentError(
-          'The ${parameter} should be defined as argument or default option in client settings');
+          'The $parameter should be defined as argument or default option in client settings');
     }
   }
 

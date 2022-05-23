@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class DeleteApi {
-  DeleteApi(ApiClient apiClient) : apiClient = apiClient;
+  DeleteApi(this.apiClient);
 
   final ApiClient apiClient;
 

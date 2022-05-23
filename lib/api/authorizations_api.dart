@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class AuthorizationsApi {
-  AuthorizationsApi(ApiClient apiClient) : apiClient = apiClient;
+  AuthorizationsApi(this.apiClient);
 
   final ApiClient apiClient;
 
