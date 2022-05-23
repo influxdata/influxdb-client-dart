@@ -241,7 +241,7 @@ class InfluxDBClient {
       authentication.apiKeyPrefix = 'Token';
       authentication.apiKey = token;
     }
-    api._client = client;
+    api.client = client;
     api._defaultHeaderMap.addAll(defaultHeaders);
     return api;
   }

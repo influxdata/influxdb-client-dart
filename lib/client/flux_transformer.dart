@@ -48,7 +48,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
   var tableId = -1;
   var startNewTable = false;
   var parsingStateError = false;
-  var groups;
+  var groups = [];
 
   // Original Stream
   late Stream<List> _stream;
