@@ -184,6 +184,7 @@ jobs:
       - image: "dart:latest"
     steps:
       - checkout
+      - run: dart pub get
       - run:
           name: Check static analysis formatting
           command: dart analyze --fatal-infos lib
