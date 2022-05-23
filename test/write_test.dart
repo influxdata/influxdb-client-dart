@@ -104,4 +104,20 @@ void main() {
 
     await deleteTestBucket(bucket);
   });
+
+  test('writeBatch', () async {
+    var mockClient = MockClient((request) async {
+      var body = request.body.toString();
+      expect(body.contains('mem,tag=a value=1'), true);
+      expect(body.contains('mem,tag=b value=2'), true);
+      return Response('', 204);
+    });
+
+    var clientMock = createClient();
+    clientMock.client = mockClient;
+    var writeService = clientMock.getWriteService();
+
+    writeService.batchWrite(["mem,tag=a value=1", "mem,tag=b value=2"]);
+    await writeService.flush();
+  });
 }
