@@ -1,9 +1,9 @@
 part of influxdb_client_api;
 
-const ANNOTATION_DEFAULT = '#default';
-const ANNOTATION_GROUP = '#group';
-const ANNOTATION_DATATYPE = '#datatype';
-const ANNOTATIONS = [ANNOTATION_DEFAULT, ANNOTATION_GROUP, ANNOTATION_DATATYPE];
+const annotationDefault = '#default';
+const annotationGroup = '#group';
+const annotationDatatype = '#datatype';
+const annotations = [annotationDefault, annotationGroup, annotationDatatype];
 
 /// [FluxQueryException] is thrown when Flux response contains error from server
 class FluxQueryException implements Exception {
@@ -31,7 +31,7 @@ enum FluxResponseMode {
   full,
 
   /// useful for Invokable scripts
-  only_names
+  onlyNames
 }
 
 /// Parses Flux query result and transforms the CSV stream of List<dynamic>
@@ -109,8 +109,8 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
 
     // check csv annotations
     var token = csv[0];
-    if ((ANNOTATIONS.contains(token) && !startNewTable) ||
-        (responseMode == FluxResponseMode.only_names && table == null)) {
+    if ((annotations.contains(token) && !startNewTable) ||
+        (responseMode == FluxResponseMode.onlyNames && table == null)) {
       startNewTable = true;
       table = FluxTableMetaData(tableIndex);
       tableIndex++;
@@ -119,15 +119,15 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
       throw FluxCsvParserException(
           'Unable to parse CSV response. FluxTable definition was not found.');
     }
-    if (ANNOTATION_DATATYPE == token) {
+    if (annotationDatatype == token) {
       _addDataTypes(table!, csv);
-    } else if (ANNOTATION_GROUP == token) {
+    } else if (annotationGroup == token) {
       groups = csv;
-    } else if (ANNOTATION_DEFAULT == token) {
+    } else if (annotationDefault == token) {
       _addDefaultEmptyValues(table!, csv);
     } else {
       if (startNewTable) {
-        if (responseMode == FluxResponseMode.only_names &&
+        if (responseMode == FluxResponseMode.onlyNames &&
             table!.columns.isEmpty) {
           _addDataTypes(table!, csv.map((e) => 'string').toList());
           groups = csv.map((e) => 'false').toList();

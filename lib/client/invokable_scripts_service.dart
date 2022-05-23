@@ -67,7 +67,7 @@ class InvokableScriptsService extends DefaultService {
     return _invokeScript(scriptId, params: params).then((value) => utf8.decoder
         .bind(value.stream)
         .transform(CsvToListConverter())
-        .transform(FluxTransformer(responseMode: FluxResponseMode.only_names)));
+        .transform(FluxTransformer(responseMode: FluxResponseMode.onlyNames)));
   }
 
   /// Invoke a script and return result as a row of CSV response.

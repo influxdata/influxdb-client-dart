@@ -1,7 +1,7 @@
 part of influxdb_client_api;
 
-String CLIENT_VERSION = '2.5.0-dev';
-String CLIENT_NAME = 'influxdb-client-dart';
+String clientVersion = '2.5.0-dev';
+String clientName = 'influxdb-client-dart';
 
 ///
 /// Superclass for all services.
@@ -212,7 +212,7 @@ class InfluxDBClient {
     if (username != null && password != null && token == null) {
       this.token = '$username:$password';
     }
-    defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
+    defaultHeaders['User-Agent'] = '$clientName/$clientVersion';
   }
 
   String? token;

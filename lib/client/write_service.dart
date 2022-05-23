@@ -223,10 +223,7 @@ class _WriteBatch {
   WriteOptions? writeOptions;
   ListQueue<_BatchItem> queue = ListQueue();
 
-  _WriteBatch(WriteOptions? writeOptions, WriteService writeService) {
-    this.writeOptions = writeOptions;
-    this.writeService = writeService;
-  }
+  _WriteBatch(this.writeOptions, this.writeService);
 
   Future<void> push(dynamic payload) async {
     if (payload is Iterable) {

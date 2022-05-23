@@ -12,7 +12,7 @@ void main() {
     test('parseWithoutDatatype', () async {
       var records = await Stream<String>.value(withoutMetadata)
           .transform(CsvToListConverter())
-          .transform(FluxTransformer(responseMode: FluxResponseMode.only_names))
+          .transform(FluxTransformer(responseMode: FluxResponseMode.onlyNames))
           .toList();
       print(records);
       expect(records.length, 2);
