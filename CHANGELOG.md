@@ -1,5 +1,8 @@
 ## 2.5.0 [unreleased]
 
+### CI
+1. [#48](https://github.com/influxdata/influxdb-client-dart/pull/48): Add dart analysis to pipeline
+
 ## 2.4.0 [2022-05-20]
 
 ### Bug Fixes

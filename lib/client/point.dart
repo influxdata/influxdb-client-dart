@@ -145,7 +145,7 @@ class Point {
     for (var i = 0; i < value.length; i++) {
       switch (value[i]) {
         case '\\':
-        case '\"':
+        case '"':
           sb.write('\\');
           break;
       }

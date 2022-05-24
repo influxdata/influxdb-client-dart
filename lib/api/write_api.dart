@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class WriteApi {
-  WriteApi(ApiClient apiClient) : apiClient = apiClient;
+  WriteApi(this.apiClient);
 
   final ApiClient apiClient;
 

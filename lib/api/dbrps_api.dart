@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class DBRPsApi {
-  DBRPsApi(ApiClient apiClient) : apiClient = apiClient;
+  DBRPsApi(this.apiClient);
 
   final ApiClient apiClient;
 

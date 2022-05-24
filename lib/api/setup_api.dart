@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class SetupApi {
-  SetupApi(ApiClient apiClient) : apiClient = apiClient;
+  SetupApi(this.apiClient);
 
   final ApiClient apiClient;
 

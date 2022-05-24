@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class VariablesApi {
-  VariablesApi(ApiClient apiClient) : apiClient = apiClient;
+  VariablesApi(this.apiClient);
 
   final ApiClient apiClient;
 

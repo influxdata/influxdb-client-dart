@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class PingApi {
-  PingApi(ApiClient apiClient) : apiClient = apiClient;
+  PingApi(this.apiClient);
 
   final ApiClient apiClient;
 

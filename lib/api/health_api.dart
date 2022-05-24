@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class HealthApi {
-  HealthApi(ApiClient apiClient) : apiClient = apiClient;
+  HealthApi(this.apiClient);
 
   final ApiClient apiClient;
 

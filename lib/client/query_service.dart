@@ -8,7 +8,7 @@ class QueryOptions {
 
 final defaultQueryOptions = QueryOptions(gzip: true);
 
-final Dialect DEFAULT_dialect = Dialect(
+final Dialect defaultDialect = Dialect(
     header: true,
     delimiter: ',',
     annotations: [
@@ -75,7 +75,7 @@ class QueryService extends DefaultService {
     var query = fluxQuery is Query ? fluxQuery : Query(query: fluxQuery);
 
     query.params = params ?? query.params;
-    query.dialect = query.dialect ?? DEFAULT_dialect;
+    query.dialect = query.dialect ?? defaultDialect;
 
     var response = await _send('/api/v2/query', {'org': influxDB.org}, query);
     return utf8.decoder

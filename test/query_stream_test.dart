@@ -21,7 +21,7 @@ void main() {
   |> filter(fn: (r) => r["_measurement"] == "temperature")
   ''';
 
-    var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
+    var q = Query(query: fluxQuery, dialect: defaultDialect);
 
     var r = Request(
         'POST', Uri.parse('http://localhost:8086/api/v2/query?org=my-org'));
@@ -49,7 +49,7 @@ void main() {
   |> range(start: 0)
   |> filter(fn: (r) => r["_measurement"] == "temperature")
   ''';
-    var q = Query(query: fluxQuery, dialect: DEFAULT_dialect);
+    var q = Query(query: fluxQuery, dialect: defaultDialect);
     var r = Request(
         'POST', Uri.parse('http://localhost:8086/api/v2/query?org=my-org'));
 

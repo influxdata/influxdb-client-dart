@@ -1,7 +1,7 @@
 part of influxdb_client_api;
 
-String CLIENT_VERSION = '2.5.0-dev';
-String CLIENT_NAME = 'influxdb-client-dart';
+String clientVersion = '2.5.0-dev';
+String clientName = 'influxdb-client-dart';
 
 ///
 /// Superclass for all services.
@@ -199,23 +199,20 @@ class InfluxDBClient {
       String? password,
 
       /// verbose logging of http calls
-      bool debug = false,
-      maxRedirects = 5,
-      followRedirects = true}) {
+      this.debug = false,
+      this.maxRedirects = 5,
+      this.followRedirects = true}) {
     this.url = url ?? const String.fromEnvironment('INFLUXDB_URL');
     this.token = token ?? const String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? const String.fromEnvironment('INFLUXDB_BUCKET');
     this.org = org ?? const String.fromEnvironment('INFLUXDB_ORG');
     this.client = client ?? LoggingClient(debug, Client());
-    this.debug = debug;
-    this.maxRedirects = maxRedirects;
-    this.followRedirects = followRedirects;
 
     // 1.8 compatibility token
     if (username != null && password != null && token == null) {
       this.token = '$username:$password';
     }
-    defaultHeaders['User-Agent'] = '${CLIENT_NAME}/$CLIENT_VERSION';
+    defaultHeaders['User-Agent'] = '$clientName/$clientVersion';
   }
 
   String? token;
@@ -244,7 +241,7 @@ class InfluxDBClient {
       authentication.apiKeyPrefix = 'Token';
       authentication.apiKey = token;
     }
-    api._client = client;
+    api.client = client;
     api._defaultHeaderMap.addAll(defaultHeaders);
     return api;
   }

@@ -84,6 +84,7 @@ workflows:
           dart-image: "dart:2.12"
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
       - check-code-style
+      - check-static-analysis
       - build-windows:
           requires:
             - dart-2.12
@@ -177,6 +178,16 @@ jobs:
       - run:
           name: Check correct formatting
           command: dart format --set-exit-if-changed .
+
+  check-static-analysis:
+    docker:
+      - image: "dart:latest"
+    steps:
+      - checkout
+      - run: dart pub get
+      - run:
+          name: Check static analysis formatting
+          command: dart analyze --fatal-infos lib
 
   build-windows:
     executor: win/default

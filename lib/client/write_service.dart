@@ -92,7 +92,7 @@ class WriteService extends DefaultService {
   /// Flushes and Closes writeService
   ///
   Future close() async {
-    await writeBatch.close;
+    writeBatch.close;
   }
 
   ///
@@ -130,7 +130,7 @@ class WriteService extends DefaultService {
     });
     var headers = {'Content-Type': 'text/plain; charset=utf-8'};
     _updateParamsForAuth(headers);
-    var payload;
+    dynamic payload;
     if (writeOptions!.gzip) {
       var stringBytes = utf8.encode(data);
       payload = GZipEncoder().encode(stringBytes);
@@ -165,6 +165,15 @@ class WriteService extends DefaultService {
       }
     }
     if (data is Iterable) {
+      if (batching) {
+        var batch = [];
+        var iterator = data.iterator;
+        while (iterator.moveNext()) {
+          batch.add(
+              _payload(iterator.current, precision, bucket, org, batching));
+        }
+        return batch;
+      }
       var buffer = StringBuffer();
       var iterator = data.iterator;
       iterator.moveNext();
@@ -182,7 +191,7 @@ class WriteService extends DefaultService {
   void _checkNotNull(String parameter, dynamic value) {
     if (value == null) {
       throw ArgumentError(
-          'The ${parameter} should be defined as argument or default option in client settings');
+          'The $parameter should be defined as argument or default option in client settings');
     }
   }
 
@@ -223,16 +232,13 @@ class _WriteBatch {
   WriteOptions? writeOptions;
   ListQueue<_BatchItem> queue = ListQueue();
 
-  _WriteBatch(WriteOptions? writeOptions, WriteService writeService) {
-    this.writeOptions = writeOptions;
-    this.writeService = writeService;
-  }
+  _WriteBatch(this.writeOptions, this.writeService);
 
   Future<void> push(dynamic payload) async {
     if (payload is Iterable) {
-      payload.forEach((element) {
-        push(payload);
-      });
+      for (var element in payload) {
+        push(element);
+      }
     }
     if (payload is _BatchItem) {
       queue.add(payload);

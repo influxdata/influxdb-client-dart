@@ -24,7 +24,7 @@ class InfluxDBException implements Exception {
     } catch (e) {
       message = errorBody;
     }
-    var retryAfter;
+    var retryAfter = -1;
     if (headers[HttpHeaders.retryAfterHeader] != null) {
       try {
         retryAfter = int.parse(headers[HttpHeaders.retryAfterHeader]!);

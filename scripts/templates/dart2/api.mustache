@@ -3,7 +3,7 @@
 {{#operations}}
 
 class {{{classname}}} {
-  {{{classname}}}(ApiClient apiClient) : apiClient = apiClient;
+  {{{classname}}}(this.apiClient);
 
   final ApiClient apiClient;
   {{#operation}}

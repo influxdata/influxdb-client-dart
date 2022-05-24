@@ -9,7 +9,7 @@
 part of influxdb_client_api;
 
 class BucketsApi {
-  BucketsApi(ApiClient apiClient) : apiClient = apiClient;
+  BucketsApi(this.apiClient);
 
   final ApiClient apiClient;
 
