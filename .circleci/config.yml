@@ -105,6 +105,8 @@ workflows:
           name: dart-latest
           dart-image: "dart:latest"
           influxdb-image: "influxdb:latest"
+      - check-code-style
+      - check-static-analysis
 
 ##################
 # Job Definitions
