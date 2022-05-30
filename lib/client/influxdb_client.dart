@@ -46,7 +46,9 @@ abstract class DefaultService {
       bool enableGzip, body) async {
     var uri = _buildUri(influxDB.url!, path, queryParams);
     Map<String, String> headers = {};
-    headers[r'Accept-Encoding'] = enableGzip ? 'gzip' : 'identity';
+    if (enableGzip) {
+      headers[r'Accept-Encoding'] = 'gzip';
+    }
     headers[r'Content-Type'] = 'application/json';
     _updateParamsForAuth(headers);
     return await (_invoke(uri, 'POST',
