@@ -71,8 +71,7 @@ void main() {
           .addField('level', 2)
           .time(time);
 
-      final nsPrecision =
-          isWeb ? '1592821563800000000' : '1592821563800123000';
+      final nsPrecision = isWeb ? '1592821563800000000' : '1592821563800123000';
       expect(point.toLineProtocol(WritePrecision.ns),
           'h2o,location=europe level=2i $nsPrecision');
 
