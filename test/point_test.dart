@@ -71,19 +71,19 @@ void main() {
           .addField('level', 2)
           .time(time);
 
-      final ns_precision =
+      final nsPrecision =
           isWeb ? '1592821563800000000' : '1592821563800123000';
       expect(point.toLineProtocol(WritePrecision.ns),
-          'h2o,location=europe level=2i $ns_precision');
+          'h2o,location=europe level=2i $nsPrecision');
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
           .addField('level', 2)
           .time(time);
 
-      final us_precision = isWeb ? '1592821563800000' : '1592821563800123';
+      final usPrecision = isWeb ? '1592821563800000' : '1592821563800123';
       expect(point.toLineProtocol(WritePrecision.us),
-          'h2o,location=europe level=2i $us_precision');
+          'h2o,location=europe level=2i $usPrecision');
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
@@ -108,14 +108,14 @@ void main() {
           .addField('level', 'string esc\\ape value');
 
       expect(point.toLineProtocol(WritePrecision.ns),
-          'h2o,location=europe level=\"string esc\\\\ape value\"');
+          'h2o,location=europe level="string esc\\\\ape value"');
 
       point = Point.measurement('h2o')
           .addTag('location', 'europe')
-          .addField('level', 'string esc\"ape value');
+          .addField('level', 'string esc"ape value');
 
       expect(point.toLineProtocol(WritePrecision.ns),
-          'h2o,location=europe level=\"string esc\\\"ape value\"');
+          'h2o,location=europe level="string esc\\"ape value"');
     });
   });
 }
