@@ -375,4 +375,26 @@ void main() {
 
     var _ = await resp.toList();
   });
+
+  test('Accept-Encoding gzip enabled', () async {
+    client.client = MockClient((request) async {
+      expect(request.headers['Accept-Encoding'], 'gzip');
+      return Response(oneTable, 200);
+    });
+
+    var _ = await client
+        .getQueryService()
+        .query("from(bucket: 'my-bucket') |> range(start: -5s, stop: now())");
+  });
+
+  test('Accept-Encoding gzip disables', () async {
+    client.client = MockClient((request) async {
+      expect(request.headers['Accept-Encoding'], null);
+      return Response(oneTable, 200);
+    });
+
+    var _ = await client
+        .getQueryService(queryOptions: QueryOptions(gzip: false))
+        .query("from(bucket: 'my-bucket') |> range(start: -5s, stop: now())");
+  });
 }

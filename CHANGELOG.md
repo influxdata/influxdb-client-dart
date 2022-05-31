@@ -1,5 +1,8 @@
 ## 2.5.0 [unreleased]
 
+### Bug Fixes
+1. [#50](https://github.com/influxdata/influxdb-client-dart/pull/50): Don't set `Accept-Encoding` for requests without compression [Web]
+
 ### CI
 1. [#48](https://github.com/influxdata/influxdb-client-dart/pull/48): Add dart analysis to pipeline
 
