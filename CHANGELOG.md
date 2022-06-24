@@ -1,4 +1,4 @@
-## 2.5.0 [unreleased]
+## 2.5.0 [2022-06-24]
 
 ### Bug Fixes
 1. [#50](https://github.com/influxdata/influxdb-client-dart/pull/50): Don't set `Accept-Encoding` for requests without compression [Web]
