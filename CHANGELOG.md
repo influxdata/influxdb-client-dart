@@ -1,5 +1,8 @@
 ## 2.6.0 [unreleased]
 
+### Bug Fixes
+1. [#51](https://github.com/influxdata/influxdb-client-dart/pull/51): Redact the `Authorization` HTTP header from log
+
 ## 2.5.0 [2022-06-24]
 
 ### Bug Fixes
