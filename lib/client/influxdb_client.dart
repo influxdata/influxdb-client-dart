@@ -351,7 +351,7 @@ class LoggingClient extends BaseClient {
     logPrint('>> contentLength: ${request.contentLength}');
   }
 
-  Map<String, String> _redacted(  Map<String, String> headers) {
+  Map<String, String> _redacted(Map<String, String> headers) {
     return headers.map((key, value) {
       return MapEntry(
           key, 'authorization' == key.toLowerCase() ? '***' : value);

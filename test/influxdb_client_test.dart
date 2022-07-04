@@ -188,13 +188,13 @@ void main() async {
 
     client.close();
   });
-  
+
   test('redacted Authorization header', () async {
     var logs = [];
     void appendLog(Object? object) {
       logs.add(object);
     }
-    
+
     client = InfluxDBClient(
         url: 'http://localhost:8086',
         org: 'my-org',
