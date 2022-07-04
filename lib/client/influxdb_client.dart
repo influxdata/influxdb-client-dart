@@ -336,7 +336,7 @@ class LoggingClient extends BaseClient {
       send.then((r) {
         logPrint(
             '<< status: ${r.statusCode} - contentLength: ${r.contentLength}');
-        logPrint('<< headers: ${r.headers}');
+        logPrint('<< headers: ${_redacted(r.headers)}');
       });
     }
     return send;
@@ -347,7 +347,14 @@ class LoggingClient extends BaseClient {
 
   void _traceRequest(BaseRequest request) {
     logPrint('>> ${request.method} ${request.url} =====');
-    logPrint('>> headers: ${request.headers}');
+    logPrint('>> headers: ${_redacted(request.headers)}');
     logPrint('>> contentLength: ${request.contentLength}');
+  }
+
+  Map<String, String> _redacted(  Map<String, String> headers) {
+    return headers.map((key, value) {
+      return MapEntry(
+          key, 'authorization' == key.toLowerCase() ? '***' : value);
+    });
   }
 }
