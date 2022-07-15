@@ -135,7 +135,8 @@ void main() async {
         url: 'http://localhost:8086',
         org: 'my-org',
         username: 'my-username',
-        password: 'my-password');
+        password: 'my-password',
+        debug: true);
 
     var mockClient = MockClient((request) async {
       expect(request.headers['Authorization'], 'Token my-username:my-password');
@@ -186,6 +187,35 @@ void main() async {
     expect(toWrite, fromQuery);
 
     client.close();
+  });
+
+  test('redacted Authorization header', () async {
+    var logs = [];
+    void appendLog(Object? object) {
+      logs.add(object);
+    }
+
+    client = InfluxDBClient(
+        url: 'http://localhost:8086',
+        org: 'my-org',
+        token: 'my-token',
+        debug: true);
+    logPrint = appendLog;
+
+    var mockClient = MockClient((request) async {
+      return Response('{}', 200);
+    });
+    client.client = LoggingClient(true, mockClient);
+
+    await client.getOrganizationsApi().getOrgs();
+    client.close();
+
+    var headers = logs
+        .where((element) => element.toString().startsWith('>> headers'))
+        .first
+        .toString();
+    expect(headers, contains('Authorization: ***'));
+    logPrint = print;
   });
 }
 
