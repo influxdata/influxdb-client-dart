@@ -23,7 +23,7 @@ abstract class DefaultService {
     } else if (influxUrl.startsWith('http://')) {
       uri = Uri.http(influxUrl.substring('http://'.length), path, queryParams);
     } else {
-      throw ArgumentError('Invalid url: ' + influxUrl);
+      throw ArgumentError('Invalid url: $influxUrl');
     }
     return uri;
   }
