@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   archive: '>=2.0.13 <4.0.0'
-  http: '>=0.13.0 <0.14.0'
+  http: ">=0.13.0 <0.14.0"
   csv: '>=4.1.0 <6.0.0'
   universal_io: ^2.0.4
   intl: ^0.17.0
