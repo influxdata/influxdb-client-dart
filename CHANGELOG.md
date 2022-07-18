@@ -3,6 +3,9 @@
 ### Bug Fixes
 1. [#51](https://github.com/influxdata/influxdb-client-dart/pull/51): Redact the `Authorization` HTTP header from log
 
+### CI
+1. [#63](https://github.com/influxdata/influxdb-client-dart/pull/63): Update linter to `2.0.0`
+
 ## 2.5.0 [2022-06-24]
 
 ### Bug Fixes
