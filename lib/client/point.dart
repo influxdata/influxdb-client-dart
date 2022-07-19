@@ -178,7 +178,7 @@ class Point {
           convertedTime = (nanos / 1000000000).round();
           break;
         default:
-          throw ArgumentError('Unsupported precision: ' + precision.toString());
+          throw ArgumentError('Unsupported precision: $precision');
       }
 
       sb.write(convertedTime);

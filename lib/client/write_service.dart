@@ -2,7 +2,7 @@ part of influxdb_client_api;
 
 class WriteService extends DefaultService {
   WriteOptions? writeOptions;
-  late _WriteBatch writeBatch;
+  late _WriteBatch _writeBatch;
   Timer? batchTimer;
   bool enableDebug = true;
 
@@ -12,7 +12,7 @@ class WriteService extends DefaultService {
   WriteService(InfluxDBClient client, {WriteOptions? writeOptions})
       : super(client) {
     this.writeOptions = writeOptions ?? WriteOptions();
-    writeBatch = _WriteBatch(this.writeOptions, this);
+    _writeBatch = _WriteBatch(this.writeOptions, this);
   }
 
   ///
@@ -78,21 +78,21 @@ class WriteService extends DefaultService {
     _checkNotNull('org', org);
 
     var payload = _payload(data, precision, bucket!, org!, true);
-    writeBatch.push(payload);
+    _writeBatch.push(payload);
   }
 
   ///
   /// Flushes the buffer
   ///
   Future flush() async {
-    await writeBatch.flush();
+    await _writeBatch.flush();
   }
 
   ///
   /// Flushes and Closes writeService
   ///
   Future close() async {
-    writeBatch.close;
+    _writeBatch.close;
   }
 
   ///
