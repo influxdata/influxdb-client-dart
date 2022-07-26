@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-dart.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-dart)
 [![codecov](https://codecov.io/gh/influxdata/influxdb-client-dart/branch/master/graph/badge.svg)](https://codecov.io/gh/influxdata/influxdb-client-dart)
 [![Platforms](https://img.shields.io/badge/platform-dart|flutter-blue.svg)](https://github.com/influxdata/influxdb-client-dart/)
-![Pub Version](https://img.shields.io/pub/v/influxdb_client)
+[![Pub Version](https://img.shields.io/pub/v/influxdb_client)](https://pub.dev/packages/influxdb_client/)
 [![License](https://img.shields.io/github/license/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-dart.svg)](https://github.com/influxdata/influxdb-client-dart/pulls)
