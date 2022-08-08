@@ -220,17 +220,22 @@ class InfluxDBClient {
     }
     defaultHeaders['User-Agent'] = '$clientName/$clientVersion';
   }
+
   ///
   /// Create a new client for InfluxDB 1.8 compatibility API.
   ///
   factory InfluxDBClient.connectV1(
       {String? url,
+
       /// Username for authentication
       String? username,
+
       /// Password for authentication
       String? password,
+
       /// Target database
       String? database,
+
       /// Target retention policy
       String? retentionPolicy,
 
