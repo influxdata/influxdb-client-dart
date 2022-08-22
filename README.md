@@ -92,23 +92,23 @@ var client = InfluxDBClient(
 
 #### Client Options
 
-| Option | Description | Type | Default |
-|---|---|---|---|
-| url | InfluxDB url | String | none |
-| bucket | Default destination bucket for writes | String | none |
-| org | Default organization bucket for writes | String | none |
-| debug | Enable verbose logging of underlying  http client | bool | false |
+| Option | Description                                       | Type   | Default |
+|--------|---------------------------------------------------|--------|---------|
+| url    | InfluxDB url                                      | String | none    |
+| bucket | Default destination bucket for writes             | String | none    |
+| org    | Default organization bucket for writes            | String | none    |
+| debug  | Enable verbose logging of underlying  http client | bool   | false   |
 
 #### InfluxDB 1.8 API compatibility
 
 ```dart
-  var client = InfluxDBClient(
-    url: 'http://localhost:8086',
-    username: '...',
-    password: '...',
-    org: 'my-org',
-    bucket: 'my-bucket',
-    debug: true);
+var client = InfluxDBClient.connectV1(
+  url: 'http://localhost:8086',
+  database: 'mydb',
+  retentionPolicy: 'autogen',
+  username: 'my-username',
+  password: 'my-password',
+);
 ```
 
 ### Writes
@@ -340,27 +340,22 @@ void main() async {
 
 The client supports following management API:
 
-|  | API docs |
-| --- | --- |
-
-The client supports following management API:
-
-|  | API docs                                            |
-| --- |-----------------------------------------------------|
+|                                                          | API docs                                                            |
+|----------------------------------------------------------|---------------------------------------------------------------------|
 | [**AuthorizationsAPI**](lib/api/authorizations_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Authorizations |
-| [**BucketsAPI**](lib/api/buckets_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Buckets |
-| [**DBRPsAPI**](lib/api/DBRPs_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/DBRPs |
-| [**DeleteAPI**](lib/api/delete_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Delete |
-| [**HealthAPI**](lib/api/health_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Health |
-| [**LabelsAPI**](lib/api/labels_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Labels |
-| [**OrganizationsAPI**](lib/api/organizations_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Organizations |
-| [**PingAPI**](lib/api/ping_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Ping |
-| [**ReadyAPI**](lib/api/ready_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Ready |
-| [**SecretsAPI**](lib/api/secrets_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Secrets |
-| [**SetupAPI**](lib/api/setup_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Setup |
-| [**TasksAPI**](lib/api/tasks_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Tasks |
-| [**UsersAPI**](lib/api/users_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Users |
-| [**VariablesAPI**](lib/api/variables_api.dart) | https://docs.influxdata.com/influxdb/latest/api/#tag/Variables |
+| [**BucketsAPI**](lib/api/buckets_api.dart)               | https://docs.influxdata.com/influxdb/latest/api/#tag/Buckets        |
+| [**DBRPsAPI**](lib/api/DBRPs_api.dart)                   | https://docs.influxdata.com/influxdb/latest/api/#tag/DBRPs          |
+| [**DeleteAPI**](lib/api/delete_api.dart)                 | https://docs.influxdata.com/influxdb/latest/api/#tag/Delete         |
+| [**HealthAPI**](lib/api/health_api.dart)                 | https://docs.influxdata.com/influxdb/latest/api/#tag/Health         |
+| [**LabelsAPI**](lib/api/labels_api.dart)                 | https://docs.influxdata.com/influxdb/latest/api/#tag/Labels         |
+| [**OrganizationsAPI**](lib/api/organizations_api.dart)   | https://docs.influxdata.com/influxdb/latest/api/#tag/Organizations  |
+| [**PingAPI**](lib/api/ping_api.dart)                     | https://docs.influxdata.com/influxdb/latest/api/#tag/Ping           |
+| [**ReadyAPI**](lib/api/ready_api.dart)                   | https://docs.influxdata.com/influxdb/latest/api/#tag/Ready          |
+| [**SecretsAPI**](lib/api/secrets_api.dart)               | https://docs.influxdata.com/influxdb/latest/api/#tag/Secrets        |
+| [**SetupAPI**](lib/api/setup_api.dart)                   | https://docs.influxdata.com/influxdb/latest/api/#tag/Setup          |
+| [**TasksAPI**](lib/api/tasks_api.dart)                   | https://docs.influxdata.com/influxdb/latest/api/#tag/Tasks          |
+| [**UsersAPI**](lib/api/users_api.dart)                   | https://docs.influxdata.com/influxdb/latest/api/#tag/Users          |
+| [**VariablesAPI**](lib/api/variables_api.dart)           | https://docs.influxdata.com/influxdb/latest/api/#tag/Variables      |
 
 
 The following example demonstrates how to use a InfluxDB 2.x Management API to create new bucket. For further information see docs and [examples](example/management_api_example.dart).

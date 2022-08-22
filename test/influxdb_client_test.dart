@@ -149,6 +149,26 @@ void main() async {
     client.close();
   });
 
+  test('v1 factory', () async {
+    var client = InfluxDBClient.connectV1(
+      url: 'http://localhost:8086',
+      database: 'mydb',
+      retentionPolicy: 'autogen',
+      username: 'my-username',
+      password: 'my-password',
+    );
+
+    var mockClient = MockClient((request) async {
+      expect(request.headers['Authorization'], 'Token my-username:my-password');
+      return Response('', 200);
+    });
+    client.client = mockClient;
+
+    await client.getQueryService().query('from');
+
+    client.close();
+  });
+
   test('initialize from sys envs', () async {
     client = InfluxDBClient();
     expect(client, isNot(null));

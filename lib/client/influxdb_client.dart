@@ -172,6 +172,10 @@ void Function(Object object) logPrint = print;
 /// Main InfluxDB client class
 ///
 class InfluxDBClient {
+  static const int defaultMaxRedirects = 5;
+  static const bool defaultFollowRedirects = true;
+  static const bool defaultEnableDebug = false;
+
   ///
   /// Create a new client for a InfluxDB.
   ///
@@ -184,8 +188,8 @@ class InfluxDBClient {
   ///     bucket: 'my-bucket'
   ///   );
   /// ```
-  /// * [debug] - enable/disable verbose http call traing
-  /// * [username] and [password] is only for InfluxDB 1.8 comatibility
+  /// * [debug] - enable/disable verbose http call tracing
+  /// * [username] and [password] is only for InfluxDB 1.8 compatibility
   ///
   InfluxDBClient(
       {String? url,
@@ -201,9 +205,9 @@ class InfluxDBClient {
       String? password,
 
       /// verbose logging of http calls
-      this.debug = false,
-      this.maxRedirects = 5,
-      this.followRedirects = true}) {
+      this.debug = defaultEnableDebug,
+      this.maxRedirects = defaultMaxRedirects,
+      this.followRedirects = defaultFollowRedirects}) {
     this.url = url ?? const String.fromEnvironment('INFLUXDB_URL');
     this.token = token ?? const String.fromEnvironment('INFLUXDB_TOKEN');
     this.bucket = bucket ?? const String.fromEnvironment('INFLUXDB_BUCKET');
@@ -217,13 +221,45 @@ class InfluxDBClient {
     defaultHeaders['User-Agent'] = '$clientName/$clientVersion';
   }
 
+  ///
+  /// Create a new client for InfluxDB 1.8 compatibility API.
+  ///
+  factory InfluxDBClient.connectV1(
+      {String? url,
+
+      /// Username for authentication
+      String? username,
+
+      /// Password for authentication
+      String? password,
+
+      /// Target database
+      String? database,
+
+      /// Target retention policy
+      String? retentionPolicy,
+
+      /// verbose logging of http calls
+      bool debug = defaultEnableDebug,
+      int maxRedirects = defaultMaxRedirects,
+      bool followRedirects = defaultFollowRedirects}) {
+    return InfluxDBClient(
+        url: url,
+        bucket: '$database/$retentionPolicy',
+        username: username,
+        password: password,
+        debug: debug,
+        maxRedirects: maxRedirects,
+        followRedirects: followRedirects);
+  }
+
   String? token;
   String? url;
   String? bucket;
   String? org;
-  bool debug = false;
-  int maxRedirects = 5;
-  bool followRedirects = true;
+  bool debug = defaultEnableDebug;
+  int maxRedirects = defaultMaxRedirects;
+  bool followRedirects = defaultFollowRedirects;
 
   late Client client;
 
