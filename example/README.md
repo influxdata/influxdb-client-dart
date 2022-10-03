@@ -16,3 +16,4 @@
 - [delete_data_example.dart](delete_data_example.dart) - How to delete data from InfluxDB by client
 - [main.dart](main.dart) - How to write, query and delete data from InfluxDB
 - [invokable_scripts.dart](invokable_scripts.dart) - How to use Invokable scripts Cloud API to create custom endpoints that query data
+- [record_row_example.dart](record_row_example.dart) - How to use `FluxRecord.row`(List) instead of `FluxRecord.values`(Map), in case of duplicity column names
