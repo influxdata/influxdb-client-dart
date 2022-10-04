@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:influxdb_client/api.dart';
 
 void main() async {
@@ -47,6 +45,5 @@ void main() async {
   print("---------------------------- record.row ----------------------------");
   print(recordRow.join("\n"));
 
-  await Future.delayed(Duration(seconds: 10));
   client.close();
 }
