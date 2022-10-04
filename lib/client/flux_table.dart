@@ -39,6 +39,7 @@ class FluxTableMetaData {
       }
       var csvValue = values[index];
       record[columnName] = _toValue(csvValue, column);
+      record.row.add(csvValue);
     }
 
     return record;
@@ -63,6 +64,7 @@ class FluxRecord extends MapMixin<String?, dynamic> {
   /// index of table
   final int tableIndex;
   final Map<String?, dynamic> _values = {};
+  final List<dynamic> row = [];
 
   FluxRecord(this.tableIndex);
 

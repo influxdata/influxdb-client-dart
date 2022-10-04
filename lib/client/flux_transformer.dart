@@ -185,6 +185,15 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
       column.label = csv[i];
       i++;
     }
+
+    var duplicates = table.columns.map((item) => item.label).toList();
+    duplicates.toSet().forEach((item) => {duplicates.remove(item)});
+
+    if (duplicates.isNotEmpty) {
+      logPrint('The response contains columns with duplicated names:'
+          ' ${duplicates.join(", ")}\nYou should use the "record.row" '
+          'to access your data instead of "record.values" dictionary.');
+    }
   }
 
   void _addGroups(FluxTableMetaData table, List? csv) {
