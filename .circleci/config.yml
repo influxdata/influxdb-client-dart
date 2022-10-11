@@ -66,6 +66,9 @@ commands:
 workflows:
   version: 2
   build:
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - test:
           name: dart-2.12
@@ -93,13 +96,8 @@ workflows:
             - dart-2.12
 
   nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - main
+    when:
+      equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - test:
           name: dart-latest
