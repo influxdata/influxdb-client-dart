@@ -1,7 +1,7 @@
 ## 2.7.0 [unreleased]
 
 ### Features
-1. [#78](https://github.com/influxdata/influxdb-client-dart/pull/78): Added `FluxRecord.row` which stores response data in a list
+1. [#78](https://github.com/influxdata/influxdb-client-dart/pull/78): Add `FluxRecord.row` which stores response data in a list
 
 ## 2.6.0 [2022-07-29]
 
