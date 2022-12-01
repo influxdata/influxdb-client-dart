@@ -1,4 +1,4 @@
-## 2.8.0 [unreleased]
+## 2.8.0 [2022-12-01]
 
 ### Others
 1. [#95](https://github.com/influxdata/influxdb-client-dart/pull/95): Update generated `PingApi`
