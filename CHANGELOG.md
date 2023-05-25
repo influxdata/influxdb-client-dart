@@ -1,5 +1,8 @@
 ## 2.9.0 [unreleased]
 
+### Others
+1. [#124](https://github.com/influxdata/influxdb-client-dart/pull/124): Add compatibility with Dart 3
+
 ## 2.8.0 [2022-12-01]
 
 ### Others
