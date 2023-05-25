@@ -1,5 +1,8 @@
 ## 2.9.0 [unreleased]
 
+### Bug Fixes
+1. [#124](https://github.com/influxdata/influxdb-client-dart/pull/124): `queryRaw` for InfluxDB Cloud
+
 ### Others
 1. [#124](https://github.com/influxdata/influxdb-client-dart/pull/124): Add compatibility with Dart 3
 
