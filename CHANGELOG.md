@@ -1,4 +1,4 @@
-## 2.9.0 [unreleased]
+## 2.9.0 [2023-05-29]
 
 ### Bug Fixes
 1. [#124](https://github.com/influxdata/influxdb-client-dart/pull/124): `queryRaw` for InfluxDB Cloud
