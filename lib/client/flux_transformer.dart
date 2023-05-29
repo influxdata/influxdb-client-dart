@@ -187,7 +187,7 @@ class FluxTransformer implements StreamTransformer<List, FluxRecord> {
     }
 
     var duplicates = table.columns.map((item) => item.label).toList();
-    duplicates.toSet().forEach((item) => {duplicates.remove(item)});
+    duplicates.toSet().forEach((item) => duplicates.remove(item));
 
     if (duplicates.isNotEmpty) {
       logPrint('The response contains columns with duplicated names:'

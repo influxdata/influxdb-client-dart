@@ -44,13 +44,8 @@ class QueryService extends DefaultService {
     query.params = params ?? query.params;
     query.dialect = dialect ?? query.dialect;
 
-    var uri = _buildUri(influxDB.url!, '/api/v2/query', {'org': influxDB.org});
-    var body = jsonEncode(query);
-    Map<String, String> headers = {};
-    _updateParamsForAuth(headers);
-    var response = await _invoke(uri, 'POST',
-        headers: headers, body: body, maxRedirects: influxDB.maxRedirects);
-    return (response as Response).body;
+    var response = await _send('/api/v2/query', {'org': influxDB.org}, query);
+    return (response as StreamedResponse).stream.bytesToString();
   }
 
   /// Streams the result of [fluxQuery] using [Dialect].
