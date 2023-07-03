@@ -101,10 +101,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_test
-      sha256: "927ef98b58c5603ec58923c0bb943a74743e58149732665885bb1eb92983befe"
+      sha256: "2c3d7c70455803a8b904b85001aa87ae21bb2a9d694baeedb019012b0972df0e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.7"
+    version: "2.2.0"
   built_collection:
     dependency: transitive
     description:
