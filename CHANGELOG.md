@@ -1,5 +1,10 @@
 ## 2.10.0 [unreleased]
 
+Explicitly set supported platforms to `android`, `ios`, `linux`, `macos`, `windows`, and `web` to avoid issues with unsupported platforms.
+
+### CI
+1. [#136](https://github.com/influxdata/influxdb-client-dart/pull/136): Fix CI pipeline for Dart 3
+
 ## 2.9.0 [2023-05-29]
 
 ### Bug Fixes
