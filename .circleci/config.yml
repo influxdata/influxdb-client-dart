@@ -194,7 +194,9 @@ jobs:
     steps:
       - run:
           name: Install Dart SDK
-          command: choco install dart-sdk
+          command: |
+            choco feature enable -n allowGlobalConfirmation
+            choco install dart-sdk
       - run:
           name: Install missing root certificate (GlobalSign Root CA)
           command: |
