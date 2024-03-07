@@ -133,6 +133,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E88979FB9B30ACF2
             apt-get update && apt-get -y install wget gnupg libdigest-sha-perl
       - when:
           condition:
