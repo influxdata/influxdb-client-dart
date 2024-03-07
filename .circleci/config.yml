@@ -130,10 +130,17 @@ jobs:
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
+      - when:
+          condition:
+            equal: [ 'chrome', << parameters.dart-platform >>]
+          steps:
+            - run:
+                name: Add Ubuntu Key
+                command: |
+                  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E88979FB9B30ACF2
       - run:
           name: Install dependencies
           command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E88979FB9B30ACF2
             apt-get update && apt-get -y install wget gnupg libdigest-sha-perl
       - when:
           condition:
