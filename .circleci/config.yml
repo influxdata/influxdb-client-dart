@@ -130,6 +130,14 @@ jobs:
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
+      - when:
+          condition:
+            equal: [ 'chrome', << parameters.dart-platform >>]
+          steps:
+            - run:
+                name: Add Ubuntu Key
+                command: |
+                  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E88979FB9B30ACF2
       - run:
           name: Install dependencies
           command: |
@@ -194,7 +202,9 @@ jobs:
     steps:
       - run:
           name: Install Dart SDK
-          command: choco install dart-sdk
+          command: |
+            choco feature enable -n allowGlobalConfirmation
+            choco install dart-sdk
       - run:
           name: Install missing root certificate (GlobalSign Root CA)
           command: |
