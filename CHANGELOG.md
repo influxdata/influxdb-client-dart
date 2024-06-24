@@ -1,4 +1,4 @@
-## 2.10.0 [unreleased]
+## 2.10.0 [2024-06-24]
 
 Explicitly set supported platforms to `android`, `ios`, `linux`, `macos`, `windows`, and `web` to avoid issues with unsupported platforms.
 
