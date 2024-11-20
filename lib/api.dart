@@ -11,7 +11,6 @@ import 'dart:math' as math;
 import 'package:archive/archive.dart';
 import 'package:csv/csv.dart';
 import 'package:http/http.dart';
-import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:universal_io/io.dart';
 
@@ -171,7 +170,6 @@ part 'client/retry.dart';
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';
-final _dateFormatter = DateFormat('yyyy-MM-dd');
 final _regList = RegExp(r'^List<(.*)>$');
 final _regSet = RegExp(r'^Set<(.*)>$');
 final _regMap = RegExp(r'^Map<String,(.*)>$');
