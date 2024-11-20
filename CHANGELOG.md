@@ -1,5 +1,11 @@
 ## 2.11.0 [unreleased]
 
+### Dependencies
+1. [#151](https://github.com/influxdata/influxdb-client-dart/pull/151): `intl` package isn't required
+
+### CI
+1. [#151](https://github.com/influxdata/influxdb-client-dart/pull/151): CI pipeline supports Dart 2 and 3
+
 ## 2.10.0 [2024-06-24]
 
 Explicitly set supported platforms to `android`, `ios`, `linux`, `macos`, `windows`, and `web` to avoid issues with unsupported platforms.
