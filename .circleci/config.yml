@@ -32,8 +32,8 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
-            - v1.5-dependencies-{{ arch }}-
+            - v1.6-dependencies-{{ arch }}-{{ checksum "pubspec.yaml" }}
+            - v1.6-dependencies-{{ arch }}-
       - run:
           name: Download deps
           shell: << parameters.shell >>
@@ -43,7 +43,7 @@ commands:
           shell: << parameters.shell >>
           command: dart pub global activate junitreport
       - save_cache:
-          key: v1.5-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+          key: v1.6-dependencies-{{ arch }}-{{ checksum "pubspec.yaml" }}
           paths:
             - .dart_tool
             - << parameters.pub-cache >>
@@ -243,7 +243,7 @@ jobs:
 
   build-linux:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:current
     steps:
       - run:
           name: Install Dart SDK
