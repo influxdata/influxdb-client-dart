@@ -1,4 +1,4 @@
-## 2.11.0 [unreleased]
+## 2.11.0 [2024-11-27]
 
 ### Dependencies
 1. [#151](https://github.com/influxdata/influxdb-client-dart/pull/151): `intl` package isn't required

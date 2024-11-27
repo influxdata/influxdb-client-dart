@@ -1,5 +1,5 @@
 name: influxdb_client
-version: 2.11.0-dev
+version: 2.11.0
 description: A client library for querying, writing and managing InfluxDB 2.x
 homepage: https://github.com/influxdata/influxdb-client-dart
 
