@@ -1,3 +1,5 @@
+## 2.12.0 [unreleased]
+
 ## 2.11.0 [2024-11-27]
 
 ### Dependencies
