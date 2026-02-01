@@ -20,7 +20,7 @@ dev_dependencies:
   mockito: any
   collection: any
   test: any
-  lints: ">=1.0.1 <3.0.0"
+  lints: ">=1.0.1 <7.0.0"
 
 platforms:
   android:
